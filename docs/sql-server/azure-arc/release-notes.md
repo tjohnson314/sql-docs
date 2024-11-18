@@ -23,6 +23,10 @@ This article lists:
 
 Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might include internal features. If the version release notes don't describe features, then the updates were internal.
 
+## November 12, 2024
+
+**Extension version**: `1.1.2859.223`
+
 ## October 8, 2024
 
 **Extension version**: `1.1.2830.214`

@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/10/2024
+ms.date: 11/14/2024
 ms.topic: include
 ---
 > [!NOTE]
@@ -1252,6 +1252,16 @@ ms.topic: include
 | 37559 | 16 | No | Object_id is not a valid option |
 | 37563 | 16 | Yes | The primary managed identity is not selected for this server. Enable the primary managed identity for Microsoft Entra authentication for this server. For more information see (https://aka.ms/sql-server-managed-identity-doc). |
 | 37564 | 10 | Yes | The managed identity with Client_ID/Application_ID '%ls', is the primary identity assigned for this server. |
+| 37566 | 16 | No | Operations on customer managed key '%s' are not allowed because the key has been disabled in Azure Key Vault '%s'. Please enable the key. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37567 | 16 | No | Operations on customer managed key '%s' are not allowed in Azure Key Vault '%s'. Please allow the following operations on the key: "get", "wrapKey", "unwrapKey". For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37568 | 16 | No | One of required operations on customer managed key '%s' is not allowed for currently chosen RBAC role of the managed instance '%s' identity on Azure Key Vault '%s'. Please change to a RBAC role permitting the following permissions on the key vault: "get", "wrapKey", "unwrapKey". For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting |
+| 37569 | 16 | No | Connection to Azure Key Vault '%s' was forbidden by Azure Key Vault firewall policy. Please review the Azure Key Vault firewall policy to enable connections from Managed Instance '%s'. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37570 | 16 | No | One of required operations on customer managed key '%s' on Azure Key Vault '%s' is not allowed for currently set key vault policy used by managed instance '%s' identity. Please use a policy permitting the following permissions on the key vault: "get", "wrapKey", "unwrapKey". For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37571 | 16 | No | Azure Key Vault '%s' operation requested by Managed Instance '%s' failed due to insufficient permissions (inner error code: '%s'). For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37572 | 16 | No | Customer managed key '%s' was not found in Azure Key Vault '%s'. If it was recently deleted, recovery could be possible if 'soft-delete' protection is enabled on the key vault. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37573 | 16 | No | Connection to Azure Key Vault '%s' could not be established. Please review network settings for Managed Instance '%s'. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37574 | 16 | No | Azure Key Vault URI '%s' could not be resolved. Please ensure the key vault URI is valid and that your network settings for Managed Instance '%s' are not blocking access to Azure Public DNS. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37576 | 16 | No | The current SQL Server Connector version for Microsoft Azure Key Vault does not support the managed identity (see https://aka.ms/sql-server-managed-identity-doc). Upgrade the SQL Server Connector to its latest version (see https://www.microsoft.com/en-us/download/details.aspx?id=45344&msockid=2aa7acc4c900647e098ebfb5c8ba6506). |
 | 38001 | 16 | No | Cannot find the file id %d in the database '%s'. |
 | 38002 | 16 | No | Only users having %s permission can execute this stored procedure. |
 | 39001 | 16 | No | Only SELECT statement is supported for input data query to 'sp_execute_external_script' stored procedure. |
