@@ -151,7 +151,9 @@ This parameter is ignored for non-[!INCLUDE [ssNoVersion](../../../includes/ssno
 `MaxCmdsInTran` wasn't designed to be always turned on. It works around cases where someone accidentally performed a large number of DML operations in a single transaction. This causes a delay in the distribution of commands, until the entire transaction is in the distribution database, locks being held, etc. If you routinely fall into this situation, review your applications and find ways to reduce the transaction size.
 
 > [!WARNING]  
-> Primary key errors might occur if the `MaxCmdsInTran` parameter is added and removed while replicating a large transaction. `MaxCmdsInTran` isn't supported if the given publication database has both Change Data Capture (CDC) and replication enabled. Using `MaxCmdsInTran` in this configuration might lead to data loss in CDC change tables.
+> Primary key errors might occur if the `MaxCmdsInTran` parameter is added and removed while replicating a large transaction. To resolve primary key errors on large transactions, add the `MaxCmdsInTran` parameter back until the transaction is replicated to the distribution database.
+> 
+> Using the `MaxCmdsInTran` parameter on a database that has both Change Data Capture (CDC) and replication enabled isn't supported and can lead to data loss in the CDC change tables. 
 
 #### -MessageInterval *message_interval*
 
