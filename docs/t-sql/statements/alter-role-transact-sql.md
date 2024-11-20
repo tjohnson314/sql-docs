@@ -21,7 +21,7 @@ dev_langs:
 monikerRange: ">=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # ALTER ROLE (Transact-SQL)
-[!INCLUDE [sql-asdb-asdbmi-fabricse-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]
 
   Adds or removes members to or from a database role, or changes the name of a user-defined database role.  
   

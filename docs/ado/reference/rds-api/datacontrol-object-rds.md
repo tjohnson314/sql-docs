@@ -25,7 +25,7 @@ Binds a data query [Recordset](../ado-api/recordset-object-ado.md) to one or mor
 ```  
   
 <OBJECT CLASSID="clsid:BD96C556-65A3-11D0-983A-00C04FC29E33" ID="DataControl"  
-   <PARAM NAME="Connect" VALUE="DSN=DSNName;UID=MyUserID;PWD=MyPassword;">  
+   <PARAM NAME="Connect" VALUE="DSN=DSNName;UID=MyUserID;PWD=<password>;">  
    <PARAM NAME="Server" VALUE="https://awebsrvr">  
    <PARAM NAME="SQL" VALUE="QueryText">  
 </OBJECT>  
@@ -67,7 +67,7 @@ Binds a data query [Recordset](../ado-api/recordset-object-ado.md) to one or mor
 ```  
 <OBJECT CLASSID="clsid:BD96C556-65A3-11D0-983A-00C04FC29E33"   
     ID="DataControl"  
-   <PARAM NAME="Connect" VALUE="DSN=DSNName;UID=MyUserID;PWD=MyPassword;">  
+   <PARAM NAME="Connect" VALUE="DSN=DSNName;UID=MyUserID;PWD=<password>;">  
    <PARAM NAME="Server" VALUE="https://awebsrvr">  
    <PARAM NAME="SQL" VALUE="QueryText">  
    <PARAM NAME="ExecuteOptions" VALUE="1">   <PARAM NAME="FetchOptions" VALUE="1">  

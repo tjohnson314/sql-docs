@@ -4,23 +4,26 @@ description: You can configure a database in Azure SQL Database as the push subs
 author: ferno-ms
 ms.author: ferno
 ms.reviewer: wiassaf, mathoma
-ms.date: 04/28/2020
+ms.date: 11/01/2024
 ms.service: azure-sql-database
 ms.subservice: replication
 ms.topic: conceptual
 ms.custom: sqldbrb=1
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 # Replication to Azure SQL Database
-[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
+[!INCLUDE[appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
-You can configure Azure SQL Database as the push subscriber in a one-way transactional or snapshot replication topology from SQL Server and Azure SQL Managed Instance.
+You can configure Azure SQL Database or Fabric SQL database as the push subscriber in a one-way transactional or snapshot replication topology from SQL Server and Azure SQL Managed Instance.
 
 > [!NOTE]
-> This article describes the use of [transactional replication](/sql/relational-databases/replication/transactional/transactional-replication) in Azure SQL Database. It is unrelated to [active geo-replication](./active-geo-replication-overview.md), an Azure SQL Database feature that allows you to create complete readable replicas of individual databases.
+> This article describes the use of [transactional replication](/sql/relational-databases/replication/transactional/transactional-replication) to push data to Azure SQL Database or Fabric SQL database. This article applies equally to Azure SQL Database and Fabric SQL database unless otherwise noted.
+> 
+> It is unrelated to [active geo-replication](./active-geo-replication-overview.md), an Azure SQL Database feature that allows you to create complete readable replicas of individual databases.
 
 ## Supported configurations
   
-- Azure SQL Database can only be the push subscriber of a SQL Server publisher and distributor.  
+- Azure SQL Database or Fabric SQL database can only be the push subscriber of a SQL Server publisher and distributor.  
 - The SQL Server instance acting as publisher and/or distributor can be an instance of [SQL Server running on-premises](https://www.microsoft.com/sql-server/sql-server-downloads), an [Azure SQL Managed Instance](../managed-instance/instance-create-quickstart.md), or an instance of [SQL Server running on an Azure virtual machine in the cloud](../virtual-machines/windows/sql-vm-create-portal-quickstart.md). 
 - The distribution database and the replication agents cannot be placed on a database in Azure SQL Database.  
 - [Snapshot](/sql/relational-databases/replication/snapshot-replication) and [one-way transactional](/sql/relational-databases/replication/transactional/transactional-replication) replication are supported. Peer-to-peer transactional replication and merge replication are not supported.
@@ -58,13 +61,15 @@ There are different [types of replication](/sql/relational-databases/replication
 
 - Only push subscriptions to Azure SQL Database are supported.  
 - Replication can be configured by using [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms) or by executing Transact-SQL statements on the publisher. You cannot configure replication by using the Azure portal.  
-- Replication can only use SQL Server authentication logins to connect to Azure SQL Database.
+- To authenticate:
+    - Replication can only use SQL Server authentication logins to connect to Azure SQL Database.
+    - Replication can only use Microsoft Entra ID authentication with a [service principal](/entra/identity-platform/app-objects-and-service-principals)to connect to Fabric SQL database.
 - Replicated tables must have a primary key.  
 - You must have an existing Azure subscription.  
 - The Azure SQL Database subscriber can be in any region.  
 - A single publication on SQL Server can support both Azure SQL Database and SQL Server (on-premises and SQL Server in an Azure virtual machine) subscribers.  
 - Replication management, monitoring, and troubleshooting must be performed from SQL Server rather than Azure SQL Database.  
-- Only `@subscriber_type = 0` is supported in **sp_addsubscription** for SQL Database.  
+- Only `@subscriber_type = 0` is supported in `sp_addsubscription` for SQL Database.  
 - Azure SQL Database does not support bi-directional, immediate, updatable, or peer-to-peer replication.
 
 ## Replication Architecture  

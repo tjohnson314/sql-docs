@@ -203,7 +203,7 @@ In app deploy, `spec.yaml` is where you provide the information that controller 
 - `options`: specify additional options for `/opt/ssis/bin/dtexec /FILE`, for example to connect to a database with connection string, it would follow the following pattern: 
 
    ```console
-   /REP V /CONN "sqldatabasename"\;"\"Data Source=xx;User ID=xx;Password=xx\""
+   /REP V /CONN "sqldatabasename"\;"\"Data Source=xx;User ID=xx;Password=<password>\""
    ```
 
   For details on syntax, see [dtexec Utility](../integration-services/packages/dtexec-utility.md).

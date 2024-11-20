@@ -4,7 +4,7 @@ description: "Constants (Transact-SQL)"
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 04/04/2024
+ms.date: 11/19/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: "reference"
@@ -29,7 +29,7 @@ helpviewer_keywords:
   - "negative values"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
 ---
 # Constants (Transact-SQL)
 
@@ -37,17 +37,17 @@ monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-s
 
 A constant, also known as a literal or a scalar value, is a symbol that represents a specific data value. The format of a constant depends on the data type of the value it represents.
 
-> [!NOTE]
-> The term *constant* in application development and the concept of a *constant* in Transact-SQL (T-SQL) are not the same. There is no specific way to set a global static value in T-SQL. Constants in T-SQL are the equivalent of string literal values.
+> [!NOTE]  
+> The term *constant* in application development and the concept of a *constant* in Transact-SQL (T-SQL) aren't the same. There's no specific way to set a global static value in T-SQL. Constants in T-SQL are the equivalent of string literal values.
 
 ## Character string constants
 
-Character string constants are enclosed in single quotation marks and include alphanumeric characters (`a`-`z`, `A`-`Z`, and `0`-`9`) and special characters, such as exclamation point (`!`), at sign (`@`), and number sign (`#`). Character string constants are assigned the default collation of the current database. If the COLLATE clause is used, the conversion to the database default code page still happens before the conversion to the collation specified by the COLLATE clause. Character strings typed by users are evaluated through the code page of the computer and are translated to the database default code page if it is required.
+Character string constants are enclosed in single quotation marks and include alphanumeric characters (`a`-`z`, `A`-`Z`, and `0`-`9`) and special characters, such as exclamation point (`!`), at sign (`@`), and number sign (`#`). Character string constants are assigned the default collation of the current database. If the COLLATE clause is used, the conversion to the database default code page still happens before the conversion to the collation specified by the COLLATE clause. Character strings typed by users are evaluated through the code page of the computer and are translated to the database default code page if it's required.
 
 > [!NOTE]  
-> When a [UTF8-enabled collation](../../relational-databases/collations/collation-and-unicode-support.md#utf8) is specified using the COLLATE clause, conversion to the database default code page still happens before the conversion to the collation specified by the COLLATE clause. Conversion is not done directly to the specified Unicode-enabled collation. For more information, see [Unicode string](#unicode-strings).
+> When a [UTF8-enabled collation](../../relational-databases/collations/collation-and-unicode-support.md#utf8) is specified using the COLLATE clause, conversion to the database default code page still happens before the conversion to the collation specified by the COLLATE clause. Conversion isn't done directly to the specified Unicode-enabled collation. For more information, see [Unicode string](#unicode-strings).
 
-If the QUOTED_IDENTIFIER option has been set OFF for a connection, character strings can also be enclosed in double quotation marks, but the Microsoft [OLE DB Driver for SQL Server](../../connect/oledb/oledb-driver-for-sql-server.md) and [ODBC Driver for SQL Server](../../connect/odbc/download-odbc-driver-for-sql-server.md) automatically use `SET QUOTED_IDENTIFIER ON`. We recommend using single quotation marks.
+If the QUOTED_IDENTIFIER option has been set OFF for a connection, character strings can also be enclosed in double quotation marks, but the [Microsoft OLE DB Driver for SQL Server](../../connect/oledb/oledb-driver-for-sql-server.md) and [ODBC Driver for SQL Server](../../connect/odbc/download-odbc-driver-for-sql-server.md) automatically use `SET QUOTED_IDENTIFIER ON`. We recommend using single quotation marks.
 
 If a character string enclosed in single quotation marks contains an embedded quotation mark, represent the embedded single quotation mark with two single quotation marks. This isn't required in strings embedded in double quotation marks.
 
@@ -92,17 +92,17 @@ The following are examples of binary strings are:
 0xAE
 0x12Ef
 0x69048AEFDD010E
-0x  (empty binary string)
+0x (empty binary string)
 ```
 
 > [!NOTE]  
 > Binary constants greater than 8000 bytes are typed as **varbinary(max)** data.
 
-## `bit` constants
+## Boolean constants
 
-**bit** constants are represented by the numbers `0` or `1`, and aren't enclosed in quotation marks. If a number larger than `1` is used, it is converted to `1`.
+Boolean (**bit**) constants are represented by the numbers `0` or `1`, and aren't enclosed in quotation marks. If a number larger than `1` is used, it's converted to `1`.
 
-## `datetime` constants
+## Date-time constants
 
 **datetime** constants are represented by using character date values in specific formats, enclosed in single quotation marks.
 
@@ -122,18 +122,18 @@ Examples of datetime constants are:
 '04:24 PM'
 ```
 
-## `integer` constants
+## Integer constants
 
-**integer** constants are represented by a string of numbers that aren't enclosed in quotation marks and don't contain decimal points. **integer** constants must be whole numbers; they can't contain decimals.
+Integer (**int**) constants are represented by a string of numbers that aren't enclosed in quotation marks and don't contain decimal points. **int** constants must be whole numbers; they can't contain decimals.
 
-The following are examples of **integer** constants:
+The following are examples of **int** constants:
 
 ```text
 1894
 2
 ```
 
-## `decimal` constants
+## Decimal constants
 
 **decimal** constants are represented by a string of numbers that aren't enclosed in quotation marks and contain a decimal point.
 
@@ -144,7 +144,7 @@ The following are examples of **decimal** constants:
 2.0
 ```
 
-## `float` and `real` constants
+## Floating point constants
 
 **float** and **real** constants are represented by using scientific notation.
 
@@ -155,7 +155,7 @@ The following are examples of **float** or **real** values:
 0.5E-2
 ```
 
-## `money` constants
+## Money constants
 
 **money** constants are represented as string of numbers with an optional decimal point and an optional currency symbol as a prefix. **money** constants aren't enclosed in quotation marks.
 
@@ -172,7 +172,7 @@ $542023.14
 $-23
 ```
 
-## `uniqueidentifier` constants
+## GUID constants
 
 **uniqueidentifier** constants are a string representing a GUID. They can be specified in either a character or binary string format.
 
@@ -187,7 +187,7 @@ The following examples both specify the same GUID:
 
 To indicate whether a number is positive or negative, apply the `+` or `-` unary operators to a numeric constant. This creates a numeric expression that represents the signed numeric value. Numeric constants use positive when the `+` or `-` unary operators aren't applied.
 
-Signed **integer** expressions:
+Signed **int** expressions:
 
 ```text
 +145345234
@@ -217,12 +217,12 @@ Signed **money** expressions:
 
 ## Enhanced collations
 
-The [!INCLUDE [ssDE-md](../../includes/ssde-md.md)] supports character and Unicode string constants that support enhanced collations. For more information, see the [COLLATE (Transact-SQL)](../../t-sql/statements/collations.md) clause.
+The [!INCLUDE [ssDE-md](../../includes/ssde-md.md)] supports character and Unicode string constants that support enhanced collations. For more information, see the [COLLATE](../statements/collations.md) clause.
 
 ## Related content
 
-- [Data Types (Transact-SQL)](../../t-sql/data-types/data-types-transact-sql.md)
-- [Expressions (Transact-SQL)](../../t-sql/language-elements/expressions-transact-sql.md)
-- [Operators (Transact-SQL)](../../t-sql/language-elements/operators-transact-sql.md)
-- [Collation and Unicode Support](../../relational-databases/collations/collation-and-unicode-support.md)
-- [Collation Precedence](../../t-sql/statements/collation-precedence-transact-sql.md)
+- [Data types (Transact-SQL)](data-types-transact-sql.md)
+- [Expressions (Transact-SQL)](../language-elements/expressions-transact-sql.md)
+- [Operators (Transact-SQL)](../language-elements/operators-transact-sql.md)
+- [Collation and Unicode support](../../relational-databases/collations/collation-and-unicode-support.md)
+- [Collation precedence](../statements/collation-precedence-transact-sql.md)

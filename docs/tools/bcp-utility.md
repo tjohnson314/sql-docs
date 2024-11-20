@@ -25,11 +25,11 @@ helpviewer_keywords:
   - "importing data, bcp utility"
   - "file importing [SQL Server]"
   - "column exporting [SQL Server]"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =fabric"
 ---
 # bcp utility
 
-[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 The bulk copy program utility (**bcp**) bulk copies data between an instance of [!INCLUDE [msCoName](../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] and a data file in a user-specified format.
 
@@ -62,7 +62,7 @@ See [Install the SQL Server command-line tools sqlcmd and bcp on Linux](../linux
 - Build number: 15.0.4298.1
 - Release date: April 7, 2023
 
-**bcp** supports Microsoft Entra authentication, including multifactor authentication (MFA) support for Azure SQL Database and Azure Synapse Analytics.
+**bcp** supports Microsoft Entra authentication, including multifactor authentication (MFA) support for Azure SQL Databas, [!INCLUDE [fabric-sqldb](../includes/fabric-sqldb.md)], and Azure Synapse Analytics.
 
 [!INCLUDE [entra-id](../includes/entra-id.md)]
 
@@ -243,9 +243,9 @@ Specifies the number of the first row to export from a table or import from a da
 
 #### -G
 
-**Applies to:** Azure SQL Database and Azure Synapse Analytics only.
+**Applies to:** Azure SQL Database, [!INCLUDE [fabric-sqldb](../includes/fabric-sqldb.md)], and Azure Synapse Analytics only.
 
-This switch is used by the client when connecting to Azure SQL Database or Azure Synapse Analytics to specify that the user be authenticated with Microsoft Entra ID. The -G switch requires [version 14.0.3008.27](https://go.microsoft.com/fwlink/?LinkID=825643) or later versions. To determine your version, execute `bcp -v`. For more information, see [Use Microsoft Entra authentication with SQL Database or Azure Synapse Analytics](/azure/sql-database/sql-database-aad-authentication).
+This switch is used by the client to specify that the user be authenticated with Microsoft Entra ID. The -G switch requires [version 14.0.3008.27](https://go.microsoft.com/fwlink/?LinkID=825643) or later versions. To determine your version, execute `bcp -v`. For more information, see [Use Microsoft Entra authentication with SQL Database or Azure Synapse Analytics](/azure/sql-database/sql-database-aad-authentication) or [Authentication to SQL database in Fabric](/fabric/database/sql/authentication).
 
 > [!IMPORTANT]  
 > Microsoft Entra interactive authentication isn't currently supported on Linux or macOS. Microsoft Entra integrated authentication requires [Microsoft ODBC Driver 17 for SQL Server](../connect/odbc/download-odbc-driver-for-sql-server.md) version 17.6.1 and later versions, and a properly [configured Kerberos environment](../connect/odbc/linux-mac/using-integrated-authentication.md#configure-kerberos).

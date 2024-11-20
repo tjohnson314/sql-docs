@@ -16,11 +16,11 @@ helpviewer_keywords:
   - "customizing execution plan display [SQL Server]"
   - "modifying execution plan display"
   - "custom zoom [SQL Server]"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=azure-sqldw-latest"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azure-sqldw-latest || =fabric"
 ---
 # Display the Estimated Execution Plan
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Synapse dedicated only](../../includes/applies-to-version/sql-asdb-asdbmi-asa-dedicated-poolonly.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Synapse dedicated only FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-dedicated-poolonly-fabricsqldb.md)]
 
 This article describes how to generate graphical estimated execution plans by using [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS). When estimated execution plans are generated, the T-SQL queries or batches do not execute. Because of this, an estimated execution plan does not contain any runtime information, such as actual resource usage metrics or runtime warnings. Instead, the execution plan that is generated displays the query execution plan that [!INCLUDE[ssDEnoversion](../../includes/ssdenoversion-md.md)] would most probably use if the queries were actually executed, and displays the estimated rows flowing through the several operators in the plan.
 

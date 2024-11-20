@@ -26,11 +26,11 @@ helpviewer_keywords:
   - "CREATE INDEX statement"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # CREATE COLUMNSTORE INDEX (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 Convert a rowstore table to a clustered columnstore index, or create a nonclustered columnstore index. Use a columnstore index to efficiently run real-time operational analytics on an OLTP workload, or to improve data compression and query performance for data warehousing workloads.
 
@@ -340,6 +340,8 @@ Requires ALTER permission on the table.
 ## Remarks
 
 You can create a columnstore index on a temporary table. When the table is dropped or the session ends, the index is also dropped.
+
+In Fabric SQL database, tables with clustered columnstore indexes are not [mirrored to Fabric OneLake](/fabric/database/sql/mirroring-overview).
 
 ## Filtered indexes
 

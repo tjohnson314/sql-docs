@@ -3,7 +3,8 @@ title: CREATE USER (Transact-SQL)
 description: CREATE USER (Transact-SQL)
 author: VanMSFT
 ms.author: vanto
-ms.date: "02/15/2024"
+ms.reviewer: wiassaf
+ms.date: 10/28/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -25,12 +26,12 @@ helpviewer_keywords:
   - "users [SQL Server]"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 
 # CREATE USER (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
   Adds a user to the current database. The 13 types of users are listed below with a sample of the most basic syntax:  
   
@@ -70,10 +71,10 @@ monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-s
 
 
 ## Syntax  
-  
-```syntaxsql
--- Syntax for SQL Server, Azure SQL Database, and Azure SQL Managed Instance
-  
+
+Syntax for SQL Server, Azure SQL Database, Azure SQL Managed Instance 
+
+```syntaxsql 
 -- Syntax Users based on logins in master  
 CREATE USER user_name   
     [   
@@ -138,9 +139,9 @@ CREATE USER user_name
     | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ] 
 ```
 
+Syntax for Azure Synapse Analytics
 
 ```syntaxsql
--- Syntax for Azure Synapse Analytics  
   
 CREATE USER user_name   
     [ { { FOR | FROM } { LOGIN login_name }   
@@ -152,11 +153,38 @@ CREATE USER user_name
 CREATE USER Microsoft_Entra_principal FROM EXTERNAL PROVIDER  
     [ WITH DEFAULT_SCHEMA = schema_name ]  
 [;]
-``` 
+```
+
+Syntax for [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
+
+```syntaxsql 
+CREATE USER   
+    {  
+    Microsoft_Entra_principal FROM EXTERNAL PROVIDER [WITH OBJECT_ID = 'objectid'] 
+    }  
+ [ ; ]  
   
+-- Users that cannot authenticate   
+CREATE USER user_name   
+    {    WITHOUT LOGIN [ WITH <options_list> [ ,... ] ]  
+       | { FOR | FROM } CERTIFICATE cert_name   
+       | { FOR | FROM } ASYMMETRIC KEY asym_key_name   
+    }  
+ [ ; ]  
+  
+<options_list> ::=  
+      DEFAULT_SCHEMA = schema_name  
+    | DEFAULT_LANGUAGE = { NONE | lcid | language name | language alias }   
+
+-- SQL Database syntax when connected to a federation member  
+CREATE USER user_name  
+[;]
+```
+
+Syntax for Parallel Data Warehouse  
+
 ```syntaxsql
--- Syntax for Parallel Data Warehouse  
-  
+ 
 CREATE USER user_name   
     [ { { FOR | FROM }  
       {   
@@ -185,7 +213,7 @@ CREATE USER user_name
  Specifies the Windows principal for which the database user is being created. The *windows_principal* can be a Windows user, or a Windows group. The user will be created even if the *windows_principal* doesn't have a login. When connecting to [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], if the *windows_principal* doesn't have a login, the Windows principal must authenticate at the [!INCLUDE[ssDE](../../includes/ssde-md.md)] through membership in a Windows group that has a login, or the connection string must specify the contained database as the initial catalog. When creating a user from a Windows principal, use the format **[**_\<domainName\>_**\\**_\<loginName\>_**]**. For examples, see [Syntax Summary](#SyntaxSummary). Users based on Active Directory users, are limited to names of fewer than 21 characters.
   
  #### '*Microsoft_Entra_principal*'  
- **Applies to**: [!INCLUDE[sssds](../../includes/sssds-md.md)], SQL Managed Instance, [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)].  
+ **Applies to**: [!INCLUDE[sssds](../../includes/sssds-md.md)], SQL Managed Instance, [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
   
  Specifies the Microsoft Entra principal for which the database user is being created. The *Microsoft_Entra_principal* can be a Microsoft Entra user, a Microsoft Entra group, or a Microsoft Entra application. (Microsoft Entra users can't have Windows Authentication logins in [!INCLUDE[ssSDS](../../includes/sssds-md.md)]; only database users.) The connection string must specify the contained database as the initial catalog.
 
@@ -214,17 +242,17 @@ CREATE USER user_name
  Specifies that the user shouldn't be mapped to an existing login.  
   
 #### CERTIFICATE *cert_name*  
- **Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later, [!INCLUDE[sssds](../../includes/sssds-md.md)].  
+ **Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later, [!INCLUDE[sssds](../../includes/sssds-md.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
   
  Specifies the certificate for which the database user is being created.  
   
 #### ASYMMETRIC KEY *asym_key_name*  
- **Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later, [!INCLUDE[sssds](../../includes/sssds-md.md)].  
+ **Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later, [!INCLUDE[sssds](../../includes/sssds-md.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
   
  Specifies the asymmetric key for which the database user is being created.  
   
 #### DEFAULT_LANGUAGE = *{ NONE \| \<lcid> \| \<language name> \| \<language salias> }*  
- **Applies to**: [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)] and later,   [!INCLUDE[sssds](../../includes/sssds-md.md)].  
+ **Applies to**: [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)] and later, [!INCLUDE[sssds](../../includes/sssds-md.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
   
  Specifies the default language for the new user. If a default language is specified for the user and the default language of the database is later changed, the users default language remains as specified. If no default language is specified, the default language for the user will be the default language of the database. If the default language for the user isn't specified and the default language of the database is later changed, the default language of the user will change to the new default language for the database.  
   
@@ -245,20 +273,20 @@ CREATE USER user_name
 >  Improper use of this option can lead to data corruption. For more information, see [Migrate Sensitive Data Protected by Always Encrypted](../../relational-databases/security/encryption/migrate-sensitive-data-protected-by-always-encrypted.md).  
 
 #### FROM EXTERNAL PROVIDER </br>
- **Applies to**: [!INCLUDE[sssds](../../includes/sssds-md.md)] and Azure SQL Managed Instance.  
+ **Applies to**: [!INCLUDE[sssds](../../includes/sssds-md.md)], Azure SQL Managed Instance, [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
 
 Specifies that the user is for Microsoft Entra authentication.
 
 #### WITH OBJECT_ID = *'objectid'*
- **Applies to**: [!INCLUDE[sssds](../../includes/sssds-md.md)] and Azure SQL Managed Instance.
+ **Applies to**: [!INCLUDE[sssds](../../includes/sssds-md.md)], Azure SQL Managed Instance, [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
+
 Specifies the Microsoft Entra Object ID. If the `OBJECT_ID` is specified, the user_name can be a user defined alias formed from the original principal display name with a suffix appended. The user_name must be a unique name in the `sys.database_principals` view and adhere to all other `sysname` limitations. For more information on using the `WITH OBJECT_ID` option, see [Microsoft Entra logins and users with nonunique display names](/azure/azure-sql/database/authentication-microsoft-entra-create-users-with-nonunique-names).
 
 > [!NOTE]
-> If the service principal display name is not a duplicate, the default `CREATE LOGIN` or `CREATE USER` statement should be used. The `WITH OBJECT_ID` extension is in **public preview**, and is a troubleshooting repair item implemented for use with nonunique service principals. Using it with a unique service principal is not recommended. Using the `WITH OBJECT_ID` extension for a service principal without adding a suffix will run successfully, but it will not be obvious which service principal the login or user was created for. It's recommended to create an alias using a suffix to uniquely identify the service principal. The `WITH OBJECT_ID` extension is not supported for SQL Server.
+> If the service principal display name is not a duplicate, the default `CREATE LOGIN` or `CREATE USER` statement should be used. The `WITH OBJECT_ID` extension is a troubleshooting repair item implemented for use with nonunique service principals. Using it with a unique service principal is not recommended. Using the `WITH OBJECT_ID` extension for a service principal without adding a suffix will run successfully, but it will not be obvious which service principal the login or user was created for. It's recommended to create an alias using a suffix to uniquely identify the service principal. The `WITH OBJECT_ID` extension is not supported for SQL Server.
 
 ## Remarks  
  If `FOR LOGIN` is omitted, the new database user will be mapped to the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] login with the same name.  
-
   
  The default schema will be the first schema that will be searched by the server when it resolves the names of objects for this database user. Unless otherwise specified, the default schema will be the owner of objects created by this database user.  
   
@@ -276,8 +304,8 @@ Specifies the Microsoft Entra Object ID. If the `OBJECT_ID` is specified, the us
   
  CREATE USER can't be used to create a guest user because the guest user already exists inside every database. You can enable the guest user by granting it CONNECT permission, as shown:  
   
-```  
-GRANT CONNECT TO guest;  
+```sql
+GRANT CONNECT TO guest; 
 GO  
 ```  
   
@@ -285,13 +313,15 @@ GO
 
 Use the syntax extension `FROM EXTERNAL PROVIDER` to create server-level Microsoft Entra logins in Azure SQL Database and Azure SQL Managed Instance. Microsoft Entra logins allow database-level Microsoft Entra principals to be mapped to server-level Microsoft Entra logins. To create a Microsoft Entra user from a Microsoft Entra login use the following syntax:
 
-
-`CREATE USER [Microsoft_Entra_principal] FROM LOGIN [Microsoft Entra login]`
-
+```sql
+CREATE USER [Microsoft_Entra_principal] FROM LOGIN [Microsoft Entra login];
+```
 
 When creating the user in the Azure SQL database, the *login_name* must correspond to an existing Microsoft Entra login, or else using the **FROM EXTERNAL PROVIDER** clause will only create a Microsoft Entra user without a login in the master database. For example, this command will create a contained user:
 
-`CREATE USER [bob@contoso.com] FROM EXTERNAL PROVIDER`
+```sql
+CREATE USER [bob@contoso.com] FROM EXTERNAL PROVIDER;
+```
   
 ##  <a name="SyntaxSummary"></a> Syntax Summary  
  **Users based on logins in master**  
@@ -527,17 +557,19 @@ CREATE USER [bob@contoso.com] FROM EXTERNAL PROVIDER;
 GO
 ```
 
-## Next steps  
+## Next steps
+
 Once the user is created, consider adding the user to a database role using the [ALTER ROLE](../../t-sql/statements/alter-role-transact-sql.md) statement.  
 You might also want to [GRANT Object Permissions](../../t-sql/statements/grant-object-permissions-transact-sql.md) to the role so they can access tables. For general information about the SQL Server security model, see [Permissions](../../relational-databases/security/permissions-database-engine.md).
   
-## Related content  
- [Create a Database User](../../relational-databases/security/authentication-access/create-a-database-user.md)   
- [sys.database_principals &#40;Transact-SQL&#41;](../../relational-databases/system-catalog-views/sys-database-principals-transact-sql.md)   
- [ALTER USER &#40;Transact-SQL&#41;](../../t-sql/statements/alter-user-transact-sql.md)   
- [DROP USER &#40;Transact-SQL&#41;](../../t-sql/statements/drop-user-transact-sql.md)   
- [CREATE LOGIN &#40;Transact-SQL&#41;](../../t-sql/statements/create-login-transact-sql.md)   
- [EVENTDATA &#40;Transact-SQL&#41;](../../t-sql/functions/eventdata-transact-sql.md)   
- [Contained Databases](../../relational-databases/databases/contained-databases.md)   
- [Connecting to SQL Database By Using Microsoft Entra authentication](/azure/azure-sql/database/authentication-aad-overview)   
- [Getting Started with Database Engine Permissions](../../relational-databases/security/authentication-access/getting-started-with-database-engine-permissions.md)
+## Related content
+
+- [Create a Database User](../../relational-databases/security/authentication-access/create-a-database-user.md)   
+- [sys.database_principals &#40;Transact-SQL&#41;](../../relational-databases/system-catalog-views/sys-database-principals-transact-sql.md)   
+- [ALTER USER &#40;Transact-SQL&#41;](../../t-sql/statements/alter-user-transact-sql.md)   
+- [DROP USER &#40;Transact-SQL&#41;](../../t-sql/statements/drop-user-transact-sql.md)   
+- [CREATE LOGIN &#40;Transact-SQL&#41;](../../t-sql/statements/create-login-transact-sql.md)   
+- [EVENTDATA &#40;Transact-SQL&#41;](../../t-sql/functions/eventdata-transact-sql.md)   
+- [Contained Databases](../../relational-databases/databases/contained-databases.md)   
+- [Connecting to SQL Database By Using Microsoft Entra authentication](/azure/azure-sql/database/authentication-aad-overview)   
+- [Getting Started with Database Engine Permissions](../../relational-databases/security/authentication-access/getting-started-with-database-engine-permissions.md)

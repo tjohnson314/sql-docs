@@ -46,7 +46,7 @@ void ProviderX() {
    try {  
       // Open a Connection using the Microsoft ODBC provider.  
       TESTHR(pConnection1.CreateInstance(__uuidof(Connection)));  
-      pConnection1->ConnectionString = "DSN=Data;user id='MyUserId';password='MyPassword';";  
+      pConnection1->ConnectionString = "DSN=Data;user id='MyUserId';password='<password>';";  
       pConnection1->Open("", "", "", adConnectUnspecified);  
       pConnection1->DefaultDatabase = "pubs";  
       // Display the provider  

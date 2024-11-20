@@ -92,7 +92,7 @@ Prior to the 7.2 version of the [!INCLUDE[jdbcNoVersion](../../includes/jdbcnove
 For example:
 
 ```java
-jdbc:sqlserver://abcd.int.mscds.com;databaseName=myDatabase;user=myName;password=myPassword;encrypt=true;hostNameInCertificate=*.int.mscds.com;
+jdbc:sqlserver://abcd.int.mscds.com;databaseName=myDatabase;user=myName;password=<password>;encrypt=true;hostNameInCertificate=*.int.mscds.com;
 ```
 
 ## See also

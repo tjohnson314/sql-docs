@@ -32,7 +32,7 @@ helpviewer_keywords:
   
  The nested-container architecture of [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] enables all containers, except for the task host container that encapsulates only a single task, to include other containers, each with its own control flow. The For Loop, Foreach Loop, and Sequence containers can include multiple tasks and other containers, which in turn can include multiple tasks and containers. For example, a package with a Script task and a Sequence container has a precedence constraint that links the Script task and the Sequence container. The Sequence container includes three Script tasks, and its precedence constraints link the three Script tasks into a control flow. The following diagram shows the precedence constraints in a package with two levels of nesting.  
   
- ![Precedence contraints in a package](../../integration-services/control-flow/media/mw-dts-12.gif "Precedence contraints in a package")  
+ ![Precedence constraints in a package](../../integration-services/control-flow/media/mw-dts-12.gif "Precedence constraints in a package")  
   
  Because the package is at the top of the [!INCLUDE[ssIS](../../includes/ssis-md.md)] container hierarchy, multiple packages cannot be linked by precedence constraints; however, you can add an Execute Package task to a package and indirectly link another package into the control flow.  
   

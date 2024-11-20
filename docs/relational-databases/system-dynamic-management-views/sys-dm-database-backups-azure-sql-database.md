@@ -1,10 +1,10 @@
 ---
 title: "sys.dm_database_backups"
-description: Returns information about backups of a database in an Azure SQL Database server.
+description: Returns information about backups of a database in an Azure SQL Database logical server and in Fabric SQL database.
 author: SudhirRaparla
 ms.author: nvraparl
 ms.reviewer: randolphwest
-ms.date: 09/28/2023
+ms.date: 10/31/2024
 ms.service: azure-sql-database
 ms.topic: "reference"
 f1_keywords:
@@ -17,13 +17,13 @@ helpviewer_keywords:
   - "sys.dm_database_backups dynamic management view"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current"
+monikerRange: "=azuresqldb-current || =fabric"
 ---
 # sys.dm_database_backups
 
-[!INCLUDE [Azure SQL Database](../../includes/applies-to-version/asdb.md)]
+[!INCLUDE [Azure SQL Database FabricSQLDB](../../includes/applies-to-version/asdb-fabricsqldb.md)]
 
-Returns information about backups of a database in an [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] server.
+Returns information about backups of a database in an [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] logical server and in [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 > [!NOTE]  
 > The `sys.dm_database_backups` DMV is currently in preview and is available for all Azure SQL Database service tiers except Hyperscale tier.
@@ -31,18 +31,20 @@ Returns information about backups of a database in an [!INCLUDE [ssazure-sqldb](
 | Column name | Data type | Description |
 | --- | --- | --- |
 | `backup_file_id` | **uniqueidentifier** | ID of the generated backup file. Not null. |
-| `logical_database_id` | **uniqueidentifier** | Logical database ID of the [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] on which the operation is performed. Not null. |
-| `physical_database_name` | **nvarchar(128)** | Name of the physical [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] on which the operation is performed. Not null. |
-| `logical_server_name` | **nvarchar(128)** | Name of the logical server on which the [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] that is being backed up is present. Not null. |
+| `logical_database_id` | **uniqueidentifier** | Logical database ID on which the operation is performed. Not null. |
+| `physical_database_name` | **nvarchar(128)** | Name of the physical database on which the operation is performed. Not null. |
+| `logical_server_name` | **nvarchar(128)** | Name of the logical server on which the database that is being backed up is present. In SQL database in Fabric, this is `NULL`.|
 | `logical_database_name` | **nvarchar(128)** | User-created name of the database on which the operation is performed. Not null. |
 | `backup_start_date` | **datetime2(7)** | Timestamp when the backup operation started. Not null. |
 | `backup_finish_date` | **datetime2(7)** | Timestamp when the backup operation finished. Not null. |
-| `backup_type` | **char(1)** | Type of backup. Not null.<br /><br />D = Full database backup<br />I = Incremental or differential backup<br />L = Log backup. |
-| `in_retention` | **bit** | Backup retention status. Tells whether backup is within retention period. Null.<br /><br />1 = In retention<br />0 = Out of retention. |
+| `backup_type` | **char(1)** | Type of backup. Not null.<br /><br />`D` = Full database backup<br />`I` = Incremental or differential backup<br />`L` = Log backup. |
+| `in_retention` | **bit** | Backup retention status. Tells whether backup is within retention period. <br /><br />`1` = In retention<br />`0` = Out of retention. |
 
 ## Permissions
 
-On SQL Database Basic, S0, and S1 service objectives, and for databases in elastic pools, the server admin account, the Microsoft Entra ID admin account, or membership in the ##MS_ServerStateReader## server role is required. On all other SQL Database service objectives, either the VIEW DATABASE STATE permission on the database, or membership in the ##MS_ServerStateReader## server role, is required.
+In Azure SQL Database, in the Basic, S0, and S1 service objectives, and for databases in elastic pools, the server admin account, the Microsoft Entra ID admin account, or membership in the ##MS_ServerStateReader## server role is required. On all other SQL Database service objectives, either the VIEW DATABASE STATE permission on the database, or membership in the ##MS_ServerStateReader## server role, is required.
+
+In Fabric SQL database, a user must be granted VIEW DATABASE STATE in the database to query this DMV. Or, a member of any [role the Fabric workspace](/fabric/get-started/roles-workspaces) can query this DMV.
 
 ## Remarks
 
@@ -76,3 +78,8 @@ SELECT backup_file_id,
 FROM sys.dm_database_backups
 ORDER BY backup_start_date DESC;
 ```
+
+## Related content
+
+- [Automated backups in Azure SQL Database](/azure/azure-sql/database/automated-backups-overview)
+- [Automated backups in SQL database in Microsoft Fabric](/fabric/database/sql/backup)

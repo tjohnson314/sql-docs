@@ -143,7 +143,7 @@ For example, the following user-defined function returns a table with a single c
 USE AdventureWorks2022;
 GO
 
-CREATE FUNCTION dbo.MyUDF (@ProudctModelID INT)
+CREATE FUNCTION dbo.MyUDF (@ProductModelID INT)
 RETURNS @T TABLE (ProductDescription XML)
 AS
 BEGIN
@@ -152,7 +152,7 @@ BEGIN
 declare namespace PD="https://www.adventure-works.com/schemas/products/description";
                     //PD:ProductDescription  ')
     FROM Production.ProductModel
-    WHERE ProductModelID = @ProudctModelID
+    WHERE ProductModelID = @ProductModelID
 
     RETURN
 END;

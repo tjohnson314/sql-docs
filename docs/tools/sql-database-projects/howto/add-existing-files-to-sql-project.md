@@ -17,7 +17,7 @@ f1_keywords:
 
 # Add existing files to a SQL project
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 As a concept, once a SQL project is created, objects can be added to it one at a time or in bulk. Adding objects one at a time is straightforward, while adding objects in bulk can be done from the contents of a `.dacpac` file or one or more SQL scripts. This article explains how to add the contents of a dacpac or SQL scripts to a SQL project and the tradeoffs between the sources.
 

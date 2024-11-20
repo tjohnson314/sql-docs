@@ -19,10 +19,11 @@ helpviewer_keywords:
   - "characters [SQL Server], wildcard"
 dev_langs:
   - "TSQL"
+monikerRange: "= azuresqldb-current || >= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-mi-current || =fabric"
 ---
 # Percent character (wildcard - character(s) to match) (Transact-SQL)
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Matches any string of zero or more characters. This wildcard character can be used as a prefix, a suffix, or in the middle of the string. The pattern string can contain more than one `%` wildcard.
 

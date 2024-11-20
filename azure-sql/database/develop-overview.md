@@ -10,10 +10,10 @@ ms.service: azure-sql
 ms.subservice: development
 ms.topic: conceptual
 ms.custom: sqldbrb=2
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
+monikerRange: "= azuresql || = azuresql-db || = azuresql-mi ||=fabricsql"
 ---
 # Application development overview - Azure SQL Database & Azure SQL Managed Instance
-[!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb-sqlmi.md)]
+[!INCLUDE [appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
 This article walks through the basic considerations that a developer should be aware of when writing code to connect to your database in Azure. This article applies to Azure SQL Database, and Azure SQL Managed Instance.
 

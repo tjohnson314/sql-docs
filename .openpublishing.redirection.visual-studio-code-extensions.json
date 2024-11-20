@@ -1,0 +1,34 @@
+{
+  "redirections": [
+    {
+      "source_path": "docs/tools/visual-studio-code/mssql-extensions.md",
+      "redirect_url": "/sql/tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/tools/visual-studio-code/sql-server-develop-use-vscode.md",
+      "redirect_url": "/sql/tools/visual-studio-code-extensions/mssql/connect-database-visual-studio-code",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/tools/visual-studio-code/mssql-query-history.md",
+      "redirect_url": "/sql/tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/tools/visual-studio-code/create-azure-function-with-mssql-command-palette.md",
+      "redirect_url": "/sql/tools/visual-studio-code-extensions/sql-bindings/create-azure-function-command-palette",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/tools/visual-studio-code/create-azure-function-with-mssql-object-explorer.md",
+      "redirect_url": "/sql/tools/visual-studio-code-extensions/sql-bindings/create-azure-function-object-explorer",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/tools/visual-studio-code/create-azure-function-with-mssql.md",
+      "redirect_url": "/sql/tools/visual-studio-code-extensions/sql-bindings/create-azure-function",
+      "redirect_document_id": false
+    }
+  ]
+}

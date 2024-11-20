@@ -18,10 +18,11 @@ helpviewer_keywords:
   - "DELETE statement [SQL Server], hints"
 dev_langs:
   - "TSQL"
+monikerRange: "= azuresqldb-current || >= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-mi-current || =fabric"
 ---
 # Hints (Transact-SQL)
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Hints are options or strategies specified for enforcement by the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] query processor on `SELECT`, `INSERT`, `UPDATE`, or `DELETE` statements. The hints override any execution plan the query optimizer might select for a query.
 

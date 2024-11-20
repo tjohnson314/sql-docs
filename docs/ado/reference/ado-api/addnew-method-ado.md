@@ -58,7 +58,7 @@ Dim cn As New adodb.Connection
 Dim rs As New adodb.Recordset  
 Dim cmd As New adodb.Command  
   
-cn.ConnectionString = "Provider=SQLOLEDB;Data Source=alexverb2;uid=sa;pwd=foo$bar00;"  
+cn.ConnectionString = "Provider=SQLOLEDB;Data Source=alexverb2;uid=sa;pwd=<password>;"  
   
 cn.Open  
 rs.Open "select * from xxx..aa1", cn, adOpenKeyset, adLockOptimistic  

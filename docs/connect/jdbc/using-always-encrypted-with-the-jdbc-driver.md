@@ -454,7 +454,7 @@ public class AlwaysEncrypted {
     private static String keyStoreLocation = "C:\\Dev\\Always Encrypted\\keystore.jks";
 
     // The password of the keystore and the key.
-    private static char[] keyStoreSecret = "********".toCharArray();
+    private static char[] keyStoreSecret = "<password>".toCharArray();
 
     /**
      * Name of the encryption algorithm used to encrypt the value of the column encryption key. The algorithm for the system providers must be

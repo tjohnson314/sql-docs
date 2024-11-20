@@ -12,7 +12,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # Pre- and post-deployment scripts overview
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Pre- and post-deployment scripts are SQL scripts that are included in the project to be executed during deployment. Pre/post-deployment scripts are included in the `.dacpac` but they aren't compiled into or validated with database object model. A pre-deployment script is executed before the deployment plan is executed but the deployment plan is calculated before the script executes. A post-deployment script is executed after the deployment plan completes.
 

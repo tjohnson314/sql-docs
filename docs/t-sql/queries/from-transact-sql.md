@@ -33,11 +33,11 @@ helpviewer_keywords:
   - "derived tables"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # FROM clause plus JOIN, APPLY, PIVOT (Transact-SQL)
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-pdw-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
 In Transact-SQL, the FROM clause is available on the following statements:
 
@@ -57,7 +57,7 @@ This article also discusses the following keywords that can be used on the FROM 
 
 ## Syntax
 
-Syntax for SQL Server and Azure SQL Database:
+Syntax for SQL Server, Azure SQL Database, and Fabric SQL database:
 
 ```syntaxsql
 [ FROM { <table_source> } [ , ...n ] ]

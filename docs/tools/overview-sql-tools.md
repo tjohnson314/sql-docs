@@ -8,12 +8,12 @@ ms.date: 09/19/2024
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: overview
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =fabric"
 ---
 
 # SQL tools overview
 
-[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 To manage your database, you need a tool. Whether your databases run in the cloud, on Windows, on macOS, or on [Linux](../linux/sql-server-linux-overview.md), your tool doesn't need to run on the same platform as the database.
 
@@ -64,3 +64,5 @@ If you're looking for other tools that aren't mentioned on this page, see [SQL C
 - [Azure Database for PostgreSQL](/azure/postgresql/)
 - [Azure Database for MySQL](/azure/mysql/)
 - [Azure Cosmos DB](/azure/cosmos-db/introduction)
+- [SQL database in Microsoft Fabric](/fabric/database/sql/overview)
+  

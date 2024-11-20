@@ -3,7 +3,7 @@ title: "Microsoft Drivers for PHP Support Matrix"
 description: "This page contains the support matrix and support lifecycle policy for the Microsoft PHP Drivers for SQL Server."
 author: David-Engel
 ms.author: davidengel
-ms.date: 01/31/2024
+ms.date: 11/01/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.custom: linux-related-content
@@ -51,6 +51,7 @@ The following Microsoft PHP Drivers are no longer supported.
 
 |Driver version&nbsp;&#8594;<br />&#8595; Database version|5.12|5.11|5.10|5.9|5.8|5.6|5.3|5.2|4.3|4.0|3.2|
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|SQL database in Fabric    |Yes|   |   |   |   |   |   |   |   |   |   | 
 |Azure SQL Database        |Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |
 |Azure SQL Managed Instance|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |
 |Azure Synapse Analytics   |Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |

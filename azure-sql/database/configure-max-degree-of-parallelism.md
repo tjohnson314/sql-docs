@@ -12,9 +12,10 @@ ms.topic: conceptual
 dev_langs:
   - "TSQL"
 ms.devlang: tsql
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 # Configure the max degree of parallelism (MAXDOP) in Azure SQL Database
-[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
   This article describes the **max degree of parallelism (MAXDOP)** configuration setting in Azure SQL Database. 
 

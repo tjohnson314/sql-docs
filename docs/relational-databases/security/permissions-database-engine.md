@@ -16,16 +16,18 @@ helpviewer_keywords:
   - "permissions [SQL Server]"
   - "security [SQL Server], permissions"
   - "naming conventions [SQL Server]"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Permissions (Database Engine)
 
-[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
 Every [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] securable has associated permissions that can be granted to a principal. Permissions in the [!INCLUDE [ssDE](../../includes/ssde-md.md)] are managed at the server level assigned to logins and server roles, and at the database level assigned to database users and database roles. The model for [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] has the same system for the database permissions, but the server level permissions aren't available. This article contains the complete list of permissions. For a typical implementation of the permissions, see [Getting Started with Database Engine Permissions](../../relational-databases/security/authentication-access/getting-started-with-database-engine-permissions.md).
 
 The total number of permissions for [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] is 292. [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] exposes 292 permissions. Most permissions apply to all platforms, but some don't. For example, most [server level permissions](authentication-access/server-level-roles.md) can't be granted on [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and a few permissions only make sense on [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 New permissions are being introduced gradually with new releases. [!INCLUDE [ssSQLv15_md](../../includes/sssql19-md.md)] exposes 248 permissions.[!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] exposed 238 permissions. [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] exposed 230 permissions. [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] exposed 219 permissions. [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] exposed 214 permissions. [!INCLUDE [sql2008r2](../../includes/sql2008r2-md.md)] exposed 195 permissions. The [sys.fn_builtin_permissions](../../relational-databases/system-functions/sys-fn-builtin-permissions-transact-sql.md) article specifies which permissions are new in recent versions.
+
+In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], only database-level users and roles are supported. Server-level logins, roles, and the sa account are not available. In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], Microsoft Entra ID for database users is the only supported authentication method. For more information, see [Authorization in SQL database in Microsoft Fabric](/fabric/database/sql/authorization).
 
 Once you understand the permissions required, you can apply server level permissions to logins or server roles, and database level permissions to users or database roles, by using the [GRANT](../../t-sql/statements/grant-transact-sql.md), [REVOKE](../../t-sql/statements/revoke-transact-sql.md), and [DENY](../../t-sql/statements/deny-transact-sql.md) statements. For example:
 

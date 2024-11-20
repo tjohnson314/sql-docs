@@ -3,19 +3,19 @@ title: "JSON_PATH_EXISTS (Transact-SQL)"
 description: JSON_PATH_EXISTS tests whether a specified SQL/JSON path exists in the input JSON string.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: randolphwest, umajay
-ms.date: 10/31/2024
+ms.reviewer: randolphwest, umajay, jovanpop
+ms.date: 11/04/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
-dev_langs:
-  - "TSQL"
 ms.custom:
   - build-2024
-monikerRange: "=azuresqldb-current||>=sql-server-ver16||>=sql-server-linux-ver16||=azuresqldb-mi-current"
+dev_langs:
+  - "TSQL"
+monikerRange: "=azuresqldb-current||>=sql-server-ver16||>=sql-server-linux-ver16||=azuresqldb-mi-current||=fabric"
 ---
 # JSON_PATH_EXISTS (Transact-SQL)
-[!INCLUDE [sqlserver2016-asdb-asmi](../../includes/applies-to-version/sqlserver2022-asdb-asmi.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw.md)]
 
 Tests whether a specified SQL/JSON path exists in the input JSON string.
 

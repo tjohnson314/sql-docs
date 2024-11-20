@@ -11,7 +11,7 @@ ms.topic: overview
 
 # What are SQL database projects?
 
-[!INCLUDE [SQL Server 2022 Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sqlserver2022-asdb-asmi.md)]
+[!INCLUDE [SQL Server 2022 Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sqlserver2022-asdb-asmi-fabricsqldb.md)]
 
 A SQL database project is a local representation of SQL objects that comprise the schema for a single database, such as tables, stored procedures, or functions. The development cycle of a SQL database project enables database development to be integrated into a continuous integration and continuous deployment (CI/CD) workflows familiar as a development best practice.
 
@@ -91,6 +91,7 @@ SDK-style projects have a superset of functionality from original SQL projects a
 - [Project-Oriented Offline Database Development](../../ssdt/project-oriented-offline-database-development.md)
 - [SQL Database Projects extension](/azure-data-studio/extensions/sql-database-project-extension)
 - [SqlPackage](../sqlpackage/sqlpackage.md)
+- [Sample CI/CD pipelines for SQL projects](https://github.com/Azure-Samples/sql-projects-devops-samples)
 - [GitHub sql-action](https://github.com/azure/sql-action)
 - [Azure DevOps SQL deployments](/azure/devops/pipelines/targets/azure-sqldb)
 - [Data-tier applications (DAC)](../../relational-databases/data-tier-applications/data-tier-applications.md)

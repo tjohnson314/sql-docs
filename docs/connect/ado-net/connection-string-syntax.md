@@ -54,10 +54,10 @@ Each of the following forms of syntax uses Windows Authentication to connect to 
 
 ### SQL Server authentication with SqlClient
 
-Windows Authentication is preferred for connecting to SQL Server. However, if SQL Server Authentication is required, use the following syntax to specify a user name and password. In this example, asterisks are used to represent a valid user name and password.
+Windows Authentication is preferred for connecting to SQL Server. However, if SQL Server Authentication is required, use the following syntax to specify a user name and password.
 
 ```csharp  
-"Persist Security Info=False;User ID=*****;Password=*****;Initial Catalog=AdventureWorks;Server=MySqlServer;Encrypt=True;"  
+"Persist Security Info=False;User ID=<user name>;Password=<password>;Initial Catalog=AdventureWorks;Server=MySqlServer;Encrypt=True;"  
 ```  
 
 When you connect to Azure SQL Database or to Azure Synapse Analytics and provide a username in the format `user@servername`, make sure that the `servername` value in the username matches the value provided for `Server=`.

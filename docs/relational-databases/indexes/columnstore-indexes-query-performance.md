@@ -7,11 +7,11 @@ ms.date: 10/23/2024
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # Columnstore indexes - Query performance
 
-[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
  This article includes recommendations for achieving the fast query performance with columnstore indexes.
 
@@ -90,9 +90,10 @@ For example, if a table has 50 columns and the query only uses 5 of those column
 
  For more information about rowgroups, see [Columnstore Index Design Guidelines](../../relational-databases/sql-server-index-design-guide.md#columnstore_index).
 
-### Batch Mode Execution
+### Batch mode execution
 
- [Batch mode execution](../../relational-databases/query-processing-architecture-guide.md#batch-mode-execution) refers to processing a set of rows, typically up to 900 rows, together for execution efficiency. For example, the query `SELECT SUM (Sales) FROM SalesData` aggregates the total sales from the table SalesData. In batch mode execution, the query execution engine computes the aggregate in group of 900 values. This spreads metadata  the access costs and other types of overhead over all the rows in a batch, rather than paying the cost for each row thereby significantly reducing the code path. Batch mode processing operates on compressed data when possible and eliminates some of the exchange operators used by row mode processing, speeding up analytics queries by orders of magnitude.
+[Batch mode execution](../../relational-databases/query-processing-architecture-guide.md#batch-mode-execution) processes rows in groups, usually up to 900 at a time, to improve efficiency. For example, the query `SELECT SUM(Sales) FROM SalesData` calculates the total sales from the `SalesData` table. In batch mode, the query engine processes the data in groups of 900 rows. This approach reduces the metadata access cost and other types of overhead by spreading them across all rows in a batch, rather than incurring the overhead for each row. Additionally, batch mode works with compressed data when possible and removes some of the exchange operators used in row mode, significantly speeding up analytical queries.
+
 
  Not all query execution operators can be executed in batch mode. For example, data manipulation language (DML) operations such as insert, delete, or update are executed one row at a time. Batch mode operator such as Scan, Join, Aggregate, Sort, and others can improve query performance. Since the columnstore index was introduced in [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], there is a sustained effort to expand the operators that can be executed in the batch mode. The following table shows the operators that run in batch mode according to the product version.
 

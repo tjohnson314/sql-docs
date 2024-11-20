@@ -4,20 +4,20 @@ description: Format query results as JSON, or export data from SQL Server as JSO
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: jroth, randolphwest, jovanpop
-ms.date: 11/23/2023
+ms.date: 11/04/2024
 ms.service: sql
+ms.topic: conceptual
 ms.custom:
   - build-2024
-ms.topic: conceptual
 helpviewer_keywords:
   - "FOR JSON"
   - "JSON, exporting"
   - "exporting JSON"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # Format query results as JSON with FOR JSON
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only.md)]
+[!INCLUDE [sql-asdbmi-asa-svrless-poolonly-fabricse-fabricdw](../../includes/applies-to-version/sql-asdbmi-asa-svrless-poolonly-fabricse-fabricdw.md)]
 
 Format query results as JSON, or export data from SQL Server as JSON, by adding the `FOR JSON` clause to a `SELECT` statement. Use the `FOR JSON` clause to simplify client applications by delegating the formatting of JSON output from the app to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
@@ -50,7 +50,7 @@ Here's a sample query that uses `PATH` mode with the `FOR JSON` clause. The foll
 
 For more detailed info and examples, see [Format Nested JSON Output with PATH Mode (SQL Server)](format-nested-json-output-with-path-mode-sql-server.md).
 
-For syntax and usage, see [FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md).
+For syntax and usage, see [SELECT - FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md).
 
 ## [FOR JSON AUTO](#tab/json-auto)
 
@@ -151,7 +151,7 @@ JSON_F52E2B61-18A1-11d1-B105-00805F49916B
 
 For more detailed info and examples, see [Format JSON Output Automatically with AUTO Mode (SQL Server)](format-json-output-automatically-with-auto-mode-sql-server.md).
 
-For syntax and usage, see [FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md).
+For syntax and usage, see [SELECT - FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md).
 
 ---
 
@@ -230,6 +230,6 @@ Here's an example that demonstrates how the `FOR JSON` clause formats the JSON o
 
 - [How FOR JSON converts SQL Server data types to JSON data types (SQL Server)](how-for-json-converts-sql-server-data-types-to-json-data-types-sql-server.md)
 - [How FOR JSON escapes special characters and control characters (SQL Server)](how-for-json-escapes-special-characters-and-control-characters-sql-server.md)
-- [JSON as a bridge between NoSQL and relational worlds](https://channel9.msdn.com/events/DataDriven-SQLServer2016/JSON-as-bridge-betwen-NoSQL-relational-worlds)
+- [Video: JSON as a bridge between NoSQL and relational worlds](/shows/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 - [SELECT - FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md)
 - [Use FOR JSON output in SQL Server and in client apps (SQL Server)](use-for-json-output-in-sql-server-and-in-client-apps-sql-server.md)

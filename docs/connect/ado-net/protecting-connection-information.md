@@ -28,7 +28,7 @@ For situations where it is not possible to use Windows authentication, you must 
 ```xml  
 <identity impersonate="true"
         userName="MyDomain\UserAccount"
-        password="*****" />  
+        password="<password>" />  
 ```  
 
 The fixed identity account should be a low-privilege account that has been granted only necessary permissions in the database. In addition, you should encrypt the configuration file so that the user name and password are not exposed in clear text.

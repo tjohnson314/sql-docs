@@ -1,11 +1,11 @@
 ---
-title: Create instance pool (preview)
+title: Create instance pool
 titleSuffix: Azure SQL Managed Instance
-description: Learn how to create instance pools (preview) for Azure SQL Managed Instance, a feature that lets you share resources for multiple instances, and provides a convenient and cost-efficient way to migrate smaller SQL Server databases to the cloud at scale. Create your instance pool by using the Azure portal, PowerShell, or the Azure CLI.
+description: Learn how to create instance pools for Azure SQL Managed Instance, a feature that lets you share resources for multiple instances, and provides a convenient and cost-efficient way to migrate smaller SQL Server databases to the cloud at scale. Create your instance pool by using the Azure portal, PowerShell, or the Azure CLI.
 author: MariDjo
 ms.author: dmarinkovic
 ms.reviewer: mathoma, randolphwest
-ms.date: 08/23/2024
+ms.date: 10/14/2024
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: how-to
@@ -13,16 +13,13 @@ ms.custom:
   - devx-track-azurepowershell
   - devx-track-azurecli
 ---
-# Create an instance pool (preview) - Azure SQL Managed Instance
+# Create an instance pool - Azure SQL Managed Instance
 
 [!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
 This article teaches how to create an [instance pool](instance-pools-overview.md) for [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md) by using the Azure portal, PowerShell, or the Azure CLI, as well as how to move instances in and out of the pool by using PowerShell, or the Azure CLI.
 
 Instance pools make it possible to deploy multiple instances with shared resources to a single virtual machine, which provides a convenient and cost-effective infrastructure to migrate multiple SQL Server instances without having to consolidate smaller and less compute-intensive workloads onto a larger SQL Managed Instance.
-
-> [!NOTE]  
-> Instance pools for Azure SQL Managed Instance are currently in preview.
 
 ## Prerequisites
 
@@ -63,7 +60,7 @@ To create an instance pool in the Azure portal, follow these steps:
 
 1. On the **Instance pools** page, select **+ Create** to open the **Create Azure SQL Managed Instance Pool** page:
 
-   :::image type="content" source="media/instance-pools-configure/instance-pool-portal-page.png" alt-text="Screenshot of the Instance pools page in the Azure portal, with +Create selected.":::
+   :::image type="content" source="media/instance-pools-configure/instance-pool-portal-page.png" alt-text="Screenshot of the Instance pools page in the Azure portal, with +Create selected." lightbox="media/instance-pools-configure/instance-pool-portal-page.png":::
 
 1. On the **Create Azure SQL Managed Instance Pool**:
     1. Provide project and instance details on the **Basics** tab.
@@ -72,7 +69,7 @@ To create an instance pool in the Azure portal, follow these steps:
     1. (Optional) Configure a non-default maintenance window for the pool on the **Additional settings** tab.
     1. Review your configuration on the **Review + create** tab, and then select **Create** to create your instance pool.
 
-   :::image type="content" source="media/instance-pools-configure/instance-pool-create-portal-page.png" alt-text="Screenshot of the Create Azure SQL Managed Instance Pool page in the Azure portal, with Configure instance pool selected.":::
+   :::image type="content" source="media/instance-pools-configure/instance-pool-create-portal-page.png" alt-text="Screenshot of the Create Azure SQL Managed Instance Pool page in the Azure portal, with Configure instance pool selected." lightbox="media/instance-pools-configure/instance-pool-create-portal-page.png":::
 
 1. You can monitor pool deployment from **Notifications**.
 
@@ -89,9 +86,9 @@ Consider the following:
 
 Create a new instance pool with 8 vCores on standard-series (Gen5) hardware by running the following sample script:
 
-```powershell
+```vb
 $virtualNetwork = Get-AzVirtualNetwork -Name "<vNetName>" -ResourceGroupName "<resourceGroupName>"
-$miSubnet = Get-AzVirtualNetworkSubnetConfig -Name "<miSubnetName>" -VirtualNetwork 
+$miSubnet = Get-AzVirtualNetworkSubnetConfig -Name "<miSubnetName>" -VirtualNetwork
 $virtualNetwork$miSubnetConfigId = $miSubnet.Id
 
 $parameters = @{
@@ -141,7 +138,7 @@ az sql instance-pool create \
 After your pool is created, you can create a new instance within the pool by using the Azure portal, PowerShell, or the Azure CLI.
 
 Consider the following:
-- You must specify the license type for the new instance, and it must match the license type of the pool. 
+- You must specify the license type for the new instance, and it must match the license type of the pool.
 
 ### [Azure portal](#tab/portal)
 
@@ -155,7 +152,10 @@ To create a new instance inside a pool by using the Azure portal, follow these s
     1. Choose _Yes_ to **Belongs to an instance pool?** under **Managed Instance details** to create your new instance inside an instance pool.
     1. Select the pool from the **Instance pool** dropdown list.
 
-   :::image type="content" source="media/instance-pools-configure/create-instance-inside-pool.png" alt-text="Screenshot of the Create Azure SQL Managed Instance page in the Azure portal with belongs to an instance pool selected.":::
+   :::image type="content" source="media/instance-pools-configure/create-instance-inside-pool.png" alt-text="Screenshot of the Create Azure SQL Managed Instance page in the Azure portal with belongs to an instance pool selected." lightbox="media/instance-pools-configure/create-instance-inside-pool.png":::
+
+   After you've selected an instance pool from the dropdown list, you see the compute cost for the instance change to 0 because compute is included in the cost of the pool.
+
 1. Fill out the remaining details on the **Create Azure SQL Managed Instance** page to create your instance inside the pool. For details, review [Create Azure SQL Managed Instance](instance-create-quickstart.md).
 1. Select **Review + create** to review settings for your new instance and then use **Create** to deploy your instance inside the selected pool.
 
@@ -217,13 +217,13 @@ Moving an existing instance inside a pool by using the Azure portal is not curre
 
 To move an instance into a pool with PowerShell, provide the pool name when you use [Set-AzSqlInstance](/powershell/module/az.sql/set-azsqlinstance):
 
-```powershell
+```csv
 $instance01 | Set-AzSqlInstance -InstancePoolName $instancePoolName
 ```
 
 To move an instance out of a pool, provide a _blank_ pool name:
 
-```powershell
+```csv
 $instance01 | Set-AzSqlInstance -InstancePoolName ''
 ```
 
@@ -243,7 +243,7 @@ To move an instance out of a pool, provide a _blank_ name in the `--instance-poo
 ```azurecli
 az sql mi update \
   --name <instance name> \
-  --instance-pool-name \
+  --instance-pool-name '' \
   --resource-group <resource group name>
 ```
 
@@ -297,25 +297,33 @@ az sql midb create
 
 ## Get pool usage
 
-### [PowerShell](#tab/powershell-1)
+You can determine how resources are being used by resources in a pool by using the Azure portal, PowerShell, or the Azure CLI.
+
+### [Azure portal](#tab/portal)
+
+To get a list of instances inside a pool, use the Azure portal to view the **Instance pools** page. Select the pool name to view the instances inside the pool on the **Overview** page:
+
+:::image type="content" source="media/instance-pools-configure/instance-pool-usage.png" alt-text="Screenshot of the Overview page of an instance pool in the Azure portal." lightbox="media/instance-pools-configure/instance-pool-usage.png":::
+
+### [PowerShell](#tab/powershell)
 
 You can use PowerShell to determine how resources are being used inside a pool.
 
 To get a list of instances inside a pool, use [Get-AzSqlInstance](/powershell/module/az.sql/get-azsqlinstance):
 
-```powershell
+```csv
 $instancePool | Get-AzSqlInstance
 ```
 
 To get pool resource usage, use [Get-AzSqlInstancePoolUsage](/powershell/module/az.sql/get-azsqlinstancepoolusage):
 
-```powershell
+```csv
 $instancePool| Get-AzSqlInstancePoolUsage
 ```
 
 You can add the -ExpandChildren parameter to get a detailed overview of the pool and instances inside it:
 
-```powershell
+```csv
 $instancePool | Get-AzSqlInstancePoolUsage –ExpandChildren
 ```
 
@@ -333,11 +341,11 @@ $databases = Get-AzSqlInstanceDatabase @databaseParams
 > [!NOTE]  
 > To check limits on the instances deployed to a pool, and databases per instance pool, review [resource limits](instance-pools-overview.md#resource-limits).
 
-### [Azure CLI](#tab/azure-cli-1)
+### [Azure CLI](#tab/azure-cli)
 
 To get information about the instances and resource usage in the pool, use [az sql instance-pool show](/cli/azure/sql/instance-pool#az-sql-instance-pool-show):
 
-```azurecli
+```powershell
 sqlmipoolId=$(az sql instance-pool show --name <pool name> \
 --resource-group <resource group name> --query id | cut -d '"' -f 2) \
 az sql mi list --resource-group <resource group name> \
@@ -348,9 +356,19 @@ az sql mi list --resource-group <resource group name> \
 
 ## Update an instance pool
 
-You can update settings for an existing instance pool by using PowerShell or the Azure CLI.
+You can update settings for an existing instance pool by using the Azure portal, PowerShell or the Azure CLI.
 
-### [PowerShell](#tab/powershell-1)
+### [Azure portal](#tab/portal)
+
+Use the **Compute + storage** pane under **Settings** of the **Instance pool** page in the Azure portal to update the license type, vCore size, and hardware type for your pool:
+
+:::image type="content" source="media/instance-pools-configure/instance-compute-storage.png" alt-text="Screenshot of the Compute + storage Instance pool pane in the Azure portal." lightbox="media/instance-pools-configure/instance-compute-storage.png":::
+
+Use the **Maintenance** pane under **Settings** of the **Instance pool** page in the Azure portal to update the maintenance window for your pool:
+
+:::image type="content" source="media/instance-pools-configure/instance-maintenance.png" alt-text="Screenshot of the Maintenance Instance pool pane in the Azure portal." lightbox="media/instance-pools-configure/instance-maintenance.png":::
+
+### [PowerShell](#tab/powershell)
 
 You can use PowerShell to make changes to the instance pool limits.
 
@@ -374,7 +392,7 @@ $parameters = @{
     Location = $location
     MaintenanceScope = "SQLManagedInstance"
 }
- 
+
 $configurations = Get-AzMaintenancePublicConfiguration @parameters
 $maintenanceWindowOptions = $configurations | Where-Object { $_.Location -eq $location -and $_.MaintenanceScope -eq "SQLManagedInstance" }
 ```
@@ -389,7 +407,7 @@ $instancePoolParams = @{
 $instancePool | Set-AzSqlInstancePool @instancePoolParams
 ```
 
-### [Azure CLI](#tab/azure-cli-1)
+### [Azure CLI](#tab/azure-cli)
 
 To update configuration settings for your pool, use [az sql instance-pool update](/cli/azure/sql/instance-pool#az-sql-instance-pool-update):
 
@@ -487,7 +505,7 @@ The following table shows available instance pool operations:
 | Command | Azure portal | PowerShell | Azure CLI |
 | :--- | :--- | :--- | :--- |
 | Create an instance pool | Yes | Yes | Yes |
-| Update pool properties | No | Yes | Yes |
+| Update pool properties | Yes | Yes | Yes |
 | Check a pool use and properties | Yes | Yes | Yes |
 | Delete an instance pool | Yes | Yes | Yes |
 | Create new managed instance inside a pool | Yes | Yes | Yes |
@@ -532,21 +550,21 @@ Available [Azure CLI](/cli/azure/sql) commands:
 
 ## Limitations
 
-During public preview, instances in a pool have the following limitations:
+Instances in a pool have the following limitations:
 
 - The pool name can contain only lowercase letters, numbers and hyphens, and can't start with a hyphen.
 - All instances in the pool use the same licensing model. When you specify a license model for an instance that is different than the license model for the pool, the pool license model is used. When the instance is moved out of the pool, it automatically switches to a full paid license (`LicenseType` = 'LicenseIncluded'). Manually activate the [Azure Hybrid Benefit](../azure-hybrid-benefit.md) or the [hybrid failover rights benefit](managed-instance-link-feature-overview.md#license-free-passive-dr-replica) to change the licensing model.
 - Pooled instances must belong to the same subnet and resource group. Moving an instance in and out of the pool is only possible within the subnet of the pool and same resource group.
-- Only the General Purpose service tier is available on standard-series (Gen5) or premium-series hardware. The Next-gen General Purpose, Business Critical service tier, and premium-series memory optimized hardware isn't available.
+- Moving an instance pool to another subnet is not supported.
+- Only General Purpose service tier is available. The Next-gen General Purpose and Business Critical service tiers aren't available. 
+- Only the standard-series (Gen5) or premium-series hardware is supported. The premium-series memory optimized hardware isn't supported.  
 - The maximum possible number of instances in the pool is 40.
 - An instance pool can only be deleted after all instances in the pool are either deleted or moved out of the pool.
-- You can't use the Azure portal to:
-    - Configure the instance pool. Use PowerShell or the Azure CLI instead.
-    - Move instances in and out of the pool. Use PowerShell or the Azure CLI instead.
-- The following SQL Managed Instance features aren't supported when instances are in a pool:
+- You can't use the Azure portal to move instances in and out of the pool. Use PowerShell or the Azure CLI instead.
+- The following SQL Managed Instance features aren't supported on instances in a pool:
     - [Failover groups](failover-group-sql-mi.md). [Failover rights](failover-group-standby-replica-how-to-configure.md) aren't available to instances in a pool.
     - [Start/Stop](instance-stop-start-how-to.md).
-    - [Zone Redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability). 
+    - [Zone Redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability).
     - [Reserved capacity](../database/reserved-capacity-overview.md) instance pricing isn't available.
 
 ## Support requests
@@ -573,9 +591,9 @@ To create larger SQL Managed Instance deployments (with or without instance pool
 
 ## Related content
 
-- [SQL common features](../database/features-comparison.md)
-- [SQL Managed Instance virtual network configuration](connectivity-architecture-overview.md)
-- [Create a managed instance quickstart](instance-create-quickstart.md)
+- [Features comparison: Azure SQL Database and Azure SQL Managed Instance](../database/features-comparison.md)
+- [Connectivity architecture for Azure SQL Managed Instance](connectivity-architecture-overview.md)
+- [Quickstart: Create Azure SQL Managed Instance](instance-create-quickstart.md)
 - [SQL Managed Instance migration using Database Migration Service](/azure/dms/tutorial-sql-server-to-managed-instance)
-- [Monitor Azure SQL Managed Instance using database watcher](../database-watcher-overview.md)
+- [Monitor Azure SQL workloads with database watcher (preview)](../database-watcher-overview.md)
 - [SQL Managed Instance pricing](https://azure.microsoft.com/pricing/details/sql-database/managed/)

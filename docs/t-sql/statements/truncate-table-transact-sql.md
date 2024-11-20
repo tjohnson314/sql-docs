@@ -22,11 +22,11 @@ helpviewer_keywords:
   - "dropping rows"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # TRUNCATE TABLE (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricdw-fabricsqldb.md)]
 
 Removes all rows from a table or specified partitions of a table, without logging the individual row deletions. `TRUNCATE TABLE` is similar to the `DELETE` statement with no `WHERE` clause; however, `TRUNCATE TABLE` is faster and uses fewer system and transaction log resources.
 
@@ -34,7 +34,7 @@ Removes all rows from a table or specified partitions of a table, without loggin
 
 ## Syntax
 
-Syntax for SQL Server and Azure SQL Database.
+Syntax for SQL Server, Azure SQL Database, Fabric SQL database
 
 ```syntaxsql
 TRUNCATE TABLE
@@ -107,6 +107,8 @@ Compared to the `DELETE` statement, `TRUNCATE TABLE` has the following advantage
 If the table contains an identity column, the counter for that column is reset to the seed value defined for the column. If no seed was defined, the default value `1` is used. To retain the identity counter, use `DELETE` instead.
 
 A `TRUNCATE TABLE` operation can be rolled back within a transaction.
+
+In Fabric SQL database, truncating a table will delete all mirrored data from Fabric OneLake for that table.
 
 ## Limitations
 

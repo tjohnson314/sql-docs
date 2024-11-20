@@ -8,11 +8,11 @@ ms.date: 10/23/2024
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
-monikerRange: "=azuresqldb-current||>=sql-server-ver16||>=sql-server-linux-ver16||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-ver16||>=sql-server-linux-ver16||=azuresqldb-mi-current||=fabric"
 ---
 # Performance tuning with ordered clustered columnstore indexes
 
-[!INCLUDE [sqlserver2022-asdb-asmi](../../includes/applies-to-version/sqlserver2022-asdb-asmi.md)]
+[!INCLUDE [sqlserver2022-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2022-asdb-asmi-fabricsqldb.md)]
 
 <!-- Adapted from \azure-docs-pr\articles\synapse-analytics\sql-data-warehouse\performance-tuning-ordered-cci.md -->
 

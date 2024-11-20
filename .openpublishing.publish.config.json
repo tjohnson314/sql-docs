@@ -196,6 +196,7 @@
     ".openpublishing.redirection.azure-data-studio.json",
     ".openpublishing.redirection.powershell.json",
     ".openpublishing.redirection.ssms.json",
-    ".openpublishing.redirection.stretch-database.json"
+    ".openpublishing.redirection.stretch-database.json",
+    ".openpublishing.redirection.visual-studio-code-extensions.json"
   ]
 }

@@ -75,7 +75,7 @@ monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-s
   
 2.  On the Standard bar, click **New Query**.  
   
-3.  Copy and paste the following example into the query window and click **Execute**. The example inserts a new row into the base table `HumanResouces.Department` by specifying the relevant columns from the view `HumanResources.vEmployeeDepartmentHistory`. The statement succeeds because only columns from a single base table are specified and the other columns in the base table have default values.  
+3.  Copy and paste the following example into the query window and click **Execute**. The example inserts a new row into the base table `HumanResources.Department` by specifying the relevant columns from the view `HumanResources.vEmployeeDepartmentHistory`. The statement succeeds because only columns from a single base table are specified and the other columns in the base table have default values.  
   
     ```  
     USE AdventureWorks2022;  

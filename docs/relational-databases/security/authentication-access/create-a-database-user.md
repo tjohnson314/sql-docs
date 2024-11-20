@@ -21,11 +21,11 @@ helpviewer_keywords:
   - "CREATE USER [Management Studio]"
   - "users [SQL Server], adding"
   - "mapping database users"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Create a database user
 
-[!INCLUDE [SQL Server](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 This article describes how to create the most common types of database users. There are 13 types of users. The complete list is provided in the article [CREATE USER](../../../t-sql/statements/create-user-transact-sql.md). All varieties of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] support database users, but not necessarily all types of users.
 
@@ -86,6 +86,8 @@ Requires `ALTER ANY USER` permission on the database.
    - **User mapped to a certificate**
    - **User mapped to an asymmetric key**
    - **Windows user**
+
+   In Fabric SQL database, `WITH PASSWORD` is not supported, as Microsoft Entra ID for database users is the only supported authentication method.
 
 1. When you select an option, the remaining options in the dialog might change. Some options only apply to specific types of database users. Some options can be left blank and use a default value.
 

@@ -10,11 +10,11 @@ ms.service: azure-sql
 ms.subservice: performance
 ms.topic: sample
 ms.custom: sqldbrb=1
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
+monikerRange: "= azuresql || = azuresql-db || = azuresql-mi ||=fabricsql"
 ---
 # Create an event session with a ring_buffer target in memory
 
-[!INCLUDE [appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
+[!INCLUDE [appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
 [!INCLUDE [sql-database-xevents-selectors-1-include](../includes/sql-database-xevents-selectors-1-include.md)]
 
@@ -25,6 +25,7 @@ The high-level steps in this walkthrough are:
 1. View captured event data as a relational rowset
 
 With the `ring_buffer` target, the steps are simpler than with the `event_file` target because you don't need to store event data in Azure Storage.
+This article is relevant to Fabric SQL database where Azure SQL Database is mentioned.
 
 ## Create and start an event session with a ring_buffer target
 

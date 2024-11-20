@@ -1,10 +1,10 @@
 ---
 title: "sys.database_automatic_tuning_configuration (Transact-SQL)"
 description: sys.database_automatic_tuning_configuration returns the automatic tuning configuration settings that are enabled for the current database.
-author: thesqlsith
-ms.author: derekw
-ms.reviewer: randolphwest
-ms.date: 09/18/2024
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: randolphwest, derekw
+ms.date: 10/29/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: reference
@@ -18,11 +18,11 @@ helpviewer_keywords:
   - "sys.database_automatic_tuning_configuration catalog view"
 dev_langs:
   - "TSQL"
-monikerRange: ">=sql-server-2017 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azuresqldb-current"
+monikerRange: ">=sql-server-2017 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azuresqldb-current ||=fabric"
 ---
 # sys.database_automatic_tuning_configuration (Transact-SQL)
 
-[!INCLUDE [sqlserver2022-asdb-asmi](../../includes/applies-to-version/sqlserver2022-asdb-asmi.md)]
+[!INCLUDE [sqlserver2022-asdb-asmi](../../includes/applies-to-version/sqlserver2022-asdb-asmi-fabricsqldb.md)]
 
 Returns the [Automatic plan correction](../automatic-tuning/automatic-tuning.md#automatic-plan-correction) component of the [Automatic tuning](../automatic-tuning/automatic-tuning.md) configuration settings that are enabled for the current database.
 

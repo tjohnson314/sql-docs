@@ -11,11 +11,11 @@ ms.topic: conceptual
 helpviewer_keywords:
   - "permissions, effective"
   - "effective permissions"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Determine effective Database Engine permissions
 
-[!INCLUDE [SQL Server](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 This article describes how to determine who has permissions to various objects in the [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)] [!INCLUDE [ssde-md](../../../includes/ssde-md.md)]. [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)] implements two permission systems for the [!INCLUDE [ssde-md](../../../includes/ssde-md.md)]. An older system of fixed roles has preconfigured permissions. Beginning with [!INCLUDE [ssversion2005-md](../../../includes/ssversion2005-md.md)] a more flexible and precise system is available.
 
@@ -28,6 +28,7 @@ You should always keep the following points in mind:
 - A denial of permissions overrides a grant of permissions.
 - If a user is a member of the sysadmin fixed server role, permissions aren't checked further, so denials won't be enforced.
 - The old system and new system have similarities. For example, membership in the `sysadmin` fixed server role is similar to having `CONTROL SERVER` permission. But the systems aren't identical. For example, if a login only has the `CONTROL SERVER` permission, and a stored procedures check for membership in the `sysadmin` fixed server role, then the permission check will fail. The reverse is also true.
+- In Fabric SQL database, Microsoft Entra ID for database users is the only supported authentication method. Server-level roles and permissions are not available, only database-level. For more information, see [Authorization in SQL database in Microsoft Fabric](/fabric/database/sql/authorization).
 
 ## Summary
 

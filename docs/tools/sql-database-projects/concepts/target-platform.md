@@ -15,7 +15,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # Target platform overview
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 The target platform setting is a project property that is used during project build to validate support for features included in the project, such as T-SQL syntax and system functions. The target platform setting is incorporated into the `.dacpac` build artifact and during deployment the target platform setting is checked against the target database to ensure compatibility. If the target platform doesn't match the database, the deployment doesn't begin unless the [publish property](../../sqlpackage/sqlpackage-publish.md#properties-specific-to-the-publish-action) `/p:AllowIncompatiblePlatform=true` is specified.
 
@@ -25,7 +25,7 @@ The target platform project property is contained in the `DSP` tag in the `.sqlp
 
 ```xml
 <Project DefaultTargets="Build">
-  <Sdk Name="Microsoft.Build.Sql" Version="0.2.0-preview" />
+  <Sdk Name="Microsoft.Build.Sql" Version="0.2.4-preview" />
   <PropertyGroup>
     <Name>AdventureWorks</Name>
     <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
@@ -41,7 +41,7 @@ Valid values for the target platform in the `DSP` tag include:
 - `Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider` (SQL Server 2019)
 - `Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider` (SQL Server 2022)
 - `Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider` (Azure SQL Database)
-- `Microsoft.Data.Tools.Schema.Sql.SqlDbFabricDatabaseSchemaProvider` (Fabric Mirrored SQL Database, preview)
+- `Microsoft.Data.Tools.Schema.Sql.SqlDbFabricDatabaseSchemaProvider` (SQL database in Fabric or Fabric Mirrored SQL Database, preview)
 - `Microsoft.Data.Tools.Schema.Sql.SqlDwDatabaseSchemaProvider` (Azure Synapse SQL Pool)
 - `Microsoft.Data.Tools.Schema.Sql.SqlServerlessDatabaseSchemaProvider` (Azure Synapse Serverless SQL Pool)
 - `Microsoft.Data.Tools.Schema.Sql.SqlDwUnifiedDatabaseSchemaProvider` (Synapse Data Warehouse in Microsoft Fabric)

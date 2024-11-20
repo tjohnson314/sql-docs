@@ -1,7 +1,7 @@
 ---
 title: Diagnose and troubleshoot high CPU
 titleSuffix: Azure SQL Database
-description: Learn to diagnose and troubleshoot high CPU problems in Azure SQL Database.
+description: Learn to diagnose and troubleshoot high CPU problems in Azure SQL Database and SQL database in Microsoft Fabric.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma
@@ -11,12 +11,13 @@ ms.subservice: performance
 ms.topic: how-to
 ms.custom:
   - sqldbrb=2
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
-# Diagnose and troubleshoot high CPU on Azure SQL Database
+# Diagnose and troubleshoot high CPU on Azure SQL Database and SQL database in Microsoft Fabric
 
-[!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
-[Azure SQL Database](sql-database-paas-overview.md) provides built-in tools to identify the causes of high CPU usage and to optimize workload performance. You can use these tools to troubleshoot high CPU usage while it's occurring, or reactively after the incident has completed. You can also enable [automatic tuning](automatic-tuning-overview.md) to proactively reduce CPU usage over time for your database. This article teaches you to diagnose and troubleshoot high CPU with built-in tools in Azure SQL Database and explains [when to add CPU resources](#when-to-add-cpu-resources).
+[Azure SQL Database](sql-database-paas-overview.md) and [SQL database in Fabric](/fabric/database/sql/overview) provide built-in tools to identify the causes of high CPU usage and to optimize workload performance. You can use these tools to troubleshoot high CPU usage while it's occurring, or reactively after the incident has completed. You can also enable [automatic tuning](automatic-tuning-overview.md) to proactively reduce CPU usage over time for your database. This article teaches you to diagnose and troubleshoot high CPU with built-in tools in Azure SQL Database and explains [when to add CPU resources](#when-to-add-cpu-resources).
 
 ## Understand vCore count
 

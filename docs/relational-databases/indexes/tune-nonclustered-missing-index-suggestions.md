@@ -8,11 +8,11 @@ ms.service: sql
 ms.topic: how-to
 ms.custom:
   - template-how-to
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 
 # Tune nonclustered indexes with missing index suggestions
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL MI](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 The missing indexes feature is a lightweight tool for finding missing indexes that might significantly improve query performance. This article describes how to use missing index suggestions to effectively tune indexes and improve query performance.
 

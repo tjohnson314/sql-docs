@@ -29,7 +29,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 ---
 # TRY...CATCH (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
 Implements error handling for [!INCLUDE [tsql](../../includes/tsql-md.md)] that is similar to the exception handling in the [!INCLUDE [c-sharp-md](../../includes/c-sharp-md.md)] and [!INCLUDE [vcprvc-md](../../includes/vcprvc-md.md)] languages. A group of [!INCLUDE [tsql](../../includes/tsql-md.md)] statements can be enclosed in a `TRY` block. If an error occurs in the `TRY` block, control is usually passed to another group of statements that is enclosed in a `CATCH` block.
 

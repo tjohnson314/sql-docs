@@ -12,9 +12,10 @@ ms.custom:
   - sqldbrb=1
   - devx-track-azurecli
   - devx-track-azurepowershell
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 # Get the required values for authenticating an application to access Azure SQL Database from code
-[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
 To create and manage an Azure SQL Database from code, you must register your app with Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)). The app must be registered in the same Microsoft Entra tenant as your Azure SQL Database resource.
 

@@ -27,7 +27,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 # GRANT (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
 Grants permissions on a securable to a principal. The general concept is to `GRANT <some permission> ON <some object> TO <some user, login, or group>`. For a general discussion of permissions, see [Permissions (Database Engine)](../../relational-databases/security/permissions-database-engine.md).
 
@@ -35,7 +35,7 @@ Grants permissions on a securable to a principal. The general concept is to `GRA
 
 ## Syntax
 
-Syntax for SQL Server and Azure SQL Database.
+Syntax for SQL Server, Azure SQL Database, and Fabric SQL database.
 
 ```syntaxsql
 -- Simplified syntax for GRANT
@@ -45,7 +45,7 @@ GRANT { ALL [ PRIVILEGES ] }
       [ WITH GRANT OPTION ] [ AS principal ]
 ```
 
-Syntax for Azure Synapse Analytics and Parallel Data Warehouse and Microsoft Fabric.
+Syntax for Azure Synapse Analytics, Parallel Data Warehouse, and Microsoft Fabric warehouse.
 
 ```syntaxsql
 GRANT

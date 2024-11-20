@@ -12,10 +12,11 @@ helpviewer_keywords:
   - "How to [DAC]"
   - "data-tier application [SQL Server], designing"
   - "wizard [DAC]"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Data-tier applications (DAC)
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 A data-tier application (DAC) is a logical database entity that defines all of the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] objects - such as tables, views, and instance objects, including logins - associated with a user's database. A DAC is a self-contained unit of the entire database model and is portable in an artifact known as a DAC package, or *.dacpac*. Data-tier applications are the build artifact from [SQL database projects](../../tools/sql-database-projects/sql-database-projects.md) and can be used as part of a comprehensive database lifecycle management and DevOps strategy.
 

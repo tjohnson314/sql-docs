@@ -59296,10 +59296,15 @@
       "redirect_document_id": false
     },
     {
+      "source_path": "docs/sql-server/fabric-mirrored-database/fabric-mirrored-databases.md",
+      "redirect_url": "/sql/sql-server/fabric-database/fabric-mirrored-databases",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "docs/t-sql/language-elements/continue-transact-sql.md",
       "redirect_url": "/sql/t-sql/language-elements/while-transact-sql",
       "redirect_document_id": false
-    },
+	  },
     {
       "source_path": "docs/connect/php/configuring-iis-for-php-sql-driver.md",
       "redirect_url": "/sql/connect/php/download-drivers-php-sql-server",

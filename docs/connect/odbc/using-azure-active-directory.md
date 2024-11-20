@@ -100,11 +100,11 @@ These options correspond to the same six available in the DSN setup UI above.
 
 1. SQL Server Authentication - legacy syntax. Server certificate isn't validated, and encryption is used only if the server enforces it. The username/password is passed in the connection string.
 
-   `server=Server;database=Database;UID=UserName;PWD=Password;Encrypt=no;TrustServerCertificate=yes;`
+   `server=Server;database=Database;UID=UserName;PWD=<password>;Encrypt=no;TrustServerCertificate=yes;`
 
 2. SQL Authentication - new syntax. The client requests encryption (the default value of `Encrypt` is `true`) and the server certificate gets validated, whatever the encryption setting (unless `TrustServerCertificate` is set to `true`). The username/password is passed in the connection string.
 
-   `server=Server;database=Database;UID=UserName;PWD=Password;Authentication=SqlPassword;`
+   `server=Server;database=Database;UID=UserName;PWD=<password>;Authentication=SqlPassword;`
 
 3. Integrated Windows Authentication (Kerberos on Linux and macOS) using SSPI (to SQL Server or SQL IaaS) - current syntax. Server certificate isn't validated, unless encryption is required by the server.
 
@@ -116,7 +116,7 @@ These options correspond to the same six available in the DSN setup UI above.
 
 5. Microsoft Entra username/password authentication (if the target database is in Azure SQL Database or Azure SQL Managed Instance). Server certificate gets validated, whatever the encryption setting (unless `TrustServerCertificate` is set to `true`). The username/password is passed in the connection string.
 
-   `server=Server;database=Database;UID=UserName;PWD=Password;Authentication=ActiveDirectoryPassword;Encrypt=yes;`
+   `server=Server;database=Database;UID=UserName;PWD=<password>;Authentication=ActiveDirectoryPassword;Encrypt=yes;`
 
 6. (_Windows, and Linux/macOS 17.6+, driver only_.) Integrated Windows Authentication using ADAL or Kerberos, which involves redeeming Windows account credentials for a Microsoft Entra access token, assuming the target database is in Azure SQL. Server certificate gets validated, whatever the encryption setting (unless `TrustServerCertificate` is set to `true`). On Linux/macOS, a suitable Kerberos ticket needs to be available. For more information, see the section below on Federated Accounts and [Using Integrated Authentication](linux-mac/using-integrated-authentication.md).
 
@@ -140,7 +140,7 @@ These options correspond to the same six available in the DSN setup UI above.
 
 10. Microsoft Entra service principal authentication
 
-   `server=Server;database=Database;UID=clientId;PWD=clientSecret;Authentication=ActiveDirectoryServicePrincipal;Encrypt=yes;`
+   `server=Server;database=Database;UID=clientId;PWD=<password>;Authentication=ActiveDirectoryServicePrincipal;Encrypt=yes;`
 
 ### Remarks
 
@@ -187,7 +187,7 @@ The following sample shows the code required to connect to SQL Server using Micr
 
 ```cpp
     ...
-    SQLCHAR connString[] = "Driver={ODBC Driver 18 for SQL Server};Server={server};UID=myuser;PWD=myPass;Authentication=ActiveDirectoryPassword;Encrypt=yes;"
+    SQLCHAR connString[] = "Driver={ODBC Driver 18 for SQL Server};Server={server};UID=myuser;PWD=<password>;Authentication=ActiveDirectoryPassword;Encrypt=yes;"
     ...
     SQLDriverConnect(hDbc, NULL, connString, SQL_NTS, NULL, 0, NULL, SQL_DRIVER_NOPROMPT);
     ...

@@ -8,7 +8,7 @@ ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
 helpviewer_keywords:
-  - "system stored functions [SQL Server]"
+  - "system functions [SQL Server]"
 dev_langs:
   - "TSQL"
 ---

@@ -43,10 +43,10 @@ Public Sub Main()
   
      ' Open a connection using a DSN and ODBC tags  
      ' It is assumed that you have created DSN 'Pubs' with a user name as  
-     ' 'MyUserId' and password as 'MyPassword'.  
+     ' 'MyUserId' and password as '<password>'.  
     Set Cnxn2 = New ADODB.Connection  
     Cnxn2.ConnectionString = "Data Source='Pubs';" & _  
-        "User ID='MyUserId';Password='MyPassword';"  
+        "User ID='MyUserId';Password='<password>';"  
     Cnxn2.ConnectionTimeout = 30  
     Cnxn2.Open  
     MsgBox "Cnxn2 state: " & GetState(Cnxn2.State)  
@@ -61,9 +61,9 @@ Public Sub Main()
      ' Open a connection using a DSN and individual  
      ' arguments instead of a connection string  
      ' It is assumed that you have created DSN 'Pubs' with a user name as  
-     ' 'MyUserId' and password as 'MyPassword'.  
+     ' 'MyUserId' and password as '<password>'.  
     Set Cnxn4 = New ADODB.Connection  
-    Cnxn4.Open "Pubs", "MyUserId", "MyPassword"  
+    Cnxn4.Open "Pubs", "MyUserId", "<password>"  
     MsgBox "Cnxn4 state: " & GetState(Cnxn4.State)  
   
     ' clean up  

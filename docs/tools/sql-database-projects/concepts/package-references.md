@@ -12,7 +12,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # SQL projects package references overview
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Package references in SQL projects allow you to reference database objects from other projects or NuGet packages. The database objects added to a project through package references can be part of the same database, a different database on the same server, or a different database on a different server.
 

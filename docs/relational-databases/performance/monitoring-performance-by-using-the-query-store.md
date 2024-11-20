@@ -10,14 +10,15 @@ ms.topic: conceptual
 helpviewer_keywords:
   - "Query Store"
   - "Query Store, described"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=azure-sqldw-latest"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azure-sqldw-latest || =fabric"
 ---
-
 # Monitor performance by using the Query Store
 
-[!INCLUDE [SQL Server ASDB, ASDBMI, ASA Dedicated Only](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-dedicated-pool-only.md)]
+[!INCLUDE [SQL Server 2016 Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics dedicated pool only FabricSQLDB](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-dedicated-pool-only-fabricsqldb.md)]
 
-The Query Store feature provides you with insight on query plan choice and performance for SQL Server, Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics. The Query Store simplifies performance troubleshooting by helping you quickly find performance differences caused by query plan changes. Query Store automatically captures a history of queries, plans, and runtime statistics, and retains these for your review. It separates data by time windows so you can see database usage patterns and understand when query plan changes happened on the server. You can configure Query Store using the [ALTER DATABASE SET](../../t-sql/statements/alter-database-transact-sql-set-options.md) option.
+The Query Store feature provides you with insight on query plan choice and performance for SQL Server, Azure SQL Database, Fabric SQL database, Azure SQL Managed Instance, and Azure Synapse Analytics. The Query Store simplifies performance troubleshooting by helping you quickly find performance differences caused by query plan changes. Query Store automatically captures a history of queries, plans, and runtime statistics, and retains these for your review. It separates data by time windows so you can see database usage patterns and understand when query plan changes happened on the server.
+
+You can configure Query Store using the [ALTER DATABASE SET](../../t-sql/statements/alter-database-transact-sql-set-options.md) option. 
 
 - For information about operating the Query Store in Azure [!INCLUDE [ssSDS](../../includes/sssds-md.md)], see [Operating the Query Store in Azure SQL Database](best-practice-with-the-query-store.md#Insight).
 - For information on discovering actionable information and tune performance with the Query Store, see [Tune performance with the Query Store](tune-performance-with-the-query-store.md).
@@ -51,6 +52,8 @@ Use the `ALTER DATABASE` statement to enable the Query Store for a given databas
 ALTER DATABASE <database_name>
 SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE);
 ```
+
+Options to configure the Query Store in Fabric SQL database with `ALTER DATABASE` are currently limited.
 
 In Azure Synapse Analytics, enable the Query Store without additional options, for example:
 

@@ -82,7 +82,7 @@ The following script shows which permissions are required for each loading optio
 ```sql  
 -- Create server login for the examples that follow.  
 USE master;  
-CREATE LOGIN BI_ETLUser WITH PASSWORD = '******';  
+CREATE LOGIN BI_ETLUser WITH PASSWORD = '<password>';  
   
 --Grant BULK Load permissions   
 GRANT ADMINISTER BULK OPERATIONS TO BI_ETLUser;  
@@ -149,7 +149,7 @@ The **ALTER ANY LOGIN** permission grants the ability to create new logins and d
   
 ```sql 
 CREATE LOGIN KimAbercrombie   
-WITH PASSWORD = 'A2c3456$#' MUST_CHANGE,  
+WITH PASSWORD = '<password>' MUST_CHANGE,  
 CHECK_EXPIRATION = ON,  
 CHECK_POLICY = ON;  
 GO  
@@ -220,7 +220,7 @@ The following SQL statements create a login named `monitor_login` and grants the
 ```sql  
 USE master;  
 GO  
-CREATE LOGIN monitor_login WITH PASSWORD='Password4321';  
+CREATE LOGIN monitor_login WITH PASSWORD='<password>';  
 GRANT VIEW SERVER STATE TO monitor_login;  
 GO  
 ```  
@@ -231,7 +231,7 @@ The following SQL statements create a login named `monitor_and_terminate_login` 
 ```sql  
 USE master;  
 GO  
-CREATE LOGIN monitor_and_terminate_login WITH PASSWORD='Password1234';   
+CREATE LOGIN monitor_and_terminate_login WITH PASSWORD='<password>';   
 GRANT VIEW SERVER STATE TO monitor_and_terminate_login;   
 GRANT ALTER ANY CONNECTION TO monitor_and_terminate_login;  
 GO  

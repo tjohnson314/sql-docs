@@ -61,9 +61,9 @@ void ConnectionStringX() {
   
       // Open a connection using a DSN and ODBC tags.  
       // It is assumed that you have create DSN 'DataPubs' with a user name as   
-      // 'MyUserId' and password as 'MyPassword'.  
+      // 'MyUserId' and password as '<password>'.  
       TESTHR(pConnection2.CreateInstance(__uuidof(Connection)));  
-      pConnection2->ConnectionString = "DSN=DataPubs;UID=MyUserId;PWD=MyPassword;";  
+      pConnection2->ConnectionString = "DSN=DataPubs;UID=MyUserId;PWD=<password>;";  
       pConnection2->Open("", "", "", adConnectUnspecified);  
       printf("cnn2 state: %s\n", (LPCTSTR)GetState(pConnection2->State));  
   

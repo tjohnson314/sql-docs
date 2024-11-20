@@ -15,7 +15,7 @@ helpviewer_keywords:
   - "PREDICT clause"
 dev_langs:
   - "TSQL"
-monikerRange: ">=sql-server-2017||=azuresqldb-current||>=sql-server-linux-2017||=azuresqldb-mi-current||>=azure-sqldw-latest"
+monikerRange: ">=sql-server-2017 || =azuresqldb-current || >=sql-server-linux-2017 || =azuresqldb-mi-current || >=azure-sqldw-latest"
 ---
 # PREDICT (Transact-SQL)
 
@@ -315,5 +315,5 @@ Learn more about related concepts in the following articles:
 - [RevoScaleR (R package in SQL Server Machine Learning Services)](../../machine-learning/r/ref-r-revoscaler.md)
 - [Revoscalepy (Python package in SQL Server Machine Learning Services)](../../machine-learning/python/ref-py-revoscalepy.md) 
 - [OPENXML (Transact-SQL)](../functions/openxml-transact-sql.md)
--	[Learn more about ONNX models](/azure/machine-learning/concept-onnx#get-onnx-models)
+-    [Learn more about ONNX models](/azure/machine-learning/concept-onnx#get-onnx-models)
 - [STRING_SPLIT (Transact-SQL)](../functions/string-split-transact-sql.md)

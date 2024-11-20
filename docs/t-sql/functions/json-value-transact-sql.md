@@ -4,10 +4,12 @@ description: JSON_VALUE extracts a scalar value from a JSON string.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: jovanpop
-ms.date: 05/02/2024
+ms.date: 11/04/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - build-2024
 f1_keywords:
   - "JSON_VALUE"
   - "JSON_VALUE_TSQL"
@@ -17,13 +19,11 @@ helpviewer_keywords:
   - "JSON, querying"
 dev_langs:
   - "TSQL"
-ms.custom:
-  - build-2024
-monikerRange: "=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # JSON_VALUE (Transact-SQL)
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw.md)]
 
  Extracts a scalar value from a JSON string.  
   
@@ -39,12 +39,12 @@ JSON_VALUE ( expression , path )
   
 ## Arguments
 
-#### *expression*  
+#### *expression*
  An expression. Typically the name of a variable or a column that contains JSON text.  
 
  If `JSON_VALUE` finds JSON that is not valid in *expression* before it finds the value identified by *path*, the function returns an error. If `JSON_VALUE` doesn't find the value identified by *path*, it scans the entire text and returns an error if it finds JSON that is not valid anywhere in *expression*.
   
-#### *path*  
+#### *path*
  A JSON path that specifies the property to extract. For more info, see [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md).  
 
 In [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you can provide a variable as the value of *path*.

@@ -10,18 +10,18 @@ ms.subservice: deployment-configuration
 ms.topic: conceptual
 ms.custom:
   - sqldbrb=1
-monikerRange: "=azuresql||=azuresql-db"
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 
 # Manage databases in Azure SQL Database by using Azure Automation
 
-[!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
 > [!div class="op_single_selector"]
 > * [Azure SQL Database](automation-manage.md?view=azuresql-db&preserve-view=true)
 > * [Azure SQL Managed Instance](../managed-instance/automation-manage.md?view=azuresql-mi&preserve-view=true)
 
-This guide introduces you to the Azure Automation service, and how it can be used to simplify the management of databases in Azure SQL Database.
+This guide introduces you to the Azure Automation service, and how it can be used to simplify the management of databases in Azure SQL Database and Fabric SQL database, which shares many features of Azure SQL Database.
 
 ## About Azure Automation
 

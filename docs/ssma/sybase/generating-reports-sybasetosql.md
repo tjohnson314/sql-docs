@@ -58,21 +58,21 @@ Use the following procedure to generate reports:
     > The Error Reporting Settings specified above are applicable for generate-assessment-report, convert-schema, migrate-data, convert-sql-statement commands.  
   
 ```xml  
-<generate-assessment-report  
-  
-    object-name="<object-name>"  
-  
-    object-type="<object-type>"  
-  
-    verbose="<true/false>"  
-  
-    report-erors="<true/false>"  
-  
-    write-summary-report-to="<file-name/folder-name>"  
-  
-    assessment-report-folder="<folder-name>"  
-  
-    assessment-report-overwrite="<true/false>"  
+<generate-assessment-report
+
+    object-name="<object-name>"
+
+    object-type="<object-type>"
+
+    verbose="<true/false>"
+
+    report-errors="<true/false>"
+
+    write-summary-report-to="<file-name/folder-name>"
+
+    assessment-report-folder="<folder-name>"
+
+    assessment-report-overwrite="<true/false>"
   
 />  
 ```  
@@ -95,7 +95,7 @@ The command **synchronize-target** has **report-errors-to** parameter, which spe
   
 />  
 ```  
-**object-name:** Specifies the object(s) considered for synchronization (It can also have indivdual object names or a group object name).  
+**object-name:** Specifies the object(s) considered for synchronization (It can also have individual object names or a group object name).  
   
 **on-error:** Specifies whether to specify synchronization errors as warnings or error. Available options for on-error:  
   
@@ -125,7 +125,7 @@ The command **refresh-from-database** has **report-errors-to** parameter, which 
   
 />  
 ```  
-**object-name:** Specifies the object(s) considered for refresh (It can also have indivdual object names or a group object name).  
+**object-name:** Specifies the object(s) considered for refresh (It can also have individual object names or a group object name).  
   
 **on-error:** Specifies whether to specify refresh errors as warnings or error. Available options for on-error:  
   

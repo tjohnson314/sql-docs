@@ -12,10 +12,10 @@ helpviewer_keywords:
   - "SQL graph, INSERT statement"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current||>=sql-server-2017||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2017 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # INSERT (SQL Graph)
-[!INCLUDE[sqlserver2017-asdb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi.md)]
+[!INCLUDE[sqlserver2017-asdb-asdbmi-fabricsqldb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi-fabricsqldb.md)]
 
 Adds one or more rows to a `node` or `edge` table in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. 
  
@@ -109,7 +109,8 @@ Users must provide values for `$from_id` and `$to_id` while inserting into an ed
 - Inserting into a node is same as inserting into any relational table. Values for the `$node_id` column are automatically generated.
 - While you insert rows into an edge table, you must provide values for `$from_id` and `$to_id` columns.   
 - BULK insert for node table is the same as for a relational table.
-- Before bulk inserting into an edge table, the node tables must be imported. Values for `$from_id` and `$to_id` can then be extracted from the `$node_id` column of the node table and inserted as edges. 
+- Before bulk inserting into an edge table, the node tables must be imported. Values for `$from_id` and `$to_id` can then be extracted from the `$node_id` column of the node table and inserted as edges.
+- In Fabric SQL database, SQL Graph is allowed, but Node and Edge tables will not mirror to Fabric OneLake.
   
 ### Permissions
 

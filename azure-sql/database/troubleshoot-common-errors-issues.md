@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot common connection issues
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
-description: Provides steps to troubleshoot Azure SQL Database connection issues and resolve other Azure SQL Database or Azure SQL Managed Instance specific issues
+description: Provides steps to troubleshoot connection issues and resolve other connectivity issues in Azure SQL Database, Fabric SQL database, or Azure SQL Managed Instance.
 author: suresh-kandoth
 ms.author: sureshka
 ms.reviewer: wiassaf, mathoma, vanto
@@ -11,18 +11,18 @@ ms.subservice: connect
 ms.topic: troubleshooting
 ms.custom:
   - sqldbrb=1
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
+monikerRange: "=azuresql||=azuresql-db||=azuresql-mi||=fabric"
 ---
 
-# Troubleshoot connectivity issues and other errors with Azure SQL Database and Azure SQL Managed Instance
-[!INCLUDE [appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
+# Troubleshoot connectivity issues and other errors
+[!INCLUDE [appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
-You receive error messages when the connection to Azure SQL Database or Azure SQL Managed Instance fails.
+You receive error messages when the connection to Azure SQL Database, Fabric SQL database, or Azure SQL Managed Instance fails.
 
 As always, apply best practices and design guidelines during the [application design](develop-overview.md) process.
 
 > [!NOTE]
-> You can use [Azure SQL Connectivity Checker](https://github.com/Azure/SQL-Connectivity-Checker) to detect and fix a wide variety of connectivity errors to Azure SQL Database, Azure SQL Managed Instance, and in Azure Synapse Analytics environments.
+> You can use [Azure SQL Connectivity Checker](https://github.com/Azure/SQL-Connectivity-Checker) to detect and fix a wide variety of connectivity errors.
 
 ## Steps to fix common connection issues
 

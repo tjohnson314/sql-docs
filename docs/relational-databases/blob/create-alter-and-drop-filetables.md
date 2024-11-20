@@ -68,7 +68,7 @@ CREATE TABLE DocumentStore AS FileTable
 GO  
 ```  
   
- The following example also creates a new FileTable. Since user-defined values are not specified, the value of **FILETABLE_DIRECTORY** becomes the name of the FileTable, the value of **FILETABLE_COLLATE_FILENAME** becomes database_default, and the primary key and unique contraints receive system-generated names.  
+ The following example also creates a new FileTable. Since user-defined values are not specified, the value of **FILETABLE_DIRECTORY** becomes the name of the FileTable, the value of **FILETABLE_COLLATE_FILENAME** becomes database_default, and the primary key and unique constraints receive system-generated names.  
   
 ```sql  
 CREATE TABLE DocumentStore AS FileTable;  

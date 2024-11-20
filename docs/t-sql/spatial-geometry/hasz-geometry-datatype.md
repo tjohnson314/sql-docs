@@ -13,7 +13,7 @@ dev_langs:
   - "TSQL"
 ---
 # HasZ (geometry DataType)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
   Returns 1 (true) if a spatial object contains at least one Z value; otherwise, it returns 0 (false).  
   

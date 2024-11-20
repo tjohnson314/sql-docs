@@ -12,7 +12,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # SQL code analysis to improve code quality
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 You can eliminate potential design and naming problems and avoid performance pitfalls by analyzing your database code. The concepts are very similar to performing static analysis to detect and correct defects in managed code. You configure which analysis rules you want to apply to your database code, analyze the code, and then correct or ignore the issues that you identify. Before you can analyze your database code, you must first import your database schema into a database project. For more information, see [Start from an existing database](../../tutorials/start-from-existing-database.md).
 

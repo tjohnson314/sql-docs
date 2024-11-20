@@ -202,7 +202,7 @@ For the cluster and cluster roles to respond properly to requests, an Azure Load
    | `LoadBalancerName` | Mandatory | Specify the name of the load balancer to be created. |
 
    ```powershell
-   ./Create-ClusterLoadBalancer.ps1 -ConfigFilePath ./cluster-config.csv -ResourceGroupName $resoucegroupname -VNetName $vnetname -subnetName $subnetname -VnetResourceGroupName $vnetresourcegroupname -Location "eastus" -LoadBalancerName $loadbalancername
+   ./Create-ClusterLoadBalancer.ps1 -ConfigFilePath ./cluster-config.csv -ResourceGroupName $resourcegroupname -VNetName $vnetname -subnetName $subnetname -VnetResourceGroupName $vnetresourcegroupname -Location "eastus" -LoadBalancerName $loadbalancername
    ```
 
 ## Replicate machines
@@ -320,7 +320,7 @@ After your VMs have migrated, reconfigure the cluster. Follow these steps:
    | `DiskNamePrefix` | Optional | Specify the prefix that you'd want to add to the names of your shared disks. |
 
    ```powershell
-   ./Create-SharedDisks.ps1 -ResourceGroupName $resoucegroupname -NumberofNodes $nodesincluster -DiskNamePrefix $disknameprefix
+   ./Create-SharedDisks.ps1 -ResourceGroupName $resourcegroupname -NumberofNodes $nodesincluster -DiskNamePrefix $disknameprefix
    ```
 
 1. Attach the shared disks to the migrated servers by running the `Attach-SharedDisks.ps1` script.
@@ -331,7 +331,7 @@ After your VMs have migrated, reconfigure the cluster. Follow these steps:
    | `StartingLunNumber` | Optional | Specify the starting LUN number that is available for the shared disks to be attached to. By default, the script tries to attach shared disks to LUN starting 0. |
 
    ```powershell
-   ./Attach-ShareDisks.ps1 -ResourceGroupName $resoucegroupname
+   ./Attach-ShareDisks.ps1 -ResourceGroupName $resourcegroupname
    ```
 
 1. Start the migrated servers in Azure and sign in to any node.

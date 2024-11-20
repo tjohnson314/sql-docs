@@ -1,21 +1,20 @@
 ---
 title: Intelligent applications
-description: "Use AI options such as OpenAI and vectors to build intelligent applications with Azure SQL Database."
-author: damauri
-ms.author: damauri
+description: "Use AI options such as OpenAI and vectors to build intelligent applications with Azure SQL Database and Fabric SQL database."
+author: WilliamDAssafMSFT
+ms.author: wiassaf
 ms.reviewer: damauri, josephsack, randolphwest, mathoma
-ms.date: 10/15/2024
+ms.date: 11/05/2024
 ms.service: azure-sql-database
 ms.topic: conceptual
 ms.collection: ce-skilling-ai-copilot
-monikerRange: "=azuresql||=azuresql-db"
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
+# Intelligent applications
 
-# Intelligent applications with Azure SQL Database
+[!INCLUDE [asdb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
-[!INCLUDE [asdb](../includes/appliesto-sqldb.md)]
-
-This article provides an overview of using artificial intelligence (AI) options, such as OpenAI and vectors, to build intelligent applications with Azure SQL Database.
+This article provides an overview of using artificial intelligence (AI) options, such as OpenAI and vectors, to build intelligent applications with Azure SQL Database and [Fabric SQL database](/fabric/database/sql/overview), which shares many of these features of Azure SQL Database.
 
 For samples and examples, please visit the [SQL AI Samples repository](https://aka.ms/sqlaisamples).
 
@@ -26,27 +25,30 @@ Watch this video in the [Azure SQL Database essentials series](/shows/azure-sql-
 
 Large language models (LLMs) enable developers to create AI-powered applications with a familiar user experience.
 
-Using LLMs in applications brings greater value and an improved user experience when the models can access the right data, at the right time, from your application's database. This process is known as Retrieval Augmented Generation (RAG) and Azure SQL Database has many features that support this new pattern, making it a great database to build intelligent applications.
+Using LLMs in applications brings greater value and an improved user experience when the models can access the right data, at the right time, from your application's database. This process is known as Retrieval Augmented Generation (RAG) and Azure SQL Database and Fabric SQL database have many features that support this new pattern, making it a great database to build intelligent applications.
 
-The following links provide sample code of various Azure SQL Database options to build intelligent applications:
+The following links provide sample code of various options to build intelligent applications:
 
 | AI Option | Description |
 | --- | --- |
 | **[Azure OpenAI](#azure-openai)** | Generate embeddings for RAG and integrate with any model supported by Azure OpenAI. |
-| **[Vectors](#vectors)** | Learn how to store and query vectors in Azure SQL Database. |
-| **[Azure AI Search](#azure-ai-search)** | Use Azure SQL Database together with Azure AI Search to train LLM on your data. |
+| **[Vectors](#vectors)** | Learn how to store and query vectors the database. |
+| **[Azure AI Search](#azure-ai-search)** | Use your database together with Azure AI Search to train LLM on your data. |
 | **[Intelligent applications](#intelligent-applications)** | Learn how to create an end-to-end solution using a common pattern that can be replicated in any scenario. |
 | **[Copilot skills in Azure SQL Database](#microsoft-copilot-skills-in-azure-sql-database)** | Learn about the set of AI-assisted experiences designed to streamline the design, operation, optimization, and health of Azure SQL Database-driven applications. |
+| **[Copilot skills in Fabric SQL database](#microsoft-copilot-skills-in-fabric-sql-database-preview)** | Learn about the set of AI-assisted experiences designed to streamline the design, operation, optimization, and health of Fabric SQL database-driven applications. |
 
-## Key concepts for implementing RAG with Azure SQL Database and Azure OpenAI
+<a id="key-concepts-for-implementing-rag-with-azure-sql-database-and-azure-openai"></a>
 
-This section includes key concepts that are critical for implementing RAG with Azure SQL Database and Azure OpenAI.
+## Key concepts for implementing RAG with Azure OpenAI
+
+This section includes key concepts that are critical for implementing RAG with Azure OpenAI in Azure SQL Database or Fabric SQL database.
 
 ### <a id="retrieval-augmented-generation"></a> Retrieval Augmented Generation (RAG)
 
 RAG is a technique that enhances the LLM's ability to produce relevant and informative responses by retrieving additional data from external sources. For example, RAG can query articles or documents that contain domain-specific knowledge related to the user's question or prompt. The LLM can then use this retrieved data as a reference when generating its response. For example, a simple RAG pattern using Azure SQL Database could be:
 
-1. Insert data into an Azure SQL Database table.
+1. Insert data into a table.
 1. Link Azure SQL Database to Azure AI Search.
 1. Create an Azure OpenAI GPT4 model and connect it to Azure AI Search.
 1. Chat and ask questions about your data using the trained Azure OpenAI model from your application and from Azure SQL Database.
@@ -228,6 +230,26 @@ The preview of Copilot for Azure SQL Database includes two Azure portal experien
 | **Microsoft Copilot for Azure** | [Azure Copilot integration](../copilot/copilot-azure-sql-overview.md?view=azuresql-db&preserve-view=true#microsoft-copilot-in-azure-enhanced-scenarios): This experience adds Azure SQL skills into [Microsoft Copilot for Azure](/azure/copilot/overview), providing customers with self-guided assistance, empowering them to manage their databases and solve issues independently.|
 
 For more information, see [Frequently asked questions about Microsoft Copilot skills in Azure SQL Database (preview)](../copilot/copilot-azure-sql-faq.yml).
+
+## Microsoft Copilot skills in Fabric SQL database (preview)
+
+[Copilot for SQL database in Microsoft Fabric (preview)](/fabric/database/sql/copilot) includes integrated AI assistance with the following features:
+
+- [**Code completion**](/fabric/database/sql/copilot-code-completion): Start writing T-SQL in the SQL query editor and Copilot will automatically generate a code suggestion to help complete your query. The **Tab** key accepts the code suggestion or keeps typing to ignore the suggestion. 
+
+- **[Quick actions](/fabric/database/sql/copilot-quick-actions)**: In the ribbon of the SQL query editor, the **Fix** and **Explain** options are quick actions. Highlight a SQL query of your choice and select one of the quick action buttons to perform the selected action on your query.
+
+  - **Fix:** Copilot can fix errors in your code as error messages arise. Error scenarios can include incorrect/unsupported T-SQL code, wrong spellings, and more. Copilot will also provide comments that explain the changes and suggest SQL best practices.
+  
+  - **Explain:** Copilot can provide natural language explanations of your SQL query and database schema in comments format.
+  
+- **[Chat pane](/fabric/database/sql/copilot-chat-pane)**: Use the chat pane to ask questions to Copilot through natural language. Copilot responds with a generated SQL query or natural language based on the question asked.
+
+  - **Natural Language to SQL**: Generate T-SQL code from plain text requests, and get suggestions of questions to ask to accelerate your workflow.
+    
+  - **Document-based Q&A**: Ask Copilot questions about general SQL database capabilities, and it responds in natural language. Copilot also helps find documentation related to your request.
+
+Copilot for SQL database utilizes table and view names, column names, primary key, and foreign key metadata to generate T-SQL code. Copilot for SQL database does not use data in tables to generate T-SQL suggestions.
 
 ## Related content
 

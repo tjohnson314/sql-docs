@@ -16,7 +16,7 @@ dev_langs:
   - "TSQL"
 ---
 # Reduce (geometry Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Returns an approximation of the given **geometry** instance. The approximation is produced by running an extension of the Douglas-Peucker algorithm on the instance with the given tolerance.
   

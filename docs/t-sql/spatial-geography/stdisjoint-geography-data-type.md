@@ -16,7 +16,7 @@ dev_langs:
   - "TSQL"
 ---
 # STDisjoint (geography Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
   Returns 1 if a **geography** instance is spatially disjoint from another **geography** instance. Returns 0 if it is not.  
   

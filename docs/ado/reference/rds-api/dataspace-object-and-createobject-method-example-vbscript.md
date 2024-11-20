@@ -132,7 +132,7 @@ The <i>Query</i> Method of the RDSServer.DataFactory is used to bring back a Rec
 Sub Window_OnLoad()  
    strServer = "https://<%=Request.ServerVariables("SERVER_NAME")%>"  
    Set BO = ADS1.CreateObject("VbBusObj.VbBusObjCls", strServer)  
-   txtConnect.Value = "dsn=Pubs;uid=MyUserID;pwd=MyPassword;"  
+   txtConnect.Value = "dsn=Pubs;uid=MyUserID;pwd=<password>;"  
    txtGetRecordset.Value = "Select * From authors for Browse"  
 End Sub  
 ```  

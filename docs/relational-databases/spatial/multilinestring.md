@@ -1,30 +1,34 @@
 ---
 title: "MultiLineString"
-description: "MultiLineString"
-author: MladjoA
-ms.author: mlandzic
-ms.date: "03/03/2017"
+description: "MultiLineString is a collection of zero or more geometry or geographyLineString instances in SQL Database Engine spatial data."
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviwer: mlandzic, jovanpop
+ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
   - "MultiLineString geometry subtype [SQL Server]"
   - "geometry subtypes [SQL Server]"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # MultiLineString
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
+
   A **MultiLineString** is a collection of zero or more **geometry** or **geographyLineString** instances.  
   
-## MultiLineString instances  
- The illustration below shows examples of **MultiLineString** instances.  
+<a id="multilinestring-instances"></a>
+
+## MultiLineString instances
+ The following illustration shows examples of **MultiLineString** instances.  
   
- ![Examples of geometry MultiLineString instances](../../relational-databases/spatial/media/multilinestring.gif "Examples of geometry MultiLineString instances")  
+ :::image type="content" source="media/multilinestring/multilinestring.gif" alt-text="Images of examples of geometry MultiLineString instances.":::  
   
  As shown in the illustration:  
   
 -   Figure 1 is a simple **MultiLineString** instance whose boundary is the four endpoints of its two **LineString** elements.  
   
--   Figure 2 is a simple **MultiLineString** instance because only the endpoints of the **LineString** elements intersect. The boundary is the two non-overlapping endpoints.  
+-   Figure 2 is a simple **MultiLineString** instance because only the endpoints of the **LineString** elements intersect. The boundary is the two nonoverlapping endpoints.  
   
 -   Figure 3 is a nonsimple **MultiLineString** instance because the interior of one of its **LineString** elements is intersected. The boundary of this **MultiLineString** instance is the four endpoints.  
   
@@ -34,8 +38,9 @@ monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||
   
 -   Figure 6 is a simple, closed **MultiLineString** instance. It is closed because all its elements are closed. It is simple because none of its elements intersect at the interiors.  
   
-### Accepted instances  
- For a **MultiLineString** instance to be accepted it must either be empty or comprised of only **LineString** instances that are accepted. For more information on accepted **LineString** instances, see [LineString](../../relational-databases/spatial/linestring.md). The following are examples of accepted **MultiLineString** instances.  
+### Accepted instances
+
+ For a **MultiLineString** instance to be accepted, it must either be empty or comprised of only **LineString** instances that are accepted. For more information on accepted **LineString** instances, see [LineString](linestring.md). The following are examples of accepted **MultiLineString** instances.  
   
 ```sql  
 DECLARE @g1 geometry = 'MULTILINESTRING EMPTY';  
@@ -50,12 +55,12 @@ The following example throws a `System.FormatException` because the second **Lin
 DECLARE @g geometry = 'MULTILINESTRING((1 1, 3 5),(-5 3))';  
 ```  
   
-### Valid instances  
-For a **MultiLineString** instance to be valid it must meet the following criteria:  
+### Valid instances
+For a **MultiLineString** instance to be valid, it must meet the following criteria:  
   
-1.  All instances comprising the **MultiLineString** instance must be valid **LineString** instances.  
+1. All instances comprising the **MultiLineString** instance must be valid **LineString** instances.  
   
-2.  No two **LineString** instances comprising the **MultiLineString** instance may overlap over an interval. The **LineString** instances can only intersect or touch themselves or other **LineString** instances at a finite number of points.  
+1. No two **LineString** instances comprising the **MultiLineString** instance can overlap over an interval. The **LineString** instances can only intersect or touch themselves or other **LineString** instances at a finite number of points.  
 
 The following example shows three valid **MultiLineString** instances and one **MultiLineString** instance that is not valid.  
   
@@ -69,7 +74,8 @@ SELECT @g1.STIsValid(), @g2.STIsValid(), @g3.STIsValid(), @g4.STIsValid();
   
 `@g4` is not valid because the second **LineString** instance overlaps the first **LineString** instance at an interval. They touch at an infinite number of points.  
   
-## Examples  
+## Examples
+
 The following example creates a simple `geometry``MultiLineString` instance containing two `LineString` elements with the SRID 0.  
   
 ```sql  
@@ -85,10 +91,9 @@ SET @g = geometry::Parse('MULTILINESTRING((0 2, 1 1), (1 0, 1 1))');
 SET @g.STSrid = 13;  
 ```  
   
-## See Also  
- [STLength &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stlength-geometry-data-type.md)   
- [STIsClosed &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stisclosed-geometry-data-type.md)   
- [LineString](../../relational-databases/spatial/linestring.md)   
- [Spatial Data &#40;SQL Server&#41;](../../relational-databases/spatial/spatial-data-sql-server.md)  
-  
-  
+## Related content
+
+- [STLength (geometry Data Type)](../../t-sql/spatial-geometry/stlength-geometry-data-type.md)
+- [STIsClosed (geometry Data Type)](../../t-sql/spatial-geometry/stisclosed-geometry-data-type.md)
+- [LineString](linestring.md)
+- [Spatial Data](spatial-data-sql-server.md)

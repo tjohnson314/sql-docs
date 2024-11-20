@@ -23,7 +23,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 ---
 # Predicates
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
 A *predicate* is an expression that evaluates to `TRUE`, `FALSE`, or `UNKNOWN`. Predicates are used in the search condition of [WHERE](where-transact-sql.md) clauses and [HAVING](select-having-transact-sql.md) clauses, the join conditions of [FROM](from-transact-sql.md) clauses, and other constructs where a Boolean value is required.
 

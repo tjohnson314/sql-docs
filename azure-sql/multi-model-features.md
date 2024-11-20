@@ -1,18 +1,18 @@
 ---
 title: Multi-model capabilities
 description: Microsoft Azure SQL enables you to work with multiple data models in the same database.
-author: yorek
-ms.author: damauri
-ms.reviewer: mathoma, urmilano
-ms.date: 12/17/2018
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: mathoma, urmilano, damauri
+ms.date: 11/06/2024
 ms.service: azure-sql
 ms.subservice: service-overview
 ms.topic: conceptual
 ms.custom: sqldbrb=2
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
+monikerRange: "=azuresql||=azuresql-db||=azuresql-mi||=fabricsql"
 ---
-# Multi-model capabilities of Azure SQL Database and SQL Managed Instance
-[!INCLUDE[appliesto-sqldb-sqlmi](includes/appliesto-sqldb-sqlmi.md)]
+# Multi-model capabilities
+[!INCLUDE[appliesto-sqldb-sqlmi-fabricsqldb](includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
 Multi-model databases enable you to store and work with data in multiple formats, such as relational data, graph, JSON or XML documents, spatial data, and key-value pairs.
 

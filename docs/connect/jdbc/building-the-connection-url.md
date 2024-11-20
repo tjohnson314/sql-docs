@@ -43,7 +43,7 @@ For a detailed list of properties that can be set in the connection string, see 
 
 Connect to the default database on the local computer by using a user name and password:
 
-`jdbc:sqlserver://localhost;encrypt=true;user=MyUserName;password=*****;`
+`jdbc:sqlserver://localhost;encrypt=true;user=MyUserName;password=<password>;`
 
 > [!NOTE]  
 > Although the previous example uses a username and password in the connection string, you should use integrated security as it's more secure. For more information, see the [Connecting with integrated authentication](#Connectingintegrated) section later in this article.

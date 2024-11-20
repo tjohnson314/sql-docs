@@ -15,7 +15,7 @@ f1_keywords:
 
 # Tutorial: start from an existing database
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 SQL projects contain declarative (CREATE statement) files for all the objects in a database, such as tables, views, and stored procedures. These files can be used to create new databases, update existing databases, or even just to track the database in source control. Often we are starting with a SQL project when we have an existing database and want to create objects in the SQL project that match the database with minimal effort.
 

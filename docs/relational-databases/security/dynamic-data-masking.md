@@ -8,11 +8,11 @@ ms.date: 04/15/2024
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
-monikerRange: "=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Dynamic data masking
 
-[!INCLUDE [SQL Server 2016 ASDB, ASDBMI, ASDW](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa.md)]
+[!INCLUDE [SQL Server 2016 Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics FabricSQLDB](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricsqldb.md)]
 
 :::image type="content" source="media/dynamic-data-masking/dynamic-data-masking.png" alt-text="Diagram of dynamic data masking.":::
 

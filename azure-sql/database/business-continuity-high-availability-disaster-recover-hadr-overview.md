@@ -15,10 +15,10 @@ keywords:
   - "cloud business continuity"
   - "database disaster recovery"
   - "database recovery"
-monikerRange: "= azuresql || = azuresql-db "
+monikerRange: "= azuresql || = azuresql-db ||=fabricsql"
 ---
 # Overview of business continuity with Azure SQL Database
-[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
 > [!div class="op_single_selector"]
 > * [Azure SQL Database](business-continuity-high-availability-disaster-recover-hadr-overview.md?view=azuresql-db&preserve-view=true)

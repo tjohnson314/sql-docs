@@ -12,7 +12,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # Author custom code analysis rules
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 This walkthrough demonstrates the steps used to create a SQL Server code analysis rule. The rule created in this walkthrough is used to avoid `WAITFOR DELAY` statements in stored procedures, triggers, and functions.
 

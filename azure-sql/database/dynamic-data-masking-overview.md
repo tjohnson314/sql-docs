@@ -12,13 +12,13 @@ ms.topic: conceptual
 ms.custom:
   - sqldbrb=1
 tags: azure-synapse
-monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi ||=fabricsql"
 ---
 # Dynamic data masking
 
-[!INCLUDE [appliesto-sqldb-sqlmi-asa-dedicated-only](../includes/appliesto-sqldb-sqlmi-asa-dedicated-only.md)]
+[!INCLUDE [appliesto-sqldb-sqlmi-asa-dedicated-only-fabricsqldb](../includes/appliesto-sqldb-sqlmi-asa-dedicated-only-fabricsqldb.md)]
 
-Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics support dynamic data masking (DDM). Dynamic data masking limits sensitive data exposure by masking it to nonprivileged users.
+Azure SQL Database, SQL database in Microsoft Fabric, Azure SQL Managed Instance, and Azure Synapse Analytics support dynamic data masking (DDM). Dynamic data masking limits sensitive data exposure by masking it to nonprivileged users.
 
 Dynamic data masking helps prevent unauthorized access to sensitive data by enabling customers to designate how much of the sensitive data to reveal with minimal effect on the application layer. It's a policy-based security feature that hides the sensitive data in the result set of a query over designated database fields, while the data in the database isn't changed.
 
@@ -26,7 +26,9 @@ For example, a service representative at a call center might identify a caller b
 
 ## Dynamic data masking basics
 
-You set up a dynamic data masking policy in the Azure portal by selecting the **Dynamic Data Masking** pane under **Security** in your SQL Database configuration pane. This feature can't be set using portal for SQL Managed Instance. For more information, see [Dynamic Data Masking](/sql/relational-databases/security/dynamic-data-masking).
+For Azure SQL Database, you set up a dynamic data masking policy in the Azure portal by selecting the **Dynamic Data Masking** pane under **Security** in your SQL Database configuration pane. 
+
+This feature can't be set using the Azure portal for SQL Managed Instance or SQL database in Fabric. Instead, use T-SQL, as in the [Dynamic Data Masking example in this article](#granular-permission-example). For more information, see [Dynamic Data Masking](/sql/relational-databases/security/dynamic-data-masking).
 
 ### Dynamic data masking policy
 

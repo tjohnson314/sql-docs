@@ -1,7 +1,7 @@
 ---
 title: Analyze and prevent deadlocks
 titleSuffix: Azure SQL Database
-description: Learn how to analyze deadlocks and prevent them from reoccurring in Azure SQL Database
+description: Learn how to analyze deadlocks and prevent them from reoccurring in Azure SQL Database and Fabric SQL database.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma, dfurman, wiassaf
@@ -9,16 +9,17 @@ ms.date: 03/14/2023
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: conceptual
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 
-# Analyze and prevent deadlocks in Azure SQL Database
-[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
+# Analyze and prevent deadlocks in Azure SQL Database and Fabric SQL database
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
-This article teaches you how to identify deadlocks in Azure SQL Database, use deadlock graphs and Query Store to identify the queries in the deadlock, and plan and test changes to prevent deadlocks from reoccurring.
+This article teaches you how to identify deadlocks, use deadlock graphs and Query Store to identify the queries in the deadlock, and plan and test changes to prevent deadlocks from reoccurring. This article applies to Azure SQL Database and Fabric SQL database, which shares many features of Azure SQL Database.
 
 This article focuses on identifying and analyzing deadlocks due to lock contention. Learn more about other types of deadlocks in [resources that can deadlock](/sql/relational-databases/sql-server-deadlocks-guide#deadlock_resources).
 
-## How deadlocks occur in Azure SQL Database
+## How deadlocks occur
 
 Each new database in Azure SQL Database has the [read committed snapshot](/sql/t-sql/statements/alter-database-transact-sql-set-options?view=azuresqldb-current&preserve-view=true#read_committed_snapshot--on--off--1) (RCSI) database setting enabled by default.  [Blocking](understand-resolve-blocking.md) between sessions reading data and sessions writing data is minimized under RCSI, which uses row versioning to increase concurrency. However, blocking and deadlocks may still occur in databases in Azure SQL Database because:
 
@@ -762,7 +763,7 @@ There are multiple techniques available to prevent deadlocks from reoccurring, i
 
 - **Use Snapshot isolation**. In some cases, [setting the transaction isolation level](/sql/t-sql/statements/set-transaction-isolation-level-transact-sql) to snapshot for one or more of the transactions involved in a deadlock may prevent blocking and deadlocks from reoccurring.
 
-    This technique is most likely to be successful when used on SELECT statements when [read committed snapshot is disabled in a database](#how-deadlocks-occur-in-azure-sql-database). When read committed snapshot is disabled, SELECT queries using the read committed isolation level require shared (S) locks. Using snapshot isolation on these transactions removes the need for shared locks, which can prevent blocking and deadlocks.
+    This technique is most likely to be successful when used on SELECT statements when [read committed snapshot is disabled in a database](#how-deadlocks-occur). When read committed snapshot is disabled, SELECT queries using the read committed isolation level require shared (S) locks. Using snapshot isolation on these transactions removes the need for shared locks, which can prevent blocking and deadlocks.
 
     In databases where read committed snapshot isolation has been enabled, SELECT queries do not require shared (S) locks, so deadlocks are more likely to occur between transactions that are modifying data. In cases where deadlocks occur between multiple transactions modifying data, snapshot isolation may result in an [update conflict](/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide#behavior-in-summary) instead of a deadlock. This similarly requires one of the transactions to retry its operation.
 

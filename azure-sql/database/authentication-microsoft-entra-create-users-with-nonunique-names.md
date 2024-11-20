@@ -1,29 +1,29 @@
 ---
-title: Microsoft Entra logins and users with nonunique display names (preview)
+title: Microsoft Entra logins and users with nonunique display names
 titleSuffix: Azure SQL Database and Azure SQL Managed Instance
 description: Learn how to mitigate naming conflicts for Microsoft Entra logins and users with nonunique display names in Azure SQL Database and Azure SQL Managed Instance by using the T-SQL Object_ID syntax, currently in preview. 
 author: tameikal-msft
 ms.author: talawren
 ms.reviewer: vanto, mathoma
-ms.date: 02/21/2024
+ms.date: 11/20/2024
 ms.service: azure-sql
 ms.subservice: security
 ms.topic: conceptual
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
+monikerRange: "= azuresql || = azuresql-db || = azuresql-mi ||=fabricsql"
 ---
 
-# Microsoft Entra logins and users with nonunique display names (preview)
+# Microsoft Entra logins and users with nonunique display names
+
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
 
-This article teaches you how to use the T-SQL Object_ID syntax to create Microsoft Entra logins and users with nonunique display names in Azure SQL Database and Azure SQL Managed Instance. 
+This article teaches you how to use the T-SQL `Object_ID` syntax to create Microsoft Entra logins and users with nonunique display names in Azure SQL Database, Fabric SQL database, and Azure SQL Managed Instance. 
 
 > [!NOTE]
-> Using `WITH OBJECT_ID` to create users and logins in Azure SQL is currently in preview. 
+> You can create users in Fabric SQL database, but not logins.
 
 ## Overview
 
 Microsoft Entra ID supports authentication for service principals. However, using a service principal with a display name that is not unique in Microsoft Entra ID leads to errors when creating the login or user in Azure SQL. 
-
 
 For example, if the application `myapp` isn't unique, you might run into the following error: 
 
@@ -44,11 +44,9 @@ CREATE LOGIN [myapp] FROM EXTERNAL PROVIDER
 The *duplicate display name* error occurs because Microsoft Entra ID allows duplicate display names for [Microsoft Entra application (service principal)](authentication-aad-service-principal.md), while Azure SQL requires unique names to create Microsoft Entra logins and users. To mitigate this problem, the Data Definition Language (DDL) statement to create logins and users has been extended to include the Object ID of the Azure resource with the `WITH OBJECT_ID` clause.
 
 > [!NOTE]
-> The `WITH OBJECT_ID` extension is currently in **public preview**.
->
 > Most nonunique display names in Microsoft Entra ID are related to service principals, though occasionally group names can also be nonunique. Microsoft Entra user principal names are unique, as two users can't have the same user principal. However, an app registration (service principal) can be created with a display name that is the same as a user principal name.
 >
-> If the service principal display name is not a duplicate, the default `CREATE LOGIN` or `CREATE USER` statement should be used. The `WITH OBJECT_ID` extension is in **public preview**, and is a troubleshooting repair item implemented for use with nonunique service principals. Using it with a unique service principal is not recommended. Using the `WITH OBJECT_ID` extension for a service principal without adding a suffix will run successfully, but it will not be obvious which service principal the login or user was created for. It's recommended to create an alias using a suffix to uniquely identify the service principal. The `WITH OBJECT_ID` extension is not supported for SQL Server.
+> If the service principal display name is not a duplicate, the default `CREATE LOGIN` or `CREATE USER` statement should be used. The `WITH OBJECT_ID` extension is a troubleshooting repair item implemented for use with nonunique service principals. Using it with a unique service principal is not recommended. Using the `WITH OBJECT_ID` extension for a service principal without adding a suffix will run successfully, but it will not be obvious which service principal the login or user was created for. It's recommended to create an alias using a suffix to uniquely identify the service principal. The `WITH OBJECT_ID` extension is not supported for SQL Server.
 
 ## T-SQL create login/user syntax for nonunique display names
 

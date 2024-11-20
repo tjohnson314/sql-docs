@@ -20,12 +20,12 @@ helpviewer_keywords:
   - "conditions [SQL Server], IS [NOT] DISTINCT FROM"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current || >= sql-server-ver16 || >= sql-server-linux-ver16 || = azuresqldb-mi-current ||=fabric"
+monikerRange: "= azuresqldb-current || >= sql-server-ver16 || >= sql-server-linux-ver16 || = azuresqldb-mi-current || =fabric"
 ---
 
 # IS [NOT] DISTINCT FROM (Transact-SQL)
 
-[!INCLUDE[SQL Server 2022 Azure SQL Database Azure SQL Managed Instance FabricSE FabricDW](../../includes/applies-to-version/sqlserver2022-asdb-asmi-fabricse-fabricdw.md)]
+[!INCLUDE [SQL Server 2022 Azure SQL Database Azure SQL Managed Instance FabricSE FabricDW FabricSQLDB](../../includes/applies-to-version/sqlserver2022-asdb-asmi-fabricse-fabricdw-fabricsqldb.md)]
 
 Compares the equality of two expressions and guarantees a true or false result, even if one or both operands are NULL.
 

@@ -9,10 +9,10 @@ ms.topic: quickstart
 ms.custom: intro-quickstart
 helpviewer_keywords:
   - "Visual C# [SMO]"
-monikerRange: "=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # SMO Programming - Getting Started in Visual C# .NET
-[!INCLUDE [SQL Server ASDB, ASDBMI, ASDW](../../includes/applies-to-version/sql-asdb-asdbmi-asa.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Synapse Analytics FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-fabricsqldb.md)]
 
   [!INCLUDE[c-sharp](../../includes/c-sharp-md.md)] .NET is one of the managed programming languages that are supported by the common language runtime (CLR) in [!INCLUDE[vsprvs](../../includes/vsprvs-md.md)] .NET. Many For more information about the C# language, see the [!INCLUDE[vsprvs](../../includes/vsprvs-md.md)] .NET documentation. You can use [!INCLUDE[vsprvs2005](../../includes/vsprvs2005-md.md)] and [!INCLUDE[vsprvs2008](../../includes/vsprvs2008-md.md)] to develop SMO applications.  
   

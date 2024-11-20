@@ -1,7 +1,7 @@
 ---
 title: Understand and resolve blocking problems
 titleSuffix: Azure SQL Database
-description: An overview of Azure SQL database-specific articles on blocking and troubleshooting.
+description: The article describes blocking in Azure SQL Database and Fabric SQL database, and demonstrates how to troubleshoot and resolve blocking.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: wiassaf, mathoma
@@ -11,11 +11,12 @@ ms.subservice: performance
 ms.topic: conceptual
 dev_langs:
   - "TSQL"
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
-# Understand and resolve Azure SQL Database blocking problems
-[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
+# Understand and resolve blocking problems
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
-The article describes blocking in Azure SQL databases and demonstrates how to troubleshoot and resolve blocking. 
+The article describes blocking in Azure SQL Database and Fabric SQL database, and demonstrates how to troubleshoot and resolve blocking.
 
 ## Objective
 
@@ -25,8 +26,9 @@ For information on troubleshooting deadlocks, see [Analyze and prevent deadlocks
 
 > [!NOTE]
 > **This content is focused on Azure SQL Database.** Azure SQL Database is based on the latest stable version of the Microsoft SQL Server database engine, so much of the content is similar though troubleshooting options and tools might differ. For more on blocking in SQL Server, see [Understand and resolve SQL Server blocking problems](/troubleshoot/sql/performance/understand-resolve-blocking).
+> Fabric SQL database shares many features with Azure SQL Database. For more information on performance monitoring, see [Fabric SQL database performance monitoring](/fabric/database/sql/monitor).
 
-## Understand blocking 
+## Understand blocking
  
 Blocking is an unavoidable and by-design characteristic of any relational database management system (RDBMS) with lock-based concurrency. Blocking in a database in Azure SQL Database occurs when one session holds a lock on a specific resource and a second SPID attempts to acquire a conflicting lock type on the same resource. Typically, the time frame for which the first SPID locks the resource is small. When the owning session releases the lock, the second connection is then free to acquire its own lock on the resource and continue processing. This is normal behavior and can happen many times throughout the course of a day with no noticeable effect on system performance.
 
@@ -355,7 +357,7 @@ The Waittype, Open_Tran, and Status columns refer to information returned by [sy
 |:-|:-|:-|:-|:-|:-|--|
 | 1 | NOT NULL | >= 0 | runnable | Yes, when query finishes. | In `sys.dm_exec_sessions`, `reads`, `cpu_time`, and/or `memory_usage` columns will increase over time. Duration for the query will be high when completed. |
 | 2 | NULL | \>0 | sleeping | No, but SPID can be killed. | An attention signal might be seen in the Extended Event session for this SPID, indicating a query time-out or cancel has occurred. |
-| 3 | NULL | \>= 0 | runnable | No. Won't resolve until client fetches all rows or closes connection. SPID can be killed, but it can take up to 30 seconds. | If open_transaction_count = 0, and the SPID holds locks while the transaction isolation level is default (READ COMMMITTED), this is a likely cause. |  
+| 3 | NULL | \>= 0 | runnable | No. Won't resolve until client fetches all rows or closes connection. SPID can be killed, but it can take up to 30 seconds. | If open_transaction_count = 0, and the SPID holds locks while the transaction isolation level is default (READ COMMITTED), this is a likely cause. |  
 | 4 | Varies | \>= 0 | runnable | No. Won't resolve until client cancels queries or closes connections. SPIDs can be killed, but might take up to 30 seconds. | The `hostname` column in `sys.dm_exec_sessions` for the SPID at the head of a blocking chain will be the same as one of the SPID it's blocking. |  
 | 5 | NULL | \>0 | rollback | Yes. | An attention signal might be seen in the Extended Events session for this SPID, indicating a query time-out or cancel has occurred, or simply a rollback statement has been issued. |  
 | 6 | NULL | \>0 | sleeping | Eventually. When Windows NT determines the session is no longer active, the Azure SQL Database connection is broken. | The `last_request_start_time` value in `sys.dm_exec_sessions` is much earlier than the current time. |

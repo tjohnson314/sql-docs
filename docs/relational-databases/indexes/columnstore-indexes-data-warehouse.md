@@ -7,10 +7,10 @@ ms.date: 10/23/2024
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016||=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # Columnstore indexes in data warehousing
-[!INCLUDE [SQL Server Azure SQL Database PDW](../../includes/applies-to-version/sql-asdb-asdbmi-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-pdw-fabricsqldb.md)]
 
   Columnstore indexes, in conjunction with partitioning, are essential for building a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] data warehouse. This article focuses on key use cases and examples for data warehousing designs with the SQL Database Engine.
   

@@ -3,7 +3,7 @@ title: "SQL Data Developer"
 description: "Use Microsoft's SQL data platform to create data-centric solutions across mobile devices and desktops for web servers, enterprise servers, and the cloud."
 author: David-Engel
 ms.author: davidengel
-ms.date: "08/05/2020"
+ms.date: 11/01/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -19,6 +19,7 @@ Use Microsoft's SQL data platform to create data-centric solutions across mobile
 
 ## SQL Data tools
 * [Azure Data Studio](/azure-data-studio/download-azure-data-studio): Use Azure Data Studio on Windows, macOS, and Linux to run SQL Server, Azure SQL Database, PostgreSQL, Jupyter Notebooks and more.
+* [mssql extension for Visual Studio Code](/sql/tools/visual-studio-code/mssql-extensions?view=fabric&preserve-view=true): Use the mssql extension in VS Code on Windows, macOS, and Linux to manage SQL Server, Azure SQL Database, SQL database in Fabric.
 * [SQL Server Data Tools](../ssdt/download-sql-server-data-tools-ssdt.md): Use SSDT inside Visual Studio to build relational databases, Azure SQL databases, Integration Services packages, Analysis Services data models, and Reporting Services reports.
 * [SQL Server Management Tools](../ssms/download-sql-server-management-studio-ssms.md):  Use SSMS on Windows to configure, monitor, and administer instances of SQL Server.
 

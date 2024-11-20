@@ -102,7 +102,7 @@ Specifies the type of schema **Recordset** that the [OpenSchema](./openschema-me
 |AdoEnums.Schema.PROPERTIES|  
 |AdoEnums.Schema.PROVIDERSPECIFIC|  
 |AdoEnums.Schema.PROVIDERTYPES|  
-|AdoEnums.Schema.REFERENTIALCONTRAINTS|  
+|AdoEnums.Schema.REFERENTIALCONTSRAINTS|  
 |AdoEnums.Schema.SCHEMATA|  
 |AdoEnums.Schema.SQLLANGUAGES|  
 |AdoEnums.Schema.STATISTICS|  

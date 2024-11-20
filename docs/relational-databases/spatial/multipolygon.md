@@ -1,24 +1,26 @@
 ---
 title: "MultiPolygon"
-description: "MultiPolygon"
-author: MladjoA
-ms.author: mlandzic
-ms.date: "03/03/2017"
+description: "MultiPolygon is a collection of zero or more **Polygon** instances in SQL Server spatial data."
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviwer: mlandzic, jovanpop
+ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
   - "MultiPolygon geometry subtype [SQL Server]"
   - "geometry subtypes [SQL Server]"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # MultiPolygon
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
   A **MultiPolygon** instance is a collection of zero or more **Polygon** instances.  
   
-## Polygon Instances  
+## Polygon instances
+
  The illustration below shows examples of **MultiPolygon** instances.  
   
- ![Examples of geometry MultiPolygon instances](../../relational-databases/spatial/media/multipolygon.gif "Examples of geometry MultiPolygon instances")  
+ :::image type="content" source="media/multipolygon/multipolygon.gif" alt-text="Images of examples of geometry MultiPolygon instances.":::  
   
  As shown in the illustration:  
   
@@ -26,12 +28,13 @@ monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||
   
 -   Figure 2 is a **MultiPolygon** instance with two **Polygon** elements. The boundary is defined by the two exterior rings and the three interior rings. The two **Polygon** elements intersect at a tangent point.  
   
-### Accepted Instances  
+### Accepted instances
+
  A **MultiPolygon** instance is accepted one of the following conditions is met.  
   
 -   It is an empty **MultiPolygon** instance.  
   
--   All instances comprising the **MultiPolygon** instance are accepted **Polygon** instances. For more information on accepted **Polygon** instances, see [Polygon](../../relational-databases/spatial/polygon.md).  
+-   All instances comprising the **MultiPolygon** instance are accepted **Polygon** instances. For more information on accepted **Polygon** instances, see [Polygon](polygon.md).  
   
 The following examples show accepted **MultiPolygon** instances.  
   
@@ -49,12 +52,13 @@ DECLARE @g geometry = 'MULTIPOLYGON(((1 1, 1 -1, -1 -1, -1 1, 1 1)),((1 1, 3 1, 
   
 The second instance in the MultiPolygon is a LineString instance and not an accepted Polygon instance.  
   
-### Valid Instances  
+### Valid instances
+
  A **MultiPolygon** instance is valid if it is an empty **MultiPolygon** instance or if it meets the following criteria.  
   
-1.  All of the instances comprising the **MultiPolygon** instance are valid **Polygon** instances. For valid **Polygon** instances, see [Polygon](../../relational-databases/spatial/polygon.md).  
+1. All of the instances comprising the **MultiPolygon** instance are valid **Polygon** instances. For valid **Polygon** instances, see [Polygon](polygon.md).  
   
-2.  None of the **Polygon** instances comprising the **MultiPolygon** instance overlap.  
+1. None of the **Polygon** instances comprising the **MultiPolygon** instance overlap.  
 
 The following example shows two valid **MultiPolygon** instances and one invalid **MultiPolygon** instance.  
   
@@ -67,29 +71,31 @@ SELECT @g1.STIsValid(), @g2.STIsValid(), @g3.STIsValid();
   
 `@g2` is valid because the two **Polygon** instances touch only at a tangent point. `@g3` is not valid because the interiors of the two **Polygon** instances overlap each other.  
   
-## Examples  
+## Examples
+
 ### Example A.
-The following example shows the creation of a `geometry``MultiPolygon` instance and returns the Well-Known Text (WKT) of the second component.  
+
+The following example shows the creation of a `geometry MultiPolygon` instance and returns the Well-Known Text (WKT) of the second component.  
   
 ```sql  
 DECLARE @g geometry;  
 SET @g = geometry::Parse('MULTIPOLYGON(((0 0, 0 3, 3 3, 3 0, 0 0), (1 1, 1 2, 2 1, 1 1)), ((9 9, 9 10, 10 9, 9 9)))');  
 SELECT @g.STGeometryN(2).STAsText();  
-```  
+```
   
 ## Example B.
+
 This example instantiates an empty `MultiPolygon` instance.  
   
 ```sql  
 DECLARE @g geometry;  
 SET @g = geometry::Parse('MULTIPOLYGON EMPTY');  
 ```  
-  
-## See Also  
- [Polygon](../../relational-databases/spatial/polygon.md)   
- [STArea &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/starea-geometry-data-type.md)   
- [STCentroid &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stcentroid-geometry-data-type.md)   
- [STPointOnSurface &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stpointonsurface-geometry-data-type.md)   
- [Spatial Data &#40;SQL Server&#41;](../../relational-databases/spatial/spatial-data-sql-server.md)  
-  
-  
+
+## Related content
+
+- [Polygon](polygon.md)
+- [STArea (geometry Data Type)](../../t-sql/spatial-geometry/starea-geometry-data-type.md)
+- [STCentroid (geometry Data Type)](../../t-sql/spatial-geometry/stcentroid-geometry-data-type.md)
+- [STPointOnSurface (geometry Data Type)](../../t-sql/spatial-geometry/stpointonsurface-geometry-data-type.md)
+- [Spatial Data](spatial-data-sql-server.md)

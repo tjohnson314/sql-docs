@@ -97,7 +97,7 @@ To alter a DML trigger requires `ALTER` permission on the table or view on which
       GO
       ```
 
-### Rename a trigger using DROP TRIGGER and ALTER TRIGGER
+### Rename a trigger using DROP TRIGGER and CREATE TRIGGER
 
 1. Connect to the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 

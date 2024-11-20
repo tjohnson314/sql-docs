@@ -168,6 +168,18 @@ SQL Managed Instance enables system administrators to spend less time on adminis
 
 For more information, see [a list of supported and unsupported SQL Managed Instance features](../database/features-comparison.md), and [T-SQL differences between SQL Managed Instance and SQL Server](transact-sql-tsql-differences-sql-server.md).
 
+## Save on costs
+
+As with any Azure service, when you use Azure SQL Managed Instance, you are billed for the compute, storage, and license your product uses. 
+
+SQL Managed Instance offers several ways to save on costs:
+
+- **Azure Hybrid Benefit**: If you have Software Assurance, you can use the [Azure Hybrid Benefit](https://azure.microsoft.com/pricing/hybrid-benefit/) to save up to 55% on licensing costs. The Azure Hybrid Benefit for SQL Server allows you to use your on-premises SQL Server licenses to run Azure SQL Managed Instance at a reduced rate.
+- **Reserved capacity**: You can save up to 80% on costs by purchasing [reserved capacity](../database/reserved-capacity-overview.md) for SQL Managed Instance. 
+- **Instance pools**: If you have multiple managed instances, you can save on costs by using [instance pools](instance-pools-overview.md), which also support [reserved capacity](instance-pools-overview.md#reserved-capacity-pricing).
+- **Instance stop and start**: You can [stop and start](instance-stop-start-how-to.md) your managed instance to save on costs. When you stop your instance, you only pay for storage, and you can restart it at any time.
+- **Free DR replica**: You can save on licensing costs by designating a secondary replica for [disaster recovery (DR) only](business-continuity-high-availability-disaster-recover-hadr-overview.md#license-free-dr-replicas). 
+
 ## vCore-based purchasing model
 
 The [vCore-based purchasing model](service-tiers-managed-instance-vcore.md) for SQL Managed Instance gives you flexibility, control, transparency, and a straightforward way to translate on-premises workload requirements to the cloud. This model allows you to change compute, memory, and storage based upon your workload needs. The vCore model is also eligible for up to 55 percent savings with the [Azure Hybrid Benefit](https://azure.microsoft.com/pricing/hybrid-benefit/) for SQL Server.

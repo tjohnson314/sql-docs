@@ -84,7 +84,7 @@ When you're using LRS, consider the following best practices:
 - Plan to complete a single LRS migration job within a maximum of 30 days. On expiration of this time frame, the LRS job is automatically canceled.
 - To prevent unintentionally migrating a corrupt database, and for a faster database restore, enable `CHECKSUM` when you're taking your backups. Although SQL Managed Instance performs a basic integrity check on backups without `CHECKSUM`, catching all forms of corruption isn't guaranteed. Taking backups with `CHECKSUM` is the only way to ensure the backup restored to SQL Managed Instance isn't corrupt. The basic integrity check on backups without `CHECKSUM` increases the restore time of a database. 
 - When migrating to the **Business Critical** service tier, account for a [prolonged delay](#longer-cutover-in-the-business-critical-service-tier) in database availability after cutover, while databases are seeded to secondary replicas. For especially large databases with minimal downtime requirements, consider migrating to the General Purpose service tier first and then upgrading to the **Business Critical** service tier, or using the [Managed Instance link](managed-instance-link-migrate.md) to migrate your data. 
-- Uploading thousands of database files to restore can lead to excessive migration times and even failure. Consolidate databases into fewer files to speed up the migration process, and ensure it's success. 
+- Uploading thousands of database files to restore can lead to excessive migration times and even failure. Consolidate databases into fewer files to speed up the migration process, and ensure its success. 
 
 ### Configure a maintenance window
 
@@ -631,7 +631,7 @@ Consider the following limitations when migrating with LRS:
 - A single LRS job can run for a maximum of 30 days, after which it will be automatically canceled.
 - While it's possible to use an Azure Storage account behind a firewall, extra configuration is necessary, and the storage account and managed instance must either be in the same region, or two paired regions. Review [Configure firewall](log-replay-service-migrate.md#configure-azure-storage-behind-a-firewall) to learn more. 
 - The maximum number of databases you can restore in parallel is 200 per single subscription. In some cases, it's possible to increase this limit by opening a support ticket. 
-- Uploading thousands of database files to restore can lead to excessive migration times and even failure. Consolidate databases into fewer files to speed up the migration process, and ensure it's success. 
+- Uploading thousands of database files to restore can lead to excessive migration times and even failure. Consolidate databases into fewer files to speed up the migration process, and ensure its success. 
 
 > [!NOTE]
 > If you require a database to be read-only accessible during the migration, with a much longer time frame for performing the migration and with minimal downtime, consider using the [Managed Instance link](managed-instance-link-feature-overview.md) feature as a recommended migration solution.

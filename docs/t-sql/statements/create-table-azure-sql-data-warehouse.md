@@ -1,10 +1,10 @@
 ---
 title: CREATE TABLE
-description: "CREATE TABLE creates a new table in Azure Synapse Analytics, Analytics Platform System (PDW), and Microsoft Fabric."
+description: "CREATE TABLE creates a new table in Azure Synapse Analytics, Analytics Platform System (PDW), and Microsoft Fabric Data Warehouse."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: vanto, xiaoyul, mariyaali, maghan
-ms.date: 10/31/2024
+ms.date: 11/01/2024
 ms.service: sql
 ms.topic: reference
 dev_langs:
@@ -18,6 +18,8 @@ monikerRange: ">=aps-pdw-2016||=azure-sqldw-latest||=fabric"
 
 [!INCLUDE [applies-to-version/asa-pdw](../../includes/applies-to-version/asa-pdw.md)]
 
+## CREATE TABLE (Azure Synapse Analytics)
+
  Creates a new table in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] or [!INCLUDE [ssPDW](../../includes/sspdw-md.md)].  
 
  To understand tables and how to use them, see [Tables in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-overview).
@@ -26,6 +28,7 @@ monikerRange: ">=aps-pdw-2016||=azure-sqldw-latest||=fabric"
 
 > [!NOTE]
 > For SQL Server and Azure SQL platforms, visit [CREATE TABLE](create-table-transact-sql.md?view=azuresqldb-current&preserve-view=true) and select your desired product version.
+> For [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], see [CREATE TABLE](create-table-transact-sql.md?view=fabric&preserve-view=true).
 > For reference to [!INCLUDE [fabric-data-warehouse](../../includes/fabric-dw.md)] in [!INCLUDE [microsoft-fabric](../../includes/fabric.md)], visit [CREATE TABLE (Fabric)](create-table-azure-sql-data-warehouse.md?view=fabric&preserve-view=true).
 
 [!INCLUDE [synapse-analytics-od-supported-tables](../../includes/synapse-analytics-od-supported-tables.md)]
@@ -196,7 +199,7 @@ For an example, see [Create a partitioned table](#PartitionedTable).
 
 ### Ordered clustered columnstore index option
 
-Clustered columnstore index (CCI) is the default for creating tables in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]. Data in a CCI is not sorted before being compressed into columnstore segments. When creating a CCI with ORDER, data is sorted before being added to index segments and query performance can be improved. For more infomration on ordered clustered columnstore indexes in Azure Synapse Analytics, see [Performance Tuning with Ordered Clustered Columnstore Index](/azure/sql-data-warehouse/performance-tuning-ordered-cci?view=azure-sqldw-latest&preserve-view=true).  
+Clustered columnstore index (CCI) is the default for creating tables in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]. Data in a CCI is not sorted before being compressed into columnstore segments. When creating a CCI with ORDER, data is sorted before being added to index segments and query performance can be improved. For more information on ordered clustered columnstore indexes in Azure Synapse Analytics, see [Performance Tuning with Ordered Clustered Columnstore Index](/azure/sql-data-warehouse/performance-tuning-ordered-cci?view=azure-sqldw-latest&preserve-view=true).  
 
 An ordered CCI can be created on columns of any data types supported in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] except for string columns.  
 
@@ -664,13 +667,16 @@ WITH
 
 [!INCLUDE [applies-to-version/fabric-dw-only](../../includes/applies-to-version/fabric-dw.md)]
 
+## CREATE TABLE (Fabric Data Warehouse)
+
  Creates a new table in a [!INCLUDE [fabric-data-warehouse](../../includes/fabric-dw.md)] in [!INCLUDE [microsoft-fabric](../../includes/fabric.md)].
 
  For more information, see [Create tables on [!INCLUDE [fabric-data-warehouse](../../includes/fabric-dw.md)] in [!INCLUDE [microsoft-fabric](../../includes/fabric.md)]](/fabric/data-warehouse/create-table).
 
 > [!NOTE]
-> For reference to [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE[ssPDW](../../includes/sspdw-md.md)], visit [CREATE TABLE (Azure Synapse Analytics)](create-table-azure-sql-data-warehouse.md?view=azure-sqldw-latest&preserve-view=true).
+> For [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], see [CREATE TABLE](create-table-transact-sql.md?view=fabric&preserve-view=true).
 > For SQL Server and Azure SQL platforms, visit [CREATE TABLE](create-table-transact-sql.md?view=azuresqldb-current&preserve-view=true) and select your desired product version from the version dropdown list.
+> For reference to [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE[ssPDW](../../includes/sspdw-md.md)], visit [CREATE TABLE (Azure Synapse Analytics)](create-table-azure-sql-data-warehouse.md?view=azure-sqldw-latest&preserve-view=true).
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
 

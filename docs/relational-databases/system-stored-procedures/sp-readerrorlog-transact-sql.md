@@ -1,10 +1,10 @@
 ---
-title: sp_readerrorlog (Transact-SQL)
+title: "sp_readerrorlog (Transact-SQL)"
 description: sp_readerrorlog allows you to read the contents of the SQL Server or SQL Server Agent error log file and filter on keywords.
 author: pijocoder
 ms.author: jopilov
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -51,7 +51,7 @@ The string value for a string you want to filter on when viewing the error log. 
 
 #### [ @p4 = ] N'*p4*'
 
-The string value for an additional string you want to filter on to further refine the search when viewing the error log. *@p4* is **nvarchar(4000)**, with a default of `NULL`. This parameter provides an extra filter to the first string search *@p3*.
+The string value for an extra string you want to filter on to further refine the search when viewing the error log. *@p4* is **nvarchar(4000)**, with a default of `NULL`. This parameter provides an extra filter to the first string search *@p3*.
 
 ## Return code values
 
@@ -67,7 +67,9 @@ Every time [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is started
 
 ## Permissions
 
-Execute permissions for `sp_readerrorlog` are restricted to members of the **sysadmin** fixed server role.
+[!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and earlier versions require VIEW SERVER STATE permission on the server.
+
+[!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions require VIEW ANY ERROR LOG permission on the server.
 
 ## Examples
 
@@ -76,19 +78,19 @@ The following example cycles the [!INCLUDE [ssNoVersion](../../includes/ssnovers
 ### A. Read the current SQL Server error log
 
 ```sql
-EXEC sp_readerrorlog;
+EXECUTE sp_readerrorlog;
 ```
 
 ### B. Show the previous SQL Server Agent error log
 
 ```sql
-EXEC sp_readerrorlog 1, 2;
+EXECUTE sp_readerrorlog 1, 2;
 ```
 
 ### C. Find log messages that indicate a database is starting up
 
 ```sql
-EXEC sp_readerrorlog 0, 1, 'database', 'start';
+EXECUTE sp_readerrorlog 0, 1, 'database', 'start';
 ```
 
 ## Related content

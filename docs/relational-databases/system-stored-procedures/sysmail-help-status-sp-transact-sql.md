@@ -4,7 +4,7 @@ description: "Displays the status of Database Mail queues."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/30/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -43,14 +43,16 @@ sysmail_help_status_sp
 
 ## Permissions
 
-By default, only members of the **sysadmin** fixed server role can access this procedure.
+Requires `CONTROL SERVER` permission on the server, or membership in the **db_owner** database role in the `msdb` database.
+
+[!INCLUDE [msdb-execute-permissions](../../includes/msdb-execute-permissions.md)]
 
 ## Examples
 
 The following example displays the status of Database Mail.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_status_sp;
+EXECUTE msdb.dbo.sysmail_help_status_sp;
 GO
 ```
 

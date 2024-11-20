@@ -14,9 +14,10 @@ helpviewer_keywords:
   - "geometry data type [SQL Server], Transact-SQL"
 dev_langs:
   - "TSQL"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # Spatial Types - geometry (Transact-SQL)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
   The planar spatial data type, **geometry**, is implemented as a common language runtime (CLR) data type in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. This type represents data in a Euclidean (flat) coordinate system.  
   
@@ -27,6 +28,10 @@ dev_langs:
 ## Registering the geometry Type  
  The **geometry** type is predefined and available in each database. You can create table columns of type **geometry** and operate on **geometry** data in the same manner as you would use other CLR types. Can be used in persisted and non-persisted computed columns.  
   
+## Remarks
+
+In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], **geography** and **geometry** data types are supported but cannot be [mirrored to the Fabric OneLake](/fabric/database/sql/mirroring-overview).
+
 ## Examples  
   
 ### A. Showing how to add and query geometry data  

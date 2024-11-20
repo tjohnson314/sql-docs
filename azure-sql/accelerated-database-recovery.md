@@ -5,22 +5,22 @@ description: Accelerated database recovery provides fast and consistent database
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: nvraparl, wiassaf, derekw
-ms.date: 02/18/2022
+ms.date: 10/01/2024
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: conceptual
 ms.custom: sqldbrb=4
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
+monikerRange: "=azuresql||=azuresql-db||=azuresql-mi||=fabric"
 ---
 # Accelerated Database Recovery in Azure SQL 
-[!INCLUDE[appliesto-sqldb-sqlmi](includes/appliesto-sqldb-sqlmi.md)]
+[!INCLUDE[appliesto-sqldb-sqlmi-fabricsqldb](includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
-**Accelerated Database Recovery (ADR)** is a SQL Server database engine feature that greatly improves database availability, especially in the presence of long running transactions, by redesigning the SQL Server database engine recovery process. 
+**Accelerated Database Recovery (ADR)** is a SQL Server database engine feature that greatly improves database availability, especially in the presence of long running transactions, by redesigning the SQL Server database engine recovery process.
 
-ADR is currently available for Azure SQL Database, Azure SQL Managed Instance, databases in Azure Synapse Analytics, and SQL Server on Azure VMs starting with SQL Server 2019. For information on ADR in SQL Server, see [Manage accelerated database recovery](/sql/relational-databases/accelerated-database-recovery-management).
+ADR is currently available for Azure SQL Database, Azure SQL Managed Instance, databases in Azure Synapse Analytics, Fabric SQL databases, and SQL Server on Azure VMs starting with SQL Server 2019. For information on ADR in SQL Server, see [Manage accelerated database recovery](/sql/relational-databases/accelerated-database-recovery-management).
 
-> [!NOTE] 
-> ADR is enabled by default in Azure SQL Database and Azure SQL Managed Instance. Disabling ADR in Azure SQL Database and Azure SQL Managed Instance is not supported. 
+> [!NOTE]
+> In Azure SQL Database, Fabric SQL databases, and Azure SQL Managed Instance, Accelerated Database Recovery (ADR) is enabled by default, and disabling ADR is not supported.
 
 ## Overview
 

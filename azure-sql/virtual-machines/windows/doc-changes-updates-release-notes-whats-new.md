@@ -3,8 +3,8 @@ title: What's new?
 description: Learn about the new features for and improvements to SQL Server on Azure Virtual Machines.
 author: MashaMSFT
 ms.author: mathoma
-ms.reviewer: randolphwest, mathoma
-ms.date: 10/23/2024
+ms.reviewer: randolphwest, mathoma, dpless
+ms.date: 11/19/2024
 ms.service: azure-vm-sql-server
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -45,6 +45,7 @@ The following table lists features of SQL Server on Azure VMs that have been mad
 
 | Changes | Month | Details |
 | --- | --- |--- |
+| [Mbv3 VM series](performance-guidelines-best-practices-vm-size.md#mbsv3-and-mbdsv3-series) | November 2024 | A powerful new VM series that currently delivers a high level of IOPs and GB throughput, with strong memory capabilities up to the 176 vCore count for a consistent 8:1 memory-to-vCore ratio in this series. Both VMs in the series offer a consistent 64 maximum data disks per VM size, allowing you to maximize storage performance and still allow fully scalability across the table. The Mbdsv3 VMs in the series have the highest IOPS and GB throughput VMs available in Azure and can scale up to 4 TiBs at the 176 vCore level.|
 | [Azure Update Manager](../azure-update-manager-sql-vm.md) | April 2024 | Automatically patch multiple SQL Server VMs at scale with the Azure Update Manager integrated in to the [SQL virtual machines](manage-sql-vm-portal.md) resource in the Azure portal, including Cumulative Updates. |
 | [Azure SQL triggers for Azure Functions](/azure/azure-functions/functions-bindings-azure-sql-trigger) | March 2024 | Azure Functions supports function triggers for SQL Server on Azure VMs. |
 | [Azure Elastic SAN](performance-guidelines-best-practices-storage.md#azure-elastic-san) | February 2024 | Place your SQL Server workloads on an Azure Elastic SAN for improved performance, throughput, and cost. | 
@@ -57,6 +58,12 @@ The following table lists features of SQL Server on Azure VMs that have been mad
 ## Documentation changes 
 
 Learn about significant changes to the SQL Server on Azure VMs documentation. For previous years, see the [What's new archive](doc-changes-updates-release-notes-whats-new-archive.md).
+
+### November 2024
+
+| Changes | Details |
+| --- | --- |
+| **Mbsv3 and Mbdsv3 VM series GA** | A powerful new VM series that currently delivers one of the highest IOPS and GB throughput, with substantial vCore and memory options. This VM series is now generally available. Review [Mbsv3 and Mbdsv3 series](performance-guidelines-best-practices-vm-size.md#mbsv3-and-mbdsv3-series) to learn more. |
 
 ### October 2024
 

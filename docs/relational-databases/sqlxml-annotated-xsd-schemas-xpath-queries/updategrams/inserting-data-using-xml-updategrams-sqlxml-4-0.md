@@ -636,7 +636,7 @@ CustOrder(OrderID, EmployeeID, OrderType)
       <p1:ProductPhotoID>118</p1:ProductPhotoID>  
    </p1:Picture>  
    <p1:Specifications> These are the product specifications.  
-     <Material>Almuminum Alloy</Material>  
+     <Material>Aluminum Alloy</Material>  
      <Color>Available in most colors</Color>  
      <ProductLine>Mountain bike</ProductLine>  
      <Style>Unisex</Style>  

@@ -1,19 +1,20 @@
 ---
 title: "CurvePolygon"
-description: "CurvePolygon"
-author: MladjoA
-ms.author: mlandzic
-ms.date: "03/03/2017"
+description: "CurvePolygon is a topologically closed surface defined by an exterior bounding ring and zero or more interior rings in SQL Database Engine spatial data."
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviwer: mlandzic, jovanpop
+ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # CurvePolygon
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
-  A **CurvePolygon** is a topologically closed surface defined by an exterior bounding ring and zero or more interior rings  
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
+  A **CurvePolygon** is a topologically closed surface defined by an exterior bounding ring and zero or more interior rings in SQL Database Engine spatial data.
   
 > [!IMPORTANT]  
-> For a detailed description and examples of spatial features introduced in [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)], including the **CurvePolygon** subtype, download the white paper, [New Spatial Features in SQL Server 2012](https://go.microsoft.com/fwlink/?LinkId=226407).  
+> For a detailed description and examples of spatial features introduced in [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], including the **CurvePolygon** subtype, download the white paper, [New Spatial Features in SQL Server 2012](https://go.microsoft.com/fwlink/?LinkId=226407).  
   
  The following criteria define attributes of a **CurvePolygon** instance:  
   
@@ -21,19 +22,19 @@ monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||
   
 -   The interior of the **CurvePolygon** instance is the space between the exterior ring and all of the interior rings.  
   
- A **CurvePolygon** instance differs from a **Polygon** instance in that a **CurvePolygon** instance may contain the following circular arc segments: **CircularString** and **CompoundCurve**.  
+ A **CurvePolygon** instance differs from a **Polygon** instance in that a **CurvePolygon** instance can contain the following circular arc segments: **CircularString** and **CompoundCurve**.  
   
-## CompoundCurve instances  
+## CompoundCurve instances
  Illustration below shows valid **CurvePolygon** figures:  
   
-### Accepted instances  
+### Accepted instances
  For a **CurvePolygon** instance to be accepted, it needs to be either empty or contain only circular arc rings that are accepted. An accepted circular arc ring meets the following requirements.  
   
-1.  Is an accepted **LineString**, **CircularString**, or **CompoundCurve** instance. For more information on accepted instances, see [LineString](../../relational-databases/spatial/linestring.md), [CircularString](../../relational-databases/spatial/circularstring.md), and [CompoundCurve](../../relational-databases/spatial/compoundcurve.md).  
+1. Is an accepted **LineString**, **CircularString**, or **CompoundCurve** instance. For more information on accepted instances, see [LineString](linestring.md), [CircularString](circularstring.md), and [CompoundCurve](compoundcurve.md).  
   
-2.  Has at least four points.  
+1. Has at least four points.  
   
-3.  The start and end point have the same X and Y coordinates.  
+1. The start and endpoint have the same X and Y coordinates.  
 
     > [!NOTE]  
     > Z and M values are ignored.  
@@ -59,24 +60,24 @@ DECLARE @g2 geometry = 'CURVEPOLYGON((0 0, 0 0, 0 0))';
   
 `@g1` is not accepted because the start and end points do not have the same Y value. `@g2` is not accepted because the ring does not have enough points.  
   
-### Valid instances  
+### Valid instances
 For a **CurvePolygon** instance to be valid both exterior and interior rings must meet the following criteria:  
   
-1.  They may only touch at single tangent points.  
-2.  They cannot cross each other.  
-3.  Each ring must contain at least four points.  
-4.  Each ring must be an acceptable curve type.  
+1. They can only touch at single tangent points.  
+1. They cannot cross each other.  
+1. Each ring must contain at least four points.  
+1. Each ring must be an acceptable curve type.  
   
 **CurvePolygon** instances also need to meet specific criteria depending on whether they are **geometry** or **geography** data types.  
   
-#### Geometry data type  
+#### Geometry data type
 A valid **geometryCurvePolygon** instance must have the following attributes:  
   
-1.  All the interior rings must be contained within the exterior ring.  
-2.  May have multiple interior rings, but an interior ring cannot contain another interior ring.  
-3.  No ring can cross itself or another ring.  
-4.  Rings can only touch at single tangent points (number of points where rings touch must be finite).  
-5.  The interior of the polygon must be connected.  
+1. All the interior rings must be contained within the exterior ring.  
+1. May have multiple interior rings, but an interior ring cannot contain another interior ring.  
+1. No ring can cross itself or another ring.  
+1. Rings can only touch at single tangent points (number of points where rings touch must be finite).  
+1. The interior of the polygon must be connected.  
   
 The following example shows valid **geometryCurvePolygon** instances.  
   
@@ -86,15 +87,15 @@ DECLARE @g2 geometry = 'CURVEPOLYGON(CIRCULARSTRING(1 3, 3 5, 4 7, 7 3, 1 3))';
 SELECT @g1.STIsValid(), @g2.STIsValid();  
 ```  
   
-CurvePolygon instances have the same validity rules as Polygon instances with the exception that CurvePolygon instances may accept the new circular arc segment types. For more examples of instances that are valid or not valid, see [Polygon](../../relational-databases/spatial/polygon.md).  
+CurvePolygon instances have the same validity rules as Polygon instances with the exception that CurvePolygon instances can accept the new circular arc segment types. For more examples of instances that are valid or not valid, see [Polygon](polygon.md).  
   
-#### Geography data type  
+#### Geography data type
 A valid **geographyCurvePolygon** instance must have the following attributes:  
   
-1.  The interior of the polygon is connected using the left-hand rule.  
-2.  No ring can cross itself or another ring.  
-3.  Rings can only touch at single tangent points (number of points where rings touch must be finite).  
-4.  The interior of the polygon must be connected.  
+1. The interior of the polygon is connected using the left-hand rule.  
+1. No ring can cross itself or another ring.  
+1. Rings can only touch at single tangent points (number of points where rings touch must be finite).  
+1. The interior of the polygon must be connected.  
   
 The following example shows a valid geography CurvePolygon instance.  
   
@@ -103,9 +104,11 @@ DECLARE @g geography = 'CURVEPOLYGON((-122.3 47, 122.3 47, 125.7 49, 121 38, -12
 SELECT @g.STIsValid();  
 ```  
   
-## Examples  
+## Examples
   
-### A. Instantiating a Geometry Instance with an Empty CurvePolygon  
+<a id="a-instantiating-a-geometry-instance-with-an-empty-curvepolygon"></a>
+
+### A. Instantiate a Geometry Instance with an Empty CurvePolygon
  This example shows how to create an empty **CurvePolygon** instance:  
   
 ```sql  
@@ -113,21 +116,27 @@ DECLARE @g geometry;
 SET @g = geometry::Parse('CURVEPOLYGON EMPTY');  
 ```  
   
-### B. Declaring and Instantiating a Geometry Instance with a CurvePolygon in the Same Statement  
+<a id="b-declaring-and-instantiating-a-geometry-instance-with-a-curvepolygon-in-the-same-statement"></a>
+
+### B. Declare and Instantiating a Geometry Instance with a CurvePolygon in the Same Statement
  This code snippet shows how to declare and initialize a geometry instance with a **CurvePolygon** in the same statement:  
   
 ```sql  
 DECLARE @g geometry = 'CURVEPOLYGON(CIRCULARSTRING(2 4, 4 2, 6 4, 4 6, 2 4))'  
 ```  
   
-### C. Instantiating a Geography Instance with a CurvePolygon  
+<a id="c-instantiating-a-geography-instance-with-a-curvepolygon"></a>
+
+### C. Instantiate a Geography Instance with a CurvePolygon
  This code snippet shows how to declare and initialize a **geography** instance with a **CurvePolygon**:  
   
 ```sql  
 DECLARE @g geography = 'CURVEPOLYGON(CIRCULARSTRING(-122.358 47.653, -122.348 47.649, -122.348 47.658, -122.358 47.658, -122.358 47.653))';  
 ```  
   
-### D. Storing a CurvePolygon with Only an Exterior Bounding Ring  
+<a id="d-storing-a-curvepolygon-with-only-an-exterior-bounding-ring"></a>
+
+### D. Store a CurvePolygon with Only an Exterior Bounding Ring
  This example shows how to store a simple circle in a **CurvePolygon** instance (only an exterior bounding ring is used to define the circle):  
   
 ```sql  
@@ -136,7 +145,9 @@ SET @g = geometry::Parse('CURVEPOLYGON(CIRCULARSTRING(2 4, 4 2, 6 4, 4 6, 2 4))'
 SELECT @g.STArea() AS Area;  
 ```  
   
-### E. Storing a CurvePolygon Containing Interior Rings  
+<a id="e-storing-a-curvepolygon-containing-interior-rings"></a>
+
+### E. Store a CurvePolygon Containing Interior Rings
  This example creates a donut in a **CurvePolygon** instance (both an exterior bounding ring and an interior ring is used to define the donut):  
   
 ```sql  
@@ -164,11 +175,11 @@ SELECT @g1.STIsValid() AS G1, @g2.STIsValid() AS G2;
   
  Both `@g1` and `@g2` use the same exterior bounding ring: a circle with a radius of 5 and they both use a square for an interior ring.  However, the instance `@g1` is valid, but the instance `@g2` is invalid. The reason that @g2 is invalid is that the interior ring splits the interior space bounded by the exterior ring into four separate regions. The following drawing shows what occurred:  
   
-## See Also  
- [Polygon](../../relational-databases/spatial/polygon.md)   
- [CircularString](../../relational-databases/spatial/circularstring.md)   
- [CompoundCurve](../../relational-databases/spatial/compoundcurve.md)   
- [geometry Data Type Method Reference](../../t-sql/spatial-geometry/spatial-types-geometry-transact-sql.md)   
- [geography Data Type Method Reference](../../t-sql/spatial-geography/stequals-geography-data-type.md)   
- [Spatial Data Types Overview](../../relational-databases/spatial/spatial-data-types-overview.md)  
-  
+## Related content
+
+- [Polygon](polygon.md)
+- [CircularString](circularstring.md)
+- [CompoundCurve](compoundcurve.md)
+- [geometry Data Type Method Reference](../../t-sql/spatial-geometry/spatial-types-geometry-transact-sql.md)
+- [geography Data Type Method Reference](../../t-sql/spatial-geography/stequals-geography-data-type.md)
+- [Spatial Data Types Overview](spatial-data-types-overview.md)

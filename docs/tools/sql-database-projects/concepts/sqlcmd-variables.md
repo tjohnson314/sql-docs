@@ -12,7 +12,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # SQLCMD variables overview
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 SQLCMD variables are used in SQL projects to create dynamically replaceable tokens in SQL objects and scripts. The values of these variables are set at deployment time and can be used to dynamically set values in a SQL project. Values for SQLCMD variables can be set in the publish action or through a publish profile.
 

@@ -31,7 +31,7 @@ dev_langs:
 monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # INSERT (Transact-SQL)
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricdw-fabricsqldb.md)]
 
 Adds one or more rows to a table or a view in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For examples, see [Examples](#InsertExamples).  
   
@@ -39,8 +39,10 @@ Adds one or more rows to a table or a view in [!INCLUDE[ssNoVersion](../../inclu
   
 ## Syntax  
   
+Syntax for SQL Server and Azure SQL Database and Fabric SQL database
+
 ```syntaxsql
--- Syntax for SQL Server and Azure SQL Database  
+-- Syntax for SQL Server and Azure SQL Database and Fabric SQL database
 
 [ WITH <common_table_expression> [ ,...n ] ]  
 INSERT   
@@ -108,7 +110,9 @@ INSERT
 [ type_schema_name . ] type_name   
     [ ( precision [ , scale ] | max ]  
 ```  
-  
+
+Syntax for Azure Synapse Analytics and Parallel Data Warehouse and Microsoft Fabric Warehouse
+
 ```syntaxsql
 -- Syntax for Azure Synapse Analytics and Parallel Data Warehouse and Microsoft Fabric
 

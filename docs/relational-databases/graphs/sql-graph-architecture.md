@@ -9,10 +9,10 @@ ms.topic: "language-reference"
 helpviewer_keywords:
   - "SQL graph"
   - "SQL graph, architecture"
-monikerRange: "=azuresqldb-current||>=sql-server-2017||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2017||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # SQL Graph Architecture
-[!INCLUDE[sqlserver2017-asdb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi.md)]
+[!INCLUDE[sqlserver2017-asdb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi-fabricsqldb.md)]
 
 Learn about the architecture of SQL Graph. Knowing the basics make it easier to understand other SQL Graph articles.
 
@@ -164,6 +164,7 @@ There are certain limitations on node and edge tables:
 - Users can't update the `$from_id` and `$to_id` columns of an edge using UPDATE statement. To update nodes that are referenced by an edge, users have to insert a new edge pointing to new nodes, and delete the previous one.
 - Cross database queries on graph objects aren't supported.
 - Graph pseudo-columns (`node_id`, `$from_id`, `$to_id` and `edge_id`) can't be used as the sort columns for an [ordered clustered columnstore index](../indexes/columnstore-indexes-design-guidance.md#choose-the-best-columnstore-index-for-your-needs). Attempting to use any graph pseudo-columns as the sort columns for ordered clustered columnstore results in an `Msg 102: Incorrect syntax` error.
+- In [Fabric SQL database](/fabric/database/sql/overview), SQL Graph is allowed, but Node and Edge tables will not mirror to Fabric OneLake.
 
 ## See also
 

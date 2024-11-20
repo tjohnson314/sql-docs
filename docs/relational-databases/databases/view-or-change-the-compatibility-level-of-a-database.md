@@ -12,11 +12,11 @@ helpviewer_keywords:
   - "compatibility levels [SQL Server], viewing"
   - "compatibility [SQL Server], databases"
   - "compatibility levels [SQL Server], changing"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # View or change the compatibility level of a database
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 This article describes how to view or change the compatibility level of a database in [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)], Azure SQL Database, or Azure SQL Managed Instance by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] or [!INCLUDE [tsql](../../includes/tsql-md.md)].
 
@@ -84,6 +84,9 @@ You can use Transact-SQL to view or change the compatibility level of a database
    SET COMPATIBILITY_LEVEL = 160;
    GO
    ```
+
+> [!NOTE]
+> The compatibility level of a [Fabric SQL database](/fabric/database/sql/overview) cannot be changed, and always uses the latest version.
 
 ## Related content
 

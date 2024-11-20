@@ -1,230 +1,270 @@
 ---
-title: "Create, Construct, and Query geography Instances"
-description: "Create, Construct, and Query geography Instances"
-author: MladjoA
-ms.author: mlandzic
-ms.date: "03/14/2017"
+title: "Create, Construct, and Query geography instances"
+description: "Create, Construct, and Query geography instances represents data in a round-earth coordinate system in SQL Database Engine spatial data."
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviwer: mlandzic, jovanpop
+ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
   - "geography data type [SQL Server]"
   - "geodetic data type [SQL Server]"
   - "geography data type [SQL Server], about geography data type"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
-# Create, Construct, and Query geography Instances
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
-  The geography spatial data type, **geography**, represents data in a round-earth coordinate system. This type is implemented as a .NET common language runtime (CLR) data type in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. The [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] **geography** data type stores ellipsoidal (round-earth) data, such as GPS latitude and longitude coordinates.  
+# Create, Construct, and Query geography instances
+
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]
+
+  The geography spatial data type, **geography**, represents data in a round-earth coordinate system. This type is implemented as a .NET common language runtime (CLR) data type in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] **geography** data type stores ellipsoidal (round-earth) data, such as GPS latitude and longitude coordinates.  
   
  The **geography** type is predefined and available in each database. You can create table columns of type **geography** and operate on **geography** data in the same manner as you would use other system-supplied types.  
   
-##  <a name="creating"></a> Creating or constructing a new geography instance  
+<a id="creating"></a>
+
+## Creating or constructing a new geography instance
   
-###  <a name="existing"></a> Creating a New geography Instance from an Existing Instance  
+<a id="existing"></a>
+
+### Creating a New geography Instance from an Existing Instance
  The **geography** data type provides numerous built-in methods you can use to create new **geography** instances based on existing instances.  
   
  **To create a buffer around a geography**  
- [STBuffer &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stbuffer-geography-data-type.md)  
+ [STBuffer (geography Data Type)](../../t-sql/spatial-geography/stbuffer-geography-data-type.md)  
   
  **To create a buffer around a geography, allowing for a tolerance**  
- [BufferWithTolerance &#40;geography Data Type&#41;](../../t-sql/spatial-geography/bufferwithtolerance-geography-data-type.md)  
+ [BufferWithTolerance (geography Data Type)](../../t-sql/spatial-geography/bufferwithtolerance-geography-data-type.md)  
   
  **To create a geography from the intersection of two geography instances**  
- [STIntersection &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stintersection-geography-data-type.md)  
+ [STIntersection (geography Data Type)](../../t-sql/spatial-geography/stintersection-geography-data-type.md)  
   
  **To create a geography from the union of two geography instances**  
- [STUnion &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stunion-geography-data-type.md)  
+ [STUnion (geography Data Type)](../../t-sql/spatial-geography/stunion-geography-data-type.md)  
   
  **To create a geography from the points where one geography does not overlap another**  
- [STDifference &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stdifference-geography-data-type.md)  
+ [STDifference (geography Data Type)](../../t-sql/spatial-geography/stdifference-geography-data-type.md)  
   
-###  <a name="wkt"></a> Constructing a geography Instance from Well-Known Text Input  
+<a id="wkt"></a>
+
+### Constructing a geography Instance from Well-Known Text Input
  The **geography** data type provides several built-in methods that generate a geography from the Open Geospatial Consortium (OGC) WKT representation. The WKT standard is a text string that allows geography data to be exchanged in textual form.  
   
  **To construct any type of geography instance from WKT input**  
- [STGeomFromText &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stgeomfromtext-geography-data-type.md)  
+ [STGeomFromText (geography data type)](../../t-sql/spatial-geography/stgeomfromtext-geography-data-type.md)  
   
- [Parse &#40;geography Data Type&#41;](../../t-sql/spatial-geography/parse-geography-data-type.md)  
+ [Parse (geography data type)](../../t-sql/spatial-geography/parse-geography-data-type.md)  
   
  **To construct a geography Point instance from WKT input**  
- [STPointFromText &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stpointfromtext-geography-data-type.md)  
+ [STPointFromText (geography Data Type)](../../t-sql/spatial-geography/stpointfromtext-geography-data-type.md)  
   
  **To construct a geography MultiPoint instance from WKT input**  
- [STMPointFromText &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stmpointfromtext-geography-data-type.md)  
+ [STMPointFromText (geography Data Type)](../../t-sql/spatial-geography/stmpointfromtext-geography-data-type.md)  
   
  **To construct a geography LineString instance from WKT input**  
- [STLineFromText &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stlinefromtext-geography-data-type.md) 
+ [STLineFromText (geography Data Type)](../../t-sql/spatial-geography/stlinefromtext-geography-data-type.md) 
   
  **To construct a geography MultiLineString instance from WKT input**  
- [STMLineFromText &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stmlinefromtext-geography-data-type.md)  
+ [STMLineFromText (geography Data Type)](../../t-sql/spatial-geography/stmlinefromtext-geography-data-type.md)  
   
  **To construct a geography Polygon instance from WKT input**  
- [STPolyFromText &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stpolyfromtext-geography-data-type.md)  
+ [STPolyFromText (geography Data Type)](../../t-sql/spatial-geography/stpolyfromtext-geography-data-type.md)  
   
  **To construct a geography MultiPolygon instance from WKT input**  
- [STMPolyFromText &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stmpolyfromtext-geography-data-type.md)  
+ [STMPolyFromText (geography Data Type)](../../t-sql/spatial-geography/stmpolyfromtext-geography-data-type.md)  
   
  **To construct a geography GeometryCollection instance from WKT input**  
- [STGeomCollFromText &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stgeomcollfromtext-geography-data-type.md)  
+ [STGeomCollFromText (geography Data Type)](../../t-sql/spatial-geography/stgeomcollfromtext-geography-data-type.md)  
   
-###  <a name="wkb"></a> Constructing a geography Instance from Well-Known Binary Input  
+<a id="wkb"></a>
+
+### Constructing a geography Instance from Well-Known Binary Input
  WKB is a binary format specified by the OGC that permits **Geography** data to be exchanged between a client application and a SQL database. The following functions accept WKB input to construct geography instances:  
   
  **To construct any type of geography instance from WKB input**  
- [STGeomFromWKB &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stgeomfromwkb-geography-data-type.md)  
+ [STGeomFromWKB (geography Data Type)](../../t-sql/spatial-geography/stgeomfromwkb-geography-data-type.md)  
   
  **To construct a geography Point instance from WKB input**  
- [STPointFromWKB &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stpointfromwkb-geography-data-type.md)  
+ [STPointFromWKB (geography Data Type)](../../t-sql/spatial-geography/stpointfromwkb-geography-data-type.md)  
   
  **To construct a geography MultiPoint instance from WKB input**  
- [STMPointFromWKB &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stmpointfromwkb-geography-data-type.md)  
+ [STMPointFromWKB (geography Data Type)](../../t-sql/spatial-geography/stmpointfromwkb-geography-data-type.md)  
   
  **To construct a geography LineString instance from WKB input**  
- [STLineFromWKB &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stlinefromwkb-geography-data-type.md)  
+ [STLineFromWKB (geography Data Type)](../../t-sql/spatial-geography/stlinefromwkb-geography-data-type.md)  
   
  **To construct a geography MultiLineString instance from WKB input**  
- [STMLineFromWKB &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stmlinefromwkb-geography-data-type.md)  
+ [STMLineFromWKB (geography Data Type)](../../t-sql/spatial-geography/stmlinefromwkb-geography-data-type.md)  
   
  **To construct a geography Polygon instance from WKB input**  
- [STPolyFromWKB &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stpolyfromwkb-geography-data-type.md)  
+ [STPolyFromWKB (geography Data Type)](../../t-sql/spatial-geography/stpolyfromwkb-geography-data-type.md)  
   
  **To construct a geography MultiPolygon instance from WKB input**  
- [STMPolyFromWKB &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stmpolyfromwkb-geography-data-type.md)  
+ [STMPolyFromWKB (geography Data Type)](../../t-sql/spatial-geography/stmpolyfromwkb-geography-data-type.md)  
   
  **To construct a geography GeometryCollection instance from WKB input**  
- [STGeomCollFromWKB &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stgeomcollfromwkb-geography-data-type.md) STGeomCollFromWKB (geography Data Type)  
+ [STGeomCollFromWKB (geography Data Type)](../../t-sql/spatial-geography/stgeomcollfromwkb-geography-data-type.md) STGeomCollFromWKB (geography Data Type)  
   
-###  <a name="gml"></a> Constructing a geography Instance from GML Text Input  
- The **geography** data type provides a method that generates a **geography** instance from GML, an XML representation of a **geography** instance. [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] supports a subset of GML.  
+<a id="gml"></a>
+
+### Constructing a geography instance from GML text input
+ The **geography** data type provides a method that generates a **geography** instance from GML, an XML representation of a **geography** instance. [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] supports a subset of GML.  
   
  For more information on Geography Markup Language, see the OGC Specification: [OGC Specifications, Geography Markup Language.](https://go.microsoft.com/fwlink/?LinkId=93629)  
   
  **To construct any type of geography instance from GML input**  
- [GeomFromGML &#40;geography Data Type&#41;](../../t-sql/spatial-geography/geomfromgml-geography-data-type.md)  
+ [GeomFromGML (geography Data Type)](../../t-sql/spatial-geography/geomfromgml-geography-data-type.md)  
   
-##  <a name="returning"></a> Returning Well-Known Text and Well-Known Binary from a geography Instance  
+<a id="returning"></a>
+
+## Returning Well-Known Text and Well-Known Binary from a geography instance
  You can use the following methods to return either the WKT or WKB format of a **geography** instance:  
   
  **To return the WKT representation of a geography instance**  
- [STAsText &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stastext-geography-data-type.md)  
+ [STAsText (geography Data Type)](../../t-sql/spatial-geography/stastext-geography-data-type.md)  
   
- [ToString &#40;geography Data Type&#41;](../../t-sql/spatial-geography/tostring-geography-data-type.md)  
+ [ToString (geography Data Type)](../../t-sql/spatial-geography/tostring-geography-data-type.md)  
   
  **To return the WKT representation of a geography instance including any Z and M values**  
- [AsTextZM &#40;geography Data Type&#41;](../../t-sql/spatial-geography/astextzm-geography-data-type.md)  
+ [AsTextZM (geography Data Type)](../../t-sql/spatial-geography/astextzm-geography-data-type.md)  
   
  **To return the WKB representation of a geography instance**  
- [STAsBinary &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stasbinary-geography-data-type.md)  
+ [STAsBinary (geography Data Type)](../../t-sql/spatial-geography/stasbinary-geography-data-type.md)  
   
  **To return a GML representation of a geography instance**  
- [AsGml &#40;geography Data Type&#41;](../../t-sql/spatial-geography/asgml-geography-data-type.md)  
+ [AsGml - geography Data Type](../../t-sql/spatial-geography/asgml-geography-data-type.md)  
   
-##  <a name="query"></a> Querying the Properties and Behaviors of geography Instances  
- All **geography** instances have a number of properties that can be retrieved through methods that [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] provides. The following topics define the properties and behaviors of geography types, and the methods for querying each one.  
+<a id="query"></a>
+
+## Query the properties and behaviors of geography instances
+
+ All **geography** instances have a number of properties that can be retrieved through methods that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] provides. The following topics define the properties and behaviors of geography types, and the methods for querying each one.  
   
-###  <a name="valid"></a> Validity, Instance Type, and GeometryCollection Information  
+<a id="valid"></a>
+
+### Validity, instance type, and GeometryCollection information
  After a **geography** instance is constructed, you can use the following methods to return the instance type, or if it is a **GeometryCollection** instance, return a specific **geography** instance.  
   
  **To return the instance type of a geography**  
- [STGeometryType &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stgeometrytype-geography-data-type.md)  
+ [STGeometryType (geography Data Type)](../../t-sql/spatial-geography/stgeometrytype-geography-data-type.md)  
   
  **To determine if a geography is a given instance type**  
- [InstanceOf &#40;geography Data Type&#41;](../../t-sql/spatial-geography/instanceof-geography-data-type.md)  
+ [InstanceOf (geography Data Type)](../../t-sql/spatial-geography/instanceof-geography-data-type.md)  
   
  **To determine if a geography instance is well-formed for its instance type**  
- [STNumGeometries &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stnumgeometries-geography-data-type.md)  
+ [STNumGeometries (geography Data Type)](../../t-sql/spatial-geography/stnumgeometries-geography-data-type.md)  
   
  **To return a specific geography in a GeometryCollection instance**  
- [STGeometryN &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stgeometryn-geography-data-type.md) STGeometryN (geography Data Type)  
+ [STGeometryN (geography Data Type)](../../t-sql/spatial-geography/stgeometryn-geography-data-type.md) STGeometryN (geography Data Type)  
   
-###  <a name="number"></a> Number of Points  
+<a id="number"></a>
+
+### Number of points
  All nonempty **geography** instances are comprised of *points*. These points represent the latitude and longitude coordinates of the earth on which the **geography** instances are drawn. The data type **geography** provides numerous built-in methods for querying the points of an instance.  
   
  **To return the number of points that comprise an instance**  
- [STNumPoints &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stnumpoints-geography-data-type.md)  
+ [STNumPoints (geography Data Type)](../../t-sql/spatial-geography/stnumpoints-geography-data-type.md)  
   
  **To return a specific point in an instance**  
- [STPointN &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stpointn-geometry-data-type.md)  
+ [STPointN (geometry Data Type)](../../t-sql/spatial-geometry/stpointn-geometry-data-type.md)  
   
  **To return the start point of an instance**  
- [STStartPoint &#40;geography Data Type&#41;](../../t-sql/spatial-geography/ststartpoint-geography-data-type.md)  
+ [STStartPoint (geography Data Type)](../../t-sql/spatial-geography/ststartpoint-geography-data-type.md)  
   
- **To return the end point of an instance**  
- [STEndpoint &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stendpoint-geography-data-type.md)  
+ **To return the endpoint of an instance**  
+ [STEndPoint (geography Data Type)](../../t-sql/spatial-geography/stendpoint-geography-data-type.md)  
   
-###  <a name="dimension"></a> Dimension  
+<a id="dimension"></a>
+
+### Dimension
  A nonempty **geography** instance can be 0-, 1-, or 2-dimensional. Zero-dimensional **geography** instances, such as **Point** and **MultiPoint**, have no length or area. One-dimensional objects, such as **LineString, CircularString**, **CompoundCurve**, and **MultiLineString**, have length. Two-dimensional instances, such as **Polygon, CurvePolygon**, and **MultiPolygon**, have area and length. Empty instances report a dimension of -1, and a **GeometryCollection** reports the maximum dimension of its contents.  
   
  **To return the dimension of an instance**  
- [STDimension &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stdimension-geography-data-type.md)  
+ [STDimension (geography Data Type)](../../t-sql/spatial-geography/stdimension-geography-data-type.md)  
   
  **To return the length of an instance**  
- [STLength &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stlength-geography-data-type.md)  
+ [STLength (geography Data Type)](../../t-sql/spatial-geography/stlength-geography-data-type.md)  
   
  **To return the area of an instance**  
- [STArea &#40;geography Data Type&#41;](../../t-sql/spatial-geography/starea-geography-data-type.md)  
+ [STArea (geography Data Type)](../../t-sql/spatial-geography/starea-geography-data-type.md)  
   
-###  <a name="empty"></a> Empty  
+<a id="empty"></a>
+
+### Empty
  An _empty_**geography** instance does not have any points. The length of empty **LineString, CircularString**, **CompoundCurve**, and **MultiLineString** instances is 0. The area of empty **Polygon, CurvePolygon** and **MultiPolygon** instances is 0.  
   
  **To determine if an instance is empty**  
- [STIsEmpty &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stisempty-geography-data-type.md)  
+ [STIsEmpty (geography Data Type)](../../t-sql/spatial-geography/stisempty-geography-data-type.md)  
   
-###  <a name="closure"></a> Closure  
+<a id="closure"></a>
+
+### Closure
  A _closed_**geography** instance is a figure whose start points and end points are the same. **Polygon** instances are considered closed. **Point** instances are not closed.  
   
  A ring is a simple, closed **LineString** instance.  
   
  **To determine if an instance is closed**  
- [STIsClosed &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stisclosed-geography-data-type.md)  
+ [STIsClosed (geography Data Type)](../../t-sql/spatial-geography/stisclosed-geography-data-type.md)  
   
- **To return the number of rings in a Polygon instance**  
- [NumRings &#40;geography Data Type&#41;](../../t-sql/spatial-geography/numrings-geography-data-type.md)  
+ **To return the number of rings in a polygon instance**  
+ [NumRings (geography Data Type)](../../t-sql/spatial-geography/numrings-geography-data-type.md)  
   
  **To return a specified ring of a geography instance**  
- [RingN &#40;geography Data Type&#41;](../../t-sql/spatial-geography/ringn-geography-data-type.md)  
+ [RingN (geography Data Type)](../../t-sql/spatial-geography/ringn-geography-data-type.md)  
   
-###  <a name="srid"></a> Spatial Reference ID (SRID)  
+<a id="srid"></a>
+
+### Spatial reference ID (SRID)
  The spatial reference ID (SRID) is an identifier specifying which ellipsoidal coordinate system the **geography** instance is represented in. Two **geography** instances with different SRIDs cannot be compared.  
   
  **To set or return the SRID of an instance**  
- [STSrid &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stsrid-geography-data-type.md)  
+ [STSrid (geography Data Type)](../../t-sql/spatial-geography/stsrid-geography-data-type.md)  
   
  This property can be modified.  
   
-##  <a name="rel"></a> Determining Relationships between geography Instances  
+<a id="rel"></a>
+
+## Determining relationships between geography instances
  The **geography** data type provides many built-in methods you can use to determine relationships between two **geography** instances.  
   
  **To determine if two instances comprise the same point set**  
- [STEquals &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stequals-geometry-data-type.md)  
+ [STEquals (geometry Data Type)](../../t-sql/spatial-geometry/stequals-geometry-data-type.md)  
   
  **To determine if two instances are disjoint**  
- [STDisjoint &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stdisjoint-geometry-data-type.md)  
+ [STDisjoint (geometry Data Type)](../../t-sql/spatial-geometry/stdisjoint-geometry-data-type.md)  
   
  **To determine if two instances intersect**  
- [STIntersects &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stintersects-geometry-data-type.md)  
+ [STIntersects (geometry Data Type)](../../t-sql/spatial-geometry/stintersects-geometry-data-type.md)  
   
  **To determine the point or points where two instances intersect**  
- [STIntersection &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stintersection-geography-data-type.md)  
+ [STIntersection (geography Data Type)](../../t-sql/spatial-geography/stintersection-geography-data-type.md)  
   
  **To determine the shortest distance between points in two geography instances**  
- [STDistance &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stdistance-geometry-data-type.md)  
+ [STDistance (geometry Data Type)](../../t-sql/spatial-geometry/stdistance-geometry-data-type.md)  
   
  **To determine the difference in points between two geography instances**  
- [STDifference &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stdifference-geography-data-type.md)  
+ [STDifference (geography Data Type)](../../t-sql/spatial-geography/stdifference-geography-data-type.md)  
   
  **To derive the symmetric difference, or unique points, of one geography instance compared with another instance**  
- [STSymDifference &#40;geography Data Type&#41;](../../t-sql/spatial-geography/stsymdifference-geography-data-type.md)  
+ [STSymDifference (geography Data Type)](../../t-sql/spatial-geography/stsymdifference-geography-data-type.md)  
   
-##  <a name="supportedsrid"></a> geography Instances Must Use Supported SRID  
- [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] supports SRIDs based on the EPSG standards. A [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]-supported SRID for **geography** instances must be used when performing calculations or using methods with geography spatial data. The SRID must match one of the SRIDs displayed in the **sys.spatial_reference_systems** catalog view. As mentioned previously, when you perform calculations on your spatial data using the **geography** data type, your results will depend on which ellipsoid was used in the creation of your data, as each ellipsoid is assigned a specific spatial reference identifier (SRID).  
+<a id="supportedsrid"></a>
+
+## geography instances must use supported SRID
+ [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] supports SRIDs based on the EPSG standards. A [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]-supported SRID for **geography** instances must be used when performing calculations or using methods with geography spatial data. The SRID must match one of the SRIDs displayed in the **sys.spatial_reference_systems** catalog view. As mentioned previously, when you perform calculations on your spatial data using the **geography** data type, your results will depend on which ellipsoid was used in the creation of your data, as each ellipsoid is assigned a specific spatial reference identifier (SRID).  
   
- [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] uses the default SRID of 4326, which maps to the WGS 84 spatial reference system, when using methods on **geography** instances. If you use data from a spatial reference system other than WGS 84 (or SRID 4326), you will need to determine the specific SRID for your geography spatial data.  
+ [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] uses the default SRID of 4326, which maps to the WGS 84 spatial reference system, when using methods on **geography** instances. If you use data from a spatial reference system other than WGS 84 (or SRID 4326), you will need to determine the specific SRID for your geography spatial data.  
+
+## Remarks
+
+**Geometry** and **geography** types cannot be used as table columns in the [!INCLUDE [Fabric SQL analytics endpoint](../../includes/applies-to-version/_fabric-se.md)] or [!INCLUDE [Fabric Data Warehouse](../../includes/applies-to-version/_fabric-dw.md)].
   
-##  <a name="examples"></a> Examples  
+<a id="examples"></a>
+
+## Examples
 The following examples show how to add and query geography data.  
-  
-### Example A. 
+
+### Example A.
 This example creates a table with an identity column and a `geography` column `GeogCol1`. A third column renders the `geography` column into its Open Geospatial Consortium (OGC) Well-Known Text (WKT) representation, and uses the `STAsText()` method. Two rows are then inserted: one row contains a `LineString` instance of `geography`, and one row contains a `Polygon` instance.  
   
 ```sql  
@@ -261,7 +301,6 @@ SELECT @result = @geog1.STIntersection(@geog2);
 SELECT @result.STAsText();  
 ```  
   
-## See Also  
- [Spatial Data &#40;SQL Server&#41;](../../relational-databases/spatial/spatial-data-sql-server.md)  
-  
-  
+## Related content
+
+- [Spatial Data](spatial-data-sql-server.md)

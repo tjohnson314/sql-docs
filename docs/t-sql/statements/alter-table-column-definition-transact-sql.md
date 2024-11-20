@@ -1,9 +1,9 @@
 ---
 title: "column_definition (Transact-SQL)"
-description: ALTER TABLE column_definition (Transact-SQL)
+description: Use ALTER TABLE column_definition syntax to specify the properties of a column that are added to a table.
 author: markingmyname
 ms.author: maghan
-ms.date: "09/24/2018"
+ms.date: 10/28/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -21,13 +21,13 @@ monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||
 ---
 # ALTER TABLE column_definition (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-fabricdw.md)]
 
   Specifies the properties of a column that are added to a table by using [ALTER TABLE](../../t-sql/statements/alter-table-transact-sql.md).  
   
  :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
-  
-## Syntax  
+
+## Syntax
   
 ```syntaxsql
 column_name <data_type>  
@@ -73,8 +73,9 @@ column_name <data_type>
 ```  
   
 ## Arguments
+
  *column_name*  
- Is the name of the column to be altered, added, or dropped. *column_name* can consist of 1 through 128 characters. For new columns, created with a timestamp data type, *column_name* can be omitted. If no *column_name* is specified for a **timestamp** data type column, the name **timestamp** is used.  
+ Is the name of the column to be altered, added, or dropped. *column_name* can consist of 1 through 128 characters. For new columns, created with a **timestamp** data type, *column_name* can be omitted. If no *column_name* is specified for a **timestamp** data type column, the name **timestamp** is used.  
   
  [ _type_schema_name_**.** ] *type_name*  
  Is the data type for the column that is added and the schema to which it belongs.  
@@ -83,7 +84,7 @@ column_name <data_type>
   
 -   A [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] system data type.  
   
--   An alias data type based on a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] system data type. Alias data types must be created by using CREATE TYPE before they can be used in a table definition.  
+-   An alias data type based on a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] system data type. Alias data types must be created by using `CREATE TYPE` before they can be used in a table definition.  
   
 -   A [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[dnprdnshort](../../includes/dnprdnshort-md.md)] user-defined type and the schema to which it belongs. A [!INCLUDE[dnprdnshort](../../includes/dnprdnshort-md.md)] user-defined type must be created by using CREATE TYPE before it can be used in a table definition.  
   
@@ -113,12 +114,12 @@ DOCUMENT
  *xml_schema_collection*  
  **Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later.  
   
- Applies only to the **xml** data type for associating an XML schema collection with the type. Before typing an **xml** column to a schema, the schema must first be created in the database by using [CREATE XML SCHEMA COLLECTION](../../t-sql/statements/create-xml-schema-collection-transact-sql.md).  
+ Applies only to the **xml** data type for associating an XML schema collection with the type. Before an **xml** data type column is added to a schema, the schema must first be created in the database by using [CREATE XML SCHEMA COLLECTION](../../t-sql/statements/create-xml-schema-collection-transact-sql.md).  
   
 FILESTREAM  
  Optionally specifies the FILESTREAM storage attribute for column that has a *type_name* of **varbinary(max)**.  
   
- When FILESTREAM is specified for a column, the table must also have a column of the **uniqueidentifier** data type that has the ROWGUIDCOL attribute. This column must not allow null values and must have either a UNIQUE or PRIMARY KEY single-column constraint. The GUID value for the column must be supplied either by an application when data is being inserted, or by a DEFAULT constraint that uses the NEWID () function.  
+ When FILESTREAM is specified for a column, the table must also have a column of the **uniqueidentifier** data type that has the ROWGUIDCOL attribute. This column must not allow null values and must have either a UNIQUE or PRIMARY KEY single-column constraint. The GUID value for the column must be supplied either by an application when data is being inserted, or by a DEFAULT constraint that uses the `NEWID()` function.  
   
  The ROWGUIDCOL column cannot be dropped and the related constraints cannot be changed while there is a FILESTREAM column defined for the table. The ROWGUIDCOL column can be dropped only after the last FILESTREAM column is dropped.  
   
@@ -134,10 +135,10 @@ COLLATE *collation_name*
  For more information about the COLLATE clause, see [COLLATE &#40;Transact-SQL&#41;](~/t-sql/statements/collations.md).  
   
  NULL | NOT NULL  
- Determines whether null values are allowed in the column. NULL is not strictly a constraint but can be specified just like NOT NULL.  
+ Determines whether `NULL` values are allowed in the column. `NULL` is not strictly a constraint but can be specified just like `NOT NULL`.  
   
 [ CONSTRAINT *constraint_name* ]  
- Specifies the start of a DEFAULT value definition. To maintain compatibility with earlier versions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], a constraint name can be assigned to a DEFAULT. *constraint_name* must follow the rules for [identifiers](../../relational-databases/databases/database-identifiers.md), except that the name cannot start with a number sign (#). If *constraint_name* is not specified, a system-generated name is assigned to the DEFAULT definition.  
+ Specifies the start of a DEFAULT value definition. To maintain compatibility with earlier versions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], a constraint name can be assigned to a DEFAULT. *constraint_name* must follow the rules for [identifiers](../../relational-databases/databases/database-identifiers.md), except that the name cannot start with a number sign (`#`). If *constraint_name* is not specified, a system-generated name is assigned to the DEFAULT definition.  
   
 DEFAULT  
  Is a keyword that specifies the default value for the column. DEFAULT definitions can be used to provide values for a new column in the existing rows of data. DEFAULT definitions cannot be applied to **timestamp** columns, or columns with an IDENTITY property. If a default value is specified for a user-defined type column, the type must support an implicit conversion from *constant_expression* to the user-defined type.  
@@ -147,8 +148,10 @@ DEFAULT
   
 WITH VALUES
  When adding a column AND a DEFAULT constraint, if the column allows NULLS using WITH VALUES will, for existing rows, set the new column's value to the value given in DEFAULT *constant_expression*. 
+
  If the column being added does not allow NULLS, for existing rows, the column's value will always be set to the value given in the DEFAULT *constant expression*. 
- Starting in SQL Server 2012 this may be a meta data operation [adding-not-null-columns-as-an-online-operation](alter-table-transact-sql.md#adding-not-null-columns-as-an-online-operation).
+ Starting in SQL Server 2012, this can be a meta data operation [adding-not-null-columns-as-an-online-operation](alter-table-transact-sql.md#adding-not-null-columns-as-an-online-operation).
+
  If this is used when the related column isn't also being added then it has no effect.
  
  Specifies that the value given in DEFAULT *constant_expression* is stored in a new column that is added to existing rows. If the added column allows null values and WITH VALUES is specified, the default value is stored in the new column that is added to existing rows. If WITH VALUES is not specified for columns that allow nulls, the value NULL is stored in the new column, in existing rows. If the new column does not allow nulls, the default value is stored in new rows regardless of whether WITH VALUES is specified.  
@@ -161,7 +164,7 @@ IDENTITY
 > [!NOTE]  
 >  You cannot modify an existing table column to add the IDENTITY property.  
   
- Adding an identity column to a published table is not supported because it can result in nonconvergence when the column is replicated to the Subscriber. The values in the identity column at the Publisher depend on the order in which the rows for the affected table are physically stored. The rows might be stored differently at the Subscriber; therefore, the value for the identity column can be different for the same rows..  
+ Adding an identity column to a published table is not supported because it can result in nonconvergence when the column is replicated to the Subscriber. The values in the identity column at the Publisher depend on the order in which the rows for the affected table are physically stored. The rows might be stored differently at the Subscriber; therefore, the value for the identity column can be different for the same rows.
   
  To disable the IDENTITY property of a column by allowing values to be explicitly inserted, use [SET IDENTITY_INSERT](../../t-sql/statements/set-identity-insert-transact-sql.md).  
   
@@ -190,7 +193,7 @@ SPARSE
  For the definitions of the column constraint arguments, see [column_constraint &#40;Transact-SQL&#41;](../../t-sql/statements/alter-table-column-constraint-transact-sql.md).  
   
  ENCRYPTED WITH  
- Specifies encrypting columns by using the [Always Encrypted](../../relational-databases/security/encryption/always-encrypted-database-engine.md) feature.  
+ Specifies encrypting columns by using the [Always Encrypted](../../relational-databases/security/encryption/always-encrypted-database-engine.md) feature. `ENCRYPTED WITH` is not supported on [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
   
  COLUMN_ENCRYPTION_KEY = *key_name*  
  Specifies the column encryption key. For more information, see [CREATE COLUMN ENCRYPTION KEY &#40;Transact-SQL&#41;](../../t-sql/statements/create-column-encryption-key-transact-sql.md).  
@@ -200,7 +203,7 @@ ENCRYPTION_TYPE = { DETERMINISTIC | RANDOMIZED }
   
  **Randomized encryption** uses a method that encrypts data in a less predictable manner. Randomized encryption is more secure, but it prevents any computations and indexing on encrypted columns, unless your SQL Server instance supports [Always Encrypted with secure enclaves](../../relational-databases/security/encryption/always-encrypted-enclaves.md).
   
- If you are using Always Encrypted (without secure enclaves), use deterministic encryption for columns to be searched with parameters or grouping parameters, for example a government ID number. Use randomized encryption, for data such as a credit card number, which is not grouped with other records, or used to join tables, and which is not searched for because you use other columns (such as a transaction number) to find the row which contains the encrypted column of interest.  
+ If you are using Always Encrypted (without secure enclaves), use deterministic encryption for columns to be searched with parameters or grouping parameters, for example a government ID number. Use randomized encryption, for data such as a credit card number which is not grouped with other records or used to join tables, and which is not searched for because you use other columns (such as a transaction number) to find the row which contains the encrypted column of interest.  
 
  If you are using Always Encrypted with secure enclaves, randomized encryption is a recommended encryption type.  
   
@@ -210,21 +213,17 @@ ALGORITHM
 **Applies to**: [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later, [!INCLUDE[ssSDS](../../includes/sssds-md.md)].  
 Must be **'AEAD_AES_256_CBC_HMAC_SHA_256'**.  
   
- For more information including feature constraints, see [Always Encrypted &#40;Database Engine&#41;](../../relational-databases/security/encryption/always-encrypted-database-engine.md).  
-  
-   
-ADD MASKED WITH ( FUNCTION = ' *mask_function* ')  
+ For more information including feature constraints, see [Always Encrypted &#40;Database Engine&#41;](../../relational-databases/security/encryption/always-encrypted-database-engine.md).
+
+ADD MASKED WITH (FUNCTION = ' *mask_function* ')  
  **Applies to**: [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later, [!INCLUDE[sssds](../../includes/sssds-md.md)].  
   
  Specifies a dynamic data mask. *mask_function* is the name of the masking function with the appropriate parameters. The following functions are available:  
   
--   default()  
-  
--   email()  
-  
--   partial()  
-  
--   random()  
+   - `default()`
+   - `email()`
+   - `partial()`
+   - `random()`
   
  For function parameters, see [Dynamic Data Masking](../../relational-databases/security/dynamic-data-masking.md).  
   
@@ -233,11 +232,12 @@ ADD MASKED WITH ( FUNCTION = ' *mask_function* ')
   
  The [!INCLUDE[ssDE](../../includes/ssde-md.md)] does not enforce an order for specifying DEFAULT, IDENTITY, ROWGUIDCOL, or column constraints in a column definition.  
   
- ALTER TABLE statement will fail if adding the column will cause the data row size to exceed 8060 bytes.  
+ ALTER TABLE statement fails if adding the column causes the data row size to exceed 8,060 bytes.  
   
-## Examples  
+## Examples
+
  For examples, see [ALTER TABLE &#40;Transact-SQL&#41;](../../t-sql/statements/alter-table-transact-sql.md).  
   
-## See Also  
- [ALTER TABLE &#40;Transact-SQL&#41;](../../t-sql/statements/alter-table-transact-sql.md)  
-  
+## Related content
+
+- [ALTER TABLE &#40;Transact-SQL&#41;](../../t-sql/statements/alter-table-transact-sql.md)  

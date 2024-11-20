@@ -16,7 +16,7 @@ dev_langs:
   - "TSQL"
 ---
 # Point (geometry Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Constructs a **geometry** instance representing a **Point** instance from its X and Y values and an SRID.
   

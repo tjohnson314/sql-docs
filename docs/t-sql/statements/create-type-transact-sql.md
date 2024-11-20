@@ -4,7 +4,7 @@ description: Creates an alias data type or a user-defined type in the current da
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 10/10/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -24,17 +24,18 @@ helpviewer_keywords:
   - "data types [SQL Server], creating"
 dev_langs:
   - "TSQL"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # CREATE TYPE (Transact-SQL)
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Creates an alias data type or a user-defined type in the current database in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]. The implementation of an alias data type is based on a [!INCLUDE [ssde-md](../../includes/ssde-md.md)] native system type. A user-defined type is implemented through a class of an assembly in the [!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [dnprdnshort](../../includes/dnprdnshort-md.md)] common language runtime (CLR). To bind a user-defined type to its implementation, the CLR assembly that contains the implementation of the type must first be registered in the [!INCLUDE [ssde-md](../../includes/ssde-md.md)] by using [CREATE ASSEMBLY](../../t-sql/statements/create-assembly-transact-sql.md).
 
 The ability to run CLR code is off by default in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. You can create, modify, and drop database objects that reference managed code modules. However, these references don't execute in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] unless the [clr enabled Option](../../database-engine/configure-windows/clr-enabled-server-configuration-option.md) is enabled by using [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md).
 
 > [!NOTE]  
-> The integration of .NET Framework CLR into [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is discussed in this topic. CLR integration doesn't apply to [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+> The integration of .NET Framework CLR into [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is discussed in this article. CLR integration doesn't apply to [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] or [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], where CLR (.NET) types are not supported.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
@@ -292,6 +293,8 @@ In user-defined table types, structured user-defined types that are used in *col
 
 In user-defined table types, the primary key on computed columns must be `PERSISTED` and `NOT NULL`.
 
+In [Fabric SQL database](/fabric/database/sql/overview), user defined types can be created but are not mirrored to Fabric OneLake, and columns of user defined types are skipped in mirroring.
+
 ## Memory-optimized table types
 
 Beginning in [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)], processing data in a table type can be done in primary memory, and not on disk. For more information, see [In-Memory OLTP overview and usage scenarios](../../relational-databases/in-memory-oltp/overview-and-usage-scenarios.md). For code samples showing how to create memory-optimized table types, see [Creating a Memory-Optimized Table and a Natively Compiled Stored Procedure](../../relational-databases/in-memory-oltp/creating-a-memory-optimized-table-and-a-natively-compiled-stored-procedure.md).
@@ -310,9 +313,9 @@ GO
 GRANT REFERENCES ON TYPE::dbo.udt_money TO public
 ```
 
-If this is done, then this data type and `REFERENCES` permission will be available in `tempdb` permanently. Otherwise, the user-defined data type and permissions will disappear when [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] is restarted. For more information, see [CREATE TABLE](create-table-transact-sql.md#permissions-1).
+If this is done, then this data type and `REFERENCES` permission will be available in `tempdb` permanently. Otherwise, the user-defined data type and permissions will disappear when [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] is restarted. For more information, see [CREATE TABLE](create-table-transact-sql.md#permissions).
 
-If you don't want every new database to inherit the definition and permissions for this user- defined data type from model, you can use a startup stored procedure to create and assign the appropriate permissions only in `tempdb` database. For example:
+If you don't want every new database to inherit the definition and permissions for this user-defined data type from model, you can use a startup stored procedure to create and assign the appropriate permissions only in `tempdb` database. For example:
 
 ```sql
 USE master

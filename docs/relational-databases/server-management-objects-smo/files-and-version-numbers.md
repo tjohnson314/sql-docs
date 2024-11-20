@@ -13,11 +13,11 @@ helpviewer_keywords:
   - "files [SMO], components"
   - "SMO [SQL Server], versions"
   - "versions [SMO]"
-monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Files and version numbers
 
-[!INCLUDE [sql-asdb-asdbmi-asa](../../includes/applies-to-version/sql-asdb-asdbmi-asa.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Synapse Analytics FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-fabricsqldb.md)]
 
 All required SQL Server Management Object (SMO) components are included in the `Microsoft.SqlServer.SqlManagementObjects` NuGet package. SMO is implemented in several managed assemblies. You can develop SMO applications on either a client or a server.
 

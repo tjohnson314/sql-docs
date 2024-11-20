@@ -9,9 +9,13 @@ ms.subservice: performance
 ms.topic: conceptual
 helpviewer_keywords:
   - "plan guides [SQL Server], validating after upgrade"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Validate plan guides after upgrade
-[!INCLUDE [SQL Server Azure SQL Database](../../includes/applies-to-version/sql-asdb.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
+
+> [!IMPORTANT]
+> [Query Store hints](query-store-hints.md) provide an easier-to-use method for shaping query plans without changing application code. Query Store hints are simpler than plan guides. Query Store hints are available in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], [!INCLUDE[ssazuremi-md](../../includes/ssazuremi-md.md)], and in [!INCLUDE[sssql22-md](../../includes/sssql22-md.md)] and later versions.
 
 We recommend re-evaluating and testing plan guide definitions when you upgrade your application to a new release of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. Performance tuning requirements and plan guide matching behavior may change. Although an invalid plan guide will not cause a query to fail, the plan is compiled without using the plan guide and may not be the best choice. After upgrading a database to a newer version of the [!INCLUDE [ssde-md](../../includes/ssde-md.md)], we recommend that you perform the following tasks:
   

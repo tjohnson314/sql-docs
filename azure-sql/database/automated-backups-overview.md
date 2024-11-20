@@ -5,7 +5,7 @@ description: Learn how Azure SQL Database automatically backs up all databases a
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, danil, dinethi
-ms.date: 09/03/2024
+ms.date: 11/07/2024
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: conceptual
@@ -85,6 +85,19 @@ You can choose one of the following storage redundancies for backups:
 
    :::image type="content" source="media/automated-backups-overview/multi-paired-grs.svg" alt-text="Diagram showing the geo-redundant storage (GRS) option.":::
 
+- **Geo-Zone redundant storage (GZRS)**: Geo-zone-redundant storage (GZRS) combines the high availability provided by redundancy across availability zones (ZRS) with protection from regional outages provided by geo-replication (GRS). Copies your backups synchronously across three Azure availability zones in the primary region, and asynchronously three times to a single physical location in the [paired secondary region](/azure/availability-zones/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies).
+
+   Microsoft recommends using GZRS for applications requiring maximum consistency, durability, and availability, excellent performance, and resilience for disaster recovery.
+
+   The result is:
+  
+  - Three synchronous copies across Availability Zones, in the primary region.
+  - Three synchronous copies in the paired region, asynchronously copied over from the primary region to the secondary region. 
+
+    The following diagram shows how your data is replicated with GZRS or RA-GZRS:
+
+   :::image type="content" source="media/automated-backups-overview/multi-paired-gzrs.png" alt-text="Diagram showing the geo-zone redundant storage (GZRS) option.":::
+
 > [!WARNING]
 > - [Geo-restore](recovery-using-backups.md#geo-restore) is disabled as soon as a database is updated to use locally redundant or zone-redundant storage. 
 > - The storage redundancy diagrams all show regions with multiple availability zones (multi-az). However, there are some regions which provide only a single availability zone and do not support ZRS. 
@@ -102,6 +115,10 @@ You can use automatically created backups in the following scenarios:
    > [!IMPORTANT]
    > Geo-restore is available only for databases that are configured with geo-redundant backup storage. If you're not currently using geo-replicated backups for a database, you can change this by [configuring backup storage redundancy](automated-backups-change-settings.md#configure-backup-storage-redundancy).
 - [Restore a database from a specific long-term backup](long-term-retention-overview.md) of a single or pooled database, if the database has been configured with an LTR policy. LTR allows you to [restore an older version of the database](long-term-backup-retention-configure.md) by using the Azure portal, the Azure CLI, or Azure PowerShell to satisfy a compliance request or to run an older version of the application. For more information, see [Long-term retention](long-term-retention-overview.md).
+
+> [!WARNING]
+> When restoring a database and the source backup storage redundancy is configured as Geo-Zone Redundant Storage (GZRS), the source backup storage configuration is inherited by the new database if the backup storage redundancy configuration for the target database is not specified explicitly. This includes any restore operation, such as point-in-time restore, database copy, geo-restore, restore from a long-term backup.
+> During this operation, if the target Azure region does not support the specific backup storage redundancy, the restore operation will fail with appropriate error message. This can be mitigated by explicitly specifying the available storage options for the region.
 
 ## Automatic backups on secondary replicas
 

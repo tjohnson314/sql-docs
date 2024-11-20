@@ -37,7 +37,7 @@ namespace ProofOfConcept_SQL_CSharp
 			using (var connection = new QC.SqlConnection(  
 				"Server=tcp:YOUR_SERVER_NAME_HERE.database.windows.net,1433;" +
 				"Database=AdventureWorksLT;User ID=YOUR_LOGIN_NAME_HERE;" +
-				"Password=YOUR_PASSWORD_HERE;Encrypt=True;" +
+				"Password=<password>;Encrypt=True;" +
 				"TrustServerCertificate=False;Connection Timeout=30;"  
 				))  
 			{  
@@ -80,7 +80,7 @@ namespace ProofOfConcept_SQL_CSharp
 			using (var connection = new QC.SqlConnection(  
 				"Server=tcp:YOUR_SERVER_NAME_HERE.database.windows.net,1433;" +
 				"Database=AdventureWorksLT;User ID=YOUR_LOGIN_NAME_HERE;" +
-				"Password=YOUR_PASSWORD_HERE;Encrypt=True;" +
+				"Password=<password>;Encrypt=True;" +
 				"TrustServerCertificate=False;Connection Timeout=30;"  
 				))  
 			{  
@@ -168,7 +168,7 @@ namespace ProofOfConcept_SQL_CSharp
 			using (var connection = new QC.SqlConnection(  
 				"Server=tcp:YOUR_SERVER_NAME_HERE.database.windows.net,1433;" +
 				"Database=AdventureWorksLT;User ID=YOUR_LOGIN_NAME_HERE;" +
-				"Password=YOUR_PASSWORD_HERE;Encrypt=True;" +
+				"Password=<password>;Encrypt=True;" +
 				"TrustServerCertificate=False;Connection Timeout=30;"  
 				))  
 			{  

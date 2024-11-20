@@ -500,6 +500,8 @@
             href: /sql/relational-databases/security/ledger/ledger-limits
         - name: Network access controls
           href: database/network-access-controls-overview.md
+        - name: Network Security Perimeter
+          href: database/network-security-perimeter.md
         - name: Outbound firewall rules
           href: database/outbound-firewall-rule-overview.md
         - name: Transparent data encryption (TDE)

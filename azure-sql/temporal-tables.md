@@ -1,6 +1,6 @@
 ---
 title: Getting started with temporal tables
-description: Learn how to get started with using temporal tables in Azure SQL Database and Azure SQL Managed Instance.
+description: Learn how to get started with using temporal tables.
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: mathoma
@@ -9,12 +9,12 @@ ms.service: azure-sql
 ms.subservice: performance
 ms.topic: how-to
 ms.custom: sqldbrb=2
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi ||=fabricsql"
 ---
-# Getting started with temporal tables in Azure SQL Database and Azure SQL Managed Instance
-[!INCLUDE[appliesto-sqldb-sqlmi](includes/appliesto-sqldb-sqlmi.md)]
+# Getting started with temporal tables
+[!INCLUDE[appliesto-sqldb-sqlmi-fabricsqldb](includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
-Temporal tables are a programmability feature of Azure SQL Database and Azure SQL Managed Instance that allows you to track and analyze the full history of changes in your data, without the need for custom coding. Temporal tables keep data closely related to time context so that stored facts can be interpreted as valid only within the specific period. This property of temporal tables allows for efficient time-based analysis and getting insights from data evolution.
+Temporal tables are a programmability feature that allows you to track and analyze the full history of changes in your data, without the need for custom coding. Temporal tables keep data closely related to time context so that stored facts can be interpreted as valid only within the specific period. This property of temporal tables allows for efficient time-based analysis and getting insights from data evolution.
 
 ## Temporal scenario
 
@@ -191,6 +191,10 @@ With system-versioned temporal tables, the history table might increase the data
 - [Table Partitioning](/sql/relational-databases/tables/manage-retention-of-historical-data-in-system-versioned-temporal-tables#using-table-partitioning-approach)
 - [Custom Cleanup Script](/sql/relational-databases/tables/manage-retention-of-historical-data-in-system-versioned-temporal-tables#using-custom-cleanup-script-approach)
 
-## Next steps
+## Remarks
+
+In both [Azure SQL Database configured for mirroring into Fabric](/sql/sql-server/fabric-database/fabric-mirrored-databases) and [Fabric SQL database](/fabric/database/sql/overview), you can create temporal tables, but the respective history tables aren't mirrored to Fabric OneLake. For specific behavior around setting the `SYSTEM_VERSIONING` flag on temporal tables, see [Create a system-versioned temporal table](/sql/relational-databases/tables/creating-a-system-versioned-temporal-table?view=fabric&preserve-view=true).
+
+## Related content
 
 - For more information on temporal tables, see [Temporal Tables](/sql/relational-databases/tables/temporal-tables).

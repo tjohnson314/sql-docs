@@ -1,10 +1,10 @@
 ---
 title: CREATE TABLE (Transact-SQL)
-description: CREATE TABLE (Transact-SQL)
+description: CREATE TABLE creates a new table in the database.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/06/2024
+ms.date: 11/01/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -45,15 +45,18 @@ helpviewer_keywords:
   - "data retention policy"
 dev_langs:
   - "TSQL"
+monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # CREATE TABLE (Transact-SQL)
 
-[!INCLUDE [SQL Server SQL Database](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [sql-asdb-asdbmi-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
-Creates a new table in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+Creates a new table in the database.
 
 > [!NOTE]  
-> For [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] syntax, see [CREATE TABLE ([!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)])](../../t-sql/statements/create-table-azure-sql-data-warehouse.md).
+> For reference to [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)], visit [CREATE TABLE (Fabric Data Warehouse)](create-table-azure-sql-data-warehouse.md?view=fabric&preserve-view=true).
+> For reference to [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE[ssPDW](../../includes/sspdw-md.md)], visit [CREATE TABLE (Azure Synapse Analytics)](create-table-azure-sql-data-warehouse.md?view=azure-sqldw-latest&preserve-view=true).
+
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
@@ -1210,6 +1213,8 @@ The [!INCLUDE[ssDE](../../includes/ssde-md.md)] doesn't enforce an order in whic
 
 When a table is created, the QUOTED IDENTIFIER option is always stored as ON in the metadata for the table, even if the option is set to OFF when the table is created.
 
+In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], some table features can be created but will not be [mirrored into the Fabric OneLake](/fabric/database/sql/mirroring-overview). For more information, see [Limitations of Fabric SQL database mirroring](/fabric/database/sql/mirroring-limitations).
+
 ## Temporary tables
 
 You can create local and global temporary tables. Local temporary tables are visible only in the current session, and global temporary tables are visible to all sessions. Temporary tables can't be partitioned.
@@ -1301,7 +1306,7 @@ For troubleshooting `tempdb`, see [How to Monitor tempdb use](../../relational-d
 > [!NOTE]  
 > Only a server admin can access the troubleshooting DMVs in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-### Permissions
+### Permissions for temporary objects
 
 Any user can create global temporary objects. Users can only access their own objects, unless they receive additional permissions.
 

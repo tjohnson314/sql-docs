@@ -8,10 +8,12 @@ ms.date: "05/09/2024"
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Ownership and user-schema separation in SQL Server
 
-[!INCLUDE [SQL Server](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
+
 
 A core concept of SQL Server security is that owners of objects have irrevocable permissions to administer them. You can't remove privileges from an object owner, and you can't drop users from a database if they own objects in it.
 

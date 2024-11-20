@@ -1,22 +1,22 @@
 ---
 title: Monitor performance using DMVs
 titleSuffix: Azure SQL Database
-description: Learn how to detect and diagnose common performance problems by using dynamic management views to monitor Microsoft Azure SQL Database.
+description: Learn how to detect and diagnose common performance problems by using dynamic management views to monitor Microsoft Azure SQL Database and SQL database in Fabric.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman, mathoma
-ms.date: 04/24/2024
+ms.date: 10/31/2024
 ms.service: azure-sql-database
 ms.subservice: monitoring
 ms.topic: how-to
 ms.custom:
   - azure-sql-split
   - sqldbrb=2
-monikerRange: "= azuresql || = azuresql-db "
+monikerRange: "= azuresql || = azuresql-db || = fabric"
 ---
-# Monitor Azure SQL Database performance using dynamic management views
+# Monitor performance using dynamic management views
 
-[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
+[!INCLUDE[appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
 > [!div class="op_single_selector"]
 > * [Azure SQL Database](monitoring-with-dmvs.md?view=azuresql-db&preserve-view=true)
@@ -193,7 +193,9 @@ The next example shows you different ways that you can use the `sys.resource_sta
 
 ### sys.dm_elastic_pool_resource_stats
 
-Similarly to `sys.dm_db_resource_stats`, [sys.dm_elastic_pool_resource_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-elastic-pool-resource-stats-azure-sql-database?view=azuresqldb-current&preserve-view=true) provides recent and granular resource usage data for an elastic pool. The view can be queried in any database in an elastic pool to provide resource usage data for an entire pool, rather than any specific database. The percentage values reported by this DMV are toward the limits of the elastic pool, which might be higher than the limits for a database in the pool.
+[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)] only
+
+Similarly to `sys.dm_db_resource_stats`, [sys.dm_elastic_pool_resource_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-elastic-pool-resource-stats-azure-sql-database?view=azuresqldb-current&preserve-view=true) provides recent and granular resource usage data for an Azure SQL Database elastic pool. The view can be queried in any database in an elastic pool to provide resource usage data for an entire pool, rather than any specific database. The percentage values reported by this DMV are toward the limits of the elastic pool, which might be higher than the limits for a database in the pool.
 
 This example shows the summarized resource usage data for the current elastic pool in the last 15 minutes:
 
@@ -217,6 +219,8 @@ GROUP BY dso.elastic_pool_name;
 If you find that any resource usage approaches 100% for a significant period of time, you might need to review resource usage for individual databases in the same elastic pool to determine how much each database contributes to the pool-level resource usage.
 
 ### sys.elastic_pool_resource_stats
+
+[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)] only
 
 Similarly to `sys.resource_stats`, [sys.elastic_pool_resource_stats](/sql/relational-databases/system-catalog-views/sys-elastic-pool-resource-stats-azure-sql-database?view=azuresqldb-current&preserve-view=true) in the `master` database provides historical resource usage data for all elastic pools on the logical server. You can use `sys.elastic_pool_resource_stats` for historical monitoring over the last 14 days, including usage trend analysis.
 

@@ -13,7 +13,7 @@ dev_langs:
   - "TSQL"
 ---
 # CollectionAggregate (geometry Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Creates a **GeometryCollection** instance from a set of **geometry** types.
   

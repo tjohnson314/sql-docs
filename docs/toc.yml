@@ -1320,8 +1320,6 @@ items:
           href: relational-databases/indexes/columnstore-indexes-design-guidance.md
         - name: Data loading Guidance
           href: relational-databases/indexes/columnstore-indexes-data-loading-guidance.md
-        - name: Ordered clustered columnstore index performance
-          href: relational-databases/indexes/ordered-columnstore-indexes.md
         - name: Query performance
           href: relational-databases/indexes/columnstore-indexes-query-performance.md
         - name: Real-time operational analytics
@@ -7263,6 +7261,12 @@ items:
       href: sql-server/synapse-link/synapse-link-sql-server-change-feed.md
     - name: Azure Synapse Link for SQL change feed management
       href: sql-server/synapse-link/synapse-link-sql-server-change-feed-manage.md
+  - name: Fabric Databases
+    items:
+    - name: Microsoft Fabric Mirroring
+      href: sql-server/fabric-database/fabric-mirrored-databases.md
+    - name: SQL database in Microsoft Fabric
+      href: sql-server/fabric-database/sql-database-in-fabric.md
   - name: Machine Learning Services > 
     href: machine-learning/
   - name: Analytics Platform System > 
@@ -8131,7 +8135,7 @@ items:
     items:
     - name: Permissions or Securables page
       href: relational-databases/security/permissions-or-securables-page.md
-    - name: Resumable add table contraints
+    - name: Resumable add table constraints
       href: relational-databases/security/resumable-add-table-constraints.md
 - name: Tools
   items:
@@ -10004,24 +10008,22 @@ items:
     items: 
     - name: Extended features and tools
       href: tools/download-sql-feature-packs.md
-  - name: Visual Studio Code 
+  - name: Visual Studio Code extensions
     items:
-    - name: Overview
-      href: tools/visual-studio-code/mssql-extensions.md
-    - name: Connect and Query Tutorial
-      href: tools/visual-studio-code/sql-server-develop-use-vscode.md
-    - name: Query History
-      href: tools/visual-studio-code/mssql-query-history.md
-    - name: SQL Database Projects
-      href: /azure-data-studio/extensions/sql-database-project-extension
-    - name: SQL Bindings for Azure Functions
+    - name: MSSQL extension
       items: 
       - name: Overview
-        href: tools/visual-studio-code/create-azure-function-with-mssql.md
-      - name: From Object Explorer Tutorial
-        href: tools/visual-studio-code/create-azure-function-with-mssql-object-explorer.md
-      - name: From Command Palette Tutorial
-        href: tools/visual-studio-code/create-azure-function-with-mssql-command-palette.md
+        href: tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md
+      - name: Connect and Query
+        href: tools/visual-studio-code-extensions/mssql/connect-database-visual-studio-code.md
+    - name: SQL bindings for Azure Functions
+      items: 
+      - name: Overview
+        href: tools/visual-studio-code-extensions/sql-bindings/create-azure-function.md
+      - name: Object Explorer
+        href: tools/visual-studio-code-extensions/sql-bindings/create-azure-function-object-explorer.md
+      - name: Command Palette
+        href: tools/visual-studio-code-extensions/sql-bindings/create-azure-function-command-palette.md
 - name: Tutorials
   items:
   - name: SQL Server
@@ -10214,7 +10216,7 @@ items:
       - name: Connectivity libraries
         href: linux/sql-server-linux-develop-connectivity-libraries.md
       - name: Use Visual Studio Code
-        href: ./tools/visual-studio-code/sql-server-develop-use-vscode.md
+        href: tools/visual-studio-code-extensions/mssql/connect-database-visual-studio-code.md
       - name: Use SSDT
         href: linux/sql-server-linux-develop-use-ssdt.md
     - name: Manage
@@ -10474,8 +10476,6 @@ items:
           href: sql-server/azure-arc/security-overview.md
         - name: Configure least privilege
           href: sql-server/azure-arc/configure-least-privilege.md
-        - name: Set up Entra authentication
-          href: sql-server/azure-arc/entra-authentication-setup-tutorial.md
         - name: Configure advanced data Security
           href: sql-server/azure-arc/configure-advanced-data-security.md
         - name: Certificate rotation
@@ -13640,6 +13640,8 @@ items:
         href: relational-databases/system-dynamic-management-views/sys-dm-os-memory-cache-hash-tables-transact-sql.md
       - name: sys.dm_os_memory_clerks
         href: relational-databases/system-dynamic-management-views/sys-dm-os-memory-clerks-transact-sql.md
+      - name: sys.dm_os_memory_health_history
+        href: relational-databases/system-dynamic-management-views/sys-dm-os-memory-health-history.md
       - name: sys.dm_os_memory_nodes
         href: relational-databases/system-dynamic-management-views/sys-dm-os-memory-nodes-transact-sql.md
       - name: sys.dm_os_memory_objects

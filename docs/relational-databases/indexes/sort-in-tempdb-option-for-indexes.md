@@ -14,10 +14,10 @@ helpviewer_keywords:
   - "tempdb database [SQL Server], indexes"
   - "indexes [SQL Server], tempdb database"
   - "index creation [SQL Server], tempdb database"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # SORT_IN_TEMPDB Option For Indexes
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)] 
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)] 
 
   When you create or rebuild an index, by setting the SORT_IN_TEMPDB option to ON you can direct the [!INCLUDE[ssDEnoversion](../../includes/ssdenoversion-md.md)] to use **tempdb** to store the intermediate sort results that are used to build the index. Although this option increases the amount of temporary disk space that is used to create an index, the option could reduce the time that is required to create or rebuild an index when **tempdb** is on a set of disks different from that of the user database. For more information about **tempdb**, see [Configure the index create memory Server Configuration Option](../../database-engine/configure-windows/configure-the-index-create-memory-server-configuration-option.md).  
   

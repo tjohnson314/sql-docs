@@ -1,10 +1,10 @@
 ---
 title: Try for free (preview)
-description: Guidance on how to deploy the Azure SQL Managed Instance free offer.
+description: Learn how to deploy a free Azure SQL Managed Instance.
 author: Urosran
 ms.author: urandjelovic
 ms.reviewer: mathoma, randolphwest
-ms.date: 01/02/2024
+ms.date: 11/19/2024
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: how-to
@@ -39,6 +39,14 @@ You know the offer has been applied when the **Cost summary** card on the right 
 
 :::image type="content" source="media/free-offer/cost-summary-card.png" alt-text="Screenshot of the Free Offer Cost summary card. Included in the details are 'First 64 GB of storage free' and '720 vCore hours free'.":::
 
+## What's new
+
+November 2024 brings the following changes to the free Azure SQL Managed Instance offer: 
+
+- Now available in nine additional [subscriptions](#prerequisites).
+- [Determine](#monthly-vcore-limits) how many free vCore hours remain for the month. 
+- [Easily upgrade](#upgrade-to-paid-instance) to a paid version of Azure SQL Managed Instance just by changing the offer type directly in the Azure portal.
+
 ## Free offer limits
 
 The free Azure SQL Managed Instance offer is the same fully managed platform-as-a-service (PaaS) instance you get with the paid version and includes handling all of the same database management functions (such as upgrading, patching, backups, and monitoring) without user involvement. The offer is available for one instance per Azure subscription.
@@ -65,8 +73,7 @@ Additionally, the following limitations apply:
 
 - The following capabilities aren't supported: [Zone redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability), [failover groups](failover-group-sql-mi.md), [long-term backup retention](../database/long-term-retention-overview.md) 
 - Scaling up and down is possible only within 
-- The free offer is currently available in the following region (which are subject to change): Australia East, East US, East US 2, North Europe, Sweden Central, Southeast Asia, South Central US, UK South, West Europe, West US 2, West US 3
-- It's not currently possible to upgrade your free instance to the paid version. Create a new instance and [restore your database](point-in-time-restore.md?#restore-an-existing-database) to it to continue your business without the limits imposed by the free offer.
+- The free offer is currently available in the following regions (which are subject to change): Australia East, East US, East US 2, North Europe, Sweden Central, Southeast Asia, South Central US, UK South, West Europe, West US 2, West US 3
 
 
 ### Monthly vCore limits 
@@ -77,13 +84,32 @@ Once you reach the monthly free vCore limit, the instance is stopped with a stat
 
 Once you have credits available again at the beginning of the next month, the instance is started automatically at the next scheduled start. You can also stop the instance manually at any time to avoid using up your free monthly vCore hours.
 
+You can view how many vCore limits remain on the **Overview** page for your free instance in the Azure portal, such as the following screenshot: 
+
+:::image type="content" source="media/free-offer/remaining-credits.png" alt-text="Screenshot showing the remaining vCore hours for a free instance in the Azure portal.":::
+
 ## Prerequisites
 
-To try Azure SQL Managed Instance for free, you need:
+To try Azure SQL Managed Instance for free, you need to have a supported subscription: 
 
-- An Azure account with one of the following Azure subscriptions:
-  - Pay-as-you-go (003P)
-  - Azure in CSP (0145P)
+:::row:::
+    :::column:::
+      - [Pay-as-you-go (0003P)](https://azure.microsoft.com/pricing/offers/ms-azr-0003p/)
+      - [Azure in CSP (0145P)](https://azure.microsoft.com/pricing/offers/ms-azr-0145p/)
+      - [Azure Plan (0017G)](https://azure.microsoft.com/pricing/offers/ms-azr-0017g/)
+      - [Enterprise Agreement Support](https://azure.microsoft.com/pricing/offers/enterprise-agreement-support/)
+      - [Microsoft Azure EA Sponsorship (0136P)](https://azure.microsoft.com/pricing/offers/ms-azr-0136p/)
+      - [Visual Studio Professional subscribers (0059P)](https://azure.microsoft.com/pricing/offers/ms-azr-0059p/)
+    :::column-end:::
+    :::column:::
+      - [Visual Studio Test Professional subscribers (0059P)](https://azure.microsoft.com/pricing/offers/ms-azr-0060p/)
+      - [Visual Studio Enterprise subscribers (0063P)](https://azure.microsoft.com/pricing/offers/ms-azr-0063p/)
+      - [Pay-As-You-Go Dev/Test (0023P)](https://azure.microsoft.com/pricing/offers/ms-azr-0023p/)
+      - [Enterprise Dev/Test (0148P)](https://azure.microsoft.com/pricing/offers/ms-azr-0148p/)
+      - [Azure in Open Licensing (0111P)](https://azure.microsoft.com/pricing/offers/ms-azr-0111p/)
+    :::column-end:::
+:::row-end:::
+
 
 ## Create a free instance
 
@@ -124,6 +150,21 @@ If your public endpoint is disabled, you can choose to either [Create an Azure V
 ## Default instance schedule
 
 To conserve credits, by default, the free instance is scheduled to be on from 9am to 5pm Monday through Friday in the time zone configured when you created the instance. You can [modify the schedule](instance-stop-start-how-to.md) to suit your business needs.
+
+## Upgrade to paid instance 
+
+If you want to take advantage of an unlimited paid Azure SQL Managed Instance, or if you run out of vCore hours, you can upgrade your free instance to a paid instance directly from the Azure portal. 
+
+To upgrade your instance, follow these steps: 
+
+1. Go to your [SQL managed instance](https://portal.azure.com/#browse/Microsoft.Sql%2FmanagedInstances) in the Azure portal. 
+1. Select the free instance you want to upgrade to navigate to the **Overview** page for the SQL Managed Instance. 
+1. Under **Settings**, select **Compute + storage** to open the **Compute + storage** page. Alternatively, you can select **Upgrade to a paid offer** from the banner on the **Overview** page.
+1. On the **Compute + storage** page, select **Paid offer** to upgrade your instance to the paid version: 
+
+   :::image type="content" source="media/free-offer/upgrade-to-paid-offer.png" alt-text="Screenshot of the paid offer selected on the compute + storage page for your instance in the Azure portal.":::
+
+1. Select **Apply** to confirm the upgrade.
 
 ## Clean up resources
 

@@ -37,7 +37,7 @@ Public Sub Main()
     ' Open a connection using the Microsoft ODBC provider  
     Set Cnxn1 = New ADODB.Connection  
     Cnxn1.ConnectionString = "driver={SQL Server};server='MySqlServer';" & _  
-        "user id='MyUserID';password='MyPassword';"  
+        "user id='MyUserID';password='<password>';"  
     Cnxn1.Open strCnxn  
     Cnxn1.DefaultDatabase = "Pubs"  
   
@@ -48,7 +48,7 @@ Public Sub Main()
     Set Cnxn2 = New ADODB.Connection  
     Cnxn2.Provider = "Microsoft.Jet.OLEDB.4.0"  
     Cnxn2.Open "Northwind.mdb", _  
-        "MyUserID", "MyPassword"  
+        "MyUserID", "<password>"  
   
     ' Display the provider.  
     MsgBox "Cnxn2 provider: " & Cnxn2.Provider  

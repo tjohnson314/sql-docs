@@ -3,7 +3,7 @@ title: Connection resiliency
 description: Connection resiliency can transparently restore broken connections. This feature improves application behavior when the server closes idle connections.
 author: David-Engel
 ms.author: davidengel
-ms.date: 02/09/2023
+ms.date: 11/05/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -12,10 +12,10 @@ ms.topic: conceptual
 
 [!INCLUDE[Driver_ODBC_Download](../../includes/driver_odbc_download.md)]
 
-To ensure that applications remain connected to an [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], the ODBC driver can restore idle connections.
+To ensure that applications remain connected, the ODBC driver can restore idle connections.
 
 > [!IMPORTANT]
-> The connection resiliency feature is supported on Microsoft Azure SQL Database and SQL Server 2014 (and later) server versions.
+> The connection resiliency feature is supported on Microsoft Azure SQL Database, Fabric SQL database, and SQL Server 2014 (and later) server versions.
 >
 > The feature is available on Windows starting with Microsoft ODBC Driver 11 for SQL Server. It is available on Linux starting in version 17.2 of Microsoft ODBC Driver 17 for SQL Server.
 
@@ -131,7 +131,7 @@ void func2() {
 
 #define MAXBUFLEN 255
 
-    SQLCHAR ConnStrIn[MAXBUFLEN] = "DRIVER={ODBC Driver 18 for SQL Server};SERVER=server_that_supports_connection_resiliency;Encrypt=yes;UID=userID;PWD= password_for_userID;ConnectRetryCount=2";
+    SQLCHAR ConnStrIn[MAXBUFLEN] = "DRIVER={ODBC Driver 18 for SQL Server};SERVER=server_that_supports_connection_resiliency;Encrypt=yes;UID=userID;PWD=<password>;ConnectRetryCount=2";
     SQLCHAR ConnStrOut[MAXBUFLEN];
 
     SQLSMALLINT cbConnStrOut = 0;

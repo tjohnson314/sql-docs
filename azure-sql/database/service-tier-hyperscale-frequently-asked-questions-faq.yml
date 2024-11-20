@@ -8,10 +8,10 @@ metadata:
   ms.custom: sqldbrb=1
   ms.devlang: 
   ms.topic: faq
-  author: dimitri-furman
-  ms.author: dfurman
-  ms.reviewer: wiassaf, mathoma
-  ms.date: 09/12/2024
+  author: WilliamDAssafMSFT
+  ms.author: wiassaf
+  ms.reviewer: dfurman, mathoma, dinethi
+  ms.date: 11/19/2024
 title: Azure SQL Database Hyperscale FAQ
 summary: |
   [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -359,6 +359,11 @@ sections:
           How can I minimize backup storage costs?
         answer: |
           Details on how to minimize the backup storage costs are captured in [Automated Backups](hyperscale-automated-backups-overview.md#reduce-backup-storage-consumption).
+
+      - question: |
+          Can I geo-restore my Hyperscale database to another service tier, or vice-versa? 
+        answer: |
+          Currently, non-Hyperscale service tiers (Standard/Premium/General Purpose/Business Critical) backups cannot be geo-restored into a Hyperscale service tier and vice-versa. To convert a non-Hyperscale database to a Hyperscale database, change the service tier after a restore.
 
   - name: Performance questions
     questions:

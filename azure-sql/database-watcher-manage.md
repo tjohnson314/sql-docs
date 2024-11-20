@@ -572,6 +572,7 @@ If you find that the specifications of the free cluster are insufficient for you
 
 To continue using the free Azure Data Explorer cluster, [manage data retention](#manage-data-retention) to delete the older data automatically and free up space for new data. Once storage space is available, you might need to [stop and restart](#start-and-stop-a-watcher) your watcher to resume data collection.
 
+
 ### Manage data retention
 
 If you do not require older data, you can configure data retention policies to purge it automatically. By default, [data retention](/azure/data-explorer/kusto/management/retentionpolicy) is set to 365 days in a new database on an Azure Data Explorer cluster or in Real-Time Analytics.

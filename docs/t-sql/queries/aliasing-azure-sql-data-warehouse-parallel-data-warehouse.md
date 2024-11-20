@@ -8,7 +8,7 @@ ms.date: 09/12/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
-monikerRange: ">=aps-pdw-2016||=azure-sqldw-latest||=fabric"
+monikerRange: ">=aps-pdw-2016 || =azure-sqldw-latest "
 ---
 
 # Aliasing (Azure Synapse Analytics, Parallel Data Warehouse)

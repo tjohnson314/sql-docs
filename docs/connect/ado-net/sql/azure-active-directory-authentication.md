@@ -63,7 +63,7 @@ When the application is connecting to Azure SQL data sources by using Microsoft 
 // Use your own server, database, user ID, and password.
 string ConnectionString = @"Server=demo.database.windows.net;"
    + "Authentication=Active Directory Password; Encrypt=True; Database=testdb;"
-   + "User Id=user@domain.com; Password=***";
+   + "User Id=user@domain.com; Password=<password>";
 
 using (SqlConnection conn = new SqlConnection(ConnectionString)) {
     conn.Open();
@@ -140,7 +140,7 @@ The following example shows how to use `Active Directory Service Principal` auth
 // Use your own server, database, app ID, and secret.
 string ConnectionString = @"Server=demo.database.windows.net;"
   + "Authentication=Active Directory Service Principal; Encrypt=True;"
-  + "Database=testdb; User Id=AppId; Password=secret";
+  + "Database=testdb; User Id=AppId; Password=<password>";
 
 using (SqlConnection conn = new SqlConnection(ConnectionString)) {
     conn.Open();

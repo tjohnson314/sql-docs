@@ -29,7 +29,7 @@ public class SQLDatabaseConnection {
                 "jdbc:sqlserver://yourserver.database.windows.net:1433;"
                         + "database=AdventureWorks;"
                         + "user=yourusername@yourserver;"
-                        + "password=yourpassword;"
+                        + "password=<password>;"
                         + "encrypt=true;"
                         + "trustServerCertificate=false;"
                         + "loginTimeout=30;";
@@ -65,7 +65,7 @@ public class SQLDatabaseConnection {
                 "jdbc:sqlserver://yourserver.database.windows.net:1433;"
                 + "database=AdventureWorks;"
                 + "user=yourusername@yourserver;"
-                + "password=yourpassword;"
+                + "password=<password>;"
                 + "encrypt=true;"
                 + "trustServerCertificate=false;"
                 + "loginTimeout=30;";
@@ -111,7 +111,7 @@ public class SQLDatabaseConnection {
                 "jdbc:sqlserver://yourserver.database.windows.net:1433;"
                         + "database=AdventureWorks;"
                         + "user=yourusername@yourserver;"
-                        + "password=yourpassword;"
+                        + "password=<password>;"
                         + "encrypt=true;"
                         + "trustServerCertificate=false;"
                         + "loginTimeout=30;";

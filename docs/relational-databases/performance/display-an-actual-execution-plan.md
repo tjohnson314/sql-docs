@@ -13,11 +13,11 @@ helpviewer_keywords:
   - "actual execution plans"
   - "viewing execution plans"
   - "execution plans [SQL Server], displaying"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Display an actual execution plan
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 This article describes how to generate actual graphical execution plans by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)]. Actual execution plans are generated after the T-SQL queries or batches execute. Because of this, an actual execution plan contains runtime information, such as actual resource usage metrics and runtime warnings (if any). The execution plan that is generated displays the actual query execution plan that the [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] used to execute the queries.
 

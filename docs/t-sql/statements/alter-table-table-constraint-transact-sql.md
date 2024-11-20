@@ -17,7 +17,7 @@ monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||
 ---
 # ALTER TABLE table_constraint (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-fabricdw-fabricsqldb.md)]
 
   Specifies the properties of a PRIMARY KEY, UNIQUE, FOREIGN KEY, a CHECK constraint, or a DEFAULT definition added to a table by using [ALTER TABLE](../../t-sql/statements/alter-table-transact-sql.md).  
   

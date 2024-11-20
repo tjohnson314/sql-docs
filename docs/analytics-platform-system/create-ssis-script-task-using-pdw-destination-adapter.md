@@ -150,7 +150,7 @@ This SSIS package script code is a code example for using the SSIS PDW destinati
                     //Connection to the Oracle Source created  
                     ConnectionManager connectionSource = package.Connections.Add("OLEDB");  
                     connectionSource.Name = "OracleSource";  
-                    connectionSource.ConnectionString = "Data Source=127.0.0.1;User ID=sa;Password=XXXXXXXX;Provider=OraOLEDB.Oracle.1;Persist Security Info=True;";  
+                    connectionSource.ConnectionString = "Data Source=127.0.0.1;User ID=sa;Password=<password>;Provider=OraOLEDB.Oracle.1;Persist Security Info=True;";  
   
                     IDTSComponentMetaData100 srcComponent = pipeline.ComponentMetaDataCollection.New();  
                     srcComponent.ComponentClassID = "DTSAdapter.OleDbSource";  
@@ -160,7 +160,7 @@ This SSIS package script code is a code example for using the SSIS PDW destinati
                     srcComponent.Name = "OleDb Source";  
   
                     srcDesignTimeComponent.SetComponentProperty("AccessMode", 0);  
-                    srcDesignTimeComponent.SetComponentProperty("OpenRowset", "XXXXXXXX");  
+                    srcDesignTimeComponent.SetComponentProperty("OpenRowset", "<password>");  
   
                     // Set the connection manager  
                     srcComponent.RuntimeConnectionCollection[0].ConnectionManager = DtsConvert.GetExtendedInterface(connectionSource);  
@@ -173,7 +173,7 @@ This SSIS package script code is a code example for using the SSIS PDW destinati
   
                     ConnectionManager connectionDest = package.Connections.Add("SQLPDW");  
                     connectionDest.Name = "SQL Server Destination";  
-                    connectionDest.ConnectionString = @"Data Source=127.0.0.1,17001;Initial Catalog=SomeDB;User ID=sa;Password=XXXXXXXX;";  
+                    connectionDest.ConnectionString = @"Data Source=127.0.0.1,17001;Initial Catalog=SomeDB;User ID=sa;Password=<password>;";  
   
                     IDTSComponentMetaData100 destComponent = pipeline.ComponentMetaDataCollection.New();  
                     destComponent.ComponentClassID = typeof(Microsoft.SqlServer.Dts.Pipeline.SQLPDWDestinationAdapter).AssemblyQualifiedName;  
@@ -182,7 +182,7 @@ This SSIS package script code is a code example for using the SSIS PDW destinati
   
                     destComponent.Name = "ADO Destination";  
                     destDesignTimeComponent.SetComponentProperty("Mode", "Append");  
-                    destDesignTimeComponent.SetComponentProperty("FinalTable", "XXXXXXXX");  
+                    destDesignTimeComponent.SetComponentProperty("FinalTable", "<password>");  
   
                     // set connection  
                     destComponent.RuntimeConnectionCollection[0].ConnectionManager = DtsConvert.GetExtendedInterface(connectionDest);  

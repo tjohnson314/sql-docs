@@ -15,7 +15,7 @@ dev_langs:
   - "TSQL"
 ---
 # IsNull (geometry Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 The type of a **geometry** instance is null. Returns 0 if the instance isn't null.
   

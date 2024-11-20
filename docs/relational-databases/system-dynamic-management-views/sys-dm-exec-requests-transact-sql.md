@@ -72,7 +72,7 @@ Returns information about each request that is executing in [!INCLUDE [ssNoVersi
 | `ansi_padding` | **bit** | 1 = ANSI_PADDING setting is ON for the request.<br /><br />Otherwise, it's 0.<br /><br />Not nullable. |
 | `ansi_nulls` | **bit** | 1 = ANSI_NULLS setting is ON for the request. Otherwise, it's 0.<br /><br />Not nullable. |
 | `concat_null_yields_null` | **bit** | 1 = CONCAT_NULL_YIELDS_NULL setting is ON for the request. Otherwise, it's 0.<br /><br />Not nullable. |
-| `transaction_isolation_level` | **smallint** | Isolation level with which the transaction for this request is created. Not nullable.<br />0 = Unspecified<br />1 = ReadUncomitted<br />2 = ReadCommitted<br />3 = Repeatable<br />4 = Serializable<br />5 = Snapshot |
+| `transaction_isolation_level` | **smallint** | Isolation level with which the transaction for this request is created. Not nullable.<br />0 = Unspecified<br />1 = ReadUncommitted<br />2 = ReadCommitted<br />3 = Repeatable<br />4 = Serializable<br />5 = Snapshot |
 | `lock_timeout` | **int** | Lock time-out period in milliseconds for this request. Not nullable. |
 | `deadlock_priority` | **int** | DEADLOCK_PRIORITY setting for the request. Not nullable. |
 | `row_count` | **bigint** | Number of rows that have been returned to the client by this request. Not nullable. |

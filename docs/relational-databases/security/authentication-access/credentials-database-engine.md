@@ -18,11 +18,12 @@ helpviewer_keywords:
   - "users [SQL Server], credentials"
   - "credentials [SQL Server], about credentials"
   - "credentials [SQL Server]"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Credentials (Database Engine)
 
-[!INCLUDE [SQL Server](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
+
 
   A credential is a record that contains the authentication information (credentials) required to connect to a resource outside [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)]. This information is used internally by [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)]. Most credentials contain a Windows user name and password.  
   
@@ -33,6 +34,8 @@ monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-s
  System credentials are created automatically and are associated with specific endpoints. Names for system credentials start with two hash signs (##).  
   
  For more information about credentials, see the [sys.credentials](../../../relational-databases/system-catalog-views/sys-credentials-transact-sql.md) and [sys.database_scoped_credentials](../../../relational-databases/system-catalog-views/sys-database-scoped-credentials-transact-sql.md) catalog views.  
+
+In Fabric SQL database, Microsoft Entra ID for database users is the only supported authentication method. Only database-scoped credentials are supported.
   
 ## Related Content  
  [Create a Credential](../../../relational-databases/security/authentication-access/create-a-credential.md)   

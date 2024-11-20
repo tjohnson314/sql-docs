@@ -11,11 +11,11 @@ ms.topic: conceptual
 helpviewer_keywords:
   - "deadlocks, [SQL Server]"
   - "deadlock, [SQL Server]"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Deadlocks guide
 
-[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 This article discusses deadlocks in the [!INCLUDE [ssdenoversion-md](../includes/ssdenoversion-md.md)] in depth. Deadlocks are caused by competing, concurrent locks in the database, often in multi-step transactions. For more on transaction locking, see [Transaction locking and row versioning guide](sql-server-transaction-locking-and-row-versioning-guide.md).
 

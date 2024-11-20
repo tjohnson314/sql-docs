@@ -184,7 +184,7 @@ For more information on Microsoft Azure Databricks, see [What is Databricks Data
 
 ### Fabric Mirrored Database
 
-As a data replication experience, [Database Mirroring in Fabric (Preview)](/fabric/database/mirrored-database/overview) is a low-cost and low-latency solution to bring data from various systems together into a single analytics platform. You can continuously replicate your existing data estate directly into Fabric's OneLake, including data from Azure SQL Database, Snowflake, and Cosmos DB.
+As a data replication experience, [Database Mirroring in Fabric](/fabric/database/mirrored-database/overview) is a low-cost and low-latency solution to bring data from various systems together into a single analytics platform. You can continuously replicate your existing data estate directly into Fabric's OneLake, including data from Azure SQL Database, Snowflake, and Cosmos DB.
 
 With the most up-to-date data in a queryable format in OneLake, you can now use all the different services in Fabric, such as running analytics with Spark, executing notebooks, data engineering, visualizing through Power BI Reports, and more.
 
@@ -194,7 +194,7 @@ With Mirroring in Fabric, you don't need to piece together different services fr
 
 For more information, see:
 
-- [Microsoft Fabric mirrored databases (Preview)](/fabric/database/mirrored-database/overview)
+- [Microsoft Fabric mirrored databases](/fabric/database/mirrored-database/overview)
 - [Microsoft Fabric mirrored databases monitoring](/fabric/database/mirrored-database/monitor)
 - [Explore data in your Mirrored database using Microsoft Fabric](/fabric/database/mirrored-database/explore)
 - [What is Microsoft Fabric?](/fabric/get-started/microsoft-fabric-overview)

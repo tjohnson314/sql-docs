@@ -1,9 +1,9 @@
 ---
-title: Certificate management (SQL Server Configuration Manager)
+title: "Certificate Management (SQL Server Configuration Manager)"
 description: Learn how to install certificates in various SQL Server configurations. Examples include single instances, failover clusters, and Always On availability groups.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 08/09/2024
+ms.date: 11/19/2024
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -24,7 +24,7 @@ helpviewer_keywords:
 
 This article describes how to deploy and manage certificates across your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Always On failover cluster instance (FCI) or availability group (AG) topology.
 
-SSL/TLS certificates are widely used to secure access to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]. With earlier versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], organizations with large [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] estates had to spend considerable effort to maintain their [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] certificate infrastructure, often through developing scripts and running manual commands.
+Transport Layer Security (TLS) certificates are widely used to secure access to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]. With earlier versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], organizations with large [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] estates had to spend considerable effort to maintain their [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] certificate infrastructure, often through developing scripts and running manual commands.
 
 ::: moniker range=">=sql-server-ver15"
 
@@ -51,13 +51,17 @@ You can use certificate management in [!INCLUDE [ssnoversion-md](../../includes/
 > [!NOTE]  
 > These instructions apply to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager for [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and earlier versions. For [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions, see [Certificate management (SQL Server 2019 Configuration Manager)](manage-certificates.md?view=sql-server-ver15&preserve-view=true).
 
-## <a id="provision-single-server-cert"></a> Install a certificate
+<a id="provision-single-server-cert"></a>
+
+## Install a certificate
 
 ::: moniker-end
 
 ::: moniker range=">=sql-server-ver15"
 
-## <a id="provision-single-server-cert"></a> Install a certificate for a single SQL Server instance
+<a id="provision-single-server-cert"></a>
+
+## Install a certificate for a single SQL Server instance
 
 1. In [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager, in the console pane, expand **SQL Server Network Configuration**.
 
@@ -90,7 +94,9 @@ For an availability group (AG) configuration, complete these steps from the node
 
 ::: moniker range=">=sql-server-ver15"
 
-## <a id="provision-failover-cluster-cert"></a> Install a certificate in a failover cluster instance configuration
+<a id="provision-failover-cluster-cert"></a>
+
+## Install a certificate in a failover cluster instance configuration
 
 1. In [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager, in the console pane, expand **SQL Server Network Configuration**.
 
@@ -113,7 +119,9 @@ For an availability group (AG) configuration, complete these steps from the node
 > [!NOTE]  
 > Complete these steps in the active node of the FCI. User must have administrator permissions on all the cluster nodes.
 
-## <a id="provision-availability-group-cert"></a> Install a certificate in an availability group configuration
+<a id="provision-availability-group-cert"></a>
+
+## Install a certificate in an availability group configuration
 
 1. In [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager, in the console pane, expand **SQL Server Network Configuration**.
 
@@ -135,5 +143,4 @@ For an availability group (AG) configuration, complete these steps from the node
 ## Related content
 
 - [Certificate requirements for SQL Server](certificate-requirements.md)
-- [GRANT Certificate Permissions (Transact-SQL)](../../t-sql/statements/grant-certificate-permissions-transact-sql.md)
-- [REVOKE Certificate Permissions (Transact-SQL)](../../t-sql/statements/revoke-certificate-permissions-transact-sql.md)
+- [Transport Layer Security and digital certificates](certificate-overview.md)

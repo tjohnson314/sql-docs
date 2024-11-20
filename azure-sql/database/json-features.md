@@ -1,7 +1,7 @@
 ---
 title: Working with JSON data
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
-description: Azure SQL Database and Azure SQL Managed Instance enable you to parse, query, and format data in JavaScript Object Notation (JSON) notation.
+description: JSON functionality in the database enables you to parse, query, and format data in JavaScript Object Notation (JSON) notation.
 author: uc-msft
 ms.author: umajay
 ms.reviewer: wiassaf, mathoma
@@ -10,12 +10,12 @@ ms.service: azure-sql
 ms.subservice: development
 ms.topic: how-to
 ms.custom: sqldbrb=2
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
+monikerRange: "= azuresql || = azuresql-db || = azuresql-mi ||=fabricsql"
 ---
-# Getting started with JSON features in Azure SQL Database and Azure SQL Managed Instance
-[!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
+# Getting started with JSON features
+[!INCLUDE [appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
-Azure SQL Database and Azure SQL Managed Instance let you parse and query data represented in JavaScript Object Notation [(JSON)](https://www.json.org/) format, and export your relational data as JSON text. The following JSON scenarios are available:
+Azure SQL Database, Fabric SQL database, and Azure SQL Managed Instance let you parse and query data represented in JavaScript Object Notation [(JSON)](https://www.json.org/) format, and export your relational data as JSON text. The following JSON scenarios are available:
 
 - [Formatting relational data in JSON format](#formatting-relational-data-in-json-format) using `FOR JSON` clause.
 - [Working with JSON data](#working-with-json-data)
@@ -100,7 +100,7 @@ Instead of sending separate queries to get Customer data and then to fetch a lis
 
 If you don't have strictly structured data, if you have complex sub-objects, arrays, or hierarchical data, or if your data structures evolve over time, the JSON format can help you to represent any complex data structure.
 
-JSON is a textual format that can be used like any other string type in Azure SQL Database and Azure SQL Managed Instance. You can send or store JSON data as a standard NVARCHAR:
+JSON is a textual format that can be used like any other string type. You can send or store JSON data as a standard NVARCHAR:
 
 ```sql
 CREATE TABLE Products (
@@ -122,13 +122,13 @@ The JSON data used in this example is represented by using the NVARCHAR(MAX) typ
 EXEC InsertProduct 'Toy car', '{"Price":50,"Color":"White","tags":["toy","children","games"]}'
 ```
 
-Any client-side language or library that works with string data in Azure SQL Database and Azure SQL Managed Instance will also work with JSON data. JSON can be stored in any table that supports the NVARCHAR type, such as a Memory-optimized table or a System-versioned table. JSON does not introduce any constraint either in the client-side code or in the database layer.
+Any client-side language or library that works with string data will also work with JSON data. JSON can be stored in any table that supports the **nvarchar** type, such as a Memory-optimized table or a System-versioned table. JSON does not introduce any constraint either in the client-side code or in the database layer.
 
 ## Querying JSON data
 
 If you have data formatted as JSON stored in Azure SQL tables, JSON functions let you use this data in any SQL query.
 
-JSON functions that are available in Azure SQL Database and Azure SQL Managed Instance let you treat data formatted as JSON as any other SQL data type. You can easily extract values from the JSON text, and use JSON data in any query:
+[JSON functions](/sql/t-sql/functions/json-functions-transact-sql) let you treat data formatted as JSON as any other SQL data type. You can easily extract values from the JSON text, and use JSON data in any query:
 
 ```sql
 select Id, Title, JSON_VALUE(Data, '$.Color'), JSON_QUERY(Data, '$.tags')
@@ -146,7 +146,7 @@ The JSON_QUERY function is similar to JSON_VALUE. Unlike JSON_VALUE, this functi
 
 The JSON_MODIFY function lets you specify the path of the value in the JSON text that should be updated, as well as a new value that will overwrite the old one. This way you can easily update JSON text without reparsing the entire structure.
 
-Since JSON is stored in a standard text, there are no guarantees that the values stored in text columns are properly formatted. You can verify that text stored in JSON column is properly formatted by using standard Azure SQL Database check constraints and the ISJSON function:
+Since JSON is stored in a standard text, there are no guarantees that the values stored in text columns are properly formatted. You can verify that text stored in JSON column is properly formatted by using standard check constraints and the `ISJSON` function:
 
 ```sql
 ALTER TABLE Products
@@ -158,7 +158,7 @@ If the input text is properly formatted JSON, the ISJSON function returns the va
 
 ## Transforming JSON into tabular format
 
-Azure SQL Database and Azure SQL Managed Instance also let you transform JSON collections into tabular format and load or query JSON data.
+You can transform JSON collections into tabular format and load or query JSON data.
 
 OPENJSON is a table-value function that parses JSON text, locates an array of JSON objects, iterates through the elements of the array, and returns one row in the output result for each element of the array.
 
@@ -185,3 +185,7 @@ END
 ```
 
 The collection of orders formatted as a JSON array and provided as a parameter to the stored procedure can be parsed and inserted into the Orders table.
+
+## Related content
+
+- [JSON data in SQL Server](/sql/relational-databases/json/json-data-sql-server)

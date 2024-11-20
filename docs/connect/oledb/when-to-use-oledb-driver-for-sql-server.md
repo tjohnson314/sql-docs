@@ -13,7 +13,8 @@ helpviewer_keywords:
   - "data access [OLE DB Driver for SQL Server], about OLE DB Driver for SQL Server"
 ---
 # When to Use OLE DB Driver for SQL Server
-[!INCLUDE[SQL Server Azure SQL Database Synapse Analytics PDW](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+
+[!INCLUDE[SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 [!INCLUDE[Driver_OLEDB_Download](../../includes/driver_oledb_download.md)]
 

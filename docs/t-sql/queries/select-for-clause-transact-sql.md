@@ -19,10 +19,11 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 ms.custom: ignite-2023
+monikerRange: "= azuresqldb-current || >= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-mi-current || =fabric"
 ---
 # SELECT - FOR Clause (Transact-SQL)
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric Lakehouse SQL analytics endpoint Fabric Synapse Data Warehouse](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric Lakehouse SQL analytics endpoint Fabric Synapse Data Warehouse Fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]
 
 Use the FOR clause to specify one of the following options for query results.
   

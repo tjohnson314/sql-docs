@@ -4,7 +4,7 @@ description: "Learn about the optimized locking enhancement to the Database Engi
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, peskount, praspu, dfurman
-ms.date: 09/27/2024
+ms.date: 10/07/2024
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -12,12 +12,12 @@ helpviewer_keywords:
   - "optimized locking"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current"
+monikerRange: "=azuresqldb-current || =fabric"
 ---
 
 # Optimized locking
 
-[!INCLUDE [asdb](../../includes/applies-to-version/asdb.md)]
+[!INCLUDE [asdb-fabricsqldb](../../includes/applies-to-version/asdb-fabricsqldb.md)]
 
 This article introduces the optimized locking feature, a new Database Engine capability that offers an improved transaction locking mechanism that reduces lock memory consumption and blocking for concurrent transactions.
 
@@ -40,7 +40,7 @@ For example:
 
 ### Availability
 
-Optimized locking is available in [!INCLUDE [Azure SQL Database](../../includes/ssazure-sqldb.md)] only, in all service tiers and compute sizes.
+Optimized locking is available in [!INCLUDE [Azure SQL Database](../../includes/ssazure-sqldb.md)] and [Fabric SQL database](/fabric/database/sql/overview) only, in all service tiers and compute sizes.
 
 Optimized locking is not currently available in [!INCLUDE [Azure SQL Managed Instance](../../includes/ssazuremi-md.md)] or in [!INCLUDE [SQL Server](../../includes/ssnoversion-md.md)].
 

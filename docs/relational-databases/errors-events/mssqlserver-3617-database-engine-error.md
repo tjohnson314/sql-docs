@@ -39,7 +39,7 @@ Summary of Causes:
 - Find out if user(s) canceled the query execution manually
 - Find out if the application or OS terminated unexpectedly
 
-**Ensure queries complete within expected duration (less than configured query timeout value):** The most common reason for attention events is queries are terminated automatically by the application due to exceeding query timeout values. If a query/commmand timeout value is set to 30 seconds and the query does not return even a single packet of data back to the client application, the latter would cancel the query. In such cases, the best approach is to understand why the query is taking so long and take appropriate steps to reduce its duration.
+**Ensure queries complete within expected duration (less than configured query timeout value):** The most common reason for attention events is queries are terminated automatically by the application due to exceeding query timeout values. If a query/command timeout value is set to 30 seconds and the query does not return even a single packet of data back to the client application, the latter would cancel the query. In such cases, the best approach is to understand why the query is taking so long and take appropriate steps to reduce its duration.
 
 **Increase query or command timeout:** If you establish that the canceled query is running within pre-established baseline duration, but a command timeout is still reached, you may consider increasing the timeout value in the database application.
 

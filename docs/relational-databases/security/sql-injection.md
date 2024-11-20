@@ -10,11 +10,11 @@ ms.subservice: security
 ms.topic: conceptual
 helpviewer_keywords:
   - "SQL Injection"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # SQL injection
 
-[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 SQL injection is an attack in which malicious code is inserted into strings that are later passed to an instance of the [!INCLUDE [ssdenoversion-md](../../includes/ssdenoversion-md.md)] for parsing and execution. Any procedure that constructs SQL statements should be reviewed for injection vulnerabilities, because the [!INCLUDE [ssde-md](../../includes/ssde-md.md)] executes all syntactically valid queries that it receives. Even parameterized data can be manipulated by a skilled and determined attacker.
 

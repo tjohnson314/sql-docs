@@ -13,7 +13,7 @@ dev_langs:
   - "TSQL"
 ---
 # Parse (geometry Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Returns a **geometry** instance from an Open Geospatial Consortium (OGC) Well-Known Text (WKT) representation. `Parse()` is equivalent to [STGeomFromText()](../../t-sql/spatial-geometry/parse-geometry-data-type.md), with the exception that it assumes a spatial reference ID (SRID) of 0 as a parameter. The input may carry optional Z (elevation) and M (measure) values.
   

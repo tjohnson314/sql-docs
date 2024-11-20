@@ -46,7 +46,7 @@ spec:
      fsGroup: 10001
    containers:
    - name: mssql # container name within the pod.
-     image: mcr.microsoft.com/mssql/server:2019-latest
+     image: mcr.microsoft.com/mssql/server:2022-latest
      ports:
      - containerPort: 1433
        name: tcpsql
@@ -115,7 +115,7 @@ There are two values possible for this setting:
           fsGroup: 10001
         containers:
           - name: mssql
-            image: mcr.microsoft.com/mssql/server:2019-latest
+            image: mcr.microsoft.com/mssql/server:2022-latest
             ports:
               - containerPort: 1433
                 name: tcpsql
@@ -222,7 +222,7 @@ spec:
         fsGroup: 10001
       containers:
         - name: mssql-sales
-          image: mcr.microsoft.com/mssql/server:2019-latest
+          image: mcr.microsoft.com/mssql/server:2022-latest
           ports:
             - containerPort: 1433
               name: tcpsql
@@ -331,7 +331,7 @@ spec:
        - /bin/bash
        - -c
        - cp /var/opt/config/mssql.conf /var/opt/mssql/mssql.conf && /opt/mssql/bin/sqlservr
-     image: mcr.microsoft.com/mssql/server:2019-latest
+     image: mcr.microsoft.com/mssql/server:2022-latest
      resources:
       limits:
        memory: 2Gi
@@ -442,7 +442,7 @@ spec:
        - /bin/bash
        - -c
        - cp /var/opt/config/mssql.conf /var/opt/mssql/mssql.conf && /opt/mssql/bin/sqlservr
-     image: mcr.microsoft.com/mssql/server:2019-latest
+     image: mcr.microsoft.com/mssql/server:2022-latest
      resources:
       requests:
        memory: 2Gi
@@ -491,7 +491,7 @@ spec:
             - /bin/bash
             - -c
             - cp /var/opt/config/mssql.conf /var/opt/mssql/mssql.conf && /opt/mssql/bin/sqlservr
-          image: mcr.microsoft.com/mssql/server:2019-latest
+          image: mcr.microsoft.com/mssql/server:2022-latest
           ports:
             - containerPort: 1433
 ```

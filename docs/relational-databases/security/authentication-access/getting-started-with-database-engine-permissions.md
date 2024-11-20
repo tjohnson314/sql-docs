@@ -11,13 +11,18 @@ ms.topic: quickstart
 ms.custom: intro-quickstart
 helpviewer_keywords:
   - "permissions [SQL Server], getting started"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Get started with Database Engine permissions
 
-[!INCLUDE [SQL Server](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
-Permissions in the [!INCLUDE[ssDE](../../../includes/ssde-md.md)] are managed at the server level through logins and server roles, and at the database level through database users and database roles. The model for [!INCLUDE[ssSDS](../../../includes/sssds-md.md)] exposes the same system within each database, but the server level permissions aren't available. This article reviews some basic security concepts and then describes a typical implementation of the permissions.
+This article reviews some basic security concepts and then describes a typical implementation of the permissions. Permissions in the [!INCLUDE[ssDE](../../../includes/ssde-md.md)] are managed at the server level through logins and server roles, and at the database level through database users and database roles. 
+
+The model for [!INCLUDE[ssSDS](../../../includes/sssds-md.md)] and [!INCLUDE [fabric-sqldb](../../../includes/fabric-sqldb.md)] exposes the same system within each database, but the server level permissions aren't available.
+
+- In [!INCLUDE[ssSDS](../../../includes/sssds-md.md)], see [Tutorial: Secure a database in Azure SQL Database](/azure/azure-sql/database/secure-database-tutorial?view=azuresql-db&preserve-view=true). Microsoft Entra ID authentication is recommended. For more information, see [Tutorial: Create Microsoft Entra users using Microsoft Entra applications](/azure/azure-sql/database/authentication-aad-service-principal-tutorial?view=azuresql-db&preserve-view=true).
+- In [!INCLUDE [fabric-sqldb](../../../includes/fabric-sqldb.md)], Microsoft Entra ID for database users is the only supported authentication method. Server-level roles and permissions are not available, only database-level. For more information, see [Authorization in SQL database in Microsoft Fabric](/fabric/database/sql/authorization).
 
 [!INCLUDE [entra-id](../../../includes/entra-id.md)]
 

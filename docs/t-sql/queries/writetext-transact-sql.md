@@ -22,7 +22,7 @@ dev_langs:
   - "TSQL"
 ---
 # WRITETEXT (Transact-SQL)
-[!INCLUDE [SQL Server](../../includes/applies-to-version/sql-asdbmi.md)]
+[!INCLUDE [SQL Server SQLMI](../../includes/applies-to-version/sql-asdbmi.md)]
 
   Permits minimally logged, interactive updating of an existing **text**, **ntext**, or **image** column. WRITETEXT overwrites any existing data in the column it affects. WRITETEXT cannot be used on **text**, **ntext**, and **image** columns in views.  
   

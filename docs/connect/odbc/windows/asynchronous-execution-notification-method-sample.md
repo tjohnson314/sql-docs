@@ -74,7 +74,7 @@ int AsyncNotificationSample(void)
     // Initiate connect establishing  
     for (int i=0; i<NUMBER_OPERATIONS; i++)  
     {  
-        SQLDriverConnect(arhDbc[i], NULL, (SQLTCHAR*)TEXT("Driver={ODBC Driver 11 for SQL Server};SERVER=your_server;DATABASE=your_database;UID=sa;PWD=your_password;"), SQL_NTS, NULL, 0, NULL, SQL_DRIVER_NOPROMPT);  
+        SQLDriverConnect(arhDbc[i], NULL, (SQLTCHAR*)TEXT("Driver={ODBC Driver 11 for SQL Server};SERVER=your_server;DATABASE=your_database;UID=sa;PWD=<password>;"), SQL_NTS, NULL, 0, NULL, SQL_DRIVER_NOPROMPT);  
     }  
   
     // Can do some other staff before calling WaitForMultipleObjects  
@@ -308,7 +308,7 @@ int _tmain(int argc, _TCHAR* argv[])
     for(int i = 0; i < g_nConnection; i++)  
     {  
         SQLDriverConnect(g_hDbcs[i],NULL,
-            (SQLCHAR*)"DRIVER={ODBC Driver 18 for SQL Server};Server=your_server;Encrypt=yes;database=your_database;uid=usr;pwd=your_password",
+            (SQLCHAR*)"DRIVER={ODBC Driver 18 for SQL Server};Server=your_server;Encrypt=yes;database=your_database;uid=usr;pwd=<password>",
             SQL_NTS, (SQLCHAR*)g_connOut[i].szOutConnectionString, 500, &g_connOut[i].iLen, SQL_DRIVER_NOPROMPT);  
     }
 

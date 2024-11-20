@@ -12,7 +12,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # Convert an original SQL project to an SDK-style project
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Creating a new SDK-style SQL project is a [quick task](../get-started.md#step-1-create-a-new-project). However, if you have existing SQL projects you can convert them to SDK-style SQL projects in place to take advantage of the new features.
 

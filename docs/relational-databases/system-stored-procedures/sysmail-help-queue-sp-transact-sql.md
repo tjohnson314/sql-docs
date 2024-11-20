@@ -4,7 +4,7 @@ description: "Allows viewing the state of the mail or status queues."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/30/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -20,7 +20,7 @@ dev_langs:
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
-There are two queues in Database Mail: the mail queue and status queue. The mail queue stores mail items that are waiting to be sent. The status queue stores the status of items that have already been sent. This stored procedure allows viewing the state of the mail or status queues. If the parameter *@queue_type* isn't specified, the stored procedure returns one row for each of the queues.
+There are two queues in Database Mail: the mail queue and status queue. The mail queue stores mail items that are waiting to be sent. The status queue stores the status of items that were already sent. This stored procedure allows viewing the state of the mail or status queues. If the parameter *@queue_type* isn't specified, the stored procedure returns one row for each of the queues.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
@@ -48,8 +48,8 @@ Optional argument deletes e-mails of the type specified as the *@queue_type*. *@
 | `queue_type` | **nvarchar(6)** | The type of queue. Possible values are `mail` and `status`. |
 | `length` | **int** | The number of mail items in the specified queue. |
 | `state` | **nvarchar(64)** | The state of the monitor. Possible values are `INACTIVE` (queue is inactive), `NOTIFIED` (queue has been notified receipt to occur), and `RECEIVES_OCCURRING` (queue is receiving). |
-| `last_empty_rowset_time` | **datetime** | The date and time that the queue was last empty. In military time format and GMT time zone. |
-| `last_activated_time` | **datetime** | The date and time the queue was last activated. In military time format and GMT time zone. |
+| `last_empty_rowset_time` | **datetime** | The date and time that the queue was last empty. In military time format, and GMT time zone. |
+| `last_activated_time` | **datetime** | The date and time the queue was last activated. In military time format, and GMT time zone. |
 
 ## Remarks
 
@@ -57,18 +57,18 @@ When troubleshooting Database Mail, use `sysmail_help_queue_sp` to see how many 
 
 ## Permissions
 
-By default, only members of the **sysadmin** fixed server role can access this procedure.
+Requires `CONTROL SERVER` permission on the server.
 
 ## Examples
 
 The following example returns both the mail and status queues.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_queue_sp;
+EXECUTE msdb.dbo.sysmail_help_queue_sp;
 GO
 ```
 
-This is a sample result set has been edited for length.
+Here's a sample result set that was edited for length.
 
 ```output
 queue_type length      state              last_empty_rowset_time  last_activated_time

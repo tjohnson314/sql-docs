@@ -8,11 +8,11 @@ ms.date: 12/21/2023
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: conceptual
-monikerRange: "=azuresqldb-current || =azure-sqldw-latest"
+monikerRange: "=azuresqldb-current || =azure-sqldw-latest || =fabric"
 ---
 # Microsoft Entra ID support in SQL Server Data Tools (SSDT)
 
-[!INCLUDE [appliesto-xx-asdb-asdb-xxx-md.md](../includes/appliesto-xx-asdb-asdw-xxx-md.md)]
+[!INCLUDE [Azure SQL Database Azure Synapse Analytics FabricSQLDB](../includes/applies-to-version/asdb-asa-fabricsqldb.md)]
 
 SQL Server Data Tools (SSDT) provides several authentication methods with Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)).
 

@@ -14,11 +14,16 @@ helpviewer_keywords:
   - "spatial data types [SQL Server]"
 dev_langs:
   - "TSQL"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Spatial Types - geography
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
-  The geography spatial data type, **geography**, is implemented as a .NET common language runtime (CLR) data type in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. This type represents data in a round-earth coordinate system. The [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] **geography** data type stores ellipsoidal (round-earth) data, such as GPS latitude and longitude coordinates.  
+  The geography spatial data type, **geography**, is implemented as a .NET common language runtime (CLR) data type in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. This type represents data in a round-earth coordinate system. The [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] **geography** data type stores ellipsoidal (round-earth) data, such as GPS latitude and longitude coordinates. 
+
+>[!NOTE]
+>In Fabric SQL database, columns of Spatial Types are allowed to be used, but will not be mirrored to Fabric OneLake.
+  
   
  [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] supports a set of methods for the **geography** spatial data type. This includes methods on **geography** that are defined by the Open Geospatial Consortium (OGC) standard and a set of [!INCLUDE[msCoName](../../includes/msconame-md.md)] extensions to that standard.  
  
@@ -27,7 +32,11 @@ dev_langs:
 
 ## Registering the geography Type  
  The **geography** type is predefined and available in each database. You can create table columns of type **geography** and operate on **geography** data in the same manner as you would use other system-supplied types. Can be used in persisted and non-persisted computed columns.  
-  
+
+## Remarks
+
+In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], **geography** and **geometry** data types are supported but cannot be [mirrored to the Fabric OneLake](/fabric/database/sql/mirroring-overview).
+
 ## Examples  
   
 ### A. Showing how to add and query geography data  

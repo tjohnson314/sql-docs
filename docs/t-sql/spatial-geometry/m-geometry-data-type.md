@@ -16,7 +16,7 @@ dev_langs:
   - "TSQL"
 ---
 # M (geometry Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
   The **M** (measure) value of the **geometry** instance. The semantics of the measure value are user-defined.  
 

@@ -11,7 +11,7 @@ ms.topic: concept-article
 
 # T-SQL design issues
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 When you analyze the T-SQL code in your database project, one or more warnings might be categorized as design issues. You should address design issues to avoid the following situations:
 

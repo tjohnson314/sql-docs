@@ -9,12 +9,12 @@ ms.subservice: performance
 ms.topic: conceptual
 helpviewer_keywords:
   - "Query Store, best practices"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azure-sqldw-latest || =fabric"
 ---
 
 # Best practices for monitoring workloads with Query Store
 
-[!INCLUDE [SQL Server ASDB, ASDBMI](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server 2016 Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics dedicated pool only FabricSQLDB](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-dedicated-pool-only-fabricsqldb.md)]
 
 This article outlines the best practices for using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Query Store with your workload.
 
@@ -32,6 +32,8 @@ For a quick description on how to use Query Store in troubleshooting scenarios, 
 ## <a id="Insight"></a> Use Query Performance Insight in Azure SQL Database
 
 If you run Query Store in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you can use [Query Performance Insight](/azure/sql-database/sql-database-query-performance) to analyze resource consumption over time. While you can use [!INCLUDE [ssManStudio](../../includes/ssmanstudio-md.md)] and [Azure Data Studio](/azure-data-studio/what-is-azure-data-studio) to get detailed resource consumption for all your queries, such as CPU, memory, and I/O, Query Performance Insight gives you a quick and efficient way to determine their effect on overall DTU consumption for your database. For more information, see [Azure SQL Database Query Performance Insight](/azure/azure-sql/database/query-performance-insight-use).
+
+To [monitor performance in Fabric SQL database](/fabric/database/sql/monitor), use the [Performance dashboard](/fabric/database/sql/performance-dashboard).
 
 ## Use Query Store with Elastic Pool databases
 

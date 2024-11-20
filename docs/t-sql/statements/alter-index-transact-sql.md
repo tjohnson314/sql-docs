@@ -43,12 +43,12 @@ helpviewer_keywords:
   - "index reorganize [SQL Server]"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 
 # ALTER INDEX (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 Modifies an existing table or view index (rowstore, columnstore, or XML) by disabling, rebuilding, or reorganizing the index; or by setting options on the index.
 
@@ -664,6 +664,8 @@ When an option isn't explicitly specified, the current setting is applied. For e
 The values for `ONLINE`, `MAXDOP`, and `SORT_IN_TEMPDB` aren't stored in the system catalog. Unless specified in the index statement, the default value for the option is used.
 
 On multiprocessor computers, just like other queries do, `ALTER INDEX REBUILD` automatically uses more processors to perform the scan and sort operations that are associated with modifying the index. When you run `ALTER INDEX REORGANIZE`, with or without `LOB_COMPACTION`, the *max degree of parallelism* value is a single threaded operation. For more information, see [Configure Parallel Index Operations](../../relational-databases/indexes/configure-parallel-index-operations.md).
+
+In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], `ALTER INDEX ALL` is not supported, but `ALTER INDEX <index name>` is.
 
 > [!IMPORTANT]  
 > An index can't be reorganized or rebuilt if the filegroup in which it's located is offline or set to read-only. When the keyword `ALL` is specified and one or more indexes are in an offline or read-only filegroup, the statement fails.

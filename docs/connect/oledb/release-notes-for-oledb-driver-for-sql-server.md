@@ -3,14 +3,14 @@ title: Release notes for OLE DB Driver
 description: This release notes article describes the changes in each release of the Microsoft OLE DB Driver for SQL Server.
 author: David-Engel
 ms.author: davidengel
-ms.date: 07/26/2024
+ms.date: 09/24/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
 ---
 # Release notes for the Microsoft OLE DB Driver for SQL Server
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
 This page discusses what was added in each version of the Microsoft OLE DB Driver for SQL Server.
 

@@ -214,7 +214,7 @@ public class testXA {
         int portNumber = 1433;
         String databaseName = "AdventureWorks";
         String user = "UserName";
-        String password = "*****";
+        String password = "<password>";
 
         String connectionUrl = prefix + serverName + ":" + portNumber + ";encrypt=true;databaseName=" + databaseName + ";user="
                 + user + ";password=" + password;

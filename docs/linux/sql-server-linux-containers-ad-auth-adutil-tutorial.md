@@ -179,6 +179,8 @@ At this point, you can copy `mssql.keytab` from the current Linux host to the Li
    ```ini
    [libdefaults]
    default_realm = CONTOSO.COM
+   default_keytab_name = /var/opt/mssql/secrets/mssql.keytab
+   default_ccache_name = ""
 
    [realms]
    CONTOSO.COM = {

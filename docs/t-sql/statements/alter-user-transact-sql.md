@@ -3,7 +3,7 @@ title: "ALTER USER (Transact-SQL)"
 description: ALTER USER (Transact-SQL)
 author: VanMSFT
 ms.author: vanto
-ms.date: 01/10/2020
+ms.date: 11/05/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -21,7 +21,7 @@ helpviewer_keywords:
   - "modifying default schemas"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # ALTER USER (Transact-SQL)
 
@@ -42,6 +42,9 @@ Renames a database user or changes its default schema.
     :::column-end:::
     :::column:::
         [SQL Database](alter-user-transact-sql.md?view=azuresqldb-current&preserve-view=true)
+    :::column-end:::
+    :::column:::
+        [SQL database in Fabric](alter-user-transact-sql.md?view=fabric&preserve-view=true)
     :::column-end:::
     :::column:::
         [SQL Managed Instance](alter-user-transact-sql.md?view=azuresqldb-mi-current&preserve-view=true)
@@ -229,14 +232,14 @@ GO
 - [sp_migrate_user_to_contained &#40;Transact-SQL&#41;](../../relational-databases/system-stored-procedures/sp-migrate-user-to-contained-transact-sql.md)
 
 ::: moniker-end
-::: moniker range="=azuresqldb-current"
+::: moniker range="=azuresqldb-current||=fabric"
 
 :::row:::
     :::column:::
         [SQL Server](alter-user-transact-sql.md?view=sql-server-ver15&preserve-view=true)
     :::column-end:::
     :::column:::
-        **_\* SQL Database \*_**
+        **_\* Azure SQL Database and SQL Database in Fabric \*_**
     :::column-end:::
     :::column:::
         [SQL Managed Instance](alter-user-transact-sql.md?view=azuresqldb-mi-current&preserve-view=true)
@@ -251,9 +254,11 @@ GO
 
 &nbsp;
 
-## SQL Database
+## Azure SQL Database and SQL database in Microsoft Fabric
 
 ## Syntax
+
+Syntax for Azure SQL Database
 
 ```syntaxsql
 -- Syntax for Azure SQL Database
@@ -289,45 +294,70 @@ ALTER USER userName
  NAME = newUserName
 ```
 
+Syntax for [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
+
+```syntaxsql
+ALTER USER   
+    {  
+    Microsoft_Entra_principal FROM EXTERNAL PROVIDER [WITH OBJECT_ID = 'objectid'] 
+    }  
+ [ ; ]  
+  
+-- Users that cannot authenticate   
+ALTER USER user_name   
+    {  
+         { FOR | FROM } CERTIFICATE cert_name   
+       | { FOR | FROM } ASYMMETRIC KEY asym_key_name   
+    }  
+ [ ; ]  
+  
+<options_list> ::=  
+    DEFAULT_LANGUAGE = { NONE | lcid | language name | language alias }   
+
+-- SQL Database syntax when connected to a federation member  
+ALTER USER user_name
+[;]
+```
+
 ## Arguments
 
- *userName*
+#### *userName*
  Specifies the name by which the user is identified inside this database.
 
- LOGIN **=** _loginName_
+#### LOGIN **=** _loginName_
  Remaps a user to another login by changing the user's Security Identifier (SID) to match the login's SID.
 
  If the ALTER USER statement is the only statement in a SQL batch, Azure SQL Database supports the WITH LOGIN clause. If the ALTER USER statement isn't the only statement in a SQL batch or is executed in dynamic SQL, the WITH LOGIN clause isn't supported.
 
- NAME **=** _newUserName_
+#### NAME **=** _newUserName_
  Specifies the new name for this user. *newUserName* must not already occur in the current database.
 
- DEFAULT_SCHEMA **=** { *schemaName* | NULL }
+#### DEFAULT_SCHEMA **=** { *schemaName* | NULL }
  Specifies the first schema that will be searched by the server when it resolves the names of objects for this user. Setting the default schema to NULL removes a default schema from a Windows group. The NULL option can't be used with a Windows user.
 
- PASSWORD **=** '*password*'
- **Applies to**: [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)] and later, [!INCLUDE[sssds](../../includes/sssds-md.md)].
+#### PASSWORD **=** '*password*'
+ **Applies to**: [!INCLUDE[sssds](../../includes/sssds-md.md)].
 
  Specifies the password for the user that is being changed. Passwords are case-sensitive.
 
 > [!NOTE]
 > This option is available only for contained users. For more information, see [Contained Databases](../../relational-databases/databases/contained-databases.md) and [sp_migrate_user_to_contained &#40;Transact-SQL&#41;](../../relational-databases/system-stored-procedures/sp-migrate-user-to-contained-transact-sql.md).
 
- OLD_PASSWORD **=**_'oldpassword'_
- **Applies to**: [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)] and later, [!INCLUDE[sssds](../../includes/sssds-md.md)].
+#### OLD_PASSWORD **=**_'oldpassword'_
+ **Applies to**: [!INCLUDE[sssds](../../includes/sssds-md.md)].
 
  The current user password that will be replaced by '*password*'. Passwords are case-sensitive. *OLD_PASSWORD* is required to change a password, unless you have **ALTER ANY USER** permission. Requiring *OLD_PASSWORD* prevents users with **IMPERSONATION** permission from changing the password.
 
 > [!NOTE]
 > This option is available only for contained users.
 
- ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | **OFF** ]
+#### ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | **OFF** ]
  **Applies to**: [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later, [!INCLUDE[ssSDS](../../includes/sssds-md.md)].
 
  Suppresses cryptographic metadata checks on the server in bulk copy operations. This enables the user to bulk copy encrypted data between tables or databases, without decrypting the data. The default is OFF.
 
 > [!WARNING]
-> Improper use of this option can lead to data corruption. For more information, see [Migrate Sensitive Data Protected by Always Encrypted](../../relational-databases/security/encryption/migrate-sensitive-data-protected-by-always-encrypted.md).
+> Improper use of this option can lead to data corruption. For more information, see [Migrate Sensitive Data Protected by Always Encrypted](../../relational-databases/security/encryption/migrate-sensitive-data-protected-by-always-encrypted.md).  
 
 ## Remarks
 
@@ -429,6 +459,9 @@ GO
     :::column-end:::
     :::column:::
         [SQL Database](alter-user-transact-sql.md?view=azuresqldb-current&preserve-view=true)
+    :::column-end:::
+    :::column:::
+        [SQL database in Fabric](alter-user-transact-sql.md?view=fabric&preserve-view=true)
     :::column-end:::
     :::column:::
         **_\* SQL Managed Instance \*_**
@@ -715,6 +748,9 @@ ALTER USER [westus\mygroup] WITH LOGIN = mygroup
         [SQL Database](alter-user-transact-sql.md?view=azuresqldb-current&preserve-view=true)
     :::column-end:::
     :::column:::
+        [SQL database in Fabric](alter-user-transact-sql.md?view=fabric&preserve-view=true)
+    :::column-end:::
+    :::column:::
         [SQL Managed Instance](alter-user-transact-sql.md?view=azuresqldb-mi-current&preserve-view=true)
     :::column-end:::
     :::column:::
@@ -842,6 +878,9 @@ GO
     :::column-end:::
     :::column:::
         [SQL Database](alter-user-transact-sql.md?view=azuresqldb-current&preserve-view=true)
+    :::column-end:::
+    :::column:::
+        [SQL database in Fabric](alter-user-transact-sql.md?view=fabric&preserve-view=true)
     :::column-end:::
     :::column:::
         [SQL Managed Instance](alter-user-transact-sql.md?view=azuresqldb-mi-current&preserve-view=true)

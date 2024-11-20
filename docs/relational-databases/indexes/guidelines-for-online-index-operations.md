@@ -15,11 +15,11 @@ helpviewer_keywords:
   - "disk space [SQL Server], indexes"
   - "nonclustered indexes [SQL Server], online operations"
   - "transaction logs [SQL Server], indexes"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Guidelines for online index operations
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Database MI](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 When you perform online index operations, the following guidelines apply:
 

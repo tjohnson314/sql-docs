@@ -16,7 +16,7 @@ dev_langs:
   - "TSQL"
 ---
 # STDistance (geography Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
   Returns the shortest distance between a point in a **geography** instance and a point in another **geography** instance.  
   

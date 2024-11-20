@@ -12,7 +12,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # Analyze T-SQL code to find defects
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 You can improve the quality of the Transact-SQL code in a database schema by importing it into a database project and analyzing the code against a set of rules. For example, you might want to find any errors in a schema that you didn't develop and whose quality has not been verified. For more information, see the [code analysis overview](../concepts/sql-code-analysis/sql-code-analysis.md).
 

@@ -9,11 +9,12 @@ ms.service: azure-sql-database
 ms.subservice: development
 ms.topic: reference
 ms.custom: sqldbrb=2
+monikerRange: "= azuresql || = azuresql-db || = azuresql-mi ||=fabricsql"
 ---
 
 # Public data sets for testing and prototyping
 
-[!INCLUDE[appliesto-sqldb-sqlmi-sqlvm](includes/appliesto-sqldb-sqlmi-sqlvm.md)]
+[!INCLUDE [appliesto-sqldb-sqlmi-sqlvm-fabricsqldb](includes/appliesto-sqldb-sqlmi-sqlvm-fabricsqldb.md)]
 
 Browse this list of public data sets for data that you can use to prototype and test storage and analytics services and solutions.
 

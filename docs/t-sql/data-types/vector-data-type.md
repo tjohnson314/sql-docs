@@ -231,6 +231,8 @@ In the ongoing preview there are the following known issues:
 - Column encryption doesn't currently support the **vector** type.
 - Always Encrypted doesn't currently support the **vector** type.
 - Data Masking currently shows **vector** data as **varbinary** data type in the portal.
+- When passing a **vector** type to `LEN` and `DATALENGTH` error 8116 (Argument data type vector is invalid for argument 1 of datalength function) is returned.
+- In some cases when you pass a vector to a stored procedure or a function you, may get error 42211 (Truncation of vector is not allowed during the conversion). A workaround is to use **nvarchar(max)** instead **vector** type.
 
 These issues will be fixed in future updates and documentation will be updated accordingly.
 

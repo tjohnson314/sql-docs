@@ -12,12 +12,12 @@ keywords:
   - install ssdt
   - download ssdt
   - latest ssdt
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || =azuresqldb-mi-current || =fabric"
 ---
 
 # Install SQL Server Data Tools (SSDT) for Visual Studio
 
-[!INCLUDE [sql-asdb-asa](../includes/applies-to-version/sql-asdb-asa.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Synapse Analytics FabricSQLDB](../includes/applies-to-version/sql-asdb-asdbmi-asa-fabricsqldb.md)]
 
 **SQL Server Data Tools (SSDT)** is a set of development tooling for building SQL Server databases, Azure SQL databases, Analysis Services (AS) data models, Integration Services (IS) packages, and Reporting Services (RS) reports. With SSDT, you can design and deploy SQL objects with the same project concept as other application development tools. The **SQL projects** capability extends to CI/CD pipelines, enabling you to automate the build and deployment of your database projects with the [SqlPackage CLI](../tools/sqlpackage/sqlpackage.md).
 
@@ -78,7 +78,7 @@ For Analysis Services (SSAS), Integration Services (SSIS), or Reporting Services
 
 | Project Templates | SQL Platforms Supported |
 | --- | --- |
-| Relational databases | [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] - [!INCLUDE [sssql22-md](../includes/sssql22-md.md)]<br /><br />Azure SQL Database, Azure SQL Managed Instance<br /><br />Azure Synapse Analytics Dedicated Pools <br /> Azure Synapse Analytics Serverless Pools (requires VS2022 17.7 see [the release notes](/visualstudio/releases/2022/release-notes-v17.7#support-for-serverless-sql-pool-in-ssdt)) |
+| Relational databases | [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] - [!INCLUDE [sssql22-md](../includes/sssql22-md.md)]<br /><br />Azure SQL Database, Azure SQL Managed Instance<br /><br />Azure Synapse Analytics Dedicated Pools <br /> Azure Synapse Analytics Serverless Pools (requires VS2022 17.7 see [the release notes](/visualstudio/releases/2022/release-notes-v17.7#support-for-serverless-sql-pool-in-ssdt))<br /><br />Warehouse in Microsoft Fabric (requires VS2022 17.12)<br/>SQL database in Microsoft Fabric (requires VS2022 17.12) |
 | Analysis Services models<br /><br />Reporting Services reports | SQL Server 2016 - SQL Server 2022 |
 | Integration Services packages | SQL Server 2019 - SQL Server 2022 |
 

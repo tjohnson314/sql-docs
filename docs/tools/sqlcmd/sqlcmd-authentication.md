@@ -8,11 +8,11 @@ ms.date: 12/13/2023
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 ||=fabric"
 ---
 # Authenticate with Microsoft Entra ID in sqlcmd
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 **sqlcmd** supports a variety of Microsoft Entra authentication models, depending on which version you have installed.
 

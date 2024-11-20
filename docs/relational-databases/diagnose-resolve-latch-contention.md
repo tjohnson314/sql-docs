@@ -8,7 +8,7 @@ ms.date: 03/12/2021
 ms.service: sql
 ms.subservice: performance
 ms.topic: troubleshooting
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 
 # Diagnose and resolve latch contention on SQL Server

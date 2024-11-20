@@ -13,7 +13,7 @@ helpviewer_keywords:
 monikerRange: "=azuresqldb-current||>=sql-server-2017||>=sql-server-linux-2017||=azuresqldb-mi-current"
 ---
 # Graph processing with SQL Server and Azure SQL Database
-[!INCLUDE[sqlserver2017-asdb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi.md)]
+[!INCLUDE[sqlserver2017-asdb-asdbmi-fabricsqldb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi-fabricsqldb.md)]
 
 [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] offers graph database capabilities to model many-to-many relationships. The graph relationships are integrated into [!INCLUDE[tsql-md](../../includes/tsql-md.md)] and receive the benefits of using [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] as the foundational database management system.
 
@@ -87,7 +87,11 @@ To learn more about how match can be used in merge DML, refer to [MERGE Statemen
 
 The [SHORTEST_PATH](./sql-graph-shortest-path.md) function finds shortest path between any two nodes in a graph or starting from a given node to all the other nodes in the graph. `SHORTEST PATH` can also be used to find a transitive closure or for arbitrary length traversals in the graph.
 
-## Next steps
+## Fabric SQL database
+
+In Fabric SQL database, SQL Graph is allowed, but Node and Edge tables will not mirror to Fabric OneLake.
+
+## Related content
 
 - Read the [SQL Graph Database - Architecture](./sql-graph-architecture.md)
 - To get started with SQL Graph, see [SQL Graph Database - Sample](./sql-graph-sample.md)

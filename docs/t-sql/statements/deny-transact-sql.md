@@ -23,12 +23,12 @@ helpviewer_keywords:
   - "denying permissions [SQL Server]"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 
 # DENY (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
   Denies a permission to a principal. Prevents that principal from inheriting the permission through its group or role memberships. DENY takes precedence over all permissions, except that DENY does not apply to object owners or members of the sysadmin fixed server role.
   **Security Note** Members of the sysadmin fixed server role and object owners cannot be denied permissions."
@@ -36,10 +36,11 @@ monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-s
  :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
   
 ## Syntax  
+
+Syntax for SQL Server, Azure SQL Database, and Fabric SQL database
   
 ```syntaxsql
--- Syntax for SQL Server and Azure SQL Database  
-  
+ 
 -- Simplified syntax for DENY  
 DENY   { ALL [ PRIVILEGES ] } 
      | <permission>  [ ( column [ ,...n ] ) ] [ ,...n ]  
@@ -55,9 +56,9 @@ DENY   { ALL [ PRIVILEGES ] }
 { see the tables below }  
 ```  
   
-```syntaxsql
--- Syntax for Azure Synapse Analytics and Parallel Data Warehouse and Microsoft Fabric
-  
+Syntax for Azure Synapse Analytics and Parallel Data Warehouse and Microsoft Fabric warehouse
+
+```syntaxsql 
 DENY   
     <permission> [ ,...n ]  
     [ ON [ <class_> :: ] securable ]   
@@ -77,7 +78,7 @@ DENY
     | SCHEMA  
     | USER  
 }  
-```  
+```
   
 ## Arguments
  ALL  

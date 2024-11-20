@@ -12,7 +12,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # Tutorial: Create and deploy a SQL project
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 The development cycle of a SQL database project enables database development to be integrated into a continuous integration and continuous deployment (CI/CD) workflows familiar as a development best practice. While deployment of a SQL database project can be done manually, it's recommended to use a deployment pipeline to automate the deployment process such that ongoing deployments are run based on your continued local development without additional effort.
 

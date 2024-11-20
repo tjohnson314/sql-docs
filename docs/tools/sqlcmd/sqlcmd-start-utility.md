@@ -8,11 +8,11 @@ ms.date: 07/29/2024
 ms.service: sql
 ms.subservice: ssms
 ms.topic: conceptual
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || = fabric"
 ---
 # Start the sqlcmd utility
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 The [**sqlcmd** utility](sqlcmd-utility.md) lets you enter Transact-SQL statements, system procedures, and script files at the command prompt, in [Edit SQLCMD Scripts with Query Editor](edit-sqlcmd-scripts-query-editor.md) in [About SQL Server Management Studio](../../ssms/menu-help/about-sql-server-management-studio.md), and in a Windows script file or in [an operating system (Cmd.exe) job step](../../ssms/agent/create-a-cmdexec-job-step.md) of a SQL Server Agent job.
 

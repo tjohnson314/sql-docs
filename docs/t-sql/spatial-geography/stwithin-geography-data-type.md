@@ -13,7 +13,7 @@ dev_langs:
   - "TSQL"
 ---
 # STWithin (geography Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
   Returns 1 if a **geography** instance is spatially within another **geography** instance; otherwise, returns 0.  
   

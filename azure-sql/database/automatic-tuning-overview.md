@@ -4,16 +4,16 @@ titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: Azure SQL Database and Azure SQL Managed Instance analyzes SQL query and automatically adapts to user workload.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: nnikolic, mathoma
-ms.date: 9/13/2024
+ms.reviewer: nnikolic, mathoma, derekw
+ms.date: 10/29/2024
 ms.service: azure-sql
 ms.subservice: performance
 ms.topic: conceptual
 ms.custom: sqldbrb=2
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
+monikerRange: "= azuresql || = azuresql-db || = azuresql-mi || = fabric"
 ---
 # Automatic tuning in Azure SQL Database and Azure SQL Managed Instance
-[!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
+[!INCLUDE[appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
 Azure SQL Database and Azure SQL Managed Instance automatic tuning provides peak performance and stable workloads through continuous performance tuning based on AI and machine learning.
 
@@ -45,6 +45,7 @@ Automatic tuning mechanisms are mature and have been perfected on several millio
 
 - **Azure SQL Database**: [Enable automatic tuning in the Azure portal](automatic-tuning-enable.md) or by using the [ALTER DATABASE](/sql/t-sql/statements/alter-database-transact-sql-set-options?view=azuresqldb-current&preserve-view=true) T-SQL statement.
 - **Azure SQL Managed Instance**: Enable automatic tuning by using the [ALTER DATABASE](/sql/t-sql/statements/alter-database-transact-sql-set-options?view=azuresqldb-mi-current&preserve-view=true) T-SQL statement.
+- **SQL database in Microsoft Fabric**: Enabled by default. For more information, see [Performance Dashboard for SQL database in Microsoft Fabric](/fabric/database/sql/performance-dashboard).
 
 ## Automatic tuning options
 
@@ -56,7 +57,7 @@ The automatic tuning options available in Azure SQL Database and Azure SQL Manag
 |**DROP INDEX**|Drops unused (over the last 90 days) and duplicate indexes. Unique indexes, including indexes supporting primary key and unique constraints, are never dropped. This option may be automatically disabled when queries with index hints are present in the workload, or when the workload performs partition switching. On Premium and Business Critical service tiers, this option will never drop unused indexes, but will drop duplicate indexes, if any.|Yes|No|
 |**FORCE LAST GOOD PLAN** (automatic plan correction)|Identifies Azure SQL queries using an execution plan that is slower than the previous good plan, and forces queries to use the last known good plan instead of the regressed plan.|Yes|Yes|
 
-### Automatic tuning for SQL Database
+### Automatic tuning for Azure SQL Database
 
 Automatic tuning for Azure SQL Database uses the **[CREATE INDEX](/sql/t-sql/statements/create-index-transact-sql?view=azuresqldb-current&preserve-view=true)**, **[DROP INDEX](/sql/t-sql/statements/drop-index-transact-sql?view=azuresqldb-current&preserve-view=true)**, and **FORCE_LAST_GOOD_PLAN** database advisor recommendations to optimize your database performance. For more information, see [Database advisor recommendations in the Azure portal](database-advisor-find-recommendations-portal.md), in [PowerShell](/powershell/module/az.sql/get-azsqldatabaserecommendedaction), and in the [REST API](/rest/api/sql/server-automatic-tuning).
 
@@ -75,7 +76,11 @@ To learn about building email notifications for automatic tuning recommendations
 
 Automatic tuning for SQL Managed Instance only supports **FORCE LAST GOOD PLAN**. For more information about configuring automatic tuning options through T-SQL, see [Automatic tuning introduces automatic plan correction](https://azure.microsoft.com/blog/automatic-tuning-introduces-automatic-plan-correction-and-t-sql-management/) and [Automatic plan correction](/sql/relational-databases/automatic-tuning/automatic-tuning#automatic-plan-correction).
 
-### Samples to enable
+### Automatic tuning for SQL database in Microsoft Fabric
+
+The automatic tuning option to **CREATE INDEX** is enabled automatically in [SQL database in Microsoft Fabric](/fabric/database/sql/overview).
+
+## Samples to enable
 
 For more information, see [ALTER DATABASE SET options](/sql/t-sql/statements/alter-database-transact-sql-set-options?view=azuresqldb-current&preserve-view=true).
 

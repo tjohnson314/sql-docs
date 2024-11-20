@@ -4,7 +4,7 @@ description: "The sys.sp_change_feed_reseed_db_start_replication system internal
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: imotiwala
-ms.date: 03/18/2024
+ms.date: 09/24/2024
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -21,14 +21,14 @@ monikerRange: "=azuresqldb-current || =fabric"
 ---
 # sys.sp_change_feed_reseed_db_start_replication (Transact-SQL)
 
-[!INCLUDE [asdb-fabric](../../includes/applies-to-version/asdb-fabric.md)]
+[!INCLUDE [sqlserver2022-asdb-fabricmirroredsqldb-fabricsqldb](../../includes/applies-to-version/sqlserver2022-asdb-fabricmirroredsqldb-fabricsqldb.md)]
 
 Begins replication for a database in a reseed state.
 
 > [!NOTE]  
 > This system stored procedure is used internally and isn't recommended for direct administrative use. Use the Fabric portal instead. Using this procedure could introduce inconsistency.
 
-This system stored procedure is used for the Fabric Mirrored Database feature for Azure SQL Database. For more information, see [What is Mirroring in Fabric?](/fabric/database/mirrored-database/overview)
+This system stored procedure is used for [Microsoft Fabric mirrored databases](/fabric/database/mirrored-database/overview) and [SQL database in Microsoft Fabric](/fabric/database/sql/overview).
 
 ## Syntax
 

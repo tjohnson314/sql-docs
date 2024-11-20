@@ -5,7 +5,7 @@ description: Learn how to buy Azure SQL Database and SQL Managed Instance reserv
 author: rajeshsetlem
 ms.author: rsetlem
 ms.reviewer: wiassaf, mathoma
-ms.date: 09/12/2023
+ms.date: 11/19/2024
 ms.service: azure-sql
 ms.subservice: service-overview
 ms.topic: conceptual
@@ -15,7 +15,14 @@ monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
 # Save costs for resources with reserved capacity - Azure SQL Database & SQL Managed Instance
 [!INCLUDE [appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)] 
 
-Save money with Azure SQL Database or SQL Managed Instance by committing to a reservation for compute resources compared to pay-as-you-go prices. With reserved capacity, you make a commitment for SQL Database and/or SQL Managed Instance use for a period of one or three years to get a significant discount on the compute costs. To purchase reserved capacity, you need to specify the Azure region, deployment type, performance tier, and term.
+This article provides an overview of using reserved capacity to save on compute costs for Azure SQL Database and Azure SQL Managed Instance. Reserved capacity is a billing discount that you can use to save money by committing to use compute resources at a discounted rate for a period of time. 
+
+> [!NOTE]
+> Purchasing reserved capacity is a cost-saving mechanism that reserves a discounted price for compute, and does not pre-allocate or guarantee specific infrastructure resources (virtual machines or nodes) for your use. 
+
+## What is reserved capacity?
+
+With reserved capacity, you commit to using Azure SQL resource for a period of one or three years to receive a significant discount on compute costs. To purchase reserved capacity, you need to specify the Azure region, deployment type, performance tier, and term.
 
 You do not need to assign the reservation to a specific database or managed instance. Matching existing deployments that are already running, or ones that are newly deployed automatically, get the benefit. Hence, by purchasing a reserved capacity, existing resources infrastructure would not be modified and thus no failover/downtime is triggered on existing resources. By purchasing a reservation, you commit to usage for the compute costs for a period of one or three years. As soon as you buy a reservation, the compute charges that match the reservation attributes are no longer charged at the pay-as-you-go rates.
 
@@ -28,8 +35,8 @@ You can buy reserved capacity in the [Azure portal](https://portal.azure.com). P
 
 For more information about how enterprise customers and pay-as-you-go customers are charged for reservation purchases, see [Understand Azure reservation usage for your Enterprise enrollment](/azure/cost-management-billing/reservations/understand-reserved-instance-usage-ea) and [Understand Azure reservation usage for your pay-as-you-go subscription](/azure/cost-management-billing/reservations/understand-reserved-instance-usage).
 
-> [!NOTE]
-> Purchasing reserved capacity does not pre-allocate or reserve specific infrastructure resources (virtual machines or nodes) for your use.
+> [!NOTE] 
+> You can significantly save on Azure SQL Managed Instance costs by applying your reserved capacity to an [instance pool](../managed-instance/instance-pools-overview.md#reserved-capacity-pricing).
 
 ## Determine the correct size before purchase
 

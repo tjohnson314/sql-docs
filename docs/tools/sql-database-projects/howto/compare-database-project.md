@@ -12,7 +12,7 @@ zone_pivot_groups: sq1-sql-projects-tools
 
 # Compare a database and a project
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 Understanding the object definition differences between a database and a SQL project can provide valuable insights into the state of your database and project, including during ongoing development or regression troubleshooting. SQL projects include tooling for visualizing differences, analyzing changes required for updating a database, importing changes from a database into a SQL project file set, and reviewing T-SQL scripts that would be executed to update a database to match the project.
 

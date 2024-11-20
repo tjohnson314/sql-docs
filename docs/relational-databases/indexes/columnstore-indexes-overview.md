@@ -3,7 +3,7 @@ title: "Columnstore indexes: Overview"
 description: "An overview on columnstore indexes. Columnstore indexes are the standard for storing and querying large data warehousing fact tables."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 10/31/2024
+ms.date: 11/01/2024
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
@@ -14,11 +14,11 @@ helpviewer_keywords:
   - "batch mode execution"
   - "columnstore index, described"
   - "xVelocity, columnstore indexes"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # Columnstore indexes: Overview
 
-[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
 Columnstore indexes are the standard for storing and querying large data warehousing fact tables. This index uses column-based data storage and query processing to achieve gains up to 10 times the query performance in your data warehouse over traditional row-oriented storage. You can also achieve gains up to 10 times the data compression over the uncompressed data size. Beginning with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1, columnstore indexes enable operational analytics: the ability to run performant real-time analytics on a transactional workload.
 
@@ -167,9 +167,12 @@ First introduced with [!INCLUDE [_ss2022](../../includes/applies-to-version/_ss2
 |Platform|Ordered *clustered* columnstore indexes|Ordered *nonclustered* columnstore indexes|
 |:--|:--|:--|
 |[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] | Yes | Yes |
+|[!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] | Yes\* | Yes |
 |[!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]|Yes|No|
 |[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]|Yes|Yes|
 |[!INCLUDE [sss-dedicated-pool-md](../../includes/sss-dedicated-pool-md.md)] in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]|[Yes](/azure/synapse-analytics/sql-data-warehouse/performance-tuning-ordered-cci)|No|
+
+\* In Fabric SQL database, tables with clustered columnstore indexes are not [mirrored to Fabric OneLake](/fabric/database/sql/mirroring-overview).
 
 ## Metadata
 

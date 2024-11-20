@@ -9,7 +9,7 @@ ms.service: sql
 ms.topic: "reference"
 dev_langs:
   - "TSQL"
-monikerRange: "=fabric"
+monikerRange: =fabric
 ---
 # Nested Common Table Expression (CTE) in Fabric data warehousing (Transact-SQL)
 

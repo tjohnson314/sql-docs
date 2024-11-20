@@ -4,7 +4,7 @@ description: "The sys.sp_change_feed_enable_db system stored procedure enables t
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: imotiwala, randolphwest
-ms.date: 08/21/2024
+ms.date: 09/24/2024
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -21,9 +21,9 @@ monikerRange: ">=sql-server-ver16 || =azuresqldb-current || =fabric || =azure-sq
 ---
 # sys.sp_change_feed_enable_db (Transact-SQL)
 
-[!INCLUDE [sqlserver2022-asdb-asa-fabric](../../includes/applies-to-version/sqlserver2022-asdb-asa-fabric.md)]
+[!INCLUDE [sqlserver2022-asdb-asa-fabricmirroredsqldb-fabricsqldb](../../includes/applies-to-version/sqlserver2022-asdb-asa-fabricmirroredsqldb-fabricsqldb.md)]
 
-Enables current database for [Azure Synapse Link for SQL](/azure/synapse-analytics/synapse-link/sql-synapse-link-overview) or [Fabric mirrored databases](/fabric/database/mirrored-database/overview).
+Enables current database for [Azure Synapse Link for SQL](/azure/synapse-analytics/synapse-link/sql-synapse-link-overview), [Microsoft Fabric mirrored databases](/fabric/database/mirrored-database/overview), and [SQL database in Microsoft Fabric](/fabric/database/sql/overview).
 
 > [!NOTE]  
 > This system stored procedure is used internally and isn't recommended for direct administrative use. Use Synapse Studio or the Fabric portal instead. Using this procedure could introduce inconsistency.
@@ -92,15 +92,3 @@ FROM sys.databases;
 - [sys.sp_change_feed_configure_parameters (Transact-SQL)](sp-change-feed-configure-parameters.md)
 - [sys.dm_change_feed_log_scan_sessions (Transact-SQL)](../system-dynamic-management-views/sys-dm-change-feed-log-scan-sessions.md)
 - [sys.dm_change_feed_errors (Transact-SQL)](../system-dynamic-management-views/sys-dm-change-feed-errors.md)
-
-**For Microsoft Fabric mirrored databases**:
-
-- [What is Mirroring in Fabric?](/fabric/database/mirrored-database/overview)
-- [Monitor Fabric mirrored database replication](/fabric/database/mirrored-database/monitor)
-- [Explore data in your Mirrored database using Microsoft Fabric](/fabric/database/mirrored-database/explore)
-
-**For Azure Synapse Link**:
-
-- [What is Azure Synapse Link for SQL?](/azure/synapse-analytics/synapse-link/sql-synapse-link-overview)
-- [Manage Azure Synapse Link for SQL Server and Azure SQL Database](../../sql-server/synapse-link/synapse-link-sql-server-change-feed-manage.md)
-- [Troubleshoot: Azure Synapse Link for SQL initial snapshot issues](/azure/synapse-analytics/synapse-link/troubleshoot/troubleshoot-sql-snapshot-issues)

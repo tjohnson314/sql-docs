@@ -9,20 +9,20 @@ ms.topic: "language-reference"
 helpviewer_keywords:
   - "SQL graph"
   - "SQL graph, tsql reference"
-monikerRange: "=azuresqldb-current||>=sql-server-2017||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2017||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 
 # Create a graph database and run some pattern matching queries using T-SQL
 
-[!INCLUDE[sqlserver2017-asdb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi.md)]
+[!INCLUDE[sqlserver2017-asdb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi-fabricsqldb.md)]
 
 This sample provides a [!INCLUDE[tsql-md](../../includes/tsql-md.md)] script to create a graph database with nodes and edges and then use the new MATCH clause to match some patterns and traverse through the graph. This sample script works on both Azure SQL Database and [!INCLUDE[sssql17](../../includes/sssql17-md.md)] and later versions.
 
 ## Sample Schema
 
-This sample creates a graph schema for a hypothetical social network that has `People`, `Restaurant` and `City` nodes. These nodes are connected to each other using `Friends`, `Likes`, `LivesIn` and `LocatedIn` edges. The following diagram shows a sample schema with `restaurant`, `city`, `person` nodes and `LivesIn`, `LocatedIn`, `Likes` edges.
+This sample creates a graph schema for a hypothetical social network that has `People`, `Restaurant`, and `City` nodes. These nodes are connected to each other using `Friends`, `Likes`, `LivesIn`, and `LocatedIn` edges. The following diagram shows a sample schema with `restaurant`, `city`, `person` nodes, and `LivesIn`, `LocatedIn`, `Likes` edges.
 
-:::image type="content" source="media/sql-graph-sample/person-cities-restaurants-tables.png" alt-text="Diagram showing a sample schema with restaurant, city, person nodes and LivesIn, LocatedIn, Likes edges.":::
+:::image type="content" source="media/sql-graph-sample/person-cities-restaurants-tables.png" alt-text="Diagram showing a sample schema with restaurant, city, person nodes, and LivesIn, LocatedIn, Likes edges.":::
 
 ## Sample Script
 
@@ -68,14 +68,14 @@ CREATE TABLE livesIn AS EDGE;
 CREATE TABLE locatedIn AS EDGE;
 ```
 
-Now, we'll insert data to represent the relationships.
+Now, we insert data to represent the relationships.
 
 1. Insert data into node tables.
     1. Inserting into a node table is same as inserting into a regular table.
 1. Insert data into edge tables, in this case, for which restaurants each person likes into the `likes` edge. 
     1. While inserting into an edge table, provide the `$node_id` from `$from_id` and `$to_id` columns.
 1. Insert data into the `livesIn` edge to associate persons with the city where they live.
-1. Insert data into the `locatedIn` edge to associate restaurants with the city where they are located.
+1. Insert data into the `locatedIn` edge to associate restaurants with the city where they're located.
 1. Insert data into the `friendOf` edge to associated friends.
 
 ```sql
@@ -130,7 +130,7 @@ INSERT INTO friendOf
          , ((SELECT $NODE_ID FROM Person WHERE ID = 5), (SELECT $NODE_ID FROM Person WHERE ID = 4));
 ```
 
-Next, we'll query the data to find insights from the data.
+Next, we query the data to find insights from the data.
 
 1. Use the graph [MATCH](../../t-sql/queries/match-sql-graph.md) function to find which restaurants that John likes.
 1. Finds the restaurants that John's friends like.
@@ -155,7 +155,7 @@ FROM Person, likes, Restaurant, livesIn, City, locatedIn
 WHERE MATCH (Person-(likes)->Restaurant-(locatedIn)->City AND Person-(livesIn)->City);
 ```
 
-Finally, a more advanced query finds the friends of friends of friends. This query excludes those cases where the relationship "loops back". For example, Alice is a friend of John; John is a friend of Mary; and Mary in turn is a friend of Alice. This causes a "loop" back to Alice. In many cases, it is necessary to explicitly check for such loops and exclude the results.
+Finally, a more advanced query finds the friends of friends of friends. This query excludes those cases where the relationship "loops back". For example, Alice is a friend of John; John is a friend of Mary; and Mary in turn is a friend of Alice. This causes a "loop" back to Alice. In many cases, it's necessary to explicitly check for such loops and exclude the results.
 
 ```sql
 -- Find friends-of-friends-of-friends, excluding those cases where the relationship "loops back".

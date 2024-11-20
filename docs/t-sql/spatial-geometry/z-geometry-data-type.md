@@ -16,7 +16,7 @@ dev_langs:
   - "TSQL"
 ---
 # Z (geometry Data Type)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 The Z (elevation) value of the instance. The semantics of the elevation value are user-defined.
   

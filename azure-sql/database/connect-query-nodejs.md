@@ -150,7 +150,7 @@ Open a command prompt and create a folder named *sqltest*. Open the folder you c
             }
             console.log("%s\t", columns.substring(0, columns.length - 2));
 
-            // ouput row contents from default record set
+            // output row contents from default record set
             resultSet.recordset.forEach(row => {
                 console.log("%s\t%s", row.CategoryName, row.ProductName);
             });

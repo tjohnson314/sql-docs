@@ -39,6 +39,9 @@ For example, if you change the hardware generation of an instance, the virtual c
 
 The duration of virtual group change operations depends on the operation type. For more information, see [SQL Managed Instance management operations](management-operations-overview.md#duration).
 
+> [!NOTE]
+> Instance pools are placed into different virtual machine groups than single instances. 
+
 ## Number of virtual machine groups
 
 The number of virtual machine groups in a virtual cluster depends on the following:
@@ -46,15 +49,12 @@ The number of virtual machine groups in a virtual cluster depends on the followi
 - The number of different [maintenance window configurations](maintenance-window.md)
 - Limits of the virtual machine group size (which are defined at the compute layer and are subject to change)
 
-
 You can determine the number of virtual machine groups in a virtual cluster by multiplying the number of different hardware generation configurations by the number of different maintenance window configurations in your subnet. For example, if you have two hardware generation configurations (such as one Standard-series and one Premium-series instance) and two different maintenance window configurations, the virtual cluster has four virtual machine groups. 
 
 SQL Managed Instance supports three different [hardware generation configurations](service-tiers-managed-instance-vcore.md#hardware-configurations) and three different [maintenance window configurations](maintenance-window.md). Therefore, the minimum number of virtual machine groups in a virtual cluster is 1 (one hardware generation configuration, one maintenance window configuration), and the maximum is 9 (three different hardware generation configurations, three different maintenance window configurations).
 
 > [!IMPORTANT]
 > Since there is a limit to the number of virtual machines that can join a group, a lack of space in an existing group can result in creating a virtual machine group with identical specifications. It's possible for a subnet with a large number of instances to have multiple machine groups with the same configuration, and exceed 9 virtual machine groups.
-
-
 
 ## Role in IP address usage
 
@@ -83,8 +83,6 @@ Before deleting a subnet used for SQL managed instances, the subnet needs to be 
 > - Deleting a virtual cluster is a [long-running operation that can last up to 1.5 hours](management-operations-overview.md). The virtual cluster will still be visible in the portal until deleting the virtual cluster completes.
 
 In rare circumstances, creating an instance fails and results in an empty virtual cluster. Additionally, since you can cancel [creating an instance](management-operations-cancel.md), it's possible for a virtual cluster to be deployed with instances in a failed to deploy state. Empty virtual clusters, or clusters with instances that have failed to deploy, are automatically removed in the background, and there are no charges associated with these clusters. 
-
-
 
 
 ## Next steps

@@ -50,7 +50,7 @@ dwloader.exe { -h }
   
 dwloader.exe   
     {  
-        { -U login_name  -P password  }  
+        { -U login_name  -P <password>  }  
         | -W  
     }  
     [ -f parameter_file ]  
@@ -112,7 +112,7 @@ Displays simple Help information about using the Loader. Help only displays if n
 **-U** *login_name*  
 A valid SQL Server Authentication login with appropriate permissions to perform the load.  
   
-**-P** *password*  
+**-P** *\<password>*  
 The password for a SQL Server Authentication *login_name*.  
   
 **-W**  
@@ -598,7 +598,7 @@ The following script snippet uses dwloader to load data into the DimAccount and 
 ```  
 set server=10.193.63.134  
 set user=<MyUser>  
-set password=<MyPassword>  
+set password=<password>  
   
 set schema=AdventureWorksPDW2012.dbo  
 set load="C:\Program Files\Microsoft SQL Server Parallel Data Warehouse\100\dwloader.exe"  

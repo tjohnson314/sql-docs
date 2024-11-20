@@ -4,7 +4,7 @@ description: The SELECT statement retrieves rows from the database and enables t
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 10/29/2024
+ms.date: 10/30/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -27,8 +27,7 @@ dev_langs:
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # SELECT (Transact-SQL)
-
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
 Retrieves rows from the database and enables the selection of one or many rows or columns from one or many tables in the [!INCLUDE [ssdenoversion-md](../../includes/ssdenoversion-md.md)]. The full syntax of the `SELECT` statement is complex, but the main clauses can be summarized as follows:
 

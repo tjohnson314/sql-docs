@@ -50,7 +50,7 @@ The following steps create an external table in the data pool named **web_clicks
 1. Create permissions for MSSQL-Spark Connector.
    ```sql
    USE Sales
-   CREATE LOGIN sample_user  WITH PASSWORD ='password123!#' 
+   CREATE LOGIN sample_user  WITH PASSWORD ='<password>' 
    CREATE USER sample_user FROM LOGIN sample_user
 
    -- To create external tables in data pools
@@ -94,7 +94,7 @@ The following steps create an external table in the data pool named **web_clicks
    
 1. Create login for data pools and provide permissions to the user.
    ```sql 
-   EXECUTE( ' Use Sales; CREATE LOGIN sample_user  WITH PASSWORD = ''password123!#'' ;') AT  DATA_SOURCE SqlDataPool;
+   EXECUTE( ' Use Sales; CREATE LOGIN sample_user  WITH PASSWORD = ''<password>;'') AT  DATA_SOURCE SqlDataPool;
 
    EXECUTE('Use Sales; CREATE USER sample_user; ALTER ROLE [db_datareader] ADD MEMBER sample_user;  ALTER ROLE [db_datawriter] ADD MEMBER sample_user;') AT DATA_SOURCE SqlDataPool;
    ```
@@ -122,7 +122,7 @@ The next step is to create a Spark streaming job that loads web clickstream data
 
       // Change per your installation
       val user= "username"
-      val password= "****"
+      val password= "<password>"
       val database =  "MyTestDatabase"
       val sourceDir = "/clickstream_data"
       val datapool_table = "web_clickstreams_spark_results"

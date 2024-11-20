@@ -16,10 +16,10 @@ helpviewer_keywords:
   - "ALTER EXTERNAL DATA SOURCE statement"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # ALTER EXTERNAL DATA SOURCE (Transact-SQL)
-[!INCLUDE [sqlserver2016-asdbmi-asa-pdw](../../includes/applies-to-version/sqlserver2016-asdbmi-asa-pdw.md)]
+[!INCLUDE [sqlserver2016-asdbmi-asa-pdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdbmi-asa-pdw-fabricsqldb.md)]
 
   Modifies an external data source used to create an external table. The external data source can be Hadoop or Azure Blob Storage (WASBS) for SQL SERVER and Azure Blob Storage (WASBS) or Azure Data Lake storage (ABFSS/ADL) for [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)].
  
@@ -93,7 +93,7 @@ ALTER EXTERNAL DATA SOURCE data_source_name
 ## Remarks
  Only single source can be modified at a time. Concurrent requests to modify the same source cause one statement to wait. However, different sources can be modified at the same time. This statement can run concurrently with other statements.
  
- In Azure Synapse Analytics, connections to external data sources pointing to Azure Blob storage or Azure Data Lake storage are supported in dedicated SQL pool only.
+ In Azure Synapse Analytics, connections to external data sources pointing to Azure Blob storage or Azure Data Lake storage are supported in dedicated SQL pool only.  
 
 ## Permissions  
  Requires ALTER ANY EXTERNAL DATA SOURCE permission.

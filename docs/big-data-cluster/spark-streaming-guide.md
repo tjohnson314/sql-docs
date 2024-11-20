@@ -93,7 +93,7 @@ if __name__ == '__main__':
         'ssl.ca.location': '/usr/lib/ssl/certs/ca-certificates.crt',
         'sasl.mechanism': 'PLAIN',
         'sasl.username': '$ConnectionString',
-        'sasl.password': '',                         #replace!
+        'sasl.password': '<password>',               #replace!
         'client.id': 'python-sample-producer'
     }
 

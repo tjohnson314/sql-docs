@@ -71,6 +71,10 @@ sections:
       - question: What is the URL list of endpoints that need to be opened up?
         answer: You need to open up the endpoint at `*.<region>.arcdataservices.com`. For specific information, review [Prerequisites - Connect to Azure Arc data processing service](prerequisites.md#connect-to-azure-arc-data-processing-service).
 
+      - question: Does TLS inspection work with Azure Extension for SQL Server? 
+        answer: If your organization uses TLS inspection, the Azure Extension for SQL Server does not use certificate pinning and will continue to work, so long as your machine trusts the certificate presented by the TLS inspection service. For information on TLS inspection with Azure Arc-enabled server extension, see [Network Security](/azure/azure-arc/servers/security-networking#general-networking).
+
+
       - question: What are the details on the permissions assigned?
         answer: Review [Configure Windows service accounts and permissions for Azure extension for SQL Server](configure-windows-accounts-agent.md).
 

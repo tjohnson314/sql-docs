@@ -48,8 +48,8 @@ Encrypt = yes
 #  
 ```  
 
-To connect using the above DSN in a connection string, you would specify the `DSN` keyword like: `DSN=MSSQLTest;UID=my_username;PWD=my_password`  
-The above connection string would be the equivalent of specifying a connection string without the `DSN` keyword like: `Driver=ODBC Driver 18 for SQL Server;Server=tcp:localhost,1433;Encrypt=yes;UID=my_username;PWD=my_password`
+To connect using the above DSN in a connection string, you would specify the `DSN` keyword like: `DSN=MSSQLTest;UID=my_username;PWD=<password>`  
+The above connection string would be the equivalent of specifying a connection string without the `DSN` keyword like: `Driver=ODBC Driver 18 for SQL Server;Server=tcp:localhost,1433;Encrypt=yes;UID=my_username;PWD=<password>`
 
 You can optionally specify the protocol and port to connect to the server. For example, **Server=tcp:**_servername_**,12345**. The only protocol supported by the Linux and macOS drivers is `tcp`.
 

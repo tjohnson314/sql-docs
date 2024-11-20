@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot memory issues
 titleSuffix: Azure SQL Database
-description: Provides steps to investigate and troubleshoot out of memory issues in Azure SQL Database
+description: Provides steps to investigate and troubleshoot out of memory issues in Azure SQL Database and Fabric SQL database.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: wiassaf, mathoma
@@ -9,16 +9,18 @@ ms.date: 01/25/2024
 ms.service: azure-sql-database
 ms.subservice: development
 ms.topic: troubleshooting
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 
-# Troubleshoot out of memory errors with Azure SQL Database
+# Troubleshoot out of memory errors with Azure SQL Database and Fabric SQL database
 
-[!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
-You might see error messages when the SQL database engine has failed to allocate sufficient memory to run the query. This can be caused by various reasons including the limits of selected service objective, aggregate workload memory demands, and memory demands by the query. For more information on the memory resource limit for Azure SQL Databases, see [Resource management in Azure SQL Database](resource-limits-logical-server.md#memory).
+You might see error messages when the SQL database engine has failed to allocate sufficient memory to run the query. This can be caused by various reasons including the limits of selected service objective, aggregate workload memory demands, and memory demands by the query.
 
-> [!NOTE]
-> **This article is focused on Azure SQL Database.** For more on troubleshooting out of memory issues in SQL Server, see [MSSQLSERVER_701](/sql/relational-databases/errors-events/mssqlserver-701-database-engine-error).
+For more information on the memory resource limit for Azure SQL Database, see [Resource management in Azure SQL Database](resource-limits-logical-server.md#memory). Fabric SQL database shares many features with Azure SQL Database, for more information on performance monitoring, see [Fabric SQL database performance monitoring](/fabric/database/sql/monitor).
+
+**For more on troubleshooting out of memory issues in SQL Server**, see [MSSQLSERVER_701](/sql/relational-databases/errors-events/mssqlserver-701-database-engine-error).
 
 Try the following avenues of investigation in response to:
 
@@ -35,7 +37,9 @@ SELECT * FROM sys.dm_os_out_of_memory_events ORDER BY event_time DESC;
 
 ## Investigate memory allocation
 
-If out of memory errors persist in Azure SQL Database, consider at least temporarily increasing the service level objective of the database in the Azure portal. If out of memory errors persist, use the following queries to look for unusually high query memory grants that might contribute to an insufficient memory condition. Run the following example queries in the database that experienced the error (not in the `master` database of the Azure SQL logical server).  
+If out of memory errors persist in Azure SQL Database, consider at least temporarily increasing the service level objective of the database in the Azure portal.
+
+If out of memory errors persist, use the following queries to look for unusually high query memory grants that might contribute to an insufficient memory condition. Run the following example queries in the database that experienced the error (not in the `master` database of the Azure SQL logical server).  
 
 ### Use DMV to view out of memory events
 

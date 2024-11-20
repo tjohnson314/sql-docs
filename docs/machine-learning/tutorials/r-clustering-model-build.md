@@ -79,7 +79,7 @@ In the following R script, you'll use the function **kmeans** to perform cluster
 ## create clustering model
 clust <- kmeans(customer_data[,2:5],4)
 
-## create clustering ouput for table
+## create clustering output for table
 customer_cluster <- data.frame(cluster=clust$cluster,customer=customer_data$customer,orderRatio=customer_data$orderRatio,
         itemsRatio=customer_data$itemsRatio,monetaryRatio=customer_data$monetaryRatio,frequency=customer_data$frequency)
 

@@ -4,7 +4,7 @@ description: JSON_MODIFY updates the value of a property in a JSON string and re
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: jovanpop, randolphwest
-ms.date: 05/21/2024
+ms.date: 11/04/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -12,11 +12,11 @@ ms.custom:
   - build-2024
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # JSON_MODIFY (Transact-SQL)
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw.md)]
 
 Updates the value of a property in a JSON string and returns the updated JSON string.
 
@@ -285,4 +285,4 @@ WHERE EmployeeID = 17;
 ## Related content
 
 - [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md)
-- [JSON Data (SQL Server)](../../relational-databases/json/json-data-sql-server.md)
+- [JSON data in SQL Server](../../relational-databases/json/json-data-sql-server.md)

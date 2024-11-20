@@ -1,24 +1,28 @@
 ---
 title: "LineString"
-description: "LineString"
-author: MladjoA
-ms.author: mlandzic
-ms.date: "03/03/2017"
+description: "LineString is a one-dimensional object representing a sequence of points and the line segments connecting them in SQL Database Engine spatial data."
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviwer: mlandzic, jovanpop
+ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
   - "LineString geometry subtype [SQL Server]"
   - "geometry subtypes [SQL Server]"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # LineString
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
-  A **LineString** is a one-dimensional object representing a sequence of points and the line segments connecting them.  
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
+
+ A **LineString** is a one-dimensional object representing a sequence of points and the line segments connecting them in SQL Database Engine spatial data.
   
-## LineString Instances  
- The illustration below shows examples of **LineString** instances.  
+<a id="linestring-instances"></a>
+
+## LineString instances
+ The following illustration shows examples of **LineString** instances.  
   
- ![Examples of geometry LineString instances](../../relational-databases/spatial/media/linestring.gif "Examples of geometry LineString instances")  
+ :::image type="content" source="media/linestring/linestring.gif" alt-text="Images of examples of geometry LineString instances.":::  
   
 As shown in the illustration:  
   
@@ -30,8 +34,9 @@ As shown in the illustration:
   
 -   Figure 4 is a closed, nonsimple **LineString** instance, and therefore is not a ring.  
   
-### Accepted Instances  
-Accepted **LineString** instances can be input into a geometry variable, but they may not be valid **LineString** instances. The following criteria must be met for a **LineString** instance to be accepted. The instance must be formed of at least two points or it must be empty. The following LineString instances are accepted.  
+### Accepted instances
+
+Accepted **LineString** instances can be input into a geometry variable, but they might not be valid **LineString** instances. The following criteria must be met for a **LineString** instance to be accepted. The instance must be formed of at least two points or it must be empty. The following LineString instances are accepted.  
   
 ```sql  
 DECLARE @g1 geometry = 'LINESTRING EMPTY';  
@@ -41,18 +46,18 @@ DECLARE @g3 geometry = 'LINESTRING(1 1, 1 1)';
   
 `@g3` shows that a **LineString** instance can be accepted, but not valid.  
   
-The following **LineString** instance is not accepted. It will throw a `System.FormatException`.  
+The following **LineString** instance is not accepted. It throws a `System.FormatException`.  
   
 ```sql  
 DECLARE @g geometry = 'LINESTRING(1 1)';  
 ```  
   
-### Valid Instances  
+### Valid instances
 For a LineString instance to be valid, it must meet the following criteria.  
   
-1.  The **LineString** instance must be accepted.  
-2.  If a LineString instance is not empty, then it must contain at least two distinct points.  
-3.  The **LineString** instance cannot overlap itself over an interval of two or more consecutive points.  
+1. The **LineString** instance must be accepted.  
+1. If a LineString instance is not empty, then it must contain at least two distinct points.  
+1. The **LineString** instance cannot overlap itself over an interval of two or more consecutive points.  
   
 The following **LineString** instances are valid.  
   
@@ -75,25 +80,29 @@ SELECT @g1.STIsValid(), @g2.STIsValid();
 > [!WARNING]  
 > The detection of **LineString** overlaps is based on floating-point calculations, which are not exact.  
   
-## Examples  
-### Example A.    
-The following example shows how to create a `geometry``LineString` instance with three points and an SRID of 0:  
+## Examples
+
+### Example A.
+
+The following example shows how to create a `geometry LineString` instance with three points and an SRID of 0:  
   
 ```sql  
 DECLARE @g geometry;  
 SET @g = geometry::STGeomFromText('LINESTRING(1 1, 2 4, 3 9)', 0);  
 ```  
   
-### Example B.   
-Each point in the `LineString` instance may contain Z (elevation) and M (measure) values. This example adds M values to the `LineString` instance created in the example above. M and Z can be null values.  
+### Example B.
+
+Each point in the `LineString` instance can contain Z (elevation) and M (measure) values. This example adds M values to the `LineString` instance created in the previous example. M and Z can be `NULL` values.  
   
 ```sql  
 DECLARE @g geometry;  
 SET @g = geometry::STGeomFromText('LINESTRING(1 1 NULL 0, 2 4 NULL 12.3, 3 9 NULL 24.5)', 0);  
 ```  
   
-### Example C.   
-The following example shows how to create a `geometry LineString` instance with two points that are the same. A call to `IsValid` indicates that the **LineString** instance is not valid and a call to `MakeValid` will convert the **LineString** instance into a **Point**.  
+### Example C.
+
+The following example shows how to create a `geometry LineString` instance with two points that are the same. A call to `IsValid` indicates that the **LineString** instance is not valid. A call to `MakeValid` converts the **LineString** instance into a **Point**.  
   
 ```sql  
 DECLARE @g geometry  
@@ -110,22 +119,21 @@ ELSE
   END  
 ```  
   
-[!INCLUDE[ssResult](../../includes/ssresult-md.md)]
+[!INCLUDE [ssResult](../../includes/ssresult-md.md)]
 
-```  
+```output
 LINESTRING(1 3, 1 3) is not a valid LineString  
 POINT(1 3) is a valid Point.  
 ```  
   
-## See Also  
- [STLength &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stlength-geometry-data-type.md)   
- [STStartPoint &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/ststartpoint-geometry-data-type.md)   
- [STEndpoint &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stendpoint-geometry-data-type.md)   
- [STPointN &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stpointn-geometry-data-type.md)   
- [STNumPoints &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stnumpoints-geometry-data-type.md)   
- [STIsRing &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stisring-geometry-data-type.md)   
- [STIsClosed &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stisclosed-geometry-data-type.md)   
- [STPointOnSurface &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stpointonsurface-geometry-data-type.md)   
- [Spatial Data &#40;SQL Server&#41;](../../relational-databases/spatial/spatial-data-sql-server.md)  
-  
-  
+## Related content
+
+- [STLength (geometry Data Type)](../../t-sql/spatial-geometry/stlength-geometry-data-type.md)
+- [STStartPoint (geometry Data Type)](../../t-sql/spatial-geometry/ststartpoint-geometry-data-type.md)
+- [STEndpoint (geometry Data Type)](../../t-sql/spatial-geometry/stendpoint-geometry-data-type.md)
+- [STPointN (geometry Data Type)](../../t-sql/spatial-geometry/stpointn-geometry-data-type.md)
+- [STNumPoints (geometry Data Type)](../../t-sql/spatial-geometry/stnumpoints-geometry-data-type.md)
+- [STIsRing (geometry Data Type)](../../t-sql/spatial-geometry/stisring-geometry-data-type.md)
+- [STIsClosed (geometry Data Type)](../../t-sql/spatial-geometry/stisclosed-geometry-data-type.md)
+- [STPointOnSurface (geometry Data Type)](../../t-sql/spatial-geometry/stpointonsurface-geometry-data-type.md)
+- [Spatial Data](spatial-data-sql-server.md)

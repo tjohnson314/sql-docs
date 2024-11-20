@@ -58,7 +58,7 @@ The following table lists the major features of SQL Server and provides informat
 | [Cross-database transactions](/sql/relational-databases/linked-servers/linked-servers-database-engine) | No | Yes, within the instance. See [Linked server differences](../managed-instance/transact-sql-tsql-differences-sql-server.md#linked-servers) for cross-instance queries. |
 | [Database mail - DbMail](/sql/relational-databases/database-mail/database-mail) | No | Yes |
 | [Database mirroring](/sql/database-engine/database-mirroring/database-mirroring-sql-server) (deprecated) | No | No |
-| [Database mirroring in Microsoft Fabric](/fabric/database/mirrored-database/overview) | Yes, in preview | No |
+| [Database mirroring in Microsoft Fabric](/fabric/database/mirrored-database/overview) | Yes | No |
 | [Database snapshots](/sql/relational-databases/databases/database-snapshots-sql-server) | No | No |
 | [Database virtualization](../managed-instance/data-virtualization-overview.md) | No | Yes |
 | [DBCC statements](/sql/t-sql/database-console-commands/dbcc-transact-sql) | Most, see individual statements | Yes, see [DBCC differences](../managed-instance/transact-sql-tsql-differences-sql-server.md#dbcc) |
@@ -111,7 +111,7 @@ The following table lists the major features of SQL Server and provides informat
 | [SQL Server Agent](/sql/ssms/agent/sql-server-agent) | No, see [Elastic jobs](elastic-jobs-overview.md) | Yes, see [SQL Server Agent differences](../managed-instance/transact-sql-tsql-differences-sql-server.md#sql-server-agent) |
 | [SQL Server Auditing](/sql/relational-databases/security/auditing/sql-server-audit-database-engine) | No, see [Auditing for Azure SQL Database](auditing-overview.md) | Yes, see [Auditing differences](../managed-instance/transact-sql-tsql-differences-sql-server.md#auditing) |
 | [Synapse Link for SQL](/azure/synapse-analytics/synapse-link/sql-synapse-link-overview) | Yes | No |
-| [System stored functions](/sql/relational-databases/system-functions/system-functions-for-transact-sql) | Most, see individual functions | Yes, see [Stored procedures, functions, triggers differences](../managed-instance/transact-sql-tsql-differences-sql-server.md#stored-procedures-functions-and-triggers) |
+| [System functions](/sql/relational-databases/system-functions/system-functions-for-transact-sql) | Most, see individual functions | Yes, see [Stored procedures, functions, triggers differences](../managed-instance/transact-sql-tsql-differences-sql-server.md#stored-procedures-functions-and-triggers) |
 | [System stored procedures](/sql/relational-databases/system-stored-procedures/system-stored-procedures-transact-sql) | Some, see individual stored procedures | Yes, see [Stored procedures, functions, triggers differences](../managed-instance/transact-sql-tsql-differences-sql-server.md#stored-procedures-functions-and-triggers) |
 | [System tables](/sql/relational-databases/system-tables/system-tables-transact-sql) | Some, see individual tables | Yes, see [T-SQL differences](../managed-instance/transact-sql-tsql-differences-sql-server.md) |
 | [System catalog views](/sql/relational-databases/system-catalog-views/catalog-views-transact-sql) | Some, see individual views | Yes, see [T-SQL differences](../managed-instance/transact-sql-tsql-differences-sql-server.md) |

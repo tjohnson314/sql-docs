@@ -54,7 +54,7 @@ RANK ( ) OVER ( [ partition_by_clause ] order_by_clause )
 ## Examples  
   
 ### A. Ranking rows within a partition  
- The following example ranks the products in inventory the specified inventory locations according to their quantities. The result set is partitioned by `LocationID` and logically ordered by `Quantity`. Notice that products 494 and 495 have the same quantity. Because they are tied, they are both ranked one.  
+ The following example ranks the products in inventory the specified inventory locations according to their quantities. The result set is partitioned by `LocationID` and logically ordered by `Quantity`. Notice that in location 3, products 494 and 495 have the same quantity. Because they are tied, they are both ranked one.  
   
 ```sql  
 USE AdventureWorks2022;  

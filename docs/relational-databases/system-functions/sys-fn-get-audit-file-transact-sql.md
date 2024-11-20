@@ -4,7 +4,7 @@ description: "The sys.fn_get_audit_file system function returns information from
 author: sravanisaluru
 ms.author: srsaluru
 ms.reviewer: wiassaf, randolphwest
-ms.date: 06/12/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -100,7 +100,7 @@ The following table describes the audit file content that can be returned by thi
 | `class_type` | **varchar(2)** | The type of auditable entity that the audit occurs on. Not nullable. |
 | `session_server_principal_name` | **sysname** | Server principal for session. Nullable. Returns the identity of the original login that was connected to the instance of the [!INCLUDE [ssde-md](../../includes/ssde-md.md)] in case there were explicit or implicit context switches. |
 | `server_principal_name` | **sysname** | Current login. Nullable. |
-| `server_principal_sid` | **varbinary** | Current login SID. Nullable. |
+| `server_principal_sid` | **varbinary** | Current login security identifier (SID). Nullable. |
 | `database_principal_name` | **sysname** | Current user. Nullable. Returns `NULL` if not available. |
 | `target_server_principal_name` | **sysname** | Target login of action. Nullable. Returns `NULL` if not applicable. |
 | `target_server_principal_sid` | **varbinary** | SID of target login. Nullable. Returns `NULL` if not applicable. |
@@ -113,7 +113,7 @@ The following table describes the audit file content that can be returned by thi
 | `additional_information` | **nvarchar(4000)** | Unique information that only applies to a single event is returned as XML. A few auditable actions contain this kind of information.<br /><br />One level of T-SQL stack is displayed in XML format for actions that have T-SQL stack associated with them. The XML format is: `<tsql_stack><frame nest_level = '%u' database_name = '%.*s' schema_name = '%.*s' object_name = '%.*s' /></tsql_stack>`<br /><br />`frame nest_level` indicates the current nesting level of the frame. The module name is represented in three part format (`database_name`, `schema_name`, and `object_name`). The module name is parsed to escape invalid XML characters like `<`, `>`, `/`, `_x`. They're escaped as `_xHHHH_`. The `HHHH` stands for the four-digit hexadecimal UCS-2 code for the character. Nullable. Returns `NULL` when there's no additional information reported by the event. |
 | `file_name` | **varchar(260)** | The path and name of the audit log file that the record came from. Not nullable. |
 | `audit_file_offset` | **bigint** | The buffer offset in the file that contains the audit record. Not nullable.<br /><br />**Applies to**: SQL Server only |
-| `user_defined_event_id` | **smallint** | User defined event ID passed as an argument to `sp_audit_write`. `NULL` for system events (default) and non-zero for user-defined event. For more information, see [sp_audit_write (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-audit-write-transact-sql.md).<br /><br />**Applies to**: [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] and later, Azure SQL Database, and SQL Managed Instance |
+| `user_defined_event_id` | **smallint** | User defined event ID passed as an argument to `sp_audit_write`. `NULL` for system events (default) and non-zero for user-defined event. For more information, see [sp_audit_write](../system-stored-procedures/sp-audit-write-transact-sql.md).<br /><br />**Applies to**: [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] and later versions, Azure SQL Database, and SQL Managed Instance |
 | `user_defined_information` | **nvarchar(4000)** | Used to record any extra information the user wants to record in audit log by using the `sp_audit_write` stored procedure.<br /><br />**Applies to**: [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] and later versions, Azure SQL Database, and SQL Managed Instance |
 | `audit_schema_version` | **int** | Always `1`. |
 | `sequence_group_id` | **varbinary** | Unique identifier.<br /><br />**Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions |
@@ -145,7 +145,9 @@ The following table describes the audit file content that can be returned by thi
 
 ## [SQL Server](#tab/sqlserver)
 
-Requires the `CONTROL SERVER` permission.
+[!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and earlier versions require `CONTROL SERVER` permission on the server.
+
+[!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions require `VIEW SERVER SECURITY AUDIT` permission on the server.
 
 ## [Azure SQL Database](#tab/sqldb)
 

@@ -57,7 +57,7 @@ USE master;
 GO  
   
 -- Create a database master key in the master database  
-CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<UseStrongPasswordHere>';  
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<password>';  
 GO  
   
 -- Enable encryption for PDW  
@@ -82,7 +82,7 @@ BACKUP CERTIFICATE MyServerCert
     WITH PRIVATE KEY   
     (   
         FILE = '\\SECURE_SERVER\cert\MyServerCert.key',  
-        ENCRYPTION BY PASSWORD = '<UseStrongPasswordHere>'   
+        ENCRYPTION BY PASSWORD = '<password>'   
     )   
 GO  
 ```  
@@ -230,13 +230,13 @@ The master database can be restored using **DWConfig**, as part of the disaster 
 ## Upgrade and Replacing Virtual Machines  
 If a DMK exists on the appliance on which Upgrade or Replace VM was performed, DMK password must be provided as a parameter.  
   
-Example of the upgrade action. Replace `**********` with your DMK password.  
+Example of the upgrade action. Replace `<password>` with your DMK password.  
   
-`setup.exe /Action=ProvisionUpgrade ... DMKPassword='**********'`  
+`setup.exe /Action=ProvisionUpgrade ... DMKPassword='<password>'`  
   
 Example of the action to replace a virtual machine.  
   
-`setup.exe /Action=ReplaceVM ... DMKPassword='**********'`  
+`setup.exe /Action=ReplaceVM ... DMKPassword='<password>'`  
   
 During upgrade, if a user DB is encrypted and the DMK password is not provided, the upgrade action will fail. During replace, if the correct password is not provided when a DMK exists, the operation will skip the DMK recovery step. All the other steps will be completed at the end of the replace VM action, however the action will report failure at the end to indicate that additional steps are required. In the setup logs (located in **\ProgramData\Microsoft\Microsoft SQL Server Parallel Data Warehouse\100\Logs\Setup\\\\<time-stamp\>\Detail-Setup**), the following warning will be shown near the end.  
   
@@ -245,7 +245,7 @@ During upgrade, if a user DB is encrypted and the DMK password is not provided, 
 Execute these statement manually in PDW and restart appliance after that in order to recover DMK:  
   
 ```sql
-OPEN MASTER KEY DECRYPTION BY PASSWORD = '<DMK password>';  
+OPEN MASTER KEY DECRYPTION BY PASSWORD = '<password>';  
 ALTER MASTER KEY ADD ENCRYPTION BY SERVICE MASTER KEY;  
 ```
   

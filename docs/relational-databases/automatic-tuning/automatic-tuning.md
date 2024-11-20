@@ -4,7 +4,7 @@ description: Learn about automatic tuning in SQL Server and Azure SQL Database
 author: "jovanpop-msft"
 ms.author: "jovanpop"
 ms.reviewer: wiassaf
-ms.date: 10/14/2022
+ms.date: 10/25/2024
 ms.service: sql
 ms.topic: conceptual
 ms.custom: fasttrack-edit
@@ -14,21 +14,24 @@ helpviewer_keywords:
   - "aprc"
   - "automatic plan regression correction"
   - "last known good plan"
-monikerRange: "=azuresqldb-current||>=sql-server-2017||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2017 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Automatic tuning
 
-[!INCLUDE[sqlserver2017-asdb-asdbmi](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi.md)]
+[!INCLUDE[sqlserver2017-asdb-asdbmi-fabricsqldb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi-fabricsqldb.md)]
 
 Automatic tuning is a database feature that provides insight into potential query performance problems, recommend solutions, and automatically fix identified problems.
 
-Automatic tuning, introduced in [!INCLUDE[sssql17-md](../../includes/sssql17-md.md)], notifies you whenever a potential performance issue is detected and lets you apply corrective actions, or lets the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] automatically fix performance problems. Automatic tuning [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] identifies and fixes performance issues caused by **query execution plan choice regressions**. Automatic tuning in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] also creates necessary indexes and drops unused indexes. For more information on query execution plans, see [Execution Plans](../../relational-databases/performance/execution-plans.md).
+Automatic tuning, introduced in [!INCLUDE[sssql17-md](../../includes/sssql17-md.md)], notifies you whenever a potential performance issue is detected and lets you apply corrective actions, or lets the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] automatically fix performance problems. Automatic tuning [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] identifies and fixes performance issues caused by **query execution plan choice regressions**. Automatic tuning in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] also creates necessary indexes and drops unused indexes. For more information on query execution plans, see [Execution Plans](../../relational-databases/performance/execution-plans.md).
 
 The [!INCLUDE[ssDEnoversion](../../includes/ssdenoversion-md.md)] monitors the queries that are executed on the database and automatically improves performance of the workload. The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] has a built-in intelligence mechanism that can automatically tune and improve performance of your queries by dynamically adapting the database to your workload. There are two automatic tuning features that are available:
 
-- **Automatic plan correction** identifies problematic query execution plans, such as a [parameter sensitivity or parameter sniffing](../../relational-databases/query-processing-architecture-guide.md#parameter-sensitivity) issues, and fixes query execution plan-related performance problems by forcing the last known good plan before the regression occurred. **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[sssql17-md](../../includes/sssql17-md.md)]) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and Azure SQL Managed Instance]
+- **Automatic plan correction** identifies problematic query execution plans, such as a [parameter sensitivity or parameter sniffing](../../relational-databases/query-processing-architecture-guide.md#parameter-sensitivity) issues, and fixes query execution plan-related performance problems by forcing the last known good plan before the regression occurred. **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[sssql17-md](../../includes/sssql17-md.md)]), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], and Azure SQL Managed Instance
 
-- **Automatic index management** identifies indexes that should be added in your database, and indexes that should be removed. **Applies to**: [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
+- **Automatic index management** identifies indexes that should be added in your database, and indexes that should be removed. **Applies to**: [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
+
+> [!NOTE]
+> In this article, features and behaviors of [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] also apply to [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 ## Why automatic tuning?
 
@@ -164,7 +167,7 @@ Finding the optimal set of indexes that improve performance of the queries that 
 
 In addition to detection, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] can automatically apply identified recommendations. If you find that the built-in rules improve the performance of your database, you might let [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] automatically manage your indexes.
 
-When the [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] applies a CREATE INDEX or DROP INDEX recommendation, it automatically monitors the performance of the queries that are affected by the index. New index will be retained only if performances of the affected queries are improved. Dropped index will be automatically re-created if there are some queries that run slower due to the absence of the index.
+When [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] applies a CREATE INDEX or DROP INDEX recommendation, it automatically monitors the performance of the queries that are affected by the index. New index will be retained only if performances of the affected queries are improved. Dropped index will be automatically re-created if there are some queries that run slower due to the absence of the index.
 
 ### Automatic index management considerations
 

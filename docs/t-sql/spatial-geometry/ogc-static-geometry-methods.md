@@ -13,7 +13,7 @@ dev_langs:
   - "TSQL"
 ---
 # OGC Static Geometry Methods
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
   [!INCLUDE[ssnoversion](../../includes/ssnoversion-md.md)] supports the static geometry methods of the Open Geospatial Consortium (OGC).  
   

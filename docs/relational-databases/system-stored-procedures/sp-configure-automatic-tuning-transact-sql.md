@@ -1,9 +1,9 @@
 ---
 title: "sp_configure_automatic_tuning (Transact-SQL)"
 description: sp_configure_automatic_tuning changes the automatic tuning for a given query_id, to be allowed or skipped for consideration by automatic plan correction.
-author: thesqlsith
-ms.author: derekw
-ms.reviewer: randolphwest
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: randolphwest, derekw
 ms.date: 09/18/2024
 ms.service: sql
 ms.subservice: system-objects
@@ -15,11 +15,11 @@ helpviewer_keywords:
   - "sp_configure_automatic_tuning"
 dev_langs:
   - "TSQL"
-monikerRange: ">=sql-server-2017 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azuresqldb-current"
+monikerRange: ">=sql-server-2017 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azuresqldb-current ||=fabric"
 ---
 # sp_configure_automatic_tuning (Transact-SQL)
 
-[!INCLUDE [sqlserver2022-asdb-asmi](../../includes/applies-to-version/sqlserver2022-asdb-asmi.md)]
+[!INCLUDE [sqlserver2022-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2022-asdb-asmi-fabricsqldb.md)]
 
 Changes the configuration for the [automatic plan correction](../automatic-tuning/automatic-tuning.md#automatic-plan-correction) (APC) component of the [automatic tuning](../automatic-tuning/automatic-tuning.md) feature. The configuration options apply to a given `query_id` which can be obtained from the [Query Store](../performance/monitoring-performance-by-using-the-query-store.md).
 
@@ -29,7 +29,7 @@ These options include the ability to allow a `query_id` to be allowed or skipped
 
 ## Syntax
 
-Syntax for [!INCLUDE [sqlserver2022-asmi](../../includes/applies-to-version/sqlserver2022-asmi.md)].
+Syntax for [!INCLUDE [SQL Server 2022](../../includes/sssql22-md.md)], [!INCLUDE[ssazuremi-md](../../includes/ssazuremi-md.md)]:
 
 ```syntaxsql
 sp_configure_automatic_tuning
@@ -39,7 +39,7 @@ sp_configure_automatic_tuning
     , [ @option_value = ] { 'ON' | 'OFF' }
 ```
 
-Syntax for [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+Syntax for [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]:
 
 ```syntaxsql
 sp_configure_automatic_tuning
@@ -58,7 +58,7 @@ Specifies the name of the configuration option to be invoked. *@option* is **var
 | Value | Description |
 | --- | --- |
 | `FORCE_LAST_GOOD_PLAN` | Enables APC to identify execution plan choice regressions and to automatically fix the issue by forcing the last known good plan as recorded in the Query Store. See [What is execution plan choice regression?](../automatic-tuning/automatic-tuning.md#what-is-execution-plan-choice-regression) |
-| `FORCE_LAST_GOOD_PLAN_EXTENDED_CHECK` | **Applies to:** [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] only. Instructs APC to use an additional time-based plan regression check, which occurs five minutes after a plan change is detected. This check allows APC to avoid biasing its regression checks for queries that execute quickly. With this option, APC takes into account query executions that might run longer, or are prone to timing out because of a plan change. |
+| `FORCE_LAST_GOOD_PLAN_EXTENDED_CHECK` | **Applies to:** [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and  [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] only. Instructs APC to use an additional time-based plan regression check, which occurs five minutes after a plan change is detected. This check allows APC to avoid biasing its regression checks for queries that execute quickly. With this option, APC takes into account query executions that might run longer, or are prone to timing out because of a plan change. |
 
 #### [ @type = ] '*type*'
 
@@ -134,7 +134,7 @@ FROM sys.database_automatic_tuning_configurations;
 
 ### C. Configure the Automatic Tuning (Force Last Good Plan option) to apply an extended, time-based plan regression check to a specific query
 
-**Applies to:** [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
+**Applies to:** [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)],  [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]:
 
 APC uses a time-based plan regression check, which occurs five minutes after a plan change is detected. This check allows APC to avoid biasing its regression checks for queries that execute quickly. APC takes into account query executions that might run longer, or are prone to timing out because of a plan change.
 

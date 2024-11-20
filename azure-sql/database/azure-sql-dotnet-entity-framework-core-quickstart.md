@@ -75,6 +75,7 @@ To connect to Azure SQL Database by using .NET and Entity Framework Core, you ne
 - **Microsoft.EntityFrameworkCore**: Provides essential Entity Framework Core functionality
 - **Microsoft.EntityFrameworkCore.SqlServer**: Provides extra components to connect to the logical server
 - **Microsoft.EntityFrameworkCore.Design**: Provides support for running Entity Framework migrations
+- **Microsoft.EntityFrameworkCore.Tools**: Provides support for Visual Studio Package Manager Console tooling (PowerShell only)
 
 Alternatively, you can also run the `Install-Package` cmdlet in the **Package Manager Console** window:
 
@@ -82,6 +83,7 @@ Alternatively, you can also run the `Install-Package` cmdlet in the **Package Ma
 Install-Package Microsoft.EntityFrameworkCore
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 Install-Package Microsoft.EntityFrameworkCore.Design
+Install-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
 ## [.NET CLI](#tab/dotnet-cli)
