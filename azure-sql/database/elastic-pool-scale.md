@@ -1,10 +1,10 @@
 ---
-title: Scale elastic pool resources
+title: Scale Elastic Pool Resources
 description: This page describes scaling resources for elastic pools in Azure SQL Database.
 author: arvindshmicrosoft
 ms.author: arvindsh
-ms.reviewer: wiassaf, mathoma
-ms.date: 12/27/2023
+ms.reviewer: wiassaf, mathoma, randolphwest
+ms.date: 12/04/2024
 ms.service: azure-sql-database
 ms.subservice: elastic-pools
 ms.topic: conceptual
@@ -36,7 +36,7 @@ Changing the service tier or compute size of an elastic pool follows a similar p
 
 1. Switch routing of connections to new compute instance
 
-    Existing connections to the databases in the original compute instance are dropped. Any new connections are established to the databases in the new compute instance. For some combinations of service tier and compute size changes, database files are detached and reattached during the switch.  Regardless, the switch can result in a brief service interruption when databases are unavailable generally for less than 30 seconds and often for only a few seconds. If there are active long running transactions when connections are dropped, the duration of this step might take longer in order to recover aborted transactions. [Accelerated Database Recovery](../accelerated-database-recovery.md) can reduce the impact from aborting long running transactions.
+    Existing connections to the databases in the original compute instance are dropped. Any new connections are established to the databases in the new compute instance. For some combinations of service tier and compute size changes, database files are detached and reattached during the switch. Regardless, the switch can result in a brief service interruption when databases are unavailable generally for less than 30 seconds and often for only a few seconds. If there are active long running transactions when connections are dropped, the duration of this step might take longer in order to recover aborted transactions. [Accelerated database recovery](/sql/relational-databases/accelerated-database-recovery-concepts) can reduce the impact from aborting long running transactions.
 
 > [!IMPORTANT]
 > No data is lost during any step in the workflow.
@@ -68,8 +68,8 @@ WHERE s.type_desc IN ('ROWS', 'LOG');
 > [!NOTE]
 > - The zone redundant property will remain the same by default when scaling an elastic pool from the Business Critical to the General Purpose tier. 
 > - Latency for the scaling operation when zone redundancy is changed for a General Purpose elastic pool is proportional to database size.
-> - Changing an existing non-Hyperscale elastic pool to the Hyperscale edition isn't supported. See [Hyperscale elastic pools](hyperscale-elastic-pool-overview.md#limitations) for more details. Instead, databases need to be added individually to Hyperscale elastic pools.
-> - Changing the edition of a Hyperscale elastic pool to a non-Hyperscale edition isn't supported. See [Hyperscale elastic pools](hyperscale-elastic-pool-overview.md#limitations) for more details.
+> - Changing an existing non-Hyperscale elastic pool to the Hyperscale edition isn't supported. For more information, see [Hyperscale elastic pools](hyperscale-elastic-pool-overview.md#limitations). Instead, databases need to be added individually to Hyperscale elastic pools.
+> - Changing the edition of a Hyperscale elastic pool to a non-Hyperscale edition isn't supported. For more information, see [Hyperscale elastic pools](hyperscale-elastic-pool-overview.md#limitations).
 
 > [!TIP]
 > To monitor in-progress operations, see: [Manage operations using the SQL REST API](/rest/api/sql/operations/list), [Manage operations using CLI](/cli/azure/sql/elastic-pool/op), [Monitor operations using T-SQL](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database) and these two PowerShell commands: [Get-AzSqlElasticPoolActivity](/powershell/module/az.sql/get-azsqlelasticpoolactivity) and [Stop-AzSqlElasticPoolActivity](/powershell/module/az.sql/stop-azsqlelasticpoolactivity).
@@ -88,10 +88,10 @@ You are billed for each hour a database exists using the highest service tier + 
 
 ## Change elastic pool storage size
 
-The storage size (max data size) for the elastic pool can be specified using the [Azure portal](elastic-pool-manage.md#azure-portal), [PowerShell](/powershell/module/az.sql/Get-AzSqlElasticPool), the [Azure CLI](/cli/azure/sql/elastic-pool#az-sql-elastic-pool-update), or the [REST API](/rest/api/sql/elastic-pools/update). When you increase the max data size of the elastic pool, the value specified cannot exceed the max data size limit of the pool's service objective. When decreasing the max data size, the new value specified has to be equal to or greater than the summation of space allocated across all databases in the pool.
+The storage size (max data size) for the elastic pool can be specified using the [Azure portal](elastic-pool-manage.md#azure-portal), [PowerShell](/powershell/module/az.sql/Get-AzSqlElasticPool), the [Azure CLI](/cli/azure/sql/elastic-pool#az-sql-elastic-pool-update), or the [REST API](/rest/api/sql/elastic-pools/update). When you increase the max data size of the elastic pool, the value specified can't exceed the max data size limit of the pool's service objective. When decreasing the max data size, the new value specified has to be equal to or greater than the summation of space allocated across all databases in the pool.
 
 > [!IMPORTANT]
-> Under some circumstances, you might need to shrink a database to reclaim unused space. For more information, see [Manage file space in Azure SQL Database](file-space-manage.md).
+> Under some circumstances, you might need to shrink a database to reclaim unused space. For more information, see [Manage file space for databases in Azure SQL Database](file-space-manage.md).
 
 ### vCore-based purchasing model
 
@@ -99,16 +99,16 @@ The storage size (max data size) for the elastic pool can be specified using the
 - The price of storage for an elastic pool is the max data size specified, multiplied by the storage unit price of the service tier. For details on storage pricing, see [SQL Database pricing](https://azure.microsoft.com/pricing/details/sql-database/).
 
 > [!IMPORTANT]
-> Under some circumstances, you might need to shrink a database to reclaim unused space. For more information, see [Manage file space in Azure SQL Database](file-space-manage.md).
+> Under some circumstances, you might need to shrink a database to reclaim unused space. For more information, see [Manage file space for databases in Azure SQL Database](file-space-manage.md).
 
 ### DTU-based purchasing model
 
-- The eDTU price for an elastic pool includes a certain amount of storage at no additional cost. Extra data storage beyond the included amount can be provisioned for an additional cost up to the max data size limit corresponding to the eDTUs provisioned. For included storage amounts and max data size limits, see [Resources limits for elastic pools using the DTU purchasing model](resource-limits-dtu-elastic-pools.md#elastic-pool-storage-sizes-and-compute-sizes).
+- The eDTU price for an elastic pool includes a certain amount of storage at no extra cost. Extra data storage beyond the included amount can be provisioned for an additional cost up to the max data size limit corresponding to the eDTUs provisioned. For included storage amounts and max data size limits, see [Resources limits for elastic pools using the DTU purchasing model](resource-limits-dtu-elastic-pools.md#elastic-pool-storage-sizes-and-compute-sizes).
 - The price of extra storage for an elastic pool is the extra storage amount multiplied by the extra storage unit price of the service tier. For details on the price of extra storage, see [SQL Database pricing](https://azure.microsoft.com/pricing/details/sql-database/).
-- Valid values for the max data size for a Standard or Premium tier elastic pool can be one of these values: 50 GB, 100 GB, 150 GB, 200 GB, 250 GB, 300 GB, 400 GB, 500 GB, 750 GB, 800 GB, 1024 GB, 1200 GB, 1280 GB, 1536 GB, 1600 GB, 1792 GB, 2000 GB, 2048 GB, 2304 GB, 2500 GB, 2560 GB, 2816 GB, 3000 GB, 3072 GB, 3328 GB, 3584 GB, 3840 GB, 4096 GB. The max data size specified cannot exceed the max data size limit specified for the eDTUs provisioned.
+- Valid values for the max data size for a Standard or Premium tier elastic pool can be one of these values: 50 GB, 100 GB, 150 GB, 200 GB, 250 GB, 300 GB, 400 GB, 500 GB, 750 GB, 800 GB, 1,024 GB, 1,200 GB, 1,280 GB, 1,536 GB, 1,600 GB, 1,792 GB, 2,000 GB, 2,048 GB, 2,304 GB, 2,500 GB, 2,560 GB, 2,816 GB, 3,000 GB, 3,072 GB, 3,328 GB, 3,584 GB, 3,840 GB, 4,096 GB. The max data size specified can't exceed the max data size limit specified for the eDTUs provisioned.
 
 > [!IMPORTANT]
-> Under some circumstances, you might need to shrink a database to reclaim unused space. For more information, see [Manage file space in Azure SQL Database](file-space-manage.md).
+> Under some circumstances, you might need to shrink a database to reclaim unused space. For more information, see [Manage file space for databases in Azure SQL Database](file-space-manage.md).
 
 ## Monitor or cancel scaling changes
 
@@ -118,13 +118,13 @@ A service tier change or compute rescaling operation can be monitored and cancel
 
 In the SQL elastic pool Overview page, navigate to **Notifications** and select the tile indicating there's an ongoing operation:
 
-![Screenshot from the Azure portal of an ongoing deployment in progress.](./media/elastic-pool-scale/deployment-in-progress.png)
+:::image type="content" source="media/elastic-pool-scale/deployment-in-progress.png" alt-text="Screenshot from the Azure portal of an ongoing deployment in progress.":::
 
 On the resulting **Deployment is in progress** page, select **Cancel**.
 
 ### [PowerShell](#tab/azure-powershell)
 
-In order to invoke the PowerShell commands on a computer, [Az package version 9.7.0](https://www.powershellgallery.com/packages/Az/9.7.0) or a newer version must be installed locally. Or, consider using the [Azure Cloud Shell](/azure/cloud-shell/overview) to run Azure PowerShell at [shell.azure.com](https://shell.azure.com/).
+In order to invoke the PowerShell commands on a computer, you need to install [Az PowerShell module 9.7.0](https://www.powershellgallery.com/packages/Az/9.7.0) or a newer version locally. Or, consider using the [Azure Cloud Shell](/azure/cloud-shell/overview) to run Azure PowerShell at [shell.azure.com](https://shell.azure.com/).
 
 First, log in to Azure and set the proper context for your subscription:
 
@@ -177,8 +177,9 @@ else {
 
 ## Permissions
 
-To scale an elastic pool via the Azure portal, PowerShell, Azure CLI, or REST API, Azure RBAC permissions are needed, specifically the Contributor, SQL DB Contributor role, or SQL Server Contributor Azure RBAC roles. For more information, see [Azure RBAC built-in roles](/azure/role-based-access-control/built-in-roles).
+To scale an elastic pool via the Azure portal, PowerShell, Azure CLI, or REST API, you need Azure RBAC permissions, specifically the Contributor, SQL DB Contributor role, or SQL Server Contributor Azure RBAC roles. For more information, see [Azure RBAC built-in roles](/azure/role-based-access-control/built-in-roles).
 
 ## Related content
 
-For overall resource limits, see [SQL Database vCore-based resource limits - elastic pools](resource-limits-vcore-elastic-pools.md) and [SQL Database DTU-based resource limits - elastic pools](resource-limits-dtu-elastic-pools.md).
+- [Resource limits for elastic pools using the vCore purchasing model](resource-limits-vcore-elastic-pools.md)
+- [Resource limits for elastic pools using the DTU purchasing model](resource-limits-dtu-elastic-pools.md)
