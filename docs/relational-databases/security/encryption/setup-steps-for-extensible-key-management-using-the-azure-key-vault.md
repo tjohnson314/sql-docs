@@ -4,7 +4,7 @@ description: Install and configure the SQL Server Connector for Azure Key Vault.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 09/23/2024
+ms.date: 11/21/2024
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
@@ -426,6 +426,8 @@ To view error code explanations, configuration settings, or maintenance tasks fo
 
 > [!WARNING]  
 > Modifying the registry should be performed by users that know exactly what they are doing. Serious problems might occur if you modify the registry incorrectly. For added protection, back up the registry before you modify it. You can restore the registry if a problem occurs.
+>
+> Modifying the registry should be done by the administrator of the [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] computer.
 
 1. Make sure that SQL Server is installed and running.
 1. Run **regedit** to open the Registry Editor.
