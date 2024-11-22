@@ -8,6 +8,8 @@ ms.date: 12/21/2022
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "certificates"
   - "certificates_TSQL"

@@ -7,6 +7,8 @@ ms.date: "08/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "STCurveToLine method (geometry)"
 dev_langs:
@@ -94,4 +96,3 @@ Returns a polygonal approximation of a **geometry** instance that contains circu
  [STGeometryType &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stgeometrytype-geometry-data-type.md)  
   
   
-

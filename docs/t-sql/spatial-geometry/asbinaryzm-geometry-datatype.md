@@ -7,6 +7,8 @@ ms.date: "08/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "AsBinaryZM geometry"
 dev_langs:
@@ -49,4 +51,3 @@ SELECT @g1.AsBinaryZM();
  [Z &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/z-geometry-data-type.md)  
   
   
-

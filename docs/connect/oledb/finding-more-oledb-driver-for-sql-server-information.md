@@ -7,6 +7,8 @@ ms.date: "06/14/2018"
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "MSOLEDBSQL, additional resources"
   - "OLE DB Driver for SQL Server, additional resources"

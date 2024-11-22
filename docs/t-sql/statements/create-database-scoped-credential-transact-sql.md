@@ -8,6 +8,8 @@ ms.date: 08/30/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "DATABASE SCOPED CREDENTIAL"
   - "DATABASE_SCOPED_CREDENTIAL_TSQL"

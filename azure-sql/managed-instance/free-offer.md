@@ -10,6 +10,7 @@ ms.subservice: service-overview
 ms.topic: how-to
 ms.custom:
   - references_regions
+  - ignite-2024
 monikerRange: "=azuresql || =azuresql-mi"
 ---
 # Try Azure SQL Managed Instance for free (preview)

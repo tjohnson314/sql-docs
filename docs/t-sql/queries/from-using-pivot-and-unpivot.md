@@ -8,6 +8,8 @@ ms.date: 10/01/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "PIVOT_TSQL"
 helpviewer_keywords:

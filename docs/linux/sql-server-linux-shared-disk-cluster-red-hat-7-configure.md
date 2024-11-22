@@ -4,7 +4,7 @@ description: Learn to configure a Red Hat Enterprise Linux (RHEL) shared disk fa
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 08/23/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -15,19 +15,19 @@ ms.custom:
 
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
-This guide provides instructions to create a two-node shared disk failover cluster for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Red Hat Enterprise Linux. The clustering layer is based on Red Hat Enterprise Linux (RHEL) [HA add-on](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/pdf/high_availability_add-on_overview/red_hat_enterprise_linux-7-high_availability_add-on_overview-en-us.pdf) built on top of [Pacemaker](https://clusterlabs.org/). The [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance is active on either one node or the other.
+This guide provides instructions to create a two-node shared disk failover cluster for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Red Hat Enterprise Linux. The clustering layer is based on Red Hat Enterprise Linux (RHEL) [HA add-on](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/pdf/high_availability_add-on_overview/red_hat_enterprise_linux-7-high_availability_add-on_overview-en-us.pdf) built on top of [Pacemaker](https://clusterlabs.org/). The [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance is active on either one node or the other.
 
 > [!NOTE]  
 > Access to Red Hat HA add-on and documentation requires a subscription.
 
 As the following diagram shows, storage is presented to two servers. Clustering components - Corosync and Pacemaker - coordinate communications and resource management. One of the servers has the active connection to the storage resources and the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. When Pacemaker detects a failure, the clustering components are responsible for moving the resources to the other node.
 
-:::image type="content" source="./media/sql-server-linux-shared-disk-cluster-red-hat-7-configure/LinuxCluster.png" alt-text="Red Hat Enterprise Linux 7 Shared Disk SQL Cluster.":::
+:::image type="content" source="media/sql-server-linux-shared-disk-cluster-red-hat-7-operate/linux-cluster.png" alt-text="Diagram of Red Hat Enterprise Linux 7 shared disk SQL Server cluster.":::
 
-For more information on cluster configuration, resource agents options, and management, visit [RHEL reference documentation](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/index).
+For more information on cluster configuration, resource agents options, and management, visit [RHEL reference documentation](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/index).
 
-> [!NOTE]  
-> At this point, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] integration with Pacemaker isn't as coupled as with WSFC on Windows. From within [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], there's no knowledge about the presence of the cluster, all orchestration is outside in and the service is controlled as a standalone instance by Pacemaker. Also for example, cluster dmvs `sys.dm_os_cluster_nodes` and `sys.dm_os_cluster_properties` will no records.
+At this point, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] integration with Pacemaker isn't as coupled as with WSFC on Windows. From within [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], there's no knowledge about the presence of the cluster, all orchestration is outside in and the service is controlled as a standalone instance by Pacemaker. Also for example, cluster dmvs `sys.dm_os_cluster_nodes` and `sys.dm_os_cluster_properties` will no records.
+
 To use a connection string that points to a string server name and not use the IP, they will have to register in their DNS server the IP used to create the virtual IP resource (as explained in the following sections) with the chosen server name.
 
 The following sections walk through the steps to set up a failover cluster solution.
@@ -42,7 +42,7 @@ The first step is to configure the operating system on the cluster nodes. For th
 
 ## Install and configure SQL Server on each cluster node
 
-1. Install and setup [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on both nodes. For detailed instructions, see [Install SQL Server on Linux](sql-server-linux-setup.md).
+1. Install and setup [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on both nodes. For detailed instructions, see [Installation guidance for SQL Server on Linux](sql-server-linux-setup.md).
 
 1. Designate one node as primary and the other as secondary, for purposes of configuration. Use these terms for the following this guide.
 
@@ -64,15 +64,20 @@ The first step is to configure the operating system on the cluster nodes. For th
    sudo systemctl start mssql-server
    ```
 
-   Connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] `master` database with the sa account and run the following:
+   Connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] `master` database with the `sa` account and run the following:
 
-   ```bashsql
-   USE [master]
+   ```sql
+   USE [master];
    GO
-   CREATE LOGIN [<loginName>] with PASSWORD= N'<loginPassword>'
 
-   ALTER SERVER ROLE [sysadmin] ADD MEMBER [<loginName>]
+   CREATE LOGIN [<loginName>]
+       WITH PASSWORD = N'<password>';
+
+   ALTER SERVER ROLE [sysadmin] ADD MEMBER [<loginName>];
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
    Alternatively, you can set the permissions at a more granular level. The Pacemaker login requires `VIEW SERVER STATE` to query health    status with `sp_server_diagnostics`, `setupadmin` and `ALTER ANY LINKED SERVER` to update the FCI instance name with the resource name    by running `sp_dropserver` and `sp_addserver`.
 
@@ -94,7 +99,7 @@ The first step is to configure the operating system on the cluster nodes. For th
 
    The following example shows `/etc/hosts` with additions for two nodes named `sqlfcivm1` and `sqlfcivm2`.
 
-   ```bash
+   ```output
    127.0.0.1   localhost localhost4 localhost4.localdomain4
    ::1       localhost localhost6 localhost6.localdomain6
    10.128.18.128 sqlfcivm1
@@ -105,7 +110,7 @@ In the next section, you'll configure shared storage and move your database file
 
 ## Configure shared storage and move database files
 
-There are various solutions for providing shared storage. This walk-through demonstrates configuring shared storage with NFS. We recommend following best practices and use Kerberos to secure NFS (you can find an example here: https://www.certdepot.net/rhel7-use-kerberos-control-access-nfs-network-shares/).
+There are various solutions for providing shared storage. This walk-through demonstrates configuring shared storage with NFS. We recommend following best practices and use Kerberos to secure NFS. For an example, see [RHEL7: Use Kerberos to control access to NFS network shares](https://www.certdepot.net/rhel7-use-kerberos-control-access-nfs-network-shares/).
 
 > [!WARNING]  
 > If you don't secure NFS, then anyone who can access your network and spoof the IP address of a SQL node will be able to access your data files. As always, make sure you threat model your system before using it in production. Another storage option is to use SMB fileshare.
@@ -198,8 +203,8 @@ Do the following steps on all cluster nodes.
 For more information about using NFS, see the following resources:
 
 - [NFS servers and firewalld | Stack Exchange](https://unix.stackexchange.com/questions/243756/nfs-servers-and-firewalld)
-- [Mounting an NFS Volume | Linux Network Administrators Guide](https://www.tldp.org/LDP/nag2/x-087-2-nfs.mountd.html)
-- [NFS server configuration | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/nfs-serverconfig)
+- [Mounting an NFS Volume | Linux Network Administrators Guide](https://tldp.org/LDP/nag2/x-087-2-nfs.mountd.html)
+- [NFS server configuration | Red Hat Customer Portal](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/html/storage_administration_guide/nfs-serverconfig)
 
 ### Mount database files directory to point to the shared storage
 
@@ -258,10 +263,13 @@ At this point, both instances of [!INCLUDE [ssnoversion-md](../includes/ssnovers
    ```bash
    sudo touch /var/opt/mssql/secrets/passwd
    echo '<loginName>' | sudo tee -a /var/opt/mssql/secrets/passwd
-   echo '<loginPassword>' | sudo tee -a /var/opt/mssql/secrets/passwd
+   echo '<password>' | sudo tee -a /var/opt/mssql/secrets/passwd
    sudo chown root:root /var/opt/mssql/secrets/passwd
    sudo chmod 600 /var/opt/mssql/secrets/passwd
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. On both cluster nodes, open the Pacemaker firewall ports. To open these ports with `firewalld`, run the following command:
 
@@ -377,4 +385,4 @@ A STONITH device provides a fencing agent. [Setting up Pacemaker on Red Hat Ente
 ## Related content
 
 - [Cluster from Scratch](https://clusterlabs.org/pacemaker/doc/2.1/Clusters_from_Scratch/pdf/Clusters_from_Scratch.pdf)
-- [Operate SQL Server on Red Hat Enterprise Linux shared disk cluster](sql-server-linux-shared-disk-cluster-red-hat-7-operate.md)
+- [Operate RHEL failover cluster instance (FCI) for SQL Server](sql-server-linux-shared-disk-cluster-red-hat-7-operate.md)

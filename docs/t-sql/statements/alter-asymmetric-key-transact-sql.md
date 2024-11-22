@@ -7,6 +7,8 @@ ms.date: "04/12/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "ALTER_ASYMMETRIC_KEY_TSQL"
   - "ALTER ASYMMETRIC KEY"

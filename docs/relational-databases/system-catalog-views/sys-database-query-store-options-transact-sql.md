@@ -8,6 +8,8 @@ ms.date: 05/23/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "DATABASE_QUERY_STORE_OPTIONS_TSQL"
   - "DATABASE_QUERY_STORE_OPTIONS"

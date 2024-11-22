@@ -7,6 +7,8 @@ ms.date: "02/17/2017"
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "removing indexes"
   - "deleting indexes"

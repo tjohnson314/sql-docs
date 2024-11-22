@@ -1,9 +1,9 @@
 ---
-title: Walkthrough for the security features of SQL Server on Linux
+title: Walkthrough for the Security Features of SQL Server on Linux
 description: Walk through the security features of SQL Server on Linux to get an idea of areas to investigate further.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 08/23/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -24,17 +24,19 @@ If you're a Linux user who is new to [!INCLUDE [ssnoversion-md](../includes/ssno
 Grant others access to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] by creating a login in the `master` database using the [CREATE LOGIN](../t-sql/statements/create-login-transact-sql.md) statement. For example:
 
 ```sql
-CREATE LOGIN Larry WITH PASSWORD = '************';
+CREATE LOGIN Larry
+    WITH PASSWORD = '<password>';
 ```
 
-> [!NOTE]  
-> Always use a strong password in place of the asterisks in the previous command.
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 Logins can connect to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] and have access (with limited permissions) to the `master` database. To connect to a user-database, a login needs a corresponding identity at the database level, called a database user. Users are specific to each database and must be separately created in each database to grant them access. The following example moves you into the [!INCLUDE [sssampledbobject-md](../includes/sssampledbobject-md.md)] database, and then uses the [CREATE USER](../t-sql/statements/create-user-transact-sql.md) statement to create a user named Larry that is associated with the login named `Larry`. Though the login and the user are related (mapped to each other), they are different objects. The login is a server-level principal. The user is a database-level principal.
 
 ```sql
 USE AdventureWorks2022;
 GO
+
 CREATE USER Larry;
 GO
 ```
@@ -42,7 +44,7 @@ GO
 - A [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] administrator account can connect to any database and can create more logins and users in any database.
 - When someone creates a database they become the database owner, which can connect to that database. Database owners can create more users.
 
-Later you can authorize other logins to create more logins by granting them the `ALTER ANY LOGIN` permission. Inside a database, you can authorize other users to create more users by granting them the  `ALTER ANY USER` permission. For example:
+Later you can authorize other logins to create more logins by granting them the `ALTER ANY LOGIN` permission. Inside a database, you can authorize other users to create more users by granting them the `ALTER ANY USER` permission. For example:
 
 ```sql
 GRANT ALTER ANY LOGIN TO Larry;
@@ -50,6 +52,7 @@ GO
 
 USE AdventureWorks2022;
 GO
+
 GRANT ALTER ANY USER TO Jerry;
 GO
 ```
@@ -69,7 +72,7 @@ GO
 ALTER ROLE db_datareader ADD MEMBER Jerry;
 ```
 
-For a list of the fixed database roles, see [Database-Level Roles](../relational-databases/security/authentication-access/database-level-roles.md).
+For a list of the fixed database roles, see [Database-level roles](../relational-databases/security/authentication-access/database-level-roles.md).
 
 Later, when you're ready to configure more precise access to your data (highly recommended), create your own user-defined database roles using [CREATE ROLE](../t-sql/statements/create-role-transact-sql.md) statement. Then assign specific granular permissions to your custom roles.
 
@@ -77,17 +80,19 @@ For example, the following statements create a database role named `Sales`, gran
 
 ```sql
 CREATE ROLE Sales;
-GRANT SELECT ON Object::Sales TO Orders;
-GRANT UPDATE ON Object::Sales TO Orders;
-GRANT DELETE ON Object::Sales TO Orders;
+
+GRANT SELECT ON OBJECT::Sales TO Orders;
+GRANT UPDATE ON OBJECT::Sales TO Orders;
+GRANT DELETE ON OBJECT::Sales TO Orders;
+
 ALTER ROLE Sales ADD MEMBER Jerry;
 ```
 
-For more information about the permission system, see [Getting Started with Database Engine Permissions](../relational-databases/security/authentication-access/getting-started-with-database-engine-permissions.md).
+For more information about the permission system, see [Get started with Database Engine permissions](../relational-databases/security/authentication-access/getting-started-with-database-engine-permissions.md).
 
 ## Configure row-level security
 
-[Row-Level Security](../relational-databases/security/row-level-security.md) enables you to restrict access to rows in a database based on the user executing a query. This feature is useful for scenarios like ensuring that customers can only access their own data or that workers can only access data that is pertinent to their department.
+[Row-level security](../relational-databases/security/row-level-security.md) enables you to restrict access to rows in a database based on the user executing a query. This feature is useful for scenarios like ensuring that customers can only access their own data or that workers can only access data that is pertinent to their department.
 
 The following steps walk through setting up two Users with different row-level access to the `Sales.SalesOrderHeader` table.
 
@@ -114,48 +119,54 @@ Create a new schema and inline table-valued function. The function returns 1 whe
 CREATE SCHEMA Security;
 GO
 
-CREATE FUNCTION Security.fn_securitypredicate(@SalesPersonID AS int)
-    RETURNS TABLE
+CREATE FUNCTION Security.fn_securitypredicate
+(@SalesPersonID INT)
+RETURNS TABLE
 WITH SCHEMABINDING
 AS
-    RETURN SELECT 1 AS fn_securitypredicate_result
-    WHERE ('SalesPerson' + CAST(@SalesPersonId as VARCHAR(16)) = USER_NAME())
-    OR (USER_NAME() = 'Manager');
+RETURN
+    SELECT 1 AS fn_securitypredicate_result
+    WHERE ('SalesPerson' + CAST (@SalesPersonId AS VARCHAR (16)) = USER_NAME())
+          OR (USER_NAME() = 'Manager')
 ```
 
 Create a security policy adding the function as both a filter and a block predicate on the table:
 
 ```sql
 CREATE SECURITY POLICY SalesFilter
-ADD FILTER PREDICATE Security.fn_securitypredicate(SalesPersonID)
-  ON Sales.SalesOrderHeader,
-ADD BLOCK PREDICATE Security.fn_securitypredicate(SalesPersonID)
-  ON Sales.SalesOrderHeader
-WITH (STATE = ON);
+    ADD FILTER PREDICATE Security.fn_securitypredicate(SalesPersonID) ON Sales.SalesOrderHeader,
+    ADD BLOCK PREDICATE Security.fn_securitypredicate(SalesPersonID) ON Sales.SalesOrderHeader
+    WITH (STATE = ON);
 ```
 
 Execute the following to query the `SalesOrderHeader` table as each user. Verify that `SalesPerson280` only sees the 95 rows from their own sales and that the `Manager` can see all the rows in the table.
 
 ```sql
 EXECUTE AS USER = 'SalesPerson280';
-SELECT * FROM Sales.SalesOrderHeader;
+
+SELECT *
+FROM Sales.SalesOrderHeader;
+
 REVERT;
 
 EXECUTE AS USER = 'Manager';
-SELECT * FROM Sales.SalesOrderHeader;
+
+SELECT *
+FROM Sales.SalesOrderHeader;
+
 REVERT;
 ```
 
-Alter the security policy to disable the policy.  Now both users can access all rows.
+Alter the security policy to disable the policy. Now both users can access all rows.
 
 ```sql
 ALTER SECURITY POLICY SalesFilter
-WITH (STATE = OFF);
+    WITH (STATE = OFF);
 ```
 
 ## Enable dynamic data masking
 
-[Dynamic Data Masking](../relational-databases/security/dynamic-data-masking.md) enables you to limit the exposure of sensitive data to users of an application by fully or partially masking certain columns.
+[Dynamic data masking](../relational-databases/security/dynamic-data-masking.md) enables you to limit the exposure of sensitive data to users of an application by fully or partially masking certain columns.
 
 Use an `ALTER TABLE` statement to add a masking function to the `EmailAddress` column in the `Person.EmailAddress` table:
 
@@ -164,8 +175,8 @@ USE AdventureWorks2022;
 GO
 
 ALTER TABLE Person.EmailAddress
-ALTER COLUMN EmailAddress ADD MASKED
-    WITH (FUNCTION = 'email()');
+    ALTER COLUMN EmailAddress
+        ADD MASKED WITH (FUNCTION = 'email()');
 ```
 
 Create a new user `TestUser` with `SELECT` permission on the table, then execute a query as `TestUser` to view the masked data:
@@ -173,11 +184,13 @@ Create a new user `TestUser` with `SELECT` permission on the table, then execute
 ```sql
 CREATE USER TestUser WITHOUT LOGIN;
 
-GRANT SELECT ON Person.EmailAddress TO TestUser;
+GRANT SELECT
+    ON Person.EmailAddress TO TestUser;
 
 EXECUTE AS USER = 'TestUser';
 
-SELECT EmailAddressID, EmailAddress
+SELECT EmailAddressID,
+       EmailAddress
 FROM Person.EmailAddress;
 
 REVERT;
@@ -187,13 +200,13 @@ Verify that the masking function changes the email address in the first record f
 
 | EmailAddressID | EmailAddress |
 | --- | --- |
-| 1 | ken0@adventure-works.com |
+| 1 | `ken0@adventure-works.com` |
 
 into
 
 | EmailAddressID | EmailAddress |
 | --- | --- |
-| 1 | kXXX@XXXX.com |
+| 1 | `kXXX@XXXX.com` |
 
 ## Enable transparent data encryption
 
@@ -218,7 +231,7 @@ The following example illustrates encrypting and decrypting the [!INCLUDE [sssam
 USE master;
 GO
 
-CREATE MASTER KEY ENCRYPTION BY PASSWORD = '**********';
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<master-key-password>';
 GO
 
 CREATE CERTIFICATE MyServerCert
@@ -228,18 +241,19 @@ GO
 USE AdventureWorks2022;
 GO
 
-CREATE DATABASE ENCRYPTION KEY
-    WITH ALGORITHM = AES_256 ENCRYPTION BY SERVER CERTIFICATE MyServerCert;
+CREATE DATABASE ENCRYPTION KEY WITH ALGORITHM = AES_256
+    ENCRYPTION BY SERVER CERTIFICATE MyServerCert;
 GO
 
 ALTER DATABASE AdventureWorks2022
-SET ENCRYPTION ON;
+    SET ENCRYPTION ON;
 ```
 
 To remove TDE, run the following command:
 
 ```sql
-ALTER DATABASE AdventureWorks2022 SET ENCRYPTION OFF;
+ALTER DATABASE AdventureWorks2022
+    SET ENCRYPTION OFF;
 ```
 
 The encryption and decryption operations are scheduled on background threads by [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. You can view the status of these operations using the catalog views and dynamic management views in the list that appears later in this article.
@@ -247,7 +261,7 @@ The encryption and decryption operations are scheduled on background threads by 
 > [!WARNING]  
 > Backup files of databases that have TDE enabled are also encrypted by using the database encryption key. As a result, when you restore these backups, the certificate protecting the database encryption key must be available. This means that in addition to backing up the database, make sure that you maintain backups of the server certificates to prevent data loss. Data loss will result if the certificate is no longer available. For more information, see [SQL Server Certificates and Asymmetric Keys](../relational-databases/security/sql-server-certificates-and-asymmetric-keys.md).
 
-For more information about TDE, see [Transparent Data Encryption (TDE)](../relational-databases/security/encryption/transparent-data-encryption.md).
+For more information about TDE, see [Transparent data encryption (TDE)](../relational-databases/security/encryption/transparent-data-encryption.md).
 
 ## Configure backup encryption
 
@@ -267,18 +281,15 @@ CREATE CERTIFICATE BackupEncryptCert
 GO
 
 BACKUP DATABASE [AdventureWorks2022]
-    TO DISK = N'/var/opt/mssql/backups/AdventureWorks2022.bak'
+TO DISK = N'/var/opt/mssql/backups/AdventureWorks2022.bak'
 WITH COMPRESSION,
-    ENCRYPTION (
-        ALGORITHM = AES_256,
-        SERVER CERTIFICATE = BackupEncryptCert
-    ),
-    STATS = 10
+    ENCRYPTION (ALGORITHM = AES_256, SERVER CERTIFICATE = BackupEncryptCert),
+    STATS = 10;
 GO
 ```
 
-For more information, see [Backup Encryption](../relational-databases/backup-restore/backup-encryption.md).
+For more information, see [Backup encryption](../relational-databases/backup-restore/backup-encryption.md).
 
 ## Related content
 
-- [Security Center for SQL Server Database Engine and Azure SQL Database](../relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database.md)
+- [Security for SQL Server Database Engine and Azure SQL Database](../relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database.md)

@@ -8,13 +8,15 @@ ms.date: 08/15/2023
 ms.service: sql
 ms.subservice: ssms
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "scripts [SQL Server], SQLCMD scripts"
   - "SQLCMD scripts"
   - "modifying scripts"
   - "Query Editor [Database Engine], SQLCMD scripts"
   - "scripts [SQL Server], SQL Server Management Studio"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || = fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Edit SQLCMD Scripts with Query Editor
 

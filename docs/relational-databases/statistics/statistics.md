@@ -8,6 +8,8 @@ ms.date: 07/19/2024
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "statistical information [SQL Server], query optimization"
   - "query performance [SQL Server], statistics"

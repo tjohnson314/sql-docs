@@ -8,6 +8,8 @@ ms.date: 08/08/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "CURRENT_DATE"
   - "CURRENT_DATE_TSQL"

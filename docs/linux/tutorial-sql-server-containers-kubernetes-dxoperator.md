@@ -1,10 +1,10 @@
 ---
-title: Deploy availability groups with DH2i DxOperator on AKS
+title: Deploy Availability Groups With DH2i DxOperator on AKS
 description: Set up an availability group in SQL Server on Kubernetes using DH2i DxOperator.
 author: aravindmahadevan-ms
 ms.author: armaha
 ms.reviewer: amitkh, randolphwest
-ms.date: 05/02/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: tutorial
@@ -20,8 +20,8 @@ This tutorial explains how to configure [!INCLUDE [ssnoversion-md](../includes/s
 
 > [!NOTE]  
 > Microsoft supports data movement, AG, and [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] components. DH2i is responsible for support of the DxEnterprise product, which includes cluster and quorum management. DxOperator is a software extension to Kubernetes that uses custom resource definitions to automate the deployment of DxEnterprise clusters. DxEnterprise then provides all of the instrumentation to create, configure, manage and provide automatic failover for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] AG workloads in Kubernetes.
->
-> You can register for a [free DxEnterprise software license](https://dh2i.com/dxoperator-for-sql-server-kubernetes-deployments/). For more information, see the [DxOperator Quick Start Guide](https://support.dh2i.com/docs/guides/dxoperator/dxoperator-qsg/).
+>  
+> You can register for a [free DxEnterprise software license](https://dh2i.com/dxoperator-sql-server-operator-for-kubernetes). For more information, see the [DxOperator Quick Start Guide](https://support.dh2i.com/dxoperator/guides/dxoperator-qsg).
 
 Using the steps mentioned in this article, learn how to deploy a StatefulSet and use the DH2i DxOperator to create and configure an AG with three replicas, hosted on AKS.
 
@@ -53,7 +53,7 @@ This tutorial consists of the following steps:
      mssql.conf: |
        [EULA]
        accepteula = Y
-   
+
        [sqlagent]
        enabled = true
    ```
@@ -69,13 +69,16 @@ This tutorial consists of the following steps:
 Create a secret to store the `sa` password for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
 
 ```bash
-kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="Password123"
+kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="<password>"
 ```
+
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 Create a secret to store the license key for DH2i. Visit [DH2i's website](https://dh2i.com/trial/) to get a developer license. Replace `XXXX-XXXX-XXXX-XXXX` in the following example with your license key.
 
 ```bash
-kubectl create secret generic dxe --from-literal=DX_PASSKEY="Password123" --from-literal=DX_LICENSE=XXXX-XXXX-XXXX-XXXX
+kubectl create secret generic dxe --from-literal=DX_PASSKEY="<password>" --from-literal=DX_LICENSE=XXXX-XXXX-XXXX-XXXX
 ```
 
 ## Install DxOperator

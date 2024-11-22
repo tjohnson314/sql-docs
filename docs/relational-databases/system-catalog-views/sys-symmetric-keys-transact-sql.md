@@ -7,6 +7,8 @@ ms.date: "03/07/2017"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "symmetric_keys"
   - "sys.symmetric_keys"

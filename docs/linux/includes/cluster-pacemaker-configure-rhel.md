@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: include
@@ -53,7 +53,7 @@ ms.custom:
 
    **RHEL 8**
 
-   For RHEL 8, you need to authenticate the nodes separately. Manually enter in the Username and Password for hacluster when prompted.
+   For RHEL 8, you need to authenticate the nodes separately. Manually enter in the username and password for `hacluster` when prompted.
 
    ```bash
    sudo pcs host auth <node1> <node2> <node3>

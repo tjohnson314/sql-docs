@@ -8,6 +8,8 @@ ms.date: 10/28/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "column_constraint"
   - "column_constraint_TSQL"
@@ -18,7 +20,7 @@ helpviewer_keywords:
   - "column_constraint"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # ALTER TABLE column_constraint (Transact-SQL)
 

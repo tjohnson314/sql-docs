@@ -3,7 +3,7 @@ title: Troubleshoot SQL Server on Linux
 description: Troubleshoot SQL Server running on Linux or in a Linux container. Learn where to find information about supported features and known limitations.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: troubleshooting
@@ -22,7 +22,9 @@ This article describes how to troubleshoot [!INCLUDE [ssNoVersion](../includes/s
 
 For answers to frequently asked questions, see the [SQL Server on Linux FAQ](sql-server-linux-faq.yml).
 
-## <a id="connection"></a> Troubleshoot connection failures
+<a id="connection"></a>
+
+## Troubleshoot connection failures
 
 If you have difficulty connecting to your Linux [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] instance, there are a few things to check.
 
@@ -159,7 +161,7 @@ You need to attach the user databases to the instance afterwards. It also delete
 
 - database master key (DMK) information
 - any certificates loaded in `master`
-- the password for the SA login
+- the password for the `sa` account
 - job-related information from `msdb`
 - Database Mail information from `msdb`
 - `sp_configure` options
@@ -184,11 +186,14 @@ Only use these steps if you understand the implications.
 
 1. After you see the message "Recovery is complete", press **Ctrl+C**. This shuts down [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)].
 
-1. Reconfigure the SA password.
+1. Reconfigure the `sa` password.
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf set-sa-password
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Start [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] and reconfigure the server, including restoring or reattaching any user databases.
 
@@ -214,32 +219,35 @@ Many factors affect performance, including database design, hardware, and worklo
 
    This is a known issue that happens whenever the name of the machine that is trying to install the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] package is longer than 15 characters. There are currently no workarounds other than changing the name of the machine. You can do this by editing both `/etc/hostname` and `/etc/hosts`, changing the hostname, saving each file, and restarting the computer.
 
-1. The system administration (SA) password must be reset, which stops the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] service temporarily.
+1. The system administrator (`sa`) password must be reset, which stops the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] service temporarily.
 
-   If you forget the system administrator (SA) password or need to reset it for some other reason, follow these steps.
+   If you forget the `sa` password or need to reset it for some other reason, follow these steps.
 
-   Sign in to the host terminal, run the following commands and follow the prompts to reset the SA password:
+   Sign in to the host terminal, run the following commands and follow the prompts to reset the `sa` password:
 
    ```bash
    sudo systemctl stop mssql-server
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-1. Special characters in login passwords cause errors or login failures.
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
-   If you use some characters in the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] login password, you might need to escape them with a backslash when you use them on the Linux command line. For example, you must escape the dollar sign ($) anytime you use it in a terminal command/shell script:
+1. Special characters in passwords can cause errors or login failures.
 
-   Doesn't work:
+   If you use some characters in the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] password, you might need to escape them with a backslash when you use them on the Linux command line. For example, you must escape the dollar sign (`$`) anytime you use it in a terminal command/shell script:
 
-   ```bash
-   sudo sqlcmd -S myserver -U sa -P Test$$
-   ```
+   - Doesn't work:
 
-   Does work:
+     ```bash
+     sudo sqlcmd -S myserver -U sa -P Test$$
+     ```
 
-   ```bash
-   sqlcmd -S myserver -U sa -P Test\$\$
-   ```
+   - Does work:
+
+     ```bash
+     sqlcmd -S myserver -U sa -P Test\$\$
+     ```
 
 ## Related content
 

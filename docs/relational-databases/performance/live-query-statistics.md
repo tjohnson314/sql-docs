@@ -7,6 +7,8 @@ ms.date: "11/21/2018"
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "query statistics [SQL Server] live query stats"
   - "live query statistics"

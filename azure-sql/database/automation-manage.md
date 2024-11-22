@@ -10,6 +10,7 @@ ms.subservice: deployment-configuration
 ms.topic: conceptual
 ms.custom:
   - sqldbrb=1
+  - ignite-2024
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 

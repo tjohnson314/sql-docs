@@ -40,7 +40,7 @@ To configure a failover group between a primary and secondary SQL Managed Instan
 - The IP [address range](#create-virtual-network) for the virtual network of the primary instance must not overlap with the address range of the virtual network for the secondary managed instance, or any other virtual network peered with either the primary or secondary virtual network.
 - Both instances must be in the same DNS zone. When you create your secondary managed instance, you must specify the primary instance's DNS zone ID. If you don't, the zone ID is generated as a random string when the first instance is created in each virtual network and the same ID is assigned to all other instances in the same subnet. Once assigned, the DNS zone can't be modified.
 - Network Security Groups (NSG) rules for the subnets of both instances must have open inbound and outbound TCP connections for port 5022 and port range 11000-11999 to facilitate communication between the two instances.
-- Managed instances should be deployed to [paired regions](/azure/availability-zones/cross-region-replication-azure) for performance reasons. Managed instances that reside in geo-paired regions benefit from a significantly higher geo-replication speed compared to unpaired regions.
+- Managed instances should be deployed to [paired regions](/azure/reliability/cross-region-replication-azure) for performance reasons. Managed instances that reside in geo-paired regions benefit from a significantly higher geo-replication speed compared to unpaired regions.
 - Both instances must use the same [update policy](update-policy.md).
 
 ## Create the secondary instance
@@ -63,7 +63,7 @@ To create virtual network for your secondary instance in the Azure portal, follo
 1. On the **Basics** tab of the **Create virtual network** page:
    1. Select the **Resource Group** you intend to use for the secondary instance. Create a new one if it doesn't exist yet.
    1. Provide a name for your virtual network, such as `vnet-sql-mi-secondary`.
-   1. Select a region that's [paired](/azure/availability-zones/cross-region-replication-azure) with the region where the primary instance is.
+   1. Select a region that's [paired](/azure/reliability/cross-region-replication-azure) with the region where the primary instance is.
 1. On the **IP addresses** tab of the **Create virtual network** page:
    1. Use **Delete address space** to delete the existing IPv4 address space.
    1. After the address space is deleted, select **Add IPv4 address space** to add a new space, and then provide an IP address space that is different to the address space used by the virtual network of the primary instance. For example, if your current primary instance uses an address space of 10.0.0.16, then enter `10.1.0.0/16` for the address space of the virtual network you intend to use for the secondary instance.
@@ -80,7 +80,7 @@ After your virtual network is ready, follow these steps to create your secondary
 
 1. Go to the [Create Azure SQL Managed Instance](https://portal.azure.com/#create/Microsoft.SQLManagedInstance) in the Azure portal.
 1. On the **Basics** tab of the **Create Azure SQL Managed Instance** page:
-    1. Choose a region for your secondary instance that's [paired](/azure/availability-zones/cross-region-replication-azure) with the primary instance.
+    1. Choose a region for your secondary instance that's [paired](/azure/reliability/cross-region-replication-azure) with the primary instance.
     1. Choose a service tier that matches the service tier of the primary instance.
 1. On the **Networking** tab of the **Create Azure SQL Managed Instance** page, use the dropdown list under **Virtual network / subnet** to select the virtual network and subnet you previously created:
 

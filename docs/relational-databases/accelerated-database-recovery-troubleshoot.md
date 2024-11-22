@@ -8,6 +8,8 @@ ms.date: 07/14/2022
 ms.service: sql
 ms.subservice: backup-restore
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "accelerated database recovery [SQL Server], recovery-only"
   - "database recovery [SQL Server]"

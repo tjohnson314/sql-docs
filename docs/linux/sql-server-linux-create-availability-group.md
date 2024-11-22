@@ -1,10 +1,10 @@
 ---
-title: Create and configure an availability group for SQL Server on Linux
+title: Create and Configure an Availability Group for SQL Server on Linux
 description: This tutorial shows how to create and configure availability groups for SQL Server on Linux, as well as create availability group endpoints and certificates.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 12/28/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -87,7 +87,7 @@ This example creates certificates for a three-node configuration. The instance n
 1. Execute the following script on `LinAGN1` to create the master key, certificate, and endpoint, and back up the certificate. For this example, the typical TCP port of 5022 is used for the endpoint.
 
    ```sql
-   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<StrongPassword>';
+   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<master-key-password>';
    GO
 
    CREATE CERTIFICATE LinAGN1_Cert
@@ -97,43 +97,53 @@ This example creates certificates for a three-node configuration. The instance n
    BACKUP CERTIFICATE LinAGN1_Cert TO FILE = '/var/opt/mssql/data/LinAGN1_Cert.cer';
    GO
 
-   CREATE ENDPOINT AGEP STATE = STARTED AS TCP (
-       LISTENER_PORT = 5022,
-       LISTENER_IP = ALL
+   CREATE ENDPOINT AGEP
+       STATE = STARTED
+       AS TCP
+   (
+               LISTENER_PORT = 5022,
+               LISTENER_IP = ALL
    )
-   FOR DATABASE_MIRRORING(AUTHENTICATION = CERTIFICATE LinAGN1_Cert, ROLE = ALL);
+       FOR DATABASE_MIRRORING
+   (
+               AUTHENTICATION = CERTIFICATE LinAGN1_Cert,
+               ROLE = ALL
+   );
    GO
    ```
 
 1. Do the same on `LinAGN2`:
 
    ```sql
-   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<StrongPassword>';
+   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<master-key-password>';
    GO
 
    CREATE CERTIFICATE LinAGN2_Cert
-   WITH SUBJECT = 'LinAGN2 AG Certificate';
+       WITH SUBJECT = 'LinAGN2 AG Certificate';
    GO
 
-   BACKUP CERTIFICATE LinAGN2_Cert
-   TO FILE = '/var/opt/mssql/data/LinAGN2_Cert.cer';
+   BACKUP CERTIFICATE LinAGN2_Cert TO FILE = '/var/opt/mssql/data/LinAGN2_Cert.cer';
    GO
 
    CREATE ENDPOINT AGEP
-   STATE = STARTED
-   AS TCP (
-       LISTENER_PORT = 5022,
-       LISTENER_IP = ALL)
-   FOR DATABASE_MIRRORING (
-       AUTHENTICATION = CERTIFICATE LinAGN2_Cert,
-       ROLE = ALL);
+       STATE = STARTED
+       AS TCP
+   (
+               LISTENER_PORT = 5022,
+               LISTENER_IP = ALL
+   )
+       FOR DATABASE_MIRRORING
+   (
+               AUTHENTICATION = CERTIFICATE LinAGN2_Cert,
+               ROLE = ALL
+   );
    GO
    ```
 
 1. Finally, perform the same sequence on `LinAGN3`:
 
    ```sql
-   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<StrongPassword>';
+   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<master-key-password>';
    GO
 
    CREATE CERTIFICATE LinAGN3_Cert
@@ -143,11 +153,18 @@ This example creates certificates for a three-node configuration. The instance n
    BACKUP CERTIFICATE LinAGN3_Cert TO FILE = '/var/opt/mssql/data/LinAGN3_Cert.cer';
    GO
 
-   CREATE ENDPOINT AGEP STATE = STARTED AS TCP (
-       LISTENER_PORT = 5022,
-       LISTENER_IP = ALL
+   CREATE ENDPOINT AGEP
+       STATE = STARTED
+       AS TCP
+   (
+               LISTENER_PORT = 5022,
+               LISTENER_IP = ALL
    )
-   FOR DATABASE_MIRRORING(AUTHENTICATION = CERTIFICATE LinAGN3_Cert, ROLE = ALL);
+       FOR DATABASE_MIRRORING
+   (
+               AUTHENTICATION = CERTIFICATE LinAGN3_Cert,
+               ROLE = ALL
+   );
    GO
    ```
 
@@ -168,45 +185,60 @@ This example creates certificates for a three-node configuration. The instance n
 1. Create the instance-level logins and users associated with `LinAGN2` and `LinAGN3` on `LinAGN1`.
 
    ```sql
-   CREATE LOGIN LinAGN2_Login WITH PASSWORD = '<StrongPassword>';
+   CREATE LOGIN LinAGN2_Login
+       WITH PASSWORD = '<password>';
+
    CREATE USER LinAGN2_User FOR LOGIN LinAGN2_Login;
    GO
 
-   CREATE LOGIN LinAGN3_Login WITH PASSWORD = '<StrongPassword>';
+   CREATE LOGIN LinAGN3_Login
+       WITH PASSWORD = '<password>';
+
    CREATE USER LinAGN3_User FOR LOGIN LinAGN3_Login;
    GO
    ```
 
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 1. Restore `LinAGN2_Cert` and `LinAGN3_Cert` on `LinAGN1`. Having the other replicas' certificates is an important aspect of AG communication and security.
 
    ```sql
-   CREATE CERTIFICATE LinAGN2_Cert AUTHORIZATION LinAGN2_User
-   FROM FILE = '/var/opt/mssql/data/LinAGN2_Cert.cer';
+   CREATE CERTIFICATE LinAGN2_Cert
+       AUTHORIZATION LinAGN2_User
+       FROM FILE = '/var/opt/mssql/data/LinAGN2_Cert.cer';
    GO
 
-   CREATE CERTIFICATE LinAGN3_Cert AUTHORIZATION LinAGN3_User
-   FROM FILE = '/var/opt/mssql/data/LinAGN3_Cert.cer';
+   CREATE CERTIFICATE LinAGN3_Cert
+       AUTHORIZATION LinAGN3_User
+       FROM FILE = '/var/opt/mssql/data/LinAGN3_Cert.cer';
    GO
    ```
 
 1. Grant the logins associated with `LinAG2` and `LinAGN3` permission to connect to the endpoint on `LinAGN1`.
 
    ```sql
-   GRANT CONNECT ON ENDPOINT::AGEP TO LinAGN2_Login;
+   GRANT CONNECT
+       ON ENDPOINT::AGEP TO LinAGN2_Login;
    GO
 
-   GRANT CONNECT ON ENDPOINT::AGEP TO LinAGN3_Login;
+   GRANT CONNECT
+       ON ENDPOINT::AGEP TO LinAGN3_Login;
    GO
    ```
 
 1. Create the instance-level logins and users associated with `LinAGN1` and `LinAGN3` on `LinAGN2`.
 
    ```sql
-   CREATE LOGIN LinAGN1_Login WITH PASSWORD = '<StrongPassword>';
+   CREATE LOGIN LinAGN1_Login
+       WITH PASSWORD = '<password>';
+
    CREATE USER LinAGN1_User FOR LOGIN LinAGN1_Login;
    GO
 
-   CREATE LOGIN LinAGN3_Login WITH PASSWORD = '<StrongPassword>';
+   CREATE LOGIN LinAGN3_Login
+       WITH PASSWORD = '<password>';
+
    CREATE USER LinAGN3_User FOR LOGIN LinAGN3_Login;
    GO
    ```
@@ -215,34 +247,40 @@ This example creates certificates for a three-node configuration. The instance n
 
    ```sql
    CREATE CERTIFICATE LinAGN1_Cert
-   AUTHORIZATION LinAGN1_User
-   FROM FILE = '/var/opt/mssql/data/LinAGN1_Cert.cer';
+       AUTHORIZATION LinAGN1_User
+       FROM FILE = '/var/opt/mssql/data/LinAGN1_Cert.cer';
    GO
 
    CREATE CERTIFICATE LinAGN3_Cert
-   AUTHORIZATION LinAGN3_User
-   FROM FILE = '/var/opt/mssql/data/LinAGN3_Cert.cer';
+       AUTHORIZATION LinAGN3_User
+       FROM FILE = '/var/opt/mssql/data/LinAGN3_Cert.cer';
    GO
    ```
 
 1. Grant the logins associated with `LinAG1` and `LinAGN3` permission to connect to the endpoint on `LinAGN2`.
 
    ```sql
-   GRANT CONNECT ON ENDPOINT::AGEP TO LinAGN1_Login;
+   GRANT CONNECT
+       ON ENDPOINT::AGEP TO LinAGN1_Login;
    GO
 
-   GRANT CONNECT ON ENDPOINT::AGEP TO LinAGN3_Login;
+   GRANT CONNECT
+       ON ENDPOINT::AGEP TO LinAGN3_Login;
    GO
    ```
 
 1. Create the instance-level logins and users associated with `LinAGN1` and `LinAGN2` on `LinAGN3`.
 
    ```sql
-   CREATE LOGIN LinAGN1_Login WITH PASSWORD = '<StrongPassword>';
+   CREATE LOGIN LinAGN1_Login
+       WITH PASSWORD = '<password>';
+
    CREATE USER LinAGN1_User FOR LOGIN LinAGN1_Login;
    GO
 
-   CREATE LOGIN LinAGN2_Login WITH PASSWORD = '<StrongPassword>';
+   CREATE LOGIN LinAGN2_Login
+       WITH PASSWORD = '<password>';
+
    CREATE USER LinAGN2_User FOR LOGIN LinAGN2_Login;
    GO
    ```
@@ -251,23 +289,25 @@ This example creates certificates for a three-node configuration. The instance n
 
    ```sql
    CREATE CERTIFICATE LinAGN1_Cert
-   AUTHORIZATION LinAGN1_User
-   FROM FILE = '/var/opt/mssql/data/LinAGN1_Cert.cer';
+       AUTHORIZATION LinAGN1_User
+       FROM FILE = '/var/opt/mssql/data/LinAGN1_Cert.cer';
    GO
 
    CREATE CERTIFICATE LinAGN2_Cert
-   AUTHORIZATION LinAGN2_User
-   FROM FILE = '/var/opt/mssql/data/LinAGN2_Cert.cer';
+       AUTHORIZATION LinAGN2_User
+       FROM FILE = '/var/opt/mssql/data/LinAGN2_Cert.cer';
    GO
    ```
 
 1. Grant the logins associated with `LinAG1` and `LinAGN2` permission to connect to the endpoint on `LinAGN3`.
 
    ```sql
-   GRANT CONNECT ON ENDPOINT::AGEP TO LinAGN1_Login;
+   GRANT CONNECT
+       ON ENDPOINT::AGEP TO LinAGN1_Login;
    GO
 
-   GRANT CONNECT ON ENDPOINT::AGEP TO LinAGN2_Login;
+   GRANT CONNECT
+       ON ENDPOINT::AGEP TO LinAGN2_Login;
    GO
    ```
 
@@ -523,7 +563,7 @@ A Pacemaker high availability cluster underlying [!INCLUDE [ssnoversion-md](../i
 1. In a query window connected to the first replica, execute the following script:
 
    ```sql
-   CREATE LOGIN PMLogin WITH PASSWORD ='<StrongPassword>';
+   CREATE LOGIN PMLogin WITH PASSWORD ='<password>';
    GO
 
    GRANT VIEW SERVER STATE TO PMLogin;
@@ -546,7 +586,7 @@ A Pacemaker high availability cluster underlying [!INCLUDE [ssnoversion-md](../i
    ```output
    PMLogin
 
-   <StrongPassword>
+   <password>
    ```
 
 1. Hold down the `Ctrl` key, then press `X`, then `C`, to exit and save the file.

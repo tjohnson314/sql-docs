@@ -11,7 +11,8 @@ ms.subservice: monitoring
 ms.topic: how-to
 ms.custom:
   - subject-monitoring
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ---
 
 # Create and configure a database watcher (preview)

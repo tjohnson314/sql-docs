@@ -7,6 +7,8 @@ ms.date: "10/12/2021"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "GROUP"
   - "CUBE"
@@ -484,7 +486,3 @@ ORDER BY OrderDateKey;
  [SELECT Clause &#40;Transact-SQL&#41;](~/t-sql/queries/select-clause-transact-sql.md)  
   
   
-
-
-
-

@@ -79,6 +79,7 @@ SqlPackage /at:$($AccessToken_Object.Token) /Action:Extract /TargetFile:"C:\Adve
 |**/AzureCloudConfig:**|**/acc:**|{string}|Specifies the custom endpoints for connecting to Microsoft Entra ID in the format: AzureActiveDirectoryAuthority={value};DatabaseServicePrincipalName={value}" .|
 |**/Diagnostics:**|**/d:**|{True&#124;False}|Specifies whether diagnostic logging is output to the console. Defaults to False. |
 |**/DiagnosticsFile:**|**/df:**|{string}|Specifies a file to store diagnostic logs. |
+|**/DiagnosticsLevel:**|**/dl**|{None&#124;Off&#124;Critical&#124;Error&#124;Warning&#124;Information&#124;Verbose}|Specifies the levels of trace messages filtered diagnostics file|
 |**/MaxParallelism:**|**/mp:**|{int}| Specifies the degree of parallelism for concurrent operations running against a database. The default value is 8. |
 |**/OverwriteFiles:**|**/of:**|{True&#124;False}|Specifies if SqlPackage should overwrite existing files. Specifying false causes SqlPackage to abort action if an existing file is encountered. Default value is True. |
 |**/Properties:**|**/p:**|{PropertyName}={Value}|Specifies a name value pair for an [action-specific property](#properties-specific-to-the-extract-action); {PropertyName}={Value}. |

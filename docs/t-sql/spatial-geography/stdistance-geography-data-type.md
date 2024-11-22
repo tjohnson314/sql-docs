@@ -7,6 +7,8 @@ ms.date: "11/19/2019"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "STDistance_TSQL"
   - "STDistance (geography Data Type)"

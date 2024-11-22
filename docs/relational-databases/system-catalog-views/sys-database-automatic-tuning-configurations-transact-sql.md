@@ -1,10 +1,10 @@
 ---
-title: "sys.database_automatic_tuning_configuration (Transact-SQL)"
-description: sys.database_automatic_tuning_configuration returns the automatic tuning configuration settings that are enabled for the current database.
+title: "sys.database_automatic_tuning_configurations (Transact-SQL)"
+description: sys.database_automatic_tuning_configurations returns the automatic tuning configuration settings that are enabled for the current database.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest, derekw
-ms.date: 10/29/2024
+ms.date: 11/21/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: reference
@@ -13,14 +13,17 @@ f1_keywords:
   - "database_automatic_tuning_configuration"
   - "sys.database_automatic_tuning_configuration_tsql"
   - "sys.database_automatic_tuning_configuration"
+  - "sys.database_automatic_tuning_configurations_tsql"
+  - "sys.database_automatic_tuning_configurations"
 helpviewer_keywords:
   - "database_automatic_tuning_configuration catalog view"
   - "sys.database_automatic_tuning_configuration catalog view"
+  - "sys.database_automatic_tuning_configurations catalog view"
 dev_langs:
   - "TSQL"
-monikerRange: ">=sql-server-2017 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azuresqldb-current ||=fabric"
+monikerRange: ">=sql-server-2017 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azuresqldb-current || =fabric"
 ---
-# sys.database_automatic_tuning_configuration (Transact-SQL)
+# sys.database_automatic_tuning_configurations (Transact-SQL)
 
 [!INCLUDE [sqlserver2022-asdb-asmi](../../includes/applies-to-version/sqlserver2022-asdb-asmi-fabricsqldb.md)]
 

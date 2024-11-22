@@ -1,9 +1,9 @@
 ---
-title: Restore master database on SQL Server in single-user mode on Linux
+title: Restore master Database on SQL Server in Single-User Mode on Linux
 description: "Learn how to restore the master database using single-user mode in SQL Server on Linux."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -78,7 +78,7 @@ When you start an instance of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md
 1. Use **sqlcmd** to connect to the SQL Server instance:
 
    ```bash
-   /opt/mssql-tools/bin/sqlcmd -S <ServerName> -U sa -P <StrongPassword>
+   /opt/mssql-tools/bin/sqlcmd -S <ServerName> -U sa -P <password>
    ```
 
    In the previous example, `<ServerName>` is the name of the host running SQL Server if you're connecting remotely. If you're connecting directly on the host where SQL Server is running, you can skip this parameter, or use `localhost`. `<StringPassword>` is the password for the **SA** account.
@@ -88,10 +88,14 @@ When you start an instance of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md
 1. Run the following commands inside **sqlcmd**. Remember that **sqlcmd** expects `GO` at the end of the script to execute it.
 
    ```sql
-   use [master];
-   RESTORE DATABASE [master] FROM DISK = N'/var/opt/mssql/data/master.bak' WITH FILE=1,
-   MOVE N'master' to N'/var/opt/mssql/data/master.mdf',
-   MOVE N'mastlog' to N'/var/opt/mssql/data/mastlog.ldf', NOUNLOAD, REPLACE, STATS=5;
+   USE [master];
+   GO
+
+   RESTORE DATABASE [master] FROM DISK = N'/var/opt/mssql/data/master.bak'
+       WITH FILE = 1,
+       MOVE N'master' TO N'/var/opt/mssql/data/master.mdf',
+       MOVE N'mastlog' TO N'/var/opt/mssql/data/mastlog.ldf',
+       NOUNLOAD, REPLACE, STATS = 5;
    GO
    ```
 

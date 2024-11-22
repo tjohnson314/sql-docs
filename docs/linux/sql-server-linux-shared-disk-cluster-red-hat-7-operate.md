@@ -4,7 +4,7 @@ description: Learn how to operate a Red Hat Enterprise Linux (RHEL) shared disk 
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 08/23/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -25,17 +25,19 @@ This document describes how to do the following tasks for [!INCLUDE [ssnoversion
 
 ## Architecture description
 
-The clustering layer is based on Red Hat Enterprise Linux (RHEL) [HA add-on](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/pdf/high_availability_add-on_overview/red_hat_enterprise_linux-7-high_availability_add-on_overview-en-us.pdf) built on top of [Pacemaker](https://clusterlabs.org/). Corosync and Pacemaker coordinate cluster communications and resource management. The [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance is active on either one node or the other.
+The clustering layer is based on Red Hat Enterprise Linux (RHEL) [HA add-on](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/pdf/high_availability_add-on_overview/red_hat_enterprise_linux-7-high_availability_add-on_overview-en-us.pdf) built on top of [Pacemaker](https://clusterlabs.org/). Corosync and Pacemaker coordinate cluster communications and resource management. The [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance is active on either one node or the other.
 
 The following diagram illustrates the components in a Linux cluster with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
 
-:::image type="content" source="./media/sql-server-linux-shared-disk-cluster-red-hat-7-configure/LinuxCluster.png" alt-text="Red Hat Enterprise Linux 7 Shared Disk SQL Cluster.":::
+:::image type="content" source="media/sql-server-linux-shared-disk-cluster-red-hat-7-operate/linux-cluster.png" alt-text="Diagram of Red Hat Enterprise Linux 7 Shared Disk SQL Cluster.":::
 
-For more information on cluster configuration, resource agents options, and management, visit [RHEL reference documentation](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/index).
+For more information on cluster configuration, resource agents options, and management, visit [RHEL reference documentation](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/index).
 
-## <a id="failManual"></a> Fail over cluster manually
+<a id="failManual"></a>
 
-The `resource move` command creates a constraint forcing the resource to start on the target node.  After executing the `move` command, executing resource `clear` will remove the constraint so it's possible to move the resource again, or have the resource automatically fail over.
+## Fail over cluster manually
+
+The `resource move` command creates a constraint forcing the resource to start on the target node. After executing the `move` command, executing resource `clear` will remove the constraint so it's possible to move the resource again, or have the resource automatically fail over.
 
 ```bash
 sudo pcs resource move <sqlResourceName> <targetNodeName>
@@ -123,10 +125,13 @@ View the resource agent logs at `/var/log/cluster/corosync.log`
    ```bash
    sudo touch /var/opt/mssql/passwd
    sudo echo "<loginName>" >> /var/opt/mssql/secrets/passwd
-   sudo echo "<loginPassword>" >> /var/opt/mssql/secrets/passwd
+   sudo echo "<password>" >> /var/opt/mssql/secrets/passwd
    sudo chown root:root /var/opt/mssql/passwd
    sudo chmod 600 /var/opt/mssql/passwd
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. On the new node, open the Pacemaker firewall ports. To open these ports with `firewalld`, run the following command:
 
@@ -266,4 +271,4 @@ Check the following items when a node is offline.
 ## Related content
 
 - [Cluster from Scratch (from Pacemaker)](https://clusterlabs.org/pacemaker/doc/2.1/Clusters_from_Scratch/pdf/Clusters_from_Scratch.pdf)
-- [Configure Red Hat Enterprise Linux shared disk cluster for SQL Server](sql-server-linux-shared-disk-cluster-red-hat-7-configure.md)
+- [Configure RHEL failover cluster instance (FCI) cluster for SQL Server](sql-server-linux-shared-disk-cluster-red-hat-7-configure.md)

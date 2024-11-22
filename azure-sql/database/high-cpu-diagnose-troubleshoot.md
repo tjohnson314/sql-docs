@@ -11,6 +11,7 @@ ms.subservice: performance
 ms.topic: how-to
 ms.custom:
   - sqldbrb=2
+  - ignite-2024
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 # Diagnose and troubleshoot high CPU on Azure SQL Database and SQL database in Microsoft Fabric

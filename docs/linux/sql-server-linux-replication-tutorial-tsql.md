@@ -1,11 +1,11 @@
 ---
-title: "Tutorial: Configure replication (T-SQL)"
+title: "Tutorial: Configure Replication (T-SQL)"
 titleSuffix: SQL Server on Linux
 description: Configure SQL Server snapshot replication on Linux with two instances of SQL Server using Transact-SQL (T-SQL).
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -41,7 +41,7 @@ To complete this tutorial, you need:
   See [Use SQL Server Management Studio on Windows to manage SQL Server on Linux](sql-server-linux-manage-ssms.md).
 
   > [!NOTE]  
-  > SQL Server Replication is supported on Linux in [!INCLUDE [SQL Server 2017](../includes/sssql17-md.md)] ([CU18](https://support.microsoft.com/help/4527377)) and later versions.
+  > SQL Server Replication is supported on Linux in [!INCLUDE [SQL Server 2017](../includes/sssql17-md.md)] ([CU 18](/troubleshoot/sql/releases/sqlserver-2017/cumulativeupdate18)) and later versions.
 
 ## Detailed steps
 
@@ -61,14 +61,17 @@ To complete this tutorial, you need:
    USE [Sales];
    GO
 
-   CREATE TABLE Customer (
+   CREATE TABLE Customer
+   (
        [CustomerID] INT NOT NULL,
        [SalesAmount] DECIMAL NOT NULL
    );
    GO
 
    INSERT INTO Customer (CustomerID, SalesAmount)
-   VALUES (1, 100), (2, 200), (3, 300);
+   VALUES (1, 100),
+       (2, 200),
+       (3, 300);
    GO
    ```
 
@@ -95,17 +98,20 @@ To complete this tutorial, you need:
    DECLARE @distributorpassword AS SYSNAME;
 
    -- Specify the distributor name. Use 'hostname' command on in terminal to find the hostname
-   SET @distributor = N'<distributor instance name>'; --in this example, it will be the name of the publisher
+   SET @distributor = N'<distributor instance name>'; -- In this example, it will be the name of the publisher
    SET @distributorlogin = N'<distributor login>';
    SET @distributorpassword = N'<distributor password>';
 
    -- Specify the distribution database.
-   USE master
+   USE master;
 
-   EXEC sp_adddistributor @distributor = @distributor -- this should be the hostname
+   EXECUTE sp_adddistributor
+       @distributor = @distributor; -- this should be the hostname
 
-   -- Log into distributor and create Distribution Database. In this example, our publisher and distributor is on the same host
-   EXEC sp_adddistributiondb @database = N'distribution',
+   -- Log into distributor and create Distribution Database.
+   -- In this example, our publisher and distributor is on the same host
+   EXECUTE sp_adddistributiondb
+       @database = N'distribution',
        @log_file_size = 2,
        @deletebatchsize_xact = 5000,
        @deletebatchsize_cmd = 2000,
@@ -114,30 +120,29 @@ To complete this tutorial, you need:
        @password = @distributorpassword;
    GO
 
-   DECLARE @snapshotdirectory AS NVARCHAR(500);
+   DECLARE @snapshotdirectory AS NVARCHAR (500);
+
    SET @snapshotdirectory = N'/var/opt/mssql/data/ReplData/';
 
-   -- Log into distributor and create Distribution Database. In this example, our publisher and distributor is on the same host
+   -- Log into distributor and create Distribution Database.
+   -- In this example, our publisher and distributor is on the same host
    USE [distribution];
    GO
 
-   IF (NOT EXISTS (SELECT * FROM sysobjects WHERE name = 'UIProperties' AND type = 'U'))
-       CREATE TABLE UIProperties (id INT);
+   IF (NOT EXISTS (SELECT *
+                   FROM sysobjects
+                   WHERE name = 'UIProperties'
+                         AND type = 'U'))
+       CREATE TABLE UIProperties
+       (
+           id INT
+       );
 
-   IF (EXISTS (SELECT * FROM::fn_listextendedproperty('SnapshotFolder', 'user', 'dbo', 'table', 'UIProperties', NULL, NULL)))
-       EXEC sp_updateextendedproperty N'SnapshotFolder',
-           @snapshotdirectory,
-           'user',
-           dbo,
-           'table',
-           'UIProperties';
+   IF (EXISTS (SELECT *
+               FROM ::fn_listextendedproperty ('SnapshotFolder', 'user', 'dbo', 'table', 'UIProperties', NULL, NULL)))
+       EXECUTE sp_updateextendedproperty N'SnapshotFolder', @snapshotdirectory, 'user', dbo, 'table', 'UIProperties';
    ELSE
-       EXEC sp_addextendedproperty N'SnapshotFolder',
-           @snapshotdirectory,
-           'user',
-           dbo,
-           'table',
-           'UIProperties';
+       EXECUTE sp_addextendedproperty N'SnapshotFolder', @snapshotdirectory, 'user', dbo, 'table', 'UIProperties';
    GO
    ```
 
@@ -155,7 +160,8 @@ To complete this tutorial, you need:
 
    -- Specify the distribution database.
    -- Adding the distribution publishers
-   EXEC sp_adddistpublisher @publisher = @publisher,
+   EXECUTE sp_adddistpublisher
+       @publisher = @publisher,
        @distribution_db = N'distribution',
        @security_mode = 0,
        @login = @distributorlogin,
@@ -181,12 +187,14 @@ To complete this tutorial, you need:
    USE [Sales];
    GO
 
-   EXEC sp_replicationdboption @dbname = N'Sales',
+   EXECUTE sp_replicationdboption
+       @dbname = N'Sales',
        @optname = N'publish',
        @value = N'true';
 
    -- Add the snapshot publication
-   EXEC sp_addpublication @publication = N'SnapshotRepl',
+   EXECUTE sp_addpublication
+       @publication = N'SnapshotRepl',
        @description = N'Snapshot publication of database ''Sales'' from Publisher ''<PUBLISHER HOSTNAME>''.',
        @retention = 0,
        @allow_push = N'true',
@@ -194,7 +202,8 @@ To complete this tutorial, you need:
        @status = N'active',
        @independent_agent = N'true';
 
-   EXEC sp_addpublication_snapshot @publication = N'SnapshotRepl',
+   EXECUTE sp_addpublication_snapshot
+       @publication = N'SnapshotRepl',
        @frequency_type = 1,
        @frequency_interval = 1,
        @frequency_relative_interval = 1,
@@ -218,7 +227,8 @@ To complete this tutorial, you need:
    USE [Sales];
    GO
 
-   EXEC sp_addarticle @publication = N'SnapshotRepl',
+   EXECUTE sp_addarticle
+       @publication = N'SnapshotRepl',
        @article = N'customer',
        @source_owner = N'dbo',
        @source_object = N'customer',
@@ -249,7 +259,8 @@ To complete this tutorial, you need:
    USE [Sales];
    GO
 
-   EXEC sp_addsubscription @publication = N'SnapshotRepl',
+   EXECUTE sp_addsubscription
+       @publication = N'SnapshotRepl',
        @subscriber = @subscriber,
        @destination_db = @subscriber_db,
        @subscription_type = N'Push',
@@ -258,7 +269,8 @@ To complete this tutorial, you need:
        @update_mode = N'read only',
        @subscriber_type = 0;
 
-   EXEC sp_addpushsubscription_agent @publication = N'SnapshotRepl',
+   EXECUTE sp_addpushsubscription_agent
+       @publication = N'SnapshotRepl',
        @subscriber = @subscriber,
        @subscriber_db = @subscriber_db,
        @subscriber_security_mode = 0,
@@ -280,7 +292,8 @@ To complete this tutorial, you need:
 1. Run replication agent jobs. Run the following query to get a list of jobs:
 
    ```sql
-   SELECT name, date_modified
+   SELECT name,
+          date_modified
    FROM msdb.dbo.sysjobs
    ORDER BY date_modified DESC;
    ```
@@ -292,7 +305,7 @@ To complete this tutorial, you need:
    GO
 
    --generate snapshot of publications, for example
-   EXEC dbo.sp_start_job N'PUBLISHER-PUBLICATION-SnapshotRepl-1';
+   EXECUTE dbo.sp_start_job N'PUBLISHER-PUBLICATION-SnapshotRepl-1';
    GO
    ```
 
@@ -301,8 +314,9 @@ To complete this tutorial, you need:
    ```sql
    USE msdb;
    GO
+
    --distribute the publication to subscriber, for example
-   EXEC dbo.sp_start_job N'DISTRIBUTOR-PUBLICATION-SnapshotRepl-SUBSCRIBER';
+   EXECUTE dbo.sp_start_job N'DISTRIBUTOR-PUBLICATION-SnapshotRepl-SUBSCRIBER';
    GO
    ```
 
@@ -311,7 +325,8 @@ To complete this tutorial, you need:
    On the subscriber, check that the replication is working by running the following query:
 
    ```sql
-   SELECT * from [Sales].[dbo].[Customer];
+   SELECT *
+   FROM [Sales].[dbo].[Customer];
    ```
 
 In this tutorial, you configured SQL Server snapshot replication on Linux with two instances of SQL Server using T-SQL.

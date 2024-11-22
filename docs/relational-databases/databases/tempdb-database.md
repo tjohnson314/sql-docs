@@ -7,7 +7,9 @@ ms.reviewer: randolphwest
 ms.date: 11/22/2023
 ms.service: sql
 ms.topic: conceptual
-ms.custom: P360
+ms.custom:
+  - P360
+  - ignite-2024
 helpviewer_keywords:
   - "temporary tables [SQL Server], tempdb database"
   - "tempdb database [SQL Server], about tempdb"

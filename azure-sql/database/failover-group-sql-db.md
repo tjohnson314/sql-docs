@@ -107,7 +107,7 @@ When designing a service with business continuity in mind, follow the general gu
 
 ## <a id="using-geo-paired-regions"></a> Use paired regions
 
-When creating your failover group between the primary and secondary server, use [paired regions](/azure/availability-zones/cross-region-replication-azure) as failover groups in paired regions have better performance compared to unpaired regions.
+When creating your failover group between the primary and secondary server, use [paired regions](/azure/reliability/cross-region-replication-azure) as failover groups in paired regions have better performance compared to unpaired regions.
 
 Following safe deployment practices, Azure SQL Database generally doesn't update paired regions at the same time. However, it isn't possible to predict which region will be upgraded first, so the order of deployment isn't guaranteed. Sometimes, your primary server is upgraded first, and sometimes it's upgraded second.
 

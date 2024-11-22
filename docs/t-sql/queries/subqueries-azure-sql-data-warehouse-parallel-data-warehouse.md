@@ -8,7 +8,9 @@ ms.date: "03/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
-monikerRange: ">= aps-pdw-2016 || = azure-sqldw-latest || =fabric"
+ms.custom:
+  - ignite-2024
+monikerRange: ">=aps-pdw-2016 || =azure-sqldw-latest || =fabric"
 ---
 
 # Subqueries

@@ -8,6 +8,8 @@ ms.date: 04/01/2024
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "updating statistics"
   - "statistics [SQL Server], updating"

@@ -80,7 +80,7 @@ Hyperscale supports configurable storage redundancy. When creating a Hyperscale 
 - Read-access geo-redundant storage (RA-GRS)
 - Read-access geo-zone-redundant storage (RA-GZRS)
 
-Zone-redundant storage options are available in Azure [regions with availability zones](/azure/reliability/availability-zones-service-support).
+Zone-redundant storage options are available in Azure [regions with availability zones](/azure/reliability/availability-zones-region-support).
 
 The selected storage redundancy option is used for the lifetime of the database, for both data storage redundancy and [backup storage redundancy](automated-backups-overview.md#backup-storage-redundancy).
 

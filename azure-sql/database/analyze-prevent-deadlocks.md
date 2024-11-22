@@ -9,6 +9,8 @@ ms.date: 03/14/2023
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 

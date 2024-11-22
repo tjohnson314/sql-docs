@@ -7,6 +7,8 @@ ms.date: "01/31/2017"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sys.database_role_members_TSQL"
   - "sys.database_role_members"
@@ -55,5 +57,3 @@ ORDER BY DP1.name;
 [ALTER ROLE (Transact-SQLL)](../../t-sql/statements/alter-role-transact-sql.md)      
 [sys.server_role_members (Transact-SQL)](../../relational-databases/system-catalog-views/sys-server-role-members-transact-sql.md)   
   
-
-

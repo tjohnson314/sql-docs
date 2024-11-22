@@ -7,6 +7,8 @@ ms.date: "06/09/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "DENY statement, types"
   - "permissions [SQL Server], types"

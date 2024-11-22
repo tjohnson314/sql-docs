@@ -7,6 +7,8 @@ ms.date: 11/01/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "system requirements [OLE DB Driver for SQL Server]"
   - "data access [OLE DB Driver for SQL Server], system requirements"

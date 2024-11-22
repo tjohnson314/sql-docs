@@ -7,6 +7,8 @@ ms.date: 07/11/2024
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "HASH join"
   - "NESTED LOOPS join"

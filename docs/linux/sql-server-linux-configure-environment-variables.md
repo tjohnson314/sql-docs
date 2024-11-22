@@ -1,9 +1,9 @@
 ---
-title: Configure environment variables for SQL Server on Linux
+title: Configure Environment Variables for SQL Server on Linux
 description: This article describes how to use environment variables to configure specific SQL Server settings on Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 09/27/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -15,13 +15,13 @@ ms.custom:
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 You can use several different environment variables to configure [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] on Linux. These variables are used in two scenarios:
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 You can use several different environment variables to configure [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] on Linux. These variables are used in two scenarios:
 
@@ -34,7 +34,7 @@ You can use several different environment variables to configure [!INCLUDE [sssq
 ::: moniker-end
 
 - To configure initial setup with the `mssql-conf setup` command.
-- To configure a new [SQL Server container in Docker](quickstart-install-connect-docker.md).
+- To configure a new [SQL Server Linux container image](quickstart-install-connect-docker.md).
 
 > [!TIP]  
 > If you need to configure SQL Server after these setup scenarios, see [Configure SQL Server on Linux with the mssql-conf tool](sql-server-linux-configure-mssql-conf.md).
@@ -44,7 +44,7 @@ You can use several different environment variables to configure [!INCLUDE [sssq
 | Environment variable | Description |
 | --- | --- |
 | `ACCEPT_EULA` | Set the `ACCEPT_EULA` variable to any value to confirm your acceptance of the [End-User Licensing Agreement](https://go.microsoft.com/fwlink/?LinkId=746388). Required setting for the SQL Server image. |
-| `MSSQL_SA_PASSWORD` | Configure the SA user password.<br /><br />The `SA_PASSWORD` environment variable is deprecated. Use `MSSQL_SA_PASSWORD` instead. |
+| `MSSQL_SA_PASSWORD` | Configure the `sa` password.<br /><br />The `SA_PASSWORD` environment variable is deprecated. Use `MSSQL_SA_PASSWORD` instead. |
 | `MSSQL_PID` | Set the SQL Server edition or product key. Possible values include:<br /><br />`Evaluation`<br />`Developer`<br />`Express`<br />`Web`<br />`Standard`<br />`Enterprise` <sup>1</sup><br />`EnterpriseCore` <sup>1</sup><br />`A product key`<br /><br />If specifying a product key, it must be in the form of #####-#####-#####-#####-#####, where '#' is a number or a letter. |
 | `MSSQL_LCID` | Sets the language ID to use for SQL Server. For example, 1036 is French. |
 | `MSSQL_COLLATION` | Sets the default collation for SQL Server. This overrides the default mapping of language ID (LCID) to collation. |
@@ -68,12 +68,15 @@ You can use several different environment variables to configure [!INCLUDE [sssq
 This example runs `mssql-conf setup` with configured environment variables. The following environment variables are specified:
 
 - `ACCEPT_EULA` accepts the end user license agreement.
+
 - `MSSQL_PID` specifies the freely licensed Developer Edition of SQL Server for non-production use.
-- `MSSQL_SA_PASSWORD` sets a strong password.
+
+- `MSSQL_SA_PASSWORD` sets a strong password. [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 - `MSSQL_TCP_PORT` sets the TCP port that SQL Server listens on to 1234.
 
 ```bash
-sudo ACCEPT_EULA='Y' MSSQL_PID='Developer' MSSQL_SA_PASSWORD='<YourStrong!Passw0rd>' MSSQL_TCP_PORT=1234 /opt/mssql/bin/mssql-conf setup
+sudo ACCEPT_EULA='Y' MSSQL_PID='Developer' MSSQL_SA_PASSWORD='<password>' MSSQL_TCP_PORT=1234 /opt/mssql/bin/mssql-conf setup
 ```
 
 ## Use with Docker
@@ -81,23 +84,26 @@ sudo ACCEPT_EULA='Y' MSSQL_PID='Developer' MSSQL_SA_PASSWORD='<YourStrong!Passw0
 This example `docker` command uses the following environment variables to create a new SQL Server container:
 
 - `ACCEPT_EULA` accepts the end user license agreement.
+
 - `MSSQL_PID` specifies the freely licensed Developer Edition of SQL Server for non-production use.
-- `MSSQL_SA_PASSWORD` sets a strong password.
+
+- `MSSQL_SA_PASSWORD` sets a strong password. [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 - `MSSQL_TCP_PORT` sets the TCP port that SQL Server listens on to 1234. This means that instead of mapping port 1433 (default) to a host port, the custom TCP port must be mapped with the `-p 1234:1234` command in this example.
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 If you're running Docker on Linux, use the following syntax with single quotes:
 
 ```bash
-docker run -e ACCEPT_EULA=Y -e MSSQL_PID='Developer' -e MSSQL_SA_PASSWORD='<YourStrong!Passw0rd>' -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2017-latest
+docker run -e ACCEPT_EULA=Y -e MSSQL_PID='Developer' -e MSSQL_SA_PASSWORD='<password>' -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 
 If you're running Docker on Windows, use the following syntax with double quotes:
 
 ```bash
-docker run -e ACCEPT_EULA=Y -e MSSQL_PID="Developer" -e MSSQL_SA_PASSWORD="<YourStrong!Passw0rd>" -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2017-latest
+docker run -e ACCEPT_EULA=Y -e MSSQL_PID="Developer" -e MSSQL_SA_PASSWORD="<password>" -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 
 > [!NOTE]  
@@ -105,18 +111,18 @@ docker run -e ACCEPT_EULA=Y -e MSSQL_PID="Developer" -e MSSQL_SA_PASSWORD="<Your
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 If you're running Docker on Linux, use the following syntax with single quotes:
 
 ```bash
-docker run -e ACCEPT_EULA=Y -e MSSQL_PID='Developer' -e MSSQL_SA_PASSWORD='<YourStrong!Passw0rd>' -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2019-latest
+docker run -e ACCEPT_EULA=Y -e MSSQL_PID='Developer' -e MSSQL_SA_PASSWORD='<password>' -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 
 If you're running Docker on Windows, use the following syntax with double quotes:
 
 ```bash
-docker run -e ACCEPT_EULA=Y -e MSSQL_PID="Developer" -e MSSQL_SA_PASSWORD="<YourStrong!Passw0rd>" -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2019-latest
+docker run -e ACCEPT_EULA=Y -e MSSQL_PID="Developer" -e MSSQL_SA_PASSWORD="<password>" -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 
 ::: moniker-end
@@ -127,20 +133,23 @@ docker run -e ACCEPT_EULA=Y -e MSSQL_PID="Developer" -e MSSQL_SA_PASSWORD="<Your
 If you're running Docker on Linux, use the following syntax with single quotes:
 
 ```bash
-docker run -e ACCEPT_EULA=Y -e MSSQL_PID='Developer' -e MSSQL_SA_PASSWORD='<YourStrong!Passw0rd>' -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2022-latest
+docker run -e ACCEPT_EULA=Y -e MSSQL_PID='Developer' -e MSSQL_SA_PASSWORD='<password>' -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2022-latest
 ```
 
 If you're running Docker on Windows, use the following syntax with double quotes:
 
 ```bash
-docker run -e ACCEPT_EULA=Y -e MSSQL_PID="Developer" -e MSSQL_SA_PASSWORD="<YourStrong!Passw0rd>" -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2022-latest
+docker run -e ACCEPT_EULA=Y -e MSSQL_PID="Developer" -e MSSQL_SA_PASSWORD="<password>" -e MSSQL_TCP_PORT=1234 -p 1234:1234 -d mcr.microsoft.com/mssql/server:2022-latest
 ```
 
 ::: moniker-end
 
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 ## Related content
 
 - [Configure SQL Server on Linux with the mssql-conf tool](sql-server-linux-configure-mssql-conf.md)
-- [Install SQL Server on Linux](sql-server-linux-setup.md)
+- [Installation guidance for SQL Server on Linux](sql-server-linux-setup.md)
 
 [!INCLUDE [contribute-to-content](../includes/paragraph-content/contribute-to-content.md)]

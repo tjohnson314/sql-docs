@@ -7,6 +7,8 @@ ms.date: "03/16/2017"
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.swb.spassistededitor.storedprocedure.f1"
   - "sql13.swb.spproperties.general.f1"

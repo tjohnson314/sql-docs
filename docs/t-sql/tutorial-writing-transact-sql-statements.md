@@ -8,7 +8,9 @@ ms.date: 04/19/2023
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: quickstart
-ms.custom: intro-quickstart
+ms.custom:
+  - intro-quickstart
+  - ignite-2024
 helpviewer_keywords:
   - "Transact-SQL statements, tutorials"
   - "Transact-SQL tutorials"

@@ -7,10 +7,12 @@ ms.reviewer: maghan, randolphwest
 ms.date: 08/30/2024
 ms.service: sql
 ms.topic: tutorial
-zone_pivot_groups: sq1-sql-projects-tools
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql.data.tools.dbprojectwizard.importschema"
   - "sql.data.tools.SqlProjectImportDatabaseDialog.dialog"
+zone_pivot_groups: sq1-sql-projects-tools
 ---
 
 # Tutorial: start from an existing database

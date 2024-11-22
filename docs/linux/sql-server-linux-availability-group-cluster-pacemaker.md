@@ -1,14 +1,16 @@
 ---
-title: Configure a Pacemaker cluster for SQL Server availability groups
+title: Configure a Pacemaker Cluster for SQL Server Availability Groups
 description: Learn to create a three-node cluster on Red Hat, SUSE, or Ubuntu, and add a previously created availability group resource to the cluster.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh-msft
-ms.date: 10/29/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
-ms.custom: linux-related-content, ignite-2023
+ms.custom:
+  - linux-related-content
+  - ignite-2023
 ---
 # Configure a Pacemaker cluster for SQL Server availability groups
 
@@ -186,7 +188,9 @@ sudo pcs resource create ag_cluster ocf:mssql:ag ag_name=ag1 meta failure-timeou
 
 [!INCLUDE [ss-linux-cluster-required-synchronized-secondaries-default](includes/cluster-required-synchronized-secondaries-default.md)]
 
-### <a id="createIP"></a> Create virtual IP resource
+<a id="createIP"></a>
+
+### Create virtual IP resource
 
 To create the virtual IP address resource, run the following command on one node. Use an available static IP address from the network. Replace the IP address between `<10.128.16.240>` with a valid IP address.
 
@@ -257,7 +261,7 @@ Manually fail over the availability group with `pcs`. Don't initiate failover wi
 
 ## Related content
 
-- [Always On Availability Group failover on Linux](sql-server-linux-availability-group-failover-ha.md)
+- [Always On availability group failover on Linux](sql-server-linux-availability-group-failover-ha.md)
 
 # [SUSE Linux Enterprise Server](#tab/sles)
 
@@ -361,6 +365,7 @@ On Linux servers, configure the availability group and then configure the cluste
    1. Enter a multicast port. The script proposes 5405 as default.
 
    1. To configure `SBD ()`, enter a persistent path to the partition of your block device that you want to use for SBD. The path must be consistent across all nodes in the cluster.
+
    Finally, the script will start the Pacemaker service to bring the one-node cluster online and enable the Web management interface Hawk2. The URL to use for Hawk2 is displayed on the screen.
 
 1. For any details of the setup process, check `/var/log/sleha-bootstrap.log`. You now have a running one-node cluster. Check the cluster status with crm status:
@@ -369,9 +374,9 @@ On Linux servers, configure the availability group and then configure the cluste
    sudo crm status
    ```
 
-   You can also see cluster configuration with `crm configure show xml`  or `crm configure show`.
+   You can also see cluster configuration with `crm configure show xml` or `crm configure show`.
 
-1. The bootstrap procedure creates a Linux user named hacluster with the password linux. Replace the default password with a secure one as soon as possible:
+1. The bootstrap procedure creates a Linux user named `hacluster` with the password `linux`. Replace the default password with a secure one as soon as possible:
 
    ```bash
    sudo passwd hacluster
@@ -384,9 +389,11 @@ If you have a cluster running with one or more nodes, add more cluster nodes wit
 If you have configured the existing cluster nodes with the `YaST` cluster module, make sure the following prerequisites are fulfilled before you run `ha-cluster-join`:
 
 - The root user on the existing nodes has SSH keys in place for passwordless login.
+
 - `Csync2` is configured on the existing nodes. For more information, see [Configuring Csync2 with YaST](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/cha-ha-setup.html#pro-ha-installation-setup-csync2-yast).
 
 1. Sign in as `root` to the physical or virtual machine supposed to join the cluster.
+
 1. Start the bootstrap script by executing:
 
    ```bash
@@ -531,14 +538,14 @@ Run the command on one of the nodes in the cluster:
 
 #### Create virtual IP resource
 
-If you didn't create the virtual IP resource when you ran `ha-cluster-init`, you can create this resource now. The following command creates a virtual IP resource. Replace `<**0.0.0.0**>` with an available address from your network and `<**24**>` with the number of bits in the CIDR subnet mask. Run on one node.
+If you didn't create the virtual IP resource when you ran `ha-cluster-init`, you can create this resource now. The following command creates a virtual IP resource. Replace `<0.0.0.0>` with an available address from your network and `<24>` with the number of bits in the CIDR subnet mask. Run on one node.
 
 ```bash
 crm configure \
 primitive admin_addr \
    ocf:heartbeat:IPaddr2 \
-   params ip=<**0.0.0.0**> \
-      cidr_netmask=<**24**>
+   params ip=<0.0.0.0> \
+      cidr_netmask=<24>
 ```
 
 #### Add colocation constraint
@@ -584,7 +591,7 @@ For more information, see:
 
 ## Related content
 
-- [Always On Availability Group failover on Linux](sql-server-linux-availability-group-failover-ha.md)
+- [Always On availability group failover on Linux](sql-server-linux-availability-group-failover-ha.md)
 
 # [Ubuntu Linux](#tab/ubuntu)
 
@@ -869,6 +876,6 @@ After you configure the cluster and add the availability group as a cluster reso
 
 ## Related content
 
-- [Always On Availability Group failover on Linux](sql-server-linux-availability-group-failover-ha.md)
+- [Always On availability group failover on Linux](sql-server-linux-availability-group-failover-ha.md)
 
 ---

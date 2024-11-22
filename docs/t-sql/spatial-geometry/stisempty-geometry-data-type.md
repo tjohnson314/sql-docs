@@ -7,6 +7,8 @@ ms.date: "08/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "STIsEmpty_TSQL"
   - "STIsEmpty (geometry Data Type)"
@@ -46,4 +48,3 @@ SELECT @g.STIsEmpty();
  [OGC Methods on Geometry Instances](../../t-sql/spatial-geometry/ogc-methods-on-geometry-instances.md)  
   
   
-

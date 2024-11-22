@@ -8,6 +8,8 @@ ms.date: 12/08/2022
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "database_automatic_tuning_mode_tsql"
   - "database_automatic_tuning_mode"

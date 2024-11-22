@@ -7,6 +7,8 @@ ms.date: "08/27/2019"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sys.user_token"
   - "user_token"

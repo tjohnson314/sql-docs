@@ -7,6 +7,8 @@ ms.date: 04/19/2022
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "granting permissions [SQL Server]"
   - "database permissions [SQL Server]"

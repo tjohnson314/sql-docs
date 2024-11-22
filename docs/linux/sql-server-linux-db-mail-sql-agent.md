@@ -1,9 +1,9 @@
 ---
-title: Database Mail and email alerts with SQL Server Agent on Linux
+title: Database Mail and Email Alerts With SQL Server Agent on Linux
 description: Learn how to use Database Mail and how to set up Email Alerts with SQL Server Agent (mssql-server-agent) on Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 11/30/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -22,13 +22,13 @@ This article shows how to set up Database Mail and use it with SQL Server Agent 
 USE master;
 GO
 
-sp_configure 'show advanced options', 1;
+EXECUTE sp_configure 'show advanced options', 1;
 GO
 
-RECONFIGURE WITH OVERRIDE
+RECONFIGURE WITH OVERRIDE;
 GO
 
-sp_configure 'Database Mail XPs', 1;
+EXECUTE sp_configure 'Database Mail XPs', 1;
 GO
 
 RECONFIGURE;
@@ -38,7 +38,8 @@ GO
 ## 2. Create a new account
 
 ```sql
-EXECUTE msdb.dbo.sysmail_add_account_sp @account_name = 'SQLAlerts',
+EXECUTE msdb.dbo.sysmail_add_account_sp
+    @account_name = 'SQLAlerts',
     @description = 'Account for Automated DBA Notifications',
     @email_address = 'sqlagenttest@example.com',
     @replyto_address = 'sqlagenttest@example.com',
@@ -50,6 +51,9 @@ EXECUTE msdb.dbo.sysmail_add_account_sp @account_name = 'SQLAlerts',
     @password = '<password>';
 GO
 ```
+
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 ## 3. Create a default profile
 
@@ -89,7 +93,7 @@ EXECUTE msdb.dbo.sp_send_dbmail
     @profile_name = 'default',
     @recipients = 'recipient-email@example.com',
     @subject = 'Testing DBMail',
-    @body = 'This message is a test for DBMail'
+    @body = 'This message is a test for DBMail';
 GO
 ```
 
@@ -112,7 +116,7 @@ You can use the **mssql-conf** utility, or environment variables, to register yo
 ## 8. Set up an operator for SQL Server Agent job notifications
 
 ```sql
-EXEC msdb.dbo.sp_add_operator
+EXECUTE msdb.dbo.sp_add_operator
     @name = N'JobAdmins',
     @enabled = 1,
     @email_address = N'recipient-email@example.com',
@@ -123,10 +127,10 @@ GO
 ## 9. Send email when 'Agent Test Job' succeeds
 
 ```sql
-EXEC msdb.dbo.sp_update_job
+EXECUTE msdb.dbo.sp_update_job
     @job_name = 'Agent Test Job',
     @notify_level_email = 1,
-    @notify_email_operator_name = N'JobAdmins'
+    @notify_email_operator_name = N'JobAdmins';
 GO
 ```
 

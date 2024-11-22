@@ -7,8 +7,10 @@ ms.reviewer: randolphwest, maghan
 ms.date: 06/12/2024
 ms.service: sql
 ms.subservice: tools-other
-ms.custom: linux-related-content
 ms.topic: conceptual
+ms.custom:
+  - linux-related-content
+  - ignite-2024
 helpviewer_keywords:
   - "statements [SQL Server], command prompt"
   - "go-sqlcmd"
@@ -27,7 +29,7 @@ helpviewer_keywords:
   - "RESET command"
   - "GO command"
 zone_pivot_groups: cs1-command-shell
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017||=fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =fabric"
 ---
 # sqlcmd utility
 

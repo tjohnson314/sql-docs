@@ -1,9 +1,9 @@
 ---
-title: Installation guidance for SQL Server on Linux
+title: Installation Guidance for SQL Server on Linux
 description: Install, update, and uninstall SQL Server on Linux. This article covers online, offline, and unattended scenarios.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -34,19 +34,21 @@ For answers to frequently asked questions, see the [SQL Server on Linux FAQ](sql
 
 [!INCLUDE [support-policy](includes/support-policy.md)]
 
-## <a id="supportedplatforms"></a> Supported platforms
+<a id="supportedplatforms"></a>
+
+## Supported platforms
 
 [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is supported on Red Hat Enterprise Linux (RHEL), SUSE Linux Enterprise Server (SLES), and Ubuntu. It's also supported as a container image, which can run on Kubernetes, OpenShift, and Docker Engine on Linux.
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 [!INCLUDE [linux-supported-platforms-2017](includes/linux-supported-platforms-2017.md)]
 
 ::: moniker-end
 
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 [!INCLUDE [linux-supported-platforms-2019](includes/linux-supported-platforms-2019.md)]
 
@@ -64,7 +66,9 @@ Microsoft also supports deploying and managing [!INCLUDE [ssnoversion-md](../inc
 > [!NOTE]  
 > [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is tested and supported on Linux for the previously listed distributions. If you choose to install [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on an unsupported operating system, please review the **Support policy** section of the [Technical support policy for Microsoft SQL Server](/troubleshoot/sql/general/support-policy-sql-server) to understand the support implications.
 
-## <a id="system"></a> System requirements
+<a id="system"></a>
+
+## System requirements
 
 [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] has the following system requirements for Linux:
 
@@ -84,11 +88,15 @@ If you use **Network File System (NFS)** remote shares in production, note the f
 - Use NFS version **4.2 or higher**. Older versions of NFS don't support required features, such as `fallocate` and sparse file creation, common to modern file systems.
 - Locate only the `/var/opt/mssql` directories on the NFS mount. Other files, such as the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] system binaries, aren't supported.
 
-## <a id="repositories"></a> Configure source repositories
+<a id="repositories"></a>
+
+## Configure source repositories
 
 When you install or upgrade [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], you get the latest version of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] from your configured Microsoft repository. The quickstarts use the Cumulative Update **CU** repository for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. For more information on repositories and how to configure them, see [Configure repositories for installing and upgrading SQL Server on Linux](sql-server-linux-change-repo.md).
 
-## <a id="platforms"></a> Install SQL Server
+<a id="platforms"></a>
+
+## Install SQL Server
 
 You can install [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux from the command line. For step-by-step instructions, see one of the following quickstarts:
 
@@ -103,7 +111,9 @@ You can also run [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on L
 
 After installing, consider making extra configuration changes for optimal performance. For more information, see [Performance best practices and configuration guidelines for SQL Server on Linux](sql-server-linux-performance-best-practices.md).
 
-## <a id="upgrade"></a> Update or upgrade SQL Server
+<a id="upgrade"></a>
+
+## Update or upgrade SQL Server
 
 To update the `mssql-server` package to the latest release, use one of the following commands based on your platform:
 
@@ -117,11 +127,15 @@ These commands download the newest package and replace the binaries located unde
 
 To upgrade [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], first [change your configured repository](sql-server-linux-change-repo.md) to the desired version of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. Then use the same `update` command to upgrade your version of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. This step is only possible if the upgrade path is supported between the two repositories.
 
-## <a id="rollback"></a> Roll back SQL Server
+<a id="rollback"></a>
+
+## Roll back SQL Server
 
 [!INCLUDE [roll-back-sql-server](includes/roll-back-sql-server.md)]
 
-## <a id="versioncheck"></a> Check installed SQL Server version
+<a id="versioncheck"></a>
+
+## Check installed SQL Server version
 
 To verify your current version and edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux, use the following procedure:
 
@@ -130,10 +144,12 @@ To verify your current version and edition of [!INCLUDE [ssnoversion-md](../incl
 1. Use **sqlcmd** to run a Transact-SQL command that displays your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] version and edition.
 
    ```bash
-   sqlcmd -S localhost -U SA -Q 'select @@VERSION'
+   sqlcmd -S localhost -U sa -Q 'select @@VERSION'
    ```
 
-## <a id="uninstall"></a> Uninstall SQL Server
+<a id="uninstall"></a>
+
+## Uninstall SQL Server
 
 To remove the `mssql-server` package on Linux, use one of the following commands based on your platform:
 
@@ -149,18 +165,23 @@ Removing the package doesn't delete the generated database files. If you want to
 sudo rm -rf /var/opt/mssql/
 ```
 
-## <a id="unattended"></a> Unattended install
+<a id="unattended"></a>
+
+## Unattended install
 
 You can perform an unattended installation in the following way:
 
 - Follow the initial steps in the [quickstarts](#platforms) to register the repositories and install [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
 - When you run `mssql-conf setup`, set [environment variables](sql-server-linux-configure-environment-variables.md) and use the `-n` (no prompt) option.
 
-The following example configures [!INCLUDE [ssdeveloper-md](../includes/ssdeveloper-md.md)] edition with the `MSSQL_PID` environment variable. It also accepts the EULA (`ACCEPT_EULA`) and sets the SA user password (`MSSQL_SA_PASSWORD`). The `-n` parameter performs an unprompted installation where the configuration values are pulled from the environment variables.
+The following example configures [!INCLUDE [ssdeveloper-md](../includes/ssdeveloper-md.md)] edition with the `MSSQL_PID` environment variable. It also accepts the EULA (`ACCEPT_EULA`) and sets the `sa` password (`MSSQL_SA_PASSWORD`). The `-n` parameter performs an unprompted installation where the configuration values are pulled from the environment variables.
 
 ```bash
-sudo MSSQL_PID=Developer ACCEPT_EULA=Y MSSQL_SA_PASSWORD='<YourStrong!Passw0rd>' /opt/mssql/bin/mssql-conf -n setup
+sudo MSSQL_PID=Developer ACCEPT_EULA=Y MSSQL_SA_PASSWORD='<password>' /opt/mssql/bin/mssql-conf -n setup
 ```
+
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 You can also create a script that performs other actions. For example, you could install other [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] packages.
 
@@ -170,14 +191,16 @@ For a more detailed sample script, see the following examples:
 - [Sample: Unattended SQL Server installation script for SUSE Linux Enterprise Server](sample-unattended-install-suse.md)
 - [Sample: Unattended SQL Server installation script for Ubuntu](sample-unattended-install-ubuntu.md)
 
-## <a id="offline"></a> Offline install
+<a id="offline"></a>
+
+## Offline install
 
 If your Linux machine doesn't have access to the online repositories used in the [quick starts](#platforms), you can download the package files directly. These packages are located in the Microsoft repository, at [https://packages.microsoft.com](https://packages.microsoft.com).
 
 > [!TIP]  
 > If you successfully installed with the steps in the quick starts, you don't need to download or manually install the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] package(s). This section is only for the offline scenario.
 
-1. **Download the database engine package for your platform**. Find package download links in the package details section of the [Release notes](sql-server-linux-release-notes-2022.md).
+1. **Download the database engine package for your platform**. Find package download links in the package details section of the [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md).
 
 1. **Move the downloaded package to your Linux machine**. If you used a different machine to download the packages, one way to move the packages to your Linux machine is with the **scp** command.
 
@@ -208,7 +231,9 @@ If your Linux machine doesn't have access to the online repositories used in the
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-## Licensing and pricing
+<a id="licensing-and-pricing"></a>
+
+## License and pricing
 
 [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is licensed the same for Linux and Windows. For more information about [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] licensing and pricing, see [How to license SQL Server](https://www.microsoft.com/sql-server/sql-server-2022-pricing), and [SQL Server Licensing Resources and Documents](https://www.microsoft.com/licensing/docs/view/SQL-Server).
 

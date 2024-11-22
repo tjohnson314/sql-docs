@@ -14,6 +14,7 @@ ms.custom:
   - build-2023-dataai
   - ignite-2023
   - build-2024
+  - ignite-2024
 ---
 
 # What is Azure SQL Managed Instance?

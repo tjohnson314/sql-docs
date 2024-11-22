@@ -8,6 +8,8 @@ ms.date: 07/25/2024
 ms.service: sql
 ms.subservice: supportability
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "compatibility levels [SQL Server], viewing"
   - "compatibility [SQL Server], databases"

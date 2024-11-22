@@ -7,6 +7,8 @@ ms.date: "06/27/2019"
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "principals [SQL Server], credentials"
   - "schemas [SQL Server], credentials"

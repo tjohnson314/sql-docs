@@ -88,7 +88,7 @@ The value 'Configuration needed' indicates that the onboarding process didn't ha
 
 ## Opt out of automatic connecting
 
-To opt out of the automatic installation of Azure extension for SQL Server, add the following tag and value to a subscription, resource group(s), or Arc Server resource(s).
+To opt out of the automatic installation of Azure extension for SQL Server, add the following tag and value to a subscription, resource group(s), or Arc Server resource(s).  If there are already existing Arc-enabled servers in the subscription or resource group, it may take up to 8 hours for any changes to the tag value to take effect, as the tag value is cached.
 
 | Tag | Value |
 | --- | ----- |

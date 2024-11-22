@@ -7,6 +7,8 @@ ms.reviewer: dzsquared
 ms.date: 07/19/2024
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "designing DACs"
   - "How to [DAC]"

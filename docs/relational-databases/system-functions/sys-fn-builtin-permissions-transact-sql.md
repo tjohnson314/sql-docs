@@ -7,6 +7,8 @@ ms.date: 10/14/2022
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "fn_builtin_permissions"
   - "sys.fn_builtin_permissions_TSQL"

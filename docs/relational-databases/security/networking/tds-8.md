@@ -4,7 +4,7 @@ description: This article discusses TDS 8.0, the application layer protocol used
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 02/29/2024
+ms.date: 11/20/2024
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
@@ -41,7 +41,7 @@ TCP handshake :arrow_right: TDS prelogin (cleartext) and response (cleartext) :a
 
 With the introduction of TDS 8.0, the SQL Server connections are as follows:
 
-TCP handshake :arrow_right: TLS handshake :arrow_right: TDS prelogin (encrypted) and response (encrypted) :arrow_right:  authentication (encrypted) :arrow_right: data exchange (encrypted)
+TCP handshake :arrow_right: TLS handshake :arrow_right: TDS prelogin (encrypted) and response (encrypted) :arrow_right: authentication (encrypted) :arrow_right: data exchange (encrypted)
 
 ## Strict connection encryption
 
@@ -49,7 +49,7 @@ To use TDS 8.0, [!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)] added `
 
 - [Microsoft ADO.NET for SQL Server and Azure SQL Database](../../../connect/ado-net/microsoft-ado-net-sql-server.md) version 5.1 or higher
 - [ODBC Driver for SQL Server](../../../connect/odbc/download-odbc-driver-for-sql-server.md) version 18.1.2.1 or higher
-- [OLE DB Driver for SQL Server](../../../connect/oledb/download-oledb-driver-for-sql-server.md) version 19.2.0 or higher
+- [Microsoft OLE DB Driver for SQL Server](../../../connect/oledb/download-oledb-driver-for-sql-server.md) version 19.2.0 or higher
 - [Microsoft JDBC Driver for SQL Server](../../../connect/jdbc/microsoft-jdbc-driver-for-sql-server.md) version 11.2.0 or higher
 - [Microsoft Drivers for PHP for SQL Server](../../../connect/php/microsoft-php-driver-for-sql-server.md) version 5.10 or higher
 - [Python SQL Driver - pyodbc](../../../connect/python/pyodbc/python-sql-driver-pyodbc.md)
@@ -80,9 +80,9 @@ The following additions are added to connection strings for encryption:
 
 | Keyword | Default | Description |
 | --- | --- | --- |
-| **Encrypt** | *false* | **Existing behavior**<br />When `true`, SQL Server uses TLS encryption for all data sent between the client and server if the server has a certificate installed. Recognized values are `true`, `false`, `yes`, and `no`. For more information, see [Connection String Syntax](/dotnet/framework/data/adonet/connection-string-syntax).<br /><br />**Change of behavior**<br />When set to `strict`, SQL Server uses TDS 8.0 for all data sent between the client and server.<br /><br />When set to `mandatory`, `true`, or `yes`, SQL Server uses TDS 7.x with TLS/SSL encryption for all data sent between the client and server if the server has a certificate installed.<br /><br />When set to `optional`, `false`, or `no`, the connection uses TDS 7.x and would be encrypted only if required by the SQL Server. |
-| **TrustServerCertificate** | *false* | **Existing behavior**<br />Set to `true` to specify that the driver doesn't validate the server TLS/SSL certificate. If `true`, the server TLS/SSL certificate is automatically trusted when the communication layer is encrypted using TLS.<br /><br />If `false`, the driver validates the server TLS/SSL certificate. If the server certificate validation fails, the driver raises an error and closes the connection. The default value is `false`. Make sure the value passed to `serverName` exactly matches the `Common Name (CN)` or DNS name in the `Subject Alternate Name` in the server certificate for a TLS/SSL connection to succeed.<br /><br />**Change of behavior for Microsoft ODBC Driver 18 for SQL Server**<br />If **Encrypt** is set to `strict`, this setting specifies the location of the certificate to be used for server certificate validation (exact match). The driver supports PEM, DER, and CER file extensions.<br /><br />If Encrypt is set to `true` or `false`, and the `TrustServerCertificate` property is unspecified or set to `null`, `true`, or `false`, the driver uses the `ServerName` property value on the connection URL as the host name to validate the SQL Server TLS/SSL certificate. |
-| **HostNameInCertificate** | *null* | The host name to be used in validating the SQL Server TLS/SSL certificate. If the **HostNameInCertificate** property is unspecified or set to `null`, the driver uses the `ServerName` property value as the host name to validate the SQL Server TLS/SSL certificate. |
+| `Encrypt` | *false* | **Existing behavior**<br /><br />When `true`, SQL Server uses TLS encryption for all data sent between the client and server if the server has a certificate installed. Recognized values are `true`, `false`, `yes`, and `no`. For more information, see [Connection String Syntax](/dotnet/framework/data/adonet/connection-string-syntax).<br /><br />**Change of behavior**<br /><br />When set to `strict`, SQL Server uses TDS 8.0 for all data sent between the client and server.<br /><br />When set to `mandatory`, `true`, or `yes`, SQL Server uses TDS 7.x with TLS/SSL encryption for all data sent between the client and server if the server has a certificate installed.<br /><br />When set to `optional`, `false`, or `no`, the connection uses TDS 7.x and would be encrypted only if required by the SQL Server. |
+| `TrustServerCertificate` | *false* | **Existing behavior**<br /><br />Set to `true` to specify that the driver doesn't validate the server TLS/SSL certificate. If `true`, the server TLS/SSL certificate is automatically trusted when the communication layer is encrypted using TLS.<br /><br />If `false`, the driver validates the server TLS/SSL certificate. If the server certificate validation fails, the driver raises an error and closes the connection. The default value is `false`. Make sure the value passed to `serverName` exactly matches the `Common Name (CN)` or DNS name in the `Subject Alternate Name` in the server certificate for a TLS/SSL connection to succeed.<br /><br />**Change of behavior for Microsoft ODBC Driver 18 for SQL Server**<br /><br />If `Encrypt` is set to `strict`, this setting specifies the location of the certificate to be used for server certificate validation (exact match). The driver supports PEM, DER, and CER file extensions.<br /><br />If `Encrypt` is set to `true` or `false`, and the `TrustServerCertificate` property is unspecified or set to `null`, `true`, or `false`, the driver uses the `ServerName` property value on the connection URL as the host name to validate the SQL Server TLS/SSL certificate. |
+| `HostNameInCertificate` | *null* | The host name to be used in validating the SQL Server TLS/SSL certificate. If the `HostNameInCertificate` property is unspecified or set to `null`, the driver uses the `ServerName` property value as the host name to validate the SQL Server TLS/SSL certificate. |
 
 ## Related content
 

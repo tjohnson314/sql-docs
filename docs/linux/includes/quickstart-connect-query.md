@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/11/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.custom:
@@ -11,10 +11,13 @@ ms.custom:
 
 The following steps use **sqlcmd** to locally connect to your new [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance.
 
-1. Run **sqlcmd** with parameters for your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] name (`-S`), the user name (`-U`), and the password (`-P`). In this tutorial, you are connecting locally, so the server name is `localhost`. The user name is `sa` and the password is the one you provided for the SA account during setup.
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](password-complexity.md)]
+
+1. Run **sqlcmd** with parameters for your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] name (`-S`), the user name (`-U`), and the password (`-P`). In this tutorial, you connect locally, so the server name is `localhost`. The user name is `sa` and the password is the one you provided for the `sa` account during setup.
 
    ```bash
-   sqlcmd -S localhost -U sa -P '<YourPassword>'
+   sqlcmd -S localhost -U sa -P '<password>'
    ```
 
    > [!NOTE]  
@@ -32,7 +35,7 @@ The following steps use **sqlcmd** to locally connect to your new [!INCLUDE [ssn
 
 The following sections walk you through using **sqlcmd** to create a new database, add data, and run a simple query.
 
-For more information about writing Transact-SQL statements and queries, see [Tutorial: Writing Transact-SQL Statements](../../t-sql/tutorial-writing-transact-sql-statements.md).
+For more information about writing Transact-SQL statements and queries, see [Tutorial: Write Transact-SQL statements](../../t-sql/tutorial-writing-transact-sql-statements.md).
 
 ### Create a new database
 
@@ -47,10 +50,11 @@ The following steps create a new database named `TestDB`.
 1. On the next line, write a query to return the name of all of the databases on your server:
 
    ```sql
-   SELECT Name from sys.databases;
+   SELECT Name
+   FROM sys.databases;
    ```
 
-1. The previous two commands were not executed immediately. You must type `GO` on a new line to execute the previous commands:
+1. The previous two commands aren't executed immediately. You must type `GO` on a new line to execute the previous commands:
 
    ```sql
    GO
@@ -69,9 +73,10 @@ Next create a new table, `dbo.Inventory`, and insert two new rows.
 1. Create new table named `dbo.Inventory`:
 
    ```sql
-   CREATE TABLE dbo.Inventory (
+   CREATE TABLE dbo.Inventory
+   (
        id INT,
-       name NVARCHAR(50),
+       name NVARCHAR (50),
        quantity INT,
        PRIMARY KEY (id)
    );
@@ -80,8 +85,11 @@ Next create a new table, `dbo.Inventory`, and insert two new rows.
 1. Insert data into the new table:
 
    ```sql
-   INSERT INTO dbo.Inventory VALUES (1, 'banana', 150);
-   INSERT INTO dbo.Inventory VALUES (2, 'orange', 154);
+   INSERT INTO dbo.Inventory
+   VALUES (1, 'banana', 150);
+
+   INSERT INTO dbo.Inventory
+   VALUES (2, 'orange', 154);
    ```
 
 1. Type `GO` to execute the previous commands:
@@ -97,7 +105,8 @@ Now, run a query to return data from the `dbo.Inventory` table.
 1. From the **sqlcmd** command prompt, enter a query that returns rows from the `dbo.Inventory` table where the quantity is greater than 152:
 
    ```sql
-   SELECT * FROM dbo.Inventory
+   SELECT *
+   FROM dbo.Inventory
    WHERE quantity > 152;
    ```
 
@@ -155,6 +164,6 @@ For answers to frequently asked questions, see the [SQL Server on Linux FAQ](../
 
 ## Related content
 
-- [Explore the tutorials for SQL Server on Linux](../sql-server-linux-migrate-restore-database.md)
+- [Migrate a SQL Server database from Windows to Linux using backup and restore](../sql-server-linux-migrate-restore-database.md)
 
 [!INCLUDE [contribute-to-content](../../includes/paragraph-content/contribute-to-content.md)]

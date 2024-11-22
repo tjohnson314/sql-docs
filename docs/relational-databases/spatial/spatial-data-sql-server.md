@@ -3,10 +3,12 @@ title: "Spatial Data (SQL Server)"
 description: "Spatial data in the SQL Database Engine represents information about the physical location and shape of geometric objects."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviwer: mlandzic, jovanpop
+ms.reviewer: mlandzic, jovanpop
 ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "geography data type [SQL Server], spatial storage design"
   - "planar spatial data [SQL Server], designing"
@@ -15,10 +17,10 @@ helpviewer_keywords:
   - "geometry data type [SQL Server], spatial storage design"
   - "spatial storage [SQL Server]"
   - "geodetic spatial data [SQL Server], designing"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Spatial Data
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]  
 
   Spatial data represents information about the physical location and shape of geometric objects. These objects can be point locations or more complex objects such as countries/regions, roads, or lakes.  
   

@@ -9,8 +9,10 @@ ms.date: 10/29/2024
 ms.service: azure-sql
 ms.subservice: performance
 ms.topic: conceptual
-ms.custom: sqldbrb=2
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi || = fabric"
+ms.custom:
+  - sqldbrb=2
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabric"
 ---
 # Automatic tuning in Azure SQL Database and Azure SQL Managed Instance
 [!INCLUDE[appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]

@@ -7,6 +7,8 @@ ms.date: "12/16/2016"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "REVOKE DATABASE SCOPED CREDENTIAL"
   - "REVOKE_DATABASE_SCOPED_CREDENTIAL_TSQL"

@@ -10,6 +10,7 @@ ms.subservice: t-sql
 ms.topic: reference
 ms.custom:
   - build-2024
+  - ignite-2024
 f1_keywords:
   - "JSON_VALUE"
   - "JSON_VALUE_TSQL"
@@ -19,7 +20,7 @@ helpviewer_keywords:
   - "JSON, querying"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # JSON_VALUE (Transact-SQL)
 

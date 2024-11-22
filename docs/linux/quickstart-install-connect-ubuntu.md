@@ -3,7 +3,7 @@ title: "Ubuntu: Install SQL Server on Linux"
 description: This quickstart shows how to install SQL Server 2017 and later versions on Ubuntu and then create and query a database with sqlcmd.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -16,7 +16,7 @@ ms.custom:
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 In this quickstart, you install [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] on Ubuntu 18.04. Then you can connect with **sqlcmd** to create your first database and run queries.
 
@@ -24,7 +24,7 @@ For more information on supported platforms, see [Release notes for SQL Server 2
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 In this quickstart, you install [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] on Ubuntu 20.04. Then you can connect with **sqlcmd** to create your first database and run queries.
 
@@ -46,7 +46,7 @@ For more information on supported platforms, see [Release notes for SQL Server 2
 If you choose to have a preinstalled SQL Server virtual machine (VM) on Ubuntu ready to run your production-based workload, then follow the [best practices](/azure/azure-sql/virtual-machines/windows/performance-guidelines-best-practices-checklist) for creating the SQL Server VM.
 
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 ## Azure Marketplace images
 
@@ -82,10 +82,13 @@ sudo /opt/mssql/bin/mssql-conf setup
 
 ::: moniker-end
 
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 ## Prerequisites
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 You must have an Ubuntu 18.04 machine with **at least 2 GB** of memory.
 
@@ -93,7 +96,7 @@ To install Ubuntu 18.04 on your own machine, go to <https://releases.ubuntu.com/
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 You must have an Ubuntu 20.04 machine with **at least 2 GB** of memory.
 
@@ -115,12 +118,14 @@ The [Windows Subsystem for Linux](/windows/wsl/about) isn't supported as an inst
 
 For other system requirements, see [System requirements for SQL Server on Linux](sql-server-linux-setup.md#system).
 
-## <a id="install"></a> Install SQL Server
+<a id="install"></a>
+
+## Install SQL Server
 
 To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Ubuntu, run the following commands in a terminal to install the **mssql-server** package.
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 1. Import the public repository GPG keys:
 
@@ -144,13 +149,14 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Ubunt
    sudo apt-get install -y mssql-server
    ```
 
-1. After the package installation finishes, run `mssql-conf setup` and follow the prompts to set the SA password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
+1. After the package installation finishes, run `mssql-conf setup` and follow the prompts to set the `sa` password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-   Remember to specify a strong password for the SA account. You need a minimum length 8 characters, including uppercase and lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Once the configuration is done, verify that the service is running:
 
@@ -162,7 +168,7 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Ubunt
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 1. Import the public repository GPG keys:
 
@@ -186,13 +192,14 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Ubunt
    sudo apt-get install -y mssql-server
    ```
 
-1. After the package installation finishes, run `mssql-conf setup` and follow the prompts to set the SA password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
+1. After the package installation finishes, run `mssql-conf setup` and follow the prompts to set the `sa` password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-   Remember to specify a strong password for the SA account. You need a minimum length 8 characters, including uppercase and lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Once the configuration is done, verify that the service is running:
 
@@ -230,13 +237,14 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Ubunt
    sudo apt-get install -y mssql-server
    ```
 
-1. After the package installation finishes, run `mssql-conf setup` and follow the prompts to set the SA password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
+1. After the package installation finishes, run `mssql-conf setup` and follow the prompts to set the `sa` password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-   Remember to specify a strong password for the SA account. You need a minimum length 8 characters, including uppercase and lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Once the configuration is done, verify that the service is running:
 
@@ -276,13 +284,14 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Ubunt
    sudo apt-get install -y mssql-server
    ```
 
-1. After the package installation finishes, run `mssql-conf setup` and follow the prompts to set the SA password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
+1. After the package installation finishes, run `mssql-conf setup` and follow the prompts to set the `sa` password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-   Remember to specify a strong password for the SA account. You need a minimum length 8 characters, including uppercase and lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Once the configuration is done, verify that the service is running:
 
@@ -298,11 +307,13 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Ubunt
 
 At this point, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is running on your Ubuntu machine and is ready to use.
 
-## Disable the `sa` account as a best practice
+## Disable the SA account as a best practice
 
 [!INCLUDE [connect-with-sa](includes/connect-with-sa.md)]
 
-## <a id="tools"></a> Install the SQL Server command-line tools
+<a id="tools"></a>
+
+## Install the SQL Server command-line tools
 
 To create a database, you need to connect with a tool that can run Transact-SQL statements on [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The following steps install the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] command-line tools: [sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md) and [bcp utility](../tools/bcp-utility.md).
 

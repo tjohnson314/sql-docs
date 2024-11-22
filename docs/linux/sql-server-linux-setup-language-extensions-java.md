@@ -4,7 +4,7 @@ titleSuffix: SQL Server Language Extensions
 description: Learn how to install SQL Server Java Language Extension on Red Hat, Ubuntu, and SUSE Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/03/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: how-to
@@ -75,7 +75,9 @@ https://github.com/microsoft/sql-server-language-extensions/tree/main/language-e
 
 ::: monikerRange="=sql-server-linux-ver15"
 
-### <a id="RHEL"></a> Red Hat install command
+<a id="RHEL"></a>
+
+### Red Hat install command
 
 You can install Language Extensions for Java on Red Hat using the following command.
 
@@ -87,7 +89,9 @@ You can install Language Extensions for Java on Red Hat using the following comm
 sudo yum install mssql-server-extensibility-java
 ```
 
-### <a id="ubuntu"></a> Ubuntu install command
+<a id="ubuntu"></a>
+
+### Ubuntu install command
 
 You can install Language Extensions for Java on Ubuntu using the following command.
 
@@ -99,7 +103,9 @@ You can install Language Extensions for Java on Ubuntu using the following comma
 sudo apt-get install mssql-server-extensibility-java
 ```
 
-### <a id="suse"></a> SUSE install command
+<a id="suse"></a>
+
+### SUSE install command
 
 You can install Language Extensions for Java on SUSE using the following command.
 
@@ -118,7 +124,7 @@ sudo zypper install mssql-server-extensibility-java
 
    If you aren't using external libraries, you need to provide [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] with permissions to execute the Java classes in your `jar`.
 
-   To grant read and execute access to a `jar` file, run the following **chmod** command on the `jar` file. We recommend always putting your class files in a `jar` when you work with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. For help with creating a `jar`, see [Create a Java jar file from class files](../language-extensions/how-to/create-a-java-jar-file-from-class-files.md).
+   To grant read and execute access to a `jar` file, run the following **chmod** command on the `jar` file. We recommend always putting your class files in a `jar` when you work with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. For help with creating a `jar`, see [Create a Java .jar file from class files](../language-extensions/how-to/create-a-java-jar-file-from-class-files.md).
 
    ```bash
    chmod ug+rx <MyJarFile.jar>
@@ -156,7 +162,8 @@ sudo zypper install mssql-server-extensibility-java
 1. Enable external script execution using Azure Data Studio, or another tool like SQL Server Management Studio (Windows only), that runs T-SQL.
 
    ```sql
-   EXEC sp_configure 'external scripts enabled', 1;
+   EXECUTE sp_configure 'external scripts enabled', 1;
+
    RECONFIGURE WITH OVERRIDE;
    ```
 
@@ -172,9 +179,11 @@ The following example adds an external language called Java to a database on [!I
 
 ```sql
 CREATE EXTERNAL LANGUAGE Java
-FROM (CONTENT = N'/opt/mssql-extensibility/lib/java-lang-extension.tar.gz',
+FROM (
+    CONTENT = N'/opt/mssql-extensibility/lib/java-lang-extension.tar.gz',
     FILE_NAME = 'javaextension.so',
-    ENVIRONMENT_VARIABLES = N'{"JRE_HOME":"/opt/mssql/lib/zulu-jre-11"}');
+    ENVIRONMENT_VARIABLES = N'{"JRE_HOME":"/opt/mssql/lib/zulu-jre-11"}'
+);
 ```
 
 For the Java extension, the environment variable `JRE_HOME` is used to determine the path to find and initialize the JVM from.
@@ -191,7 +200,9 @@ To validate installation, run a T-SQL script that executes a system stored proce
 
 ::: monikerRange="=sql-server-linux-ver15"
 
-## <a id="install-all"></a> Full install of SQL Server and Java Language Extension
+<a id="install-all"></a>
+
+## Full install of SQL Server and Java Language Extension
 
 You can install and configure the [!INCLUDE [ssde-md](../includes/ssde-md.md)] and Java Language Extension in one procedure by appending Java packages and parameters on a command that installs the [!INCLUDE [ssde-md](../includes/ssde-md.md)].
 
@@ -221,7 +232,9 @@ You can install and configure the [!INCLUDE [ssde-md](../includes/ssde-md.md)] a
 
 Use the [unattended install](./sql-server-linux-setup.md#unattended) for the Database Engine and add the packages for `mssql-server-extensibility-java`.
 
-## <a id="offline-install"></a> Offline installation
+<a id="offline-install"></a>
+
+## Offline installation
 
 Follow the [Offline installation](sql-server-linux-setup.md#offline) instructions for steps on installing the packages. Find your download site, and then download specific packages using the package list later in this section.
 

@@ -9,8 +9,10 @@ ms.date: 11/14/2019
 ms.service: azure-sql
 ms.subservice: development
 ms.topic: conceptual
-ms.custom: sqldbrb=2
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi ||=fabricsql"
+ms.custom:
+  - sqldbrb=2
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabricsql"
 ---
 # Application development overview - Azure SQL Database & Azure SQL Managed Instance
 [!INCLUDE [appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]

@@ -7,6 +7,8 @@ ms.date: "08/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "AsTextZM_(geometry Data Type)"
   - "AsTextZM_(geometry_Data_Type)_TSQL"

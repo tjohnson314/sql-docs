@@ -8,6 +8,8 @@ ms.date: "04/18/2022"
 ms.service: sql
 ms.subservice: machine-learning
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "PREDICT"
   - "PREDICT_TSQL"

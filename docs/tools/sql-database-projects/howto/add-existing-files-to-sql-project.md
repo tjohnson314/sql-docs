@@ -4,15 +4,16 @@ description: "How to add the contents of a dacpac or SQL scripts to a project."
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: maghan
-ms.service: sql
-ms.topic: how-to 
 ms.date: 09/10/2024
+ms.service: sql
+ms.topic: how-to
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "SQL.DATA.TOOLS.SQLPROJECTIMPORTDATABASESUMMARYDIALOG.DIALOG"
   - "SQL.DATA.TOOLS.IMPORTSCRIPTWIZARD.SUMMARY"
   - "sql.data.tools.importscriptwizard.welcome"
   - "sql.data.tools.importscriptwizard.fileselection"
-
 ---
 
 # Add existing files to a SQL project

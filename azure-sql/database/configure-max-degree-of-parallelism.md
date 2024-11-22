@@ -9,6 +9,8 @@ ms.date: "04/06/2022"
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 dev_langs:
   - "TSQL"
 ms.devlang: tsql

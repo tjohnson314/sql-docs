@@ -1,9 +1,9 @@
 ---
-title: Restore a SQL Server database in a Linux container
+title: Restore a SQL Server Database in a Linux Container
 description: This tutorial shows how to restore a SQL Server database backup in a new Linux container.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 02/22/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -17,13 +17,13 @@ monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017"
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 This tutorial demonstrates how to move and restore a [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] backup file into a [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] Linux container image running on Docker.
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 This tutorial demonstrates how to move and restore a [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] backup file into a [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] Linux container image running on Docker.
 
@@ -59,7 +59,7 @@ This section provides deployment options for your environment.
 ### Pull and run the container image
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 1. Open a bash terminal on Linux.
 
@@ -72,11 +72,14 @@ This section provides deployment options for your environment.
 1. To run the container image with Docker, you can use the following command:
 
    ```bash
-   sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+   sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
       --name 'sql1' -p 1401:1433 \
       -v sql1data:/var/opt/mssql \
       -d mcr.microsoft.com/mssql/server:2017-latest
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
    This command creates a [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] container with the Developer edition (default). [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] port `1433` is exposed on the host as port `1401`. The optional `-v sql1data:/var/opt/mssql` parameter creates a data volume container named `sql1data`. This is used to persist the data created by [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
 
@@ -100,7 +103,7 @@ This section provides deployment options for your environment.
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 1. Open a bash terminal on Linux.
 
@@ -113,11 +116,14 @@ This section provides deployment options for your environment.
 1. To run the container image with Docker, you can use the following command:
 
    ```bash
-   sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+   sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
       --name 'sql1' -p 1401:1433 \
       -v sql1data:/var/opt/mssql \
       -d mcr.microsoft.com/mssql/server:2019-latest
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
    This command creates a [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] container with the Developer edition (default). [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] port `1433` is exposed on the host as port `1401`. The optional `-v sql1data:/var/opt/mssql` parameter creates a data volume container named `sql1data`. This is used to persist the data created by [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
 
@@ -154,11 +160,14 @@ This section provides deployment options for your environment.
 1. To run the container image with Docker, you can use the following command:
 
    ```bash
-   sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+   sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
       --name 'sql1' -p 1401:1433 \
       -v sql1data:/var/opt/mssql \
       -d mcr.microsoft.com/mssql/server:2022-latest
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
    This command creates a [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] container with the Developer edition (default). [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] port `1433` is exposed on the host as port `1401`. The optional `-v sql1data:/var/opt/mssql` parameter creates a data volume container named `sql1data`. This is used to persist the data created by [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
 
@@ -220,7 +229,7 @@ The backup file is now located inside the container. Before restoring the backup
 
    ```bash
    sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost \
-      -U SA -P '<YourNewStrong!Passw0rd>' \
+      -U sa -P '<new-password>' \
       -Q 'RESTORE FILELISTONLY FROM DISK = "/var/opt/mssql/backup/wwi.bak"' \
       | tr -s ' ' | cut -d ' ' -f 1-2
    ```
@@ -240,7 +249,7 @@ The backup file is now located inside the container. Before restoring the backup
 
    ```bash
    sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd \
-      -S localhost -U SA -P '<YourNewStrong!Passw0rd>' \
+      -S localhost -U sa -P '<new-password>' \
       -Q 'RESTORE DATABASE WideWorldImporters FROM DISK = "/var/opt/mssql/backup/wwi.bak" WITH MOVE "WWI_Primary" TO "/var/opt/mssql/data/WideWorldImporters.mdf", MOVE "WWI_UserData" TO "/var/opt/mssql/data/WideWorldImporters_userdata.ndf", MOVE "WWI_Log" TO "/var/opt/mssql/data/WideWorldImporters.ldf", MOVE "WWI_InMemory_Data_1" TO "/var/opt/mssql/data/WideWorldImporters_InMemory_Data_1"'
    ```
 
@@ -278,8 +287,8 @@ Run the following query to display a list of database names in your container:
 
 ```bash
 sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd \
-   -S localhost -U SA -P '<YourNewStrong!Passw0rd>' \
-   -Q 'SELECT Name FROM sys.Databases'
+   -S localhost -U sa -P '<new-password>' \
+   -Q 'SELECT name FROM sys.databases'
 ```
 
 You should see `WideWorldImporters` in the list of databases.
@@ -292,7 +301,7 @@ Follow these steps to make a change in the database.
 
    ```bash
    sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd \
-      -S localhost -U SA -P '<YourNewStrong!Passw0rd>' \
+      -S localhost -U sa -P '<new-password>' \
       -Q 'SELECT TOP 10 StockItemID, StockItemName FROM WideWorldImporters.Warehouse.StockItems ORDER BY StockItemID'
    ```
 
@@ -317,7 +326,7 @@ Follow these steps to make a change in the database.
 
    ```bash
    sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd \
-      -S localhost -U SA -P '<YourNewStrong!Passw0rd>' \
+      -S localhost -U sa -P '<new-password>' \
       -Q 'UPDATE WideWorldImporters.Warehouse.StockItems SET StockItemName="USB missile launcher (Dark Green)" WHERE StockItemID=1; SELECT StockItemID, StockItemName FROM WideWorldImporters.Warehouse.StockItems WHERE StockItemID=1'
    ```
 
@@ -338,7 +347,7 @@ After you've restored your database into a container, you might also want to reg
 
    ```bash
    sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd \
-      -S localhost -U SA -P '<YourNewStrong!Passw0rd>' \
+      -S localhost -U sa -P '<new-password>' \
       -Q "BACKUP DATABASE [WideWorldImporters] TO DISK = N'/var/opt/mssql/backup/wwi_2.bak' WITH NOFORMAT, NOINIT, NAME = 'WideWorldImporters-full', SKIP, NOREWIND, NOUNLOAD, STATS = 10"
    ```
 
@@ -374,7 +383,7 @@ After you've restored your database into a container, you might also want to reg
 In addition to taking database backups for protecting your data, you can also use data volume containers. The beginning of this tutorial created the `sql1` container with the `-v sql1data:/var/opt/mssql` parameter. The `sql1data` data volume container persists the `/var/opt/mssql` data even after the container is removed. The following steps completely remove the `sql1` container and then create a new container, `sql2`, with the persisted data.
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 1. Stop the `sql1` container.
 
@@ -391,7 +400,7 @@ In addition to taking database backups for protecting your data, you can also us
 1. Create a new container, `sql2`, and reuse the `sql1data` data volume container.
 
    ```bash
-   sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+   sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
       --name 'sql2' -e 'MSSQL_PID=Developer' -p 1401:1433 \
       -v sql1data:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2017-latest
    ```
@@ -400,16 +409,15 @@ In addition to taking database backups for protecting your data, you can also us
 
    ```bash
    sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd \
-      -S localhost -U SA -P '<YourNewStrong!Passw0rd>' \
+      -S localhost -U sa -P '<new-password>' \
       -Q 'SELECT StockItemID, StockItemName FROM WideWorldImporters.Warehouse.StockItems WHERE StockItemID=1'
    ```
 
-   > [!NOTE]  
-   > The SA password isn't the password you specified for the `sql2` container, `MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>`. All of the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] data was restored from `sql1`, including the changed password from earlier in the tutorial. In effect, some options like this are ignored due to restoring the data in /var/opt/mssql. For this reason, the password is `<YourNewStrong!Passw0rd>` as shown here.
+   The `sa` password isn't the password you specified for the `sql2` container, `MSSQL_SA_PASSWORD=<password>`. All of the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] data was restored from `sql1`, including the changed password from earlier in the tutorial. In effect, some options like this are ignored due to restoring the data in /var/opt/mssql. For this reason, the password is `<new-password>` as shown here.
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 1. Stop the `sql1` container.
 
@@ -426,7 +434,7 @@ In addition to taking database backups for protecting your data, you can also us
 1. Create a new container, `sql2`, and reuse the `sql1data` data volume container.
 
     ```bash
-    sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+    sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
        --name 'sql2' -e 'MSSQL_PID=Developer' -p 1401:1433 \
        -v sql1data:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2019-latest
     ```
@@ -435,12 +443,11 @@ In addition to taking database backups for protecting your data, you can also us
 
    ```bash
    sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd \
-      -S localhost -U SA -P '<YourNewStrong!Passw0rd>' \
+      -S localhost -U sa -P '<new-password>' \
       -Q 'SELECT StockItemID, StockItemName FROM WideWorldImporters.Warehouse.StockItems WHERE StockItemID=1'
    ```
 
-   > [!NOTE]  
-   > The SA password isn't the password you specified for the `sql2` container, `MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>`. All of the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] data was restored from `sql1`, including the changed password from earlier in the tutorial. In effect, some options like this are ignored due to restoring the data in /var/opt/mssql. For this reason, the password is `<YourNewStrong!Passw0rd>` as shown here.
+   The `sa` password isn't the password you specified for the `sql2` container, `MSSQL_SA_PASSWORD=<password>`. All of the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] data was restored from `sql1`, including the changed password from earlier in the tutorial. In effect, some options like this are ignored due to restoring the data in /var/opt/mssql. For this reason, the password is `<new-password>` as shown here.
 
 ::: moniker-end
 <!--SQL Server 2022 on Linux-->
@@ -461,7 +468,7 @@ In addition to taking database backups for protecting your data, you can also us
 1. Create a new container, `sql2`, and reuse the `sql1data` data volume container.
 
     ```bash
-    sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+    sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
        --name 'sql2' -e 'MSSQL_PID=Developer' -p 1401:1433 \
        -v sql1data:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2022-latest
     ```
@@ -470,14 +477,16 @@ In addition to taking database backups for protecting your data, you can also us
 
    ```bash
    sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd \
-      -S localhost -U SA -P '<YourNewStrong!Passw0rd>' \
+      -S localhost -U sa -P '<new-password>' \
       -Q 'SELECT StockItemID, StockItemName FROM WideWorldImporters.Warehouse.StockItems WHERE StockItemID=1'
    ```
 
-   > [!NOTE]  
-   > The SA password isn't the password you specified for the `sql2` container, `MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>`. All of the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] data was restored from `sql1`, including the changed password from earlier in the tutorial. In effect, some options like this are ignored due to restoring the data in /var/opt/mssql. For this reason, the password is `<YourNewStrong!Passw0rd>` as shown here.
+   The `sa` password isn't the password you specified for the `sql2` container, `MSSQL_SA_PASSWORD=<password>`. All of the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] data was restored from `sql1`, including the changed password from earlier in the tutorial. In effect, some options like this are ignored due to restoring the data in `/var/opt/mssql`. For this reason, the password is `<new-password>` as shown here.
 
 ::: moniker-end
+
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 ## [sqlcmd](#tab/sqlcmd)
 
@@ -564,7 +573,7 @@ After you've restored your database into a container, you might also want to reg
 
 Now that the backup has been copied off the container, it can be cleaned up. The following steps completely remove the `sql1` container.
 
-1. Remove the container. **sqlcmd** has built-in safeguards to prevent deleting a container that is in use. The way it determines if a container is still in use is whether it has any user databases. For production scenarios it is recommended to delete user databases individually after verifying they are no long in use. For development/testing we can use the `--force` parameter to delete the container without deleting the user database.
+1. Remove the container. **sqlcmd** has built-in safeguards to prevent deleting a container that is in use. The way it determines if a container is still in use is whether it has any user databases. For production scenarios, you should delete user databases individually after verifying they are no long in use. For development/testing we can use the `--force` parameter to delete the container without deleting the user database.
 
    ```bash
    sqlcmd delete --force
@@ -575,13 +584,13 @@ Now that the backup has been copied off the container, it can be cleaned up. The
 ## Next step
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 In this tutorial, you learned how to back up a database on Windows and move it to a Linux server running [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] in a container. You learned how to:
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 In this tutorial, you learned how to back up a database on Windows and move it to a Linux server running [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] in a container. You learned how to:
 

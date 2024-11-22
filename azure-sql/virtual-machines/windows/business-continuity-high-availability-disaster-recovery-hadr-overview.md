@@ -57,7 +57,7 @@ Protecting your SQL Server on Azure VMs at the database level can be done using 
 
 To get started, review the [availability group tutorial](availability-group-manually-configure-prerequisites-tutorial-multi-subnet.md).
 
-For higher redundancy, availability, and disaster recovery protection, the Azure VMs can be deployed to different [availability zones](/azure/availability-zones/az-overview) as documented in the [availability group overview](availability-group-overview.md). Expanding availability replicas to run across multiple datacenters in Azure VMs adds further disaster recovery coverage. A cross-region solution helps protect against a complete site outage.
+For higher redundancy, availability, and disaster recovery protection, the Azure VMs can be deployed to different [availability zones](/azure/reliability/availability-zones-overview) as documented in the [availability group overview](availability-group-overview.md). Expanding availability replicas to run across multiple datacenters in Azure VMs adds further disaster recovery coverage. A cross-region solution helps protect against a complete site outage.
 
 :::image type="content" source="media/business-continuity-high-availability-disaster-recovery-hadr-overview/azure-only-dr-alwayson.png" alt-text="Diagram that shows two regions with a Primary Replica and Secondary Replica connected by an Asynchronous Commit.":::
 
@@ -161,7 +161,7 @@ To configure a high-availability setup, place all participating SQL Server virtu
 
 Availability zones are unique physical locations within an Azure region. Each zone consists of one or more datacenters equipped with independent power, cooling, and networking. The physical separation of availability zones within a region helps protect applications and data from datacenter failures by ensuring that at least one virtual machine is available and meets the Azure SLA of 99.99 percent.
 
-To configure high availability, place participating SQL Server virtual machines spread across availability zones in the region. There will be additional charges for network-to-network transfers between availability zones. For more information, see [Availability zones](/azure/availability-zones/az-overview).
+To configure high availability, place participating SQL Server virtual machines spread across availability zones in the region. There will be additional charges for network-to-network transfers between availability zones. For more information, see [Availability zones](/azure/reliability/availability-zones-overview).
 
 ### Network latency in hybrid IT
 

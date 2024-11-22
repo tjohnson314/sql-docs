@@ -6,7 +6,9 @@ ms.author: "maghan"
 ms.date: "08/02/2016"
 ms.service: sql
 ms.topic: quickstart
-ms.custom: intro-quickstart
+ms.custom:
+  - intro-quickstart
+  - ignite-2024
 helpviewer_keywords:
   - "Visual C# [SMO]"
 monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"

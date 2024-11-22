@@ -7,6 +7,8 @@ ms.date: 10/23/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "CREATE VIEW"
   - "VIEW_TSQL"
@@ -33,7 +35,7 @@ helpviewer_keywords:
   - "maximum number of columns per view"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 
 # CREATE VIEW (Transact-SQL)
@@ -529,4 +531,3 @@ ON (fis.SalesTerritoryKey=dst.SalesTerritoryKey);
  [EVENTDATA &#40;Transact-SQL&#41;](../../t-sql/functions/eventdata-transact-sql.md)  
   
   
-

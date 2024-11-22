@@ -7,6 +7,8 @@ ms.date: "02/06/2020"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "STSymDifference_TSQL"
   - "STSymDifference (geometry Data Type)"

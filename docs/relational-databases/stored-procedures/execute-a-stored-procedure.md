@@ -7,6 +7,8 @@ ms.date: 01/25/2024
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.swb.executeprocedure.general.f1"
   - "sql13.swb.executeprocedure.f1"

@@ -9,8 +9,10 @@ ms.date: 10/01/2024
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: conceptual
-ms.custom: sqldbrb=4
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi||=fabric"
+ms.custom:
+  - sqldbrb=4
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabric"
 ---
 # Accelerated Database Recovery in Azure SQL 
 [!INCLUDE[appliesto-sqldb-sqlmi-fabricsqldb](includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]

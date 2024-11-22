@@ -7,9 +7,11 @@ ms.reviewer: wiassaf, randolphwest
 ms.date: 10/06/2024
 ms.service: sql
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 dev_langs:
   - "TSQL"
-monikerRange: =fabric
+monikerRange: 
 ---
 # Nested Common Table Expression (CTE) in Fabric data warehousing (Transact-SQL)
 

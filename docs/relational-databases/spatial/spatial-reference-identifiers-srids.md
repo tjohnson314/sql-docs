@@ -3,19 +3,21 @@ title: "Spatial Reference Identifiers (SRIDs)"
 description: "Spatial Reference Identifiers (SRIDs) correspond to a spatial reference system based on the specific ellipsoid used for either flat-earth mapping or round-earth mapping in SQL Database Engine spatial data."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviwer: mlandzic, jovanpop
+ms.reviewer: mlandzic, jovanpop
 ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "Spatial Reference Identifiers (SRIDs)"
   - "geodetic spatial data [SQL Server], identifiers"
   - "SRID"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Spatial Reference Identifiers (SRIDs)
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]  
 
   Each spatial instance has a spatial reference identifier (SRID). The SRID corresponds to a spatial reference system based on the specific ellipsoid used for either flat-earth mapping or round-earth mapping in SQL Database Engine spatial data.
   

@@ -8,6 +8,8 @@ ms.date: 03/04/2024
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "index online operations [SQL Server]"
   - "online index operations"

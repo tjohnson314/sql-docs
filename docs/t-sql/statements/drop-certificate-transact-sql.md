@@ -7,6 +7,8 @@ ms.date: "06/18/2018"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "DROP CERTIFICATE"
   - "DROP_CERTIFICATE_TSQL"

@@ -7,6 +7,8 @@ ms.date: "09/01/2021"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sys.allocation_units_TSQL"
   - "sys.allocation_units"

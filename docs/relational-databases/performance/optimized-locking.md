@@ -8,6 +8,8 @@ ms.date: 10/07/2024
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "optimized locking"
 dev_langs:

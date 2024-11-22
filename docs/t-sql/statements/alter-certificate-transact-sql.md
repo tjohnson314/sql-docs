@@ -7,6 +7,8 @@ ms.date: "04/22/2019"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "ALTER_CERTIFICATE_TSQL"
   - "ALTER CERTIFICATE"
@@ -163,4 +165,3 @@ GO
  [CERTPROPERTY &#40;Transact-SQL&#41;](../../t-sql/functions/certproperty-transact-sql.md)  
   
   
-

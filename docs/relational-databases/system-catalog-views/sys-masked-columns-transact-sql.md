@@ -7,6 +7,8 @@ ms.date: "05/25/2021"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sys.masked_columns"
   - "masked_columns_tsql"

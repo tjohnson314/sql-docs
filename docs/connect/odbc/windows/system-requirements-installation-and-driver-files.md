@@ -7,6 +7,8 @@ ms.date: 11/01/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 ---
 
 # System requirements, installation, and driver files

@@ -12394,8 +12394,8 @@ items:
         href: relational-databases/system-catalog-views/sys-database-recovery-status-transact-sql.md
       - name: sys.database_scoped_configurations
         href: relational-databases/system-catalog-views/sys-database-scoped-configurations-transact-sql.md
-      - name: sys.database_automatic_tuning_configuration
-        href: relational-databases/system-catalog-views/sys-database-automatic-tuning-configuration-transact-sql.md
+      - name: sys.database_automatic_tuning_configurations
+        href: relational-databases/system-catalog-views/sys-database-automatic-tuning-configurations-transact-sql.md
       - name: sys.database_automatic_tuning_options
         href: relational-databases/system-catalog-views/sys-database-automatic-tuning-options-transact-sql.md
       - name: sys.database_automatic_tuning_mode

@@ -32,7 +32,7 @@ The workload in `tempdb` differs from workloads in other user databases; objects
 
 ## Number of `tempdb` files
 
-Increasing the number of `tempdb` data files creates one or more GAM and SGAM pages for each data file, which helps improve `tempdb` concurrency and reduces PFC page contention. However, increasing the number of `tempdb` data files could have other performance implications, so test thoroughly before implementing in production. 
+Increasing the number of `tempdb` data files creates one or more GAM and SGAM pages for each data file, which helps improve `tempdb` concurrency and reduces PFS  page contention. However, increasing the number of `tempdb` data files could have other performance implications, so test thoroughly before implementing in production. 
 
 By default, Azure SQL Managed Instance creates 12 `tempdb` data files, and 1 `tempdb` log file, but it's possible to modify this configuration. 
 

@@ -4,7 +4,7 @@ description: This article describes how to run the SQL Assessment API for SQL Se
 author: aravindmahadevan-ms
 ms.author: armaha
 ms.reviewer: amitkh-msft, randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -62,24 +62,26 @@ A second option is to use PowerShell to run the SQL Assessment API script.
 
 The SQL Assessment API output is available in JSON format. You must take the following steps to configure the SQL Assessment API as follows:
 
-1. In the instance you wish to assess, create a login for SQL Server assessments using SQL Authentication. You can use the following Transact-SQL (T-SQL) script to create a login and strong password. Replace `<secure_password>` with a strong password of your choosing.
+1. In the instance you wish to assess, create a login for SQL Server assessments using SQL Authentication. You can use the following Transact-SQL (T-SQL) script to create a login and strong password. [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
    ```sql
    USE [master];
    GO
 
-   CREATE LOGIN [assessmentLogin] WITH PASSWORD = N'<secure_password>';
+   CREATE LOGIN [assessmentLogin]
+       WITH PASSWORD = N'<password>';
+
    ALTER SERVER ROLE [CONTROL SERVER] ADD MEMBER [assessmentLogin];
    GO
    ```
 
    The `CONTROL SERVER` role works for most of the assessments. However, there are a few assessments that might need **sysadmin** privileges. If you aren't running those rules, we recommend using `CONTROL SERVER` permissions.
 
-1. Store the credentials for login on the system as follows, again replacing `<secure_password>` with the password you used in the previous step.
+1. Store the credentials for login on the system as follows, again replacing `<password>` with the password you used in the previous step.
 
    ```bash
    echo "assessmentLogin" > /var/opt/mssql/secrets/assessment
-   echo "<secure_password>" >> /var/opt/mssql/secrets/assessment
+   echo "<password>" >> /var/opt/mssql/secrets/assessment
    ```
 
 1. Secure the new assessment credentials by ensuring that only the `mssql` user can access the credentials.

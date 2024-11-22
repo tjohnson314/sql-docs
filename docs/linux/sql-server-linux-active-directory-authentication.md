@@ -1,11 +1,11 @@
 ---
-title: "Tutorial: Use Active Directory authentication for SQL Server on Linux"
+title: "Tutorial: Use Active Directory Authentication for SQL Server on Linux"
 titleSuffix: SQL Server
 description: This tutorial provides the configuration steps for Active Directory authentication for SQL Server on Linux.
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 10/29/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: tutorial
@@ -42,18 +42,22 @@ Before you configure Active Directory Authentication, you need to:
   - [Quickstart: Install SQL Server and create a database on SUSE Linux Enterprise Server](quickstart-install-connect-suse.md)
   - [Quickstart: Install SQL Server and create a database on Ubuntu](quickstart-install-connect-ubuntu.md)
 
-## <a id="join"></a> Join SQL Server host to Active Directory domain
+<a id="join"></a>
+
+## Join SQL Server host to Active Directory domain
 
 Join your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Linux host with an Active Directory domain controller. For information on how to join an active directory domain, see [Join SQL Server on a Linux host to an Active Directory domain](sql-server-linux-active-directory-join-domain.md).
 
-## <a id="createuser"></a> Create Active Directory user for SQL Server and set SPN
+<a id="createuser"></a>
+
+## Create Active Directory user for SQL Server and set SPN
 
 > [!NOTE]  
 > The following steps use your [fully qualified domain name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) (FQDN). If you're on Azure, you must **[create a FQDN](/azure/virtual-machines/linux/portal-create-fqdn)** before you proceed.
 
 1. On your domain controller, run the [New-ADUser](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/ee617253(v=technet.10)) PowerShell command to create a new Active Directory user with a password that never expires. The following example names the account `sqlsvc`, but the account name can be anything you like. You'll be prompted to enter a new password for the account.
 
-   ```PowerShell
+   ```powershell
    Import-Module ActiveDirectory
 
    New-ADUser sqlsvc -AccountPassword (Read-Host -AsSecureString "Enter Password") -PasswordNeverExpires $true -Enabled $true
@@ -68,7 +72,7 @@ Join your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Linux host 
 
 1. Set the ServicePrincipalName (SPN) for this account using the **setspn.exe** tool. The SPN must be formatted exactly as specified in the following example. You can find the fully qualified domain name of the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] host machine by running `hostname --all-fqdns` on the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] host. The TCP port should be 1433 unless you have configured [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] to use a different port number.
 
-   ```PowerShell
+   ```powershell
    setspn -A MSSQLSvc/<fully qualified domain name of host machine>:<tcp port> sqlsvc
    setspn -A MSSQLSvc/<netbios name of the host machine>:<tcp port> sqlsvc
    ```
@@ -80,14 +84,18 @@ Join your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Linux host 
 
 For more information, see [Register a Service Principal Name for Kerberos connections](../database-engine/configure-windows/register-a-service-principal-name-for-kerberos-connections.md).
 
-## <a id="configurekeytab"></a> Configure SQL Server service keytab
+<a id="configurekeytab"></a>
+
+## Configure SQL Server service keytab
 
 Configuring Active Directory authentication for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux requires an Active Directory user account and the SPN created in the previous section.
 
 > [!IMPORTANT]  
 > If the password for the Active Directory account is changed or the password for the account that the SPNs are assigned to is changed, you must update the keytab with the new password and Key Version Number (KVNO). Some services might also rotate the passwords automatically. Review any password rotation policies for the accounts in question and align them with scheduled maintenance activities to avoid unexpected downtime.
 
-### <a id="spn"></a> SPN keytab entries
+<a id="spn"></a>
+
+### SPN keytab entries
 
 1. Check the Key Version Number (KVNO) for the Active Directory account created in the previous step. Usually it's 2, but it could be another integer if you changed the account's password multiple times. On the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] host machine, run the following commands:
 
@@ -102,32 +110,33 @@ Configuring Active Directory authentication for [!INCLUDE [ssnoversion-md](../in
    > [!NOTE]  
    > SPNs can take several minutes to propagate through your domain, especially if the domain is large. If you receive the error, `kvno: Server not found in Kerberos database while getting credentials for MSSQLSvc/<fully qualified domain name of host machine>:<tcp port>@CONTOSO.COM`, please wait a few minutes and try again.</br></br> The above commands will only work if the server has been joined to an Active Directory domain, which was covered in the previous section.
 
-1. Using [**ktpass**](/windows-server/administration/windows-commands/ktpass), add keytab entries for each SPN using the following commands on a Windows machine Command Prompt:
+1. Using **[ktpass](/windows-server/administration/windows-commands/ktpass)**, add keytab entries for each SPN using the following commands on a Windows machine Command Prompt:
 
     - `<DomainName>\<UserName>` - Active Directory user account
     - `@CONTOSO.COM` - Use your domain name
     - `/kvno <#>` - Replace `<#>` with the KVNO obtained in an earlier step
-    - `<StrongPassword>` - Use a strong password
+    - `<password>` - [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
    ```cmd
-   ktpass /princ MSSQLSvc/<fully qualified domain name of host machine>:<tcp port>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto aes256-sha1 /mapuser <DomainName>\<UserName> /out mssql.keytab -setpass -setupn /kvno <#> /pass <StrongPassword>
+   ktpass /princ MSSQLSvc/<fully qualified domain name of host machine>:<tcp port>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto aes256-sha1 /mapuser <DomainName>\<UserName> /out mssql.keytab -setpass -setupn /kvno <#> /pass <password>
 
-   ktpass /princ MSSQLSvc/<fully qualified domain name of host machine>:<tcp port>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto rc4-hmac-nt /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <StrongPassword>
+   ktpass /princ MSSQLSvc/<fully qualified domain name of host machine>:<tcp port>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto rc4-hmac-nt /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <password>
 
-   ktpass /princ MSSQLSvc/<netbios name of the host machine>:<tcp port>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto aes256-sha1 /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <StrongPassword>
+   ktpass /princ MSSQLSvc/<netbios name of the host machine>:<tcp port>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto aes256-sha1 /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <password>
 
-   ktpass /princ MSSQLSvc/<netbios name of the host machine>:<tcp port>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto rc4-hmac-nt /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <StrongPassword>
+   ktpass /princ MSSQLSvc/<netbios name of the host machine>:<tcp port>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto rc4-hmac-nt /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <password>
 
-   ktpass /princ <UserName>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto aes256-sha1 /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <StrongPassword>
+   ktpass /princ <UserName>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto aes256-sha1 /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <password>
 
-   ktpass /princ <UserName>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto rc4-hmac-nt /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <StrongPassword>
+   ktpass /princ <UserName>@CONTOSO.COM /ptype KRB5_NT_PRINCIPAL /crypto rc4-hmac-nt /mapuser <DomainName>\<UserName> /in mssql.keytab /out mssql.keytab -setpass -setupn /kvno <#> /pass <password>
    ```
 
-   > [!NOTE]  
-   > The commands above allow both AES and RC4 encryption ciphers for Active Directory authentication. RC4 is an older encryption cipher and if a higher degree of security is required, you can choose to create the keytab entries with only the AES encryption cipher.
-   > The last two `UserName` entries must be in lowercase, or the permssion authentication might fail.
+   The previous commands allow both AES and RC4 encryption ciphers for Active Directory authentication. RC4 is an older encryption cipher and if a higher degree of security is required, you can choose to create the keytab entries with only the AES encryption cipher.
 
-1. After executing the above command, you should have a keytab file named `mssql.keytab`. Copy the file over to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] machine under the folder `/var/opt/mssql/secrets`.
+   > [!NOTE]  
+   > The last two `UserName` entries must be in lowercase, or the permssion authentication can fail.
+
+1. After executing the previous commands, you should have a keytab file named `mssql.keytab`. Copy the file over to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] machine under the folder `/var/opt/mssql/secrets`.
 
 1. Secure the keytab file.
 
@@ -165,21 +174,27 @@ Configuring Active Directory authentication for [!INCLUDE [ssnoversion-md](../in
 
 At this point, you're ready to use Active Directory-based logins in [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
 
-## <a id="createsqllogins"></a> Create Active Directory-based logins in Transact-SQL
+<a id="createsqllogins"></a>
+
+## Create Active Directory-based logins in Transact-SQL
 
 1. Connect to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] and create a new, Active Directory-based login:
 
    ```sql
-   CREATE LOGIN [CONTOSO\user] FROM WINDOWS;
+   CREATE LOGIN [CONTOSO\user]
+       FROM WINDOWS;
    ```
 
 1. Verify that the login is now listed in the [sys.server_principals](../relational-databases/system-catalog-views/sys-server-principals-transact-sql.md) system catalog view:
 
    ```sql
-   SELECT name FROM sys.server_principals;
+   SELECT name
+   FROM sys.server_principals;
    ```
 
-## <a id="connect"></a> Connect to SQL Server using Active Directory authentication
+<a id="connect"></a>
+
+## Connect to SQL Server using Active Directory authentication
 
 Sign in to a client machine using your domain credentials. Now you can connect to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] without reentering your password by using Active Directory authentication. If you create a login for an Active Directory group, any Active Directory user who is a member of that group can connect in the same way.
 
@@ -215,7 +230,9 @@ The following table describes recommendations for other client drivers:
 | **ODBC** | Use Integrated Authentication. |
 | **ADO.NET** | Connection String Syntax. |
 
-## <a id="additionalconfig"></a> Additional configuration options
+<a id="additionalconfig"></a>
+
+## Additional configuration options
 
 If you're using third-party utilities such as [PBIS](https://www.beyondtrust.com/), [VAS](https://www.oneidentity.com/products/one-identity-safeguard-authentication-services), or [Centrify](https://delinea.com/centrify) to join the Linux host to Active Directory domain and you would like to force [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] to use the OpenLDAP library directly, you can configure the `disablesssd` option with **mssql-conf** as follows:
 
@@ -225,7 +242,7 @@ systemctl restart mssql-server
 ```
 
 > [!NOTE]  
-> There are utilities such as **realmd** which set up SSSD, while other tools such as PBIS, VAS and Centrify don't setup SSSD. If the utility used to join Active Directory domain doesn't setup SSSD, it's recommended to configure `disablesssd` option to `true`. While it's not required as [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] will attempt to use SSSD for Active Directory before falling back to OpenLDAP mechanism, it would be more performant to configure it so [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] makes OpenLDAP calls directly bypassing the SSSD mechanism.
+> There are utilities such as **realmd** which set up SSSD, while other tools such as PBIS, VAS and Centrify don't setup SSSD. If the utility used to join Active Directory domain doesn't setup SSSD, you should configure `disablesssd` option to `true`. While it's not required as [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] will attempt to use SSSD for Active Directory before falling back to OpenLDAP mechanism, it would be more performant to configure it so [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] makes OpenLDAP calls directly bypassing the SSSD mechanism.
 
 If your domain controller supports LDAPS, you can force all connections from [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] to the domain controllers to be over LDAPS. To check your client can contact the domain controller over LDAPS, run the following bash command, `ldapsearch -H ldaps://contoso.com:3269`. To set [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] to only use LDAPS, run the following:
 
@@ -252,7 +269,7 @@ systemctl restart mssql-server
 
 Then configure the KDC list in `/etc/krb5.conf` as follows:
 
-```/etc/krb5.conf
+```ini
 [realms]
 CONTOSO.COM = {
   kdc = dcWithGC1.contoso.com

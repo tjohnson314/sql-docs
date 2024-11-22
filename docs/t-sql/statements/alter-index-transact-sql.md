@@ -8,6 +8,8 @@ ms.date: 05/21/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "ALTER INDEX"
   - "ALTER_INDEX_TSQL"

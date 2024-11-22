@@ -118,6 +118,14 @@ The following diagram illustrates the architecture of [!INCLUDE [ssazurearc](../
 
 [!INCLUDE [features-edition](includes/features-edition.md)]
 
+[!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] provides inventory for the following services:
+
+- SQL Server Analysis Services
+- SQL Server Reporting Services
+- SQL Server Integration Services
+
+Currently, Azure Arc does not provide additional management capabilities for these services.
+
 [!INCLUDE [supported-configurations](includes/supported-configurations.md)]
 
 ## Unsupported configurations

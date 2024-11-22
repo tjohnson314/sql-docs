@@ -8,6 +8,8 @@ ms.date: 10/10/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.swb.sysdatatype.properties.f1"
   - "CREATE TYPE"
@@ -24,7 +26,7 @@ helpviewer_keywords:
   - "data types [SQL Server], creating"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # CREATE TYPE (Transact-SQL)
 

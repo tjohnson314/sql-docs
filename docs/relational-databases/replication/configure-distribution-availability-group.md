@@ -23,7 +23,7 @@ helpviewer_keywords:
 # Set up replication distribution database in Always On availability group
  [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
-This article explains how to set up a SQL Server replication distribution databases in an Always On availability group (AG).
+This article explains how to set up a SQL Server replication distribution database in an Always On availability group (AG).
 
 SQL Server 2017 CU6 and SQL Server 2016 SP2-CU3 introduces support for replication distribution database in an AG through the following mechanisms:
 
@@ -44,17 +44,17 @@ After a distribution database in the AG is configured based on the steps describ
 - Adding or removing nodes to existing distribution database AG.
 - A distributor may have multiple distribution databases. Each distribution database can be in its own AG and can be not in any AG. Multiple distribution databases can share an AG.
 - Publisher and distributor need to be on separate SQL Server instances.
-- If the listener for the availability group hosting the distribution database is configured to use a non-default port, then its required to setup an alias for the listener and the non-default port.
+- If the listener for the availability group hosting the distribution database is configured to use a non-default port, then it's required to set up an alias for the listener and the non-default port.
 
 ## Limitations or exclusions
 
-- Local Distributor (where the Publisher server is also the Distributor) is not supported. The Publisher and Distributor must be separate SQL Server instances. These instances can be hosted on the same sets of nodes.  A local Distributor is not supported for the following reasons: 
+- Local Distributor (where the Publisher server is also the Distributor) isn't supported. The Publisher and Distributor must be separate SQL Server instances. These instances can be hosted on the same sets of nodes.  A local Distributor isn't supported for the following reasons: 
 	- If the Distributor is configured locally, you can't use the availability group listener to route traffic to the Distributor, which causes replication agents to fail after failover. 
 	- If a local Distributor is configured and then the Distributor availability group fails over to the original secondary, the Publisher connection to the Distributor changes from local to remote, which causes replication stored procedures and agents to fail.
-- Oracle publisher is not supported.
-- Merge replication is not supported.
-- Transactional replication with immediate or queued updating subscriber is not supported.
-- Peer to peer replication is not supported prior to SQL Server 2019 (15.x) CU 17
+- Oracle publisher isn't supported.
+- Merge replication isn't supported.
+- Transactional replication with immediate or queued updating subscriber isn't supported.
+- Peer to peer replication isn't supported prior to SQL Server 2019 (15.x) CU 17
 - All SQL Server 2017 instances hosting distribution database replicas must be SQL Server 2017 CU 6 or later. 
 - All SQL Server 2016 instances hosting distribution database replicas must be SQL Server 2016 SP2-CU3 or later.
 - All SQL Server instances hosting distribution database replicas must be the same version, except during the narrow timeframe when upgrade takes place.
@@ -62,22 +62,22 @@ After a distribution database in the AG is configured based on the steps describ
 - For recovery and to allow transaction log truncation, configure full and transaction log backups.
 - The distribution database AG must have a listener configured.
 - Secondary replicas in a distribution database AG can be synchronous or asynchronous. Synchronous mode is recommended and preferred.
-- Bidirectional transactional replication is not supported.
+- Bidirectional transactional replication isn't supported.
 - SSMS does not show Distribution Database as synchronizing/synchronized, when distribution database is added to an availability group.
 
 
    >[!NOTE]
    >Before executing any of replication stored procedures (for example - `sp_dropdistpublisher`, `sp_dropdistributiondb`, `sp_dropdistributor`, `sp_adddistributiondb`, `sp_adddistpublisher`) on secondary replica, make sure the replica is fully synchronized.
 
-- All secondary replicas in a distribution database AG should be readable. If a secondary replica is not readable, distributor properties in SQL Server Management Studio on the particular secondary replica can not be accessed, however replication will continue to work correctly. 
+- All secondary replicas in a distribution database AG should be readable. If a secondary replica isn't readable, distributor properties in SQL Server Management Studio on the particular secondary replica can't be accessed, however replication will continue to work correctly. 
 - All the nodes in the distribution database AG need to use the same domain account to run SQL Server Agent, and this domain account needs to have the same privilege on each node.
 - If any replication agents run under a proxy account, the proxy account needs to exist in every node in the distribution database AG and have the same privilege on each node.
 - Make changes to distributor or distribution database properties in all replicas participating in distribution database AG.
 - Make replication jobs changes through msdb stored procedures or SQL Server Management Studio in all replicas participating in distribution database AG.
-- If using a custom profile for any agent, it must be manually created on all secondary replicas by using the procedure sp_add_agent_profile. The profile must have the same id on all replicas.
-- Configuring distributor on the publisher needs to be done with scripts. The replication wizard cannot be used. Replication wizards and property sheets for other purposes are supported.
+- If using a custom profile for any agent, it must be manually created on all secondary replicas by using the procedure `sp_add_agent_profile`. The profile must have the same id on all replicas. If the profile doesn't exist on a secondary replica, you might get Primary Key violation errors after failover. You will likely need to reinitialize the subscription for the publication to resolve the errors. 
+- Configuring distributor on the publisher needs to be done with scripts. The replication wizard can't be used. Replication wizards and property sheets for other purposes are supported.
 - Configuring the AG for distribution databases can only be done through scripts.
-- Setting up distribution databases in an AG needs to be a new replication configuration. Switching an existing distribution database to an AG is not supported. Also once a distribution database is taken out an AG, it can no longer function as a valid distribution database and should be dropped.
+- Setting up distribution databases in an AG needs to be a new replication configuration. Switching an existing distribution database to an AG isn't supported. Also once a distribution database is taken out an AG, it can no longer function as a valid distribution database and should be dropped.
 
 ## Configuration architecture
 
@@ -119,7 +119,7 @@ This example configures a new distributor and publisher and puts the distributio
    EXEC sys.sp_adddistpublisher @publisher = 'PUB', @distribution_db = 'distribution', @working_directory = '<network path>';
    ```
 
-   If a replica is not readable as a secondary, perform failover such that the replica becomes the primary, and run 
+   If a replica isn't readable as a secondary, perform failover such that the replica becomes the primary, and run 
 
    ```sql
    EXEC sys.sp_adddistpublisher @publisher = 'PUB', @distribution_db = 'distribution', @working_directory = '<network path>';
@@ -204,7 +204,7 @@ This example adds a new distributor to an existing replication configuration wit
    EXEC sys.sp_adddistpublisher @publisher = 'PUB', @distribution_db = 'distribution', @working_directory = '<network path>';
    ```
 
-   If the replica is not readable as a secondary, perform failover such that the replica becomes the primary, and run:
+   If the replica isn't readable as a secondary, perform failover such that the replica becomes the primary, and run:
 
    ```sql
    EXEC sys.sp_adddistpublisher @publisher = 'PUB', @distribution_db = 'distribution', @working_directory = '<network path>';
@@ -282,7 +282,7 @@ On PUB, add subscription as you would normally do to subscriber `SUB`.
 
 ### Distributor workflow
 
-On DIST2 and DIST3, add a linked server for 'SUB' if it is not previously registered with DIST2 or DIST3. Below is a sample TSQL for linked server creation -
+On DIST2 and DIST3, add a linked server for 'SUB' if it isn't previously registered with DIST2 or DIST3. Below is a sample TSQL for linked server creation -
 
    ```sql 
    EXEC master.dbo.sp_addlinkedserver@server =N'SUB', @srvproduct=N'SQL Server';

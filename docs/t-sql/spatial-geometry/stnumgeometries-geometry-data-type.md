@@ -7,6 +7,8 @@ ms.date: "08/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "STNumGeometries (geometry Data Type)"
   - "STNumGeometries_TSQL"
@@ -39,4 +41,3 @@ Returns the number of geometries that comprise a **geometry** instance.
 >  If a **GeometryCollection** has nested empty elements, `STNumGeometries()` will not return 0. Though the elements in the **GeometryCollection** instance are empty, the instance itself is not an empty set.  
   
   
-

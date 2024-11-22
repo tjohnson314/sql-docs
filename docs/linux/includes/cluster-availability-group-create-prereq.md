@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: include
@@ -80,8 +80,12 @@ sudo systemctl restart mssql-server
 
 You can optionally enable Extended Events (XE) to help with root-cause diagnosis when you troubleshoot an availability group. Run the following command on each instance of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]:
 
-```SQL
-ALTER EVENT SESSION AlwaysOn_health ON SERVER WITH (STARTUP_STATE = ON);
+```sql
+ALTER EVENT SESSION AlwaysOn_health ON SERVER
+WITH
+(
+        STARTUP_STATE = ON
+);
 GO
 ```
 
@@ -93,15 +97,18 @@ The [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service on Lin
 
 The following Transact-SQL script creates a master key and a certificate. It then backs up the certificate and secures the file with a private key. Update the script with strong passwords. Connect to the primary [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance. To create the certificate, run the following Transact-SQL script:
 
-```SQL
-CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Master_Key_Password>';
-CREATE CERTIFICATE dbm_certificate WITH SUBJECT = 'dbm';
+```sql
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<master-key-password>';
+
+CREATE CERTIFICATE dbm_certificate
+    WITH SUBJECT = 'dbm';
+
 BACKUP CERTIFICATE dbm_certificate
     TO FILE = '/var/opt/mssql/data/dbm_certificate.cer'
     WITH PRIVATE KEY (
         FILE = '/var/opt/mssql/data/dbm_certificate.pvk',
-        ENCRYPTION BY PASSWORD = '<Private_Key_Password>'
-    );
+        ENCRYPTION BY PASSWORD = '<private-key-password>'
+);
 ```
 
 At this point, your primary [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] replica has a certificate at `/var/opt/mssql/data/dbm_certificate.cer` and a private key at `var/opt/mssql/data/dbm_certificate.pvk`. Copy these two files to the same location on all servers that will host availability replicas. Use the mssql user, or give permission to the mssql user to access these files.
@@ -122,17 +129,20 @@ chown mssql:mssql dbm_certificate.*
 
 ## Create the certificate on secondary servers
 
-The following Transact-SQL script creates a master key and a certificate from the backup that you created on the primary [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] replica. Update the script with strong passwords. The decryption password is the same password that you used to create the .pvk file in a previous step. To create the certificate, run the following script on all secondary servers:
+The following Transact-SQL script creates a master key and a certificate from the backup that you created on the primary [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] replica. Update the script with strong passwords. The decryption password is the same password that you used to create the `.pvk` file in a previous step. To create the certificate, run the following script on all secondary servers:
 
-```SQL
-CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Master_Key_Password>';
+```sql
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<master-key-password>';
+
 CREATE CERTIFICATE dbm_certificate
     FROM FILE = '/var/opt/mssql/data/dbm_certificate.cer'
     WITH PRIVATE KEY (
         FILE = '/var/opt/mssql/data/dbm_certificate.pvk',
-        DECRYPTION BY PASSWORD = '<Private_Key_Password>'
-    );
+        DECRYPTION BY PASSWORD = '<private-key-password>'
+);
 ```
+
+In the previous example, replace `<private-key-password>` with the same password you used when creating the certificate on the primary replica.
 
 ## Create the database mirroring endpoints on all replicas
 
@@ -142,32 +152,41 @@ The following Transact-SQL script creates a listening endpoint named `Hadr_endpo
 
 Update the following Transact-SQL script for your environment on all [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instances:
 
-```SQL
+```sql
 CREATE ENDPOINT [Hadr_endpoint]
-    AS TCP (LISTENER_PORT = 5022)
-    FOR DATABASE_MIRRORING (
-        ROLE = ALL,
-        AUTHENTICATION = CERTIFICATE dbm_certificate,
-        ENCRYPTION = REQUIRED ALGORITHM AES
-    );
+    AS TCP
+(
+            LISTENER_PORT = 5022
+)
+    FOR DATABASE_MIRRORING
+(
+            ROLE = ALL,
+            AUTHENTICATION = CERTIFICATE dbm_certificate,
+            ENCRYPTION = REQUIRED ALGORITHM AES
+);
 
-ALTER ENDPOINT [Hadr_endpoint] STATE = STARTED;
+ALTER ENDPOINT [Hadr_endpoint]
+    STATE = STARTED;
 ```
 
 > [!NOTE]  
->  
 > If you use [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Express edition on one node to host a configuration-only replica, the only valid value for `ROLE` is `WITNESS`. Run the following script on [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Express edition:
 
-```SQL
+```sql
 CREATE ENDPOINT [Hadr_endpoint]
-    AS TCP (LISTENER_PORT = 5022)
-    FOR DATABASE_MIRRORING (
-        ROLE = WITNESS,
-        AUTHENTICATION = CERTIFICATE dbm_certificate,
-        ENCRYPTION = REQUIRED ALGORITHM AES
-    );
+    AS TCP
+(
+            LISTENER_PORT = 5022
+)
+    FOR DATABASE_MIRRORING
+(
+            ROLE = WITNESS,
+            AUTHENTICATION = CERTIFICATE dbm_certificate,
+            ENCRYPTION = REQUIRED ALGORITHM AES
+);
 
-ALTER ENDPOINT [Hadr_endpoint] STATE = STARTED;
+ALTER ENDPOINT [Hadr_endpoint]
+    STATE = STARTED;
 ```
 
 The TCP port on the firewall must be open for the listener port.
@@ -175,4 +194,4 @@ The TCP port on the firewall must be open for the listener port.
 > [!IMPORTANT]  
 > For [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)], the only authentication method supported for the database mirroring endpoint is `CERTIFICATE`. The `WINDOWS` option isn't available.
 
-For more information, see [The database mirroring endpoint (SQL Server)](../../database-engine/database-mirroring/the-database-mirroring-endpoint-sql-server.md).
+For more information, see [The Database Mirroring Endpoint (SQL Server)](../../database-engine/database-mirroring/the-database-mirroring-endpoint-sql-server.md).

@@ -7,6 +7,8 @@ ms.date: "08/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "ShortestLineTo method (geometry)"
 dev_langs:
@@ -60,4 +62,3 @@ Returns a **LineString** instance with two points that represent the shortest di
  [ShortestLineTo &#40;geography Data Type&#41;](../../t-sql/spatial-geography/shortestlineto-geography-data-type.md)  
   
   
-

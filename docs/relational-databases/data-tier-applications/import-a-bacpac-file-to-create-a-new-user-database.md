@@ -6,6 +6,8 @@ ms.author: wiassaf
 ms.date: 04/12/2023
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.swb. importdac.results.f1"
   - "sql13.swb.importdac.settings.f1"

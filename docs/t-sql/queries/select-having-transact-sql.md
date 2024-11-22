@@ -7,6 +7,8 @@ ms.date: "01/21/2020"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "HAVING"
   - "HAVING_TSQL"
@@ -69,4 +71,3 @@ ORDER BY OrderDateKey;
  [WHERE &#40;Transact-SQL&#41;](../../t-sql/queries/where-transact-sql.md)  
   
   
-

@@ -12,6 +12,7 @@ ms.custom:
   - active directory
   - has-adal-ref
   - sqldbrb=1
+  - ignite-2024
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 # Connect to Azure SQL Database with Microsoft Entra multifactor authentication

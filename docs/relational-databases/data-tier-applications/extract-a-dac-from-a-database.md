@@ -6,6 +6,8 @@ ms.author: wiassaf
 ms.date: "07/18/2016"
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.swb.extractdacwizard.validationandsummary.f1"
   - "sql13.swb.extractdacwizard.introduction.f1"

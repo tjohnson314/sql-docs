@@ -4,7 +4,7 @@ description: This article describes how to install SQL Server Integration Servic
 author: lrtoyou1223
 ms.author: lle
 ms.reviewer: maghan, randolphwest
-ms.date: 10/30/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -26,12 +26,14 @@ You can install SQL Server Integration Services (SSIS) on Red Hat Enterprise Lin
 
 # [Red Hat Enterprise Linux](#tab/rhel)
 
-## <a id="RHEL"></a> Install SSIS on RHEL
+<a id="RHEL"></a>
+
+## Install SSIS on RHEL
 
 To install the **mssql-server-is** package on RHEL, follow these steps:
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 1. Download the SQL Server Red Hat repository configuration file.
 
@@ -45,7 +47,7 @@ To install the **mssql-server-is** package on RHEL, follow these steps:
    sudo yum install -y mssql-server-is
    ```
 
-1. After installation, run **ssis-conf**. For more info, see [Configure SSIS on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
+1. After installation, run **ssis-conf**. For more info, see [Configure SQL Server Integration Services on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
 
    ```bash
    sudo /opt/ssis/bin/ssis-conf setup
@@ -60,7 +62,7 @@ To install the **mssql-server-is** package on RHEL, follow these steps:
 ::: moniker-end
 
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 1. Download the SQL Server Red Hat repository configuration file.
 
@@ -74,7 +76,7 @@ To install the **mssql-server-is** package on RHEL, follow these steps:
    sudo yum install -y mssql-server-is
    ```
 
-1. After installation, run **ssis-conf**. For more info, see [Configure SSIS on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
+1. After installation, run **ssis-conf**. For more info, see [Configure SQL Server Integration Services on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
 
    ```bash
    sudo /opt/ssis/bin/ssis-conf setup
@@ -103,7 +105,7 @@ To install the **mssql-server-is** package on RHEL, follow these steps:
    sudo yum install -y mssql-server-is
    ```
 
-1. After installation, run **ssis-conf**. For more info, see [Configure SSIS on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
+1. After installation, run **ssis-conf**. For more info, see [Configure SQL Server Integration Services on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
 
    ```bash
    sudo /opt/ssis/bin/ssis-conf setup
@@ -135,18 +137,22 @@ sudo yum remove mssql-server-is
 
 # [SUSE Linux Enterprise Server](#tab/sles)
 
-## <a id="SLES"></a> Install SSIS on SLES
+<a id="SLES"></a>
 
-The SQL Server Integration Services package (**mssql-server-is**) is not supported on SUSE Linux Enterprise Server.
+## Install SSIS on SLES
+
+The SQL Server Integration Services package (**mssql-server-is**) isn't supported on SUSE Linux Enterprise Server.
 
 # [Ubuntu](#tab/ubuntu)
 
-## <a id="ubuntu"></a> Install SSIS on Ubuntu
+<a id="ubuntu"></a>
+
+## Install SSIS on Ubuntu
 
 To install the **mssql-server-is** package on Ubuntu, follow these steps:
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 1. Import the public repository GPG keys.
 
@@ -167,7 +173,7 @@ To install the **mssql-server-is** package on Ubuntu, follow these steps:
    sudo apt-get install -y mssql-server-is
    ```
 
-1. After installing Integration Services, run **ssis-conf**. For more info, see [Configure SSIS on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
+1. After installing Integration Services, run **ssis-conf**. For more info, see [Configure SQL Server Integration Services on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
 
    ```bash
    sudo /opt/ssis/bin/ssis-conf setup
@@ -182,7 +188,7 @@ To install the **mssql-server-is** package on Ubuntu, follow these steps:
 ::: moniker-end
 
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 1. Import the public repository GPG keys.
 
@@ -203,7 +209,7 @@ To install the **mssql-server-is** package on Ubuntu, follow these steps:
    sudo apt-get install -y mssql-server-is
    ```
 
-1. After installing Integration Services, run **ssis-conf**. For more info, see [Configure SSIS on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
+1. After installing Integration Services, run **ssis-conf**. For more info, see [Configure SQL Server Integration Services on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
 
    ```bash
    sudo /opt/ssis/bin/ssis-conf setup
@@ -239,7 +245,7 @@ To install the **mssql-server-is** package on Ubuntu, follow these steps:
    sudo apt-get install -y mssql-server-is
    ```
 
-1. After installing Integration Services, run **ssis-conf**. For more info, see [Configure SSIS on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
+1. After installing Integration Services, run **ssis-conf**. For more info, see [Configure SQL Server Integration Services on Linux with ssis-conf](sql-server-linux-configure-ssis.md).
 
    ```bash
    sudo /opt/ssis/bin/ssis-conf setup

@@ -7,6 +7,8 @@ ms.date: "05/14/2018"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "database_scoped_configurations"
   - "database_scoped_configurations_TSQL"

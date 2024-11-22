@@ -1,9 +1,9 @@
 ---
-title: How to use distributed transactions with SQL Server Linux containers
+title: How to Use Distributed Transactions With SQL Server Linux Containers
 description: Learn to use the Microsoft Distributed Transaction Coordinator (MSDTC) for distributed transactions in a SQL Server container on Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -32,7 +32,7 @@ To enable MSDTC transaction in SQL Server containers, you must set two new envir
 ### Pull and run
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 The following example shows how to use these environment variables to pull and run a single SQL Server 2017 container configured for MSDTC. This allows it to communicate with any application on any hosts.
 
@@ -41,15 +41,15 @@ The following example shows how to use these environment variables to pull and r
 
 ```bash
 docker run \
-   -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+   -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
    -e 'MSSQL_RPC_PORT=135' -e 'MSSQL_DTC_TCP_PORT=51000' \
    -p 51433:1433 -p 135:135 -p 51000:51000  \
    -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 
-```PowerShell
+```powershell
 docker run `
-   -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+   -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
    -e "MSSQL_RPC_PORT=135" -e "MSSQL_DTC_TCP_PORT=51000" `
    -p 51433:1433 -p 135:135 -p 51000:51000  `
    -d mcr.microsoft.com/mssql/server:2017-latest
@@ -57,7 +57,7 @@ docker run `
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range=">= sql-server-linux-ver15 || >= sql-server-ver15"
+::: moniker range=">=sql-server-linux-ver15 || >=sql-server-ver15"
 
 The following example shows how to use these environment variables to pull and run a single [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] container configured for MSDTC. This allows it to communicate with any application on any hosts.
 
@@ -66,21 +66,24 @@ The following example shows how to use these environment variables to pull and r
 
 ```bash
 docker run \
-   -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+   -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
    -e 'MSSQL_RPC_PORT=135' -e 'MSSQL_DTC_TCP_PORT=51000' \
    -p 51433:1433 -p 135:135 -p 51000:51000  \
    -d mcr.microsoft.com/mssql/server:2019-GA-ubuntu-20.04
 ```
 
-```PowerShell
+```powershell
 docker run `
-   -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+   -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
    -e "MSSQL_RPC_PORT=135" -e "MSSQL_DTC_TCP_PORT=51000" `
    -p 51433:1433 -p 135:135 -p 51000:51000  `
    -d mcr.microsoft.com/mssql/server:2019-GA-ubuntu-20.04
 ```
 
 ::: moniker-end
+
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 In this command, the **RPC Endpoint Mapper** service is bound to port 135, and the **MSDTC** service is bound to port 51000 within the container's virtual network. SQL Server TDS communication occurs on port 1433, also within the container's virtual network. These ports are externally exposed to host as TDS port 51433, RPC endpoint mapper port 135, and MSDTC port 51000.
 
@@ -148,8 +151,11 @@ The following diagram shows the process when one SQL Server Linux container conn
 Before running the sample deployment YAML script, create the necessary secret to store the `sa` password, using the following example command:
 
 ```bash
-kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="MyC0m9l&xP@ssw0rd"
+kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="<password>"
 ```
+
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 You notice the following points in the manifest file:
 
@@ -235,7 +241,7 @@ metadata:
   name: mssql-0
 spec:
   type: LoadBalancer
-  loadBalancerIP: 40.88.213.209
+  loadBalancerIP: 10.88.213.209
   selector:
     statefulset.kubernetes.io/pod-name: mssql-0
   ports:
@@ -258,7 +264,7 @@ metadata:
   name: mssql-1
 spec:
   type: LoadBalancer
-  loadBalancerIP: 20.72.137.129
+  loadBalancerIP: 10.72.137.129
   selector:
     statefulset.kubernetes.io/pod-name: mssql-1
   ports:
@@ -285,33 +291,46 @@ pod/mssql-1   1/1     Running   0          4d22h
 
 NAME                 TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)                                        AGE
 service/kubernetes   ClusterIP      10.0.0.1      <none>          443/TCP                                        6d6h
-service/mssql-0      LoadBalancer   10.0.18.186   40.88.213.209   1433:31875/TCP,51000:31219/TCP,135:30044/TCP   2d6h
-service/mssql-1      LoadBalancer   10.0.16.180   20.72.137.129   1433:30353/TCP,51000:32734/TCP,135:31239/TCP   2d6h
+service/mssql-0      LoadBalancer   10.0.18.186   10.88.213.209   1433:31875/TCP,51000:31219/TCP,135:30044/TCP   2d6h
+service/mssql-1      LoadBalancer   10.0.16.180   10.72.137.129   1433:30353/TCP,51000:32734/TCP,135:31239/TCP   2d6h
 
 NAME                     READY   AGE
 statefulset.apps/mssql   2/2     5d1h
 ```
 
-You can use tools like SQL Server Management Studio (SSMS) to connect to either of the previous two SQL Server instances and run a sample DTC transaction. In this example, you connect to `mssql-1` (20.72.137.129) and create the linked server to `mssql-0` (40.88.213.209) to run the distributed transaction, as shown in the following example.
+You can use tools like SQL Server Management Studio (SSMS) to connect to either of the previous two SQL Server instances and run a sample DTC transaction. In this example, you connect to `mssql-1` (10.72.137.129) and create the linked server to `mssql-0` (10.88.213.209) to run the distributed transaction, as shown in the following example.
 
 ```sql
-USE [master]
-GO
-EXEC master.dbo.sp_addlinkedserver @server = N'40.88.213.209', @srvproduct=N'SQL Server';
+USE [master];
 GO
 
-EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname = N'40.88.213.209', @rmtuser = 'sa', @rmtpassword = 'xxxx', @useself = N'False';
+EXECUTE master.dbo.sp_addlinkedserver
+    @server = N'10.88.213.209',
+    @srvproduct = N'SQL Server';
+GO
+
+EXECUTE master.dbo.sp_addlinkedsrvlogin
+    @rmtsrvname = N'10.88.213.209',
+    @rmtuser = 'sa',
+    @rmtpassword = '<password>',
+    @useself = N'False';
 GO
 ```
+
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 Now you can start the distributed transaction, and this code sample shows you the `sys.sysprocesses` from the `mssql-0` instance:
 
 ```sql
 SET XACT_ABORT ON;
 
-BEGIN DISTRIBUTED TRANSACTION
-SELECT * FROM [40.88.213.209].master.dbo.sysprocesses;
-COMMIT
+BEGIN DISTRIBUTED TRANSACTION;
+
+SELECT *
+FROM [10.88.213.209].master.dbo.sysprocesses;
+
+COMMIT TRANSACTION;
 GO
 ```
 

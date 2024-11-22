@@ -3,7 +3,7 @@ title: Overview of SQL Server on Linux
 description: This article describes how SQL Server runs on Linux and provides information on how to learn more.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/10/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -14,22 +14,22 @@ ms.custom:
 
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
-::: moniker range="= sql-server-2017 || = sql-server-linux-2017"
+::: moniker range="=sql-server-2017 || =sql-server-linux-2017"
 Starting with [!INCLUDE [sssql17-md](../includes/sssql17-md.md)], [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] runs on Linux. It's the same [!INCLUDE [ssdenoversion-md](../includes/ssdenoversion-md.md)], with many similar features and services regardless of your operating system.
 
 > [!TIP]  
 > [SQL Server 2019](sql-server-linux-overview.md?view=sql-server-ver15&preserve-view=true) is available! To find out what's new for Linux in the latest release, see [What's new in SQL Server 2019 for Linux](sql-server-linux-whats-new-2019.md?view=sql-server-ver15&preserve-view=true).
 ::: moniker-end
 
-::: moniker range="= sql-server-ver15 || = sql-server-linux-ver15"
+::: moniker range="=sql-server-ver15|| =sql-server-linux-ver15"
 [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] runs on Linux. It's the same [!INCLUDE [ssdenoversion-md](../includes/ssdenoversion-md.md)], with many similar features and services regardless of your operating system. To find out more about this release, see [What's new for SQL Server 2019 on Linux](sql-server-linux-whats-new-2019.md).
 
 > [!TIP]  
-> [SQL Server 2022](sql-server-linux-overview.md?view=sql-server-ver16&preserve-view=true) is available! To find out what's new for Linux in the latest release, see [What's new in [!INCLUDE [sql-server-2022](../includes/sssql22-md.md)]](../sql-server/what-s-new-in-sql-server-2022.md).
+> [SQL Server 2022](sql-server-linux-overview.md?view=sql-server-ver16&preserve-view=true) is available! To find out what's new for Linux in the latest release, see [What's new in SQL Server 2022](../sql-server/what-s-new-in-sql-server-2022.md).
 ::: moniker-end
 
 ::: moniker range=">= sql-server-ver16 || >= sql-server-linux-ver16"
-[!INCLUDE [sssql22-md](../includes/sssql22-md.md)] runs on Linux. It's the same [!INCLUDE [ssdenoversion-md](../includes/ssdenoversion-md.md)], with many similar features and services regardless of your operating system. To find out more about this release, see [What's new in [!INCLUDE [sql-server-2022](../includes/sssql22-md.md)]](../sql-server/what-s-new-in-sql-server-2022.md).
+[!INCLUDE [sssql22-md](../includes/sssql22-md.md)] runs on Linux. It's the same [!INCLUDE [ssdenoversion-md](../includes/ssdenoversion-md.md)], with many similar features and services regardless of your operating system. To find out more about this release, see [What's new in SQL Server 2022](../sql-server/what-s-new-in-sql-server-2022.md).
 
 ::: moniker-end
 
@@ -51,7 +51,7 @@ The [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container images 
 - For RHEL-based [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container images, see [SQL Server Red Hat containers](https://catalog.redhat.com/software/containers/mssql/rhel/server/61f2f612f385723914ed60bc).
 
 > [!NOTE]  
-> Containers will only be published to MCR for the *most recent* Linux distributions. If you create your own custom [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container image for an older supported distribution, it will still be supported. For more information, see [Upcoming updates to SQL Server container images on Microsoft Artifact Registry aka (MCR)](https://techcommunity.microsoft.com/t5/sql-server-blog/upcoming-updates-to-sql-server-container-images-on-microsoft/ba-p/3573013).
+> Containers will only be published to MCR for the *most recent* Linux distributions. If you create your own custom [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container image for an older supported distribution, it will still be supported. For more information, see [Upcoming updates to SQL Server container images on Microsoft Artifact Registry aka (MCR)](https://techcommunity.microsoft.com/blog/sqlserver/upcoming-updates-to-sql-server-container-images-on-microsoft-artifact-registry-a/3573013).
 
 ## Connect
 
@@ -77,7 +77,7 @@ Then look at what's new:
 
 - [What's new for SQL Server 2017 on Linux](sql-server-linux-whats-new.md)
 - [What's new for SQL Server 2019 on Linux](../sql-server/what-s-new-in-sql-server-2019.md#sql-server-on-linux)
-- [What's new in [!INCLUDE [sql-server-2022](../includes/sssql22-md.md)]](../sql-server/what-s-new-in-sql-server-2022.md)
+- [What's new in SQL Server 2022](../sql-server/what-s-new-in-sql-server-2022.md)
 
 > [!TIP]  
 > For answers to frequently asked questions, see the [SQL Server on Linux FAQ](sql-server-linux-faq.yml).

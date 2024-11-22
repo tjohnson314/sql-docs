@@ -1,10 +1,10 @@
 ---
-title: Configure and customize SQL Server Docker containers
+title: Configure and Customize SQL Server Docker Containers
 description: Understand the different ways to customize SQL Server Docker Containers and how you can configure it based on your requirements.
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 11/17/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: troubleshooting
@@ -22,9 +22,11 @@ This article explains how you can configure and customize [!INCLUDE [ssnoversion
 > [!TIP]  
 > You can use **sqlcmd** (Go) to create a new instance of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] in a container for development purposes. For more information, see [Create and query a SQL Server container](../tools/sqlcmd/sqlcmd-use-utility.md#create-and-query-a-sql-server-container).
 
-## <a id="customcontainer"></a> Create a customized container
+<a id="customcontainer"></a>
 
-You can create your own [Dockerfile](https://docs.docker.com/engine/reference/builder/#usage) to build a customized [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container. For more information, see [a demo that combines SQL Server and a Node application](https://github.com/twright-msft/mssql-node-docker-demo-app). If you do create your own Dockerfile, be aware of the foreground process, because this process controls the life of the container. If it exits, the container shuts down. For example, if you want to run a script and start [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], make sure that the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] process is the right-most command. All other commands are run in the background. The following command illustrates this inside a Dockerfile:
+## Create a customized container
+
+You can create your own [Dockerfile](https://docs.docker.com/reference/dockerfile/#usage) to build a customized [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container. For more information, see [a demo that combines SQL Server and a Node application](https://github.com/twright-msft/mssql-node-docker-demo-app). If you do create your own Dockerfile, be aware of the foreground process, because this process controls the life of the container. If it exits, the container shuts down. For example, if you want to run a script and start [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], make sure that the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] process is the right-most command. All other commands are run in the background. The following command illustrates this inside a Dockerfile:
 
 ```bash
 /usr/src/app/do-my-sql-commands.sh & /opt/mssql/bin/sqlservr
@@ -32,12 +34,14 @@ You can create your own [Dockerfile](https://docs.docker.com/engine/reference/bu
 
 If you reversed the commands in the previous example, the container would shut down when the do-my-sql-commands.sh script completes.
 
-## <a id="persist"></a> Persist your data
+<a id="persist"></a>
+
+## Persist your data
 
 Your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] configuration changes and database files are persisted in the container even if you restart the container with `docker stop` and `docker start`. However, if you remove the container with `docker rm`, everything in the container is deleted, including [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] and your databases. The following section explains how to use *data volumes* to persist your database files even if the associated containers are deleted.
 
 > [!IMPORTANT]  
-> For [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], it's critical that you understand data persistence in Docker. In addition to the discussion in this section, see Docker's documentation on [how to manage data in Docker containers](https://docs.docker.com/storage/volumes).
+> For [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], it's critical that you understand data persistence in Docker. In addition to the discussion in this section, see Docker's documentation on [how to manage data in Docker containers](https://docs.docker.com/engine/storage/volumes).
 
 ### Mount a host directory as data volume
 
@@ -55,7 +59,7 @@ The first option is to mount a directory on your host as a data volume in your c
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -p 1433:1433 \
 -v <host directory>/data:/var/opt/mssql/data \
 -v <host directory>/log:/var/opt/mssql/log \
@@ -68,7 +72,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 `
 -v <host directory>/data:/var/opt/mssql/data `
 -v <host directory>/log:/var/opt/mssql/log `
@@ -81,7 +85,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" ^
 -p 1433:1433 ^
 -v <host directory>/data:/var/opt/mssql/data ^
 -v <host directory>/log:/var/opt/mssql/log ^
@@ -99,7 +103,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -p 1433:1433 \
 -v <host directory>/data:/var/opt/mssql/data \
 -v <host directory>/log:/var/opt/mssql/log \
@@ -112,7 +116,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 `
 -v <host directory>/data:/var/opt/mssql/data `
 -v <host directory>/log:/var/opt/mssql/log `
@@ -125,7 +129,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" ^
 -p 1433:1433 ^
 -v <host directory>/data:/var/opt/mssql/data ^
 -v <host directory>/log:/var/opt/mssql/log ^
@@ -143,7 +147,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -p 1433:1433 \
 -v <host directory>/data:/var/opt/mssql/data \
 -v <host directory>/log:/var/opt/mssql/log \
@@ -156,7 +160,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 `
 -v <host directory>/data:/var/opt/mssql/data `
 -v <host directory>/log:/var/opt/mssql/log `
@@ -169,7 +173,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" ^
 -p 1433:1433 ^
 -v <host directory>/data:/var/opt/mssql/data ^
 -v <host directory>/log:/var/opt/mssql/log ^
@@ -181,6 +185,9 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
 
 ::: moniker-end
 
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 This technique also enables you to share and view the files on the host outside of Docker.
 
 ### Use data volume containers
@@ -188,12 +195,12 @@ This technique also enables you to share and view the files on the host outside 
 The second option is to use a data volume container. You can create a data volume container by specifying a volume name instead of a host directory with the `-v` parameter. The following example creates a shared data volume named `sqlvolume`.
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -p 1433:1433 \
 -v sqlvolume:/var/opt/mssql \
 -d mcr.microsoft.com/mssql/server:2017-latest
@@ -204,7 +211,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 `
 -v sqlvolume:/var/opt/mssql `
 -d mcr.microsoft.com/mssql/server:2017-latest
@@ -215,7 +222,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" ^
 -p 1433:1433 ^
 -v sqlvolume:/var/opt/mssql ^
 -d mcr.microsoft.com/mssql/server:2017-latest
@@ -230,7 +237,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -p 1433:1433 \
 -v sqlvolume:/var/opt/mssql \
 -d mcr.microsoft.com/mssql/server:2019-latest
@@ -241,7 +248,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 `
 -v sqlvolume:/var/opt/mssql `
 -d mcr.microsoft.com/mssql/server:2019-latest
@@ -252,7 +259,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" ^
 -p 1433:1433 ^
 -v sqlvolume:/var/opt/mssql ^
 -d mcr.microsoft.com/mssql/server:2019-latest
@@ -267,7 +274,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -p 1433:1433 \
 -v sqlvolume:/var/opt/mssql \
 -d mcr.microsoft.com/mssql/server:2022-latest
@@ -278,7 +285,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 `
 -v sqlvolume:/var/opt/mssql `
 -d mcr.microsoft.com/mssql/server:2022-latest
@@ -289,7 +296,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" ^
 -p 1433:1433 ^
 -v sqlvolume:/var/opt/mssql ^
 -d mcr.microsoft.com/mssql/server:2022-latest
@@ -299,12 +306,14 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
 
 ::: moniker-end
 
-> [!NOTE]  
-> This technique for implicitly creating a data volume in the run command doesn't work with older versions of Docker. In that case, use the explicit steps outlined in the Docker documentation, [Creating and mounting a data volume container](https://docs.docker.com/storage/volumes/#creating-and-mounting-a-data-volume-container).
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
+This technique for implicitly creating a data volume in the run command doesn't work with older versions of Docker. In that case, use the explicit steps outlined in the Docker documentation, [Creating and mounting a data volume container](https://docs.docker.com/engine/storage/volumes/#creating-and-mounting-a-data-volume-container).
 
 Even if you stop and remove this container, the data volume persists. You can view it with the `docker volume ls` command.
 
-```command
+```bash
 docker volume ls
 ```
 
@@ -350,7 +359,7 @@ Virtual Device Interface (VDI) backup and restore operations are now supported i
 
 To copy a file out of the container, use the following command:
 
-```command
+```bash
 docker cp <Container ID>:<Container path> <host path>
 ```
 
@@ -386,7 +395,7 @@ docker cp d6b75213ef80:/var/opt/mssql/log/errorlog C:\Temp\errorlog
 
 To copy a file into the container, use the following command:
 
-```command
+```bash
 docker cp <Host path> <Container ID>:<Container path>
 ```
 
@@ -416,11 +425,13 @@ docker cp C:\Temp\mydb.mdf d6b75213ef80:/var/opt/mssql/data
 
 ::: zone-end
 
-## <a id="tz"></a> Configure the time zone
+<a id="tz"></a>
+
+## Configure the time zone
 
 To run [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] in a Linux container with a specific time zone, configure the `TZ` environment variable (see [Configure the time zone for SQL Server 2022 on Linux](sql-server-linux-configure-time-zone.md) for more information). To find the right time zone value, run the `tzselect` command from a Linux bash prompt:
 
-```command
+```bash
 tzselect
 ```
 
@@ -438,12 +449,12 @@ Therefore TZ='America/Los_Angeles' will be used.
 You can use this information to set the same environment variable in your Linux container. The following example shows how to run [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] in a container in the `Americas/Los_Angeles` time zone:
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 ::: zone pivot="cs1-bash"
 
 ```bash
-sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -p 1433:1433 --name sql1 \
 -e 'TZ=America/Los_Angeles' \
 -d mcr.microsoft.com/mssql/server:2017-latest
@@ -454,7 +465,7 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' 
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 --name sql1 `
 -e "TZ=America/Los_Angeles" `
 -d mcr.microsoft.com/mssql/server:2017-latest
@@ -465,7 +476,7 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" 
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
+sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<password>" ^
 -p 1433:1433 --name sql1 ^
 -e "TZ=America/Los_Angeles" ^
 -d mcr.microsoft.com/mssql/server:2017-latest
@@ -480,7 +491,7 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" 
 ::: zone pivot="cs1-bash"
 
 ```bash
-sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -p 1433:1433 --name sql1 \
 -e 'TZ=America/Los_Angeles' \
 -d mcr.microsoft.com/mssql/server:2019-latest
@@ -491,7 +502,7 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' 
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 --name sql1 `
 -e "TZ=America/Los_Angeles" `
 -d mcr.microsoft.com/mssql/server:2019-latest
@@ -502,7 +513,7 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" 
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 --name sql1 `
 -e "TZ=America/Los_Angeles" `
 -d mcr.microsoft.com/mssql/server:2019-latest
@@ -517,7 +528,7 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" 
 ::: zone pivot="cs1-bash"
 
 ```bash
-sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' \
+sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -p 1433:1433 --name sql1 \
 -e 'TZ=America/Los_Angeles' \
 -d mcr.microsoft.com/mssql/server:2022-latest
@@ -528,7 +539,7 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' 
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<password>" `
 -p 1433:1433 --name sql1 `
 -e "TZ=America/Los_Angeles" `
 -d mcr.microsoft.com/mssql/server:2022-latest
@@ -539,7 +550,7 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" 
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" ^
+sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<password>" ^
 -p 1433:1433 --name sql1 ^
 -e "TZ=America/Los_Angeles" ^
 -d mcr.microsoft.com/mssql/server:2022-latest
@@ -549,6 +560,9 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" 
 
 ::: moniker-end
 
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 ## Change the `tempdb` path
 
 It's a good practice to keep your `tempdb` database separate from your user databases.
@@ -556,14 +570,12 @@ It's a good practice to keep your `tempdb` database separate from your user data
 1. Connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance, and then run the following Transact-SQL (T-SQL) script. If there are more files associated with `tempdb`, you need to move them as well.
 
    ```sql
-   ALTER DATABASE tempdb MODIFY FILE (
-      NAME = tempdev, FILENAME = '/var/opt/mssql/tempdb/tempdb.mdf'
-   );
+   ALTER DATABASE tempdb
+       MODIFY FILE (NAME = tempdev, FILENAME = '/var/opt/mssql/tempdb/tempdb.mdf');
    GO
 
-   ALTER DATABASE tempdb MODIFY FILE (
-       NAME = templog, FILENAME = '/var/opt/mssql/tempdb/templog.ldf'
-   );
+   ALTER DATABASE tempdb
+       MODIFY FILE (NAME = templog, FILENAME = '/var/opt/mssql/tempdb/templog.ldf');
    GO
    ```
 
@@ -642,17 +654,19 @@ It's a good practice to keep your `tempdb` database separate from your user data
    tempdb.mdf templog.ldf
    ```
 
-## <a id="changefilelocation"></a> Change the default file location
+<a id="changefilelocation"></a>
+
+## Change the default file location
 
 Add the `MSSQL_DATA_DIR` variable to change your data directory in your `docker run` command, then mount a volume to that location that your container's user has access to.
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=MyStrongPassword' \
+docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -e 'MSSQL_DATA_DIR=/my/file/path' \
 -v /my/host/path:/my/file/path \
 -p 1433:1433 \
@@ -664,7 +678,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=MyStrongPassword' \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=MyStrongPassword" `
+docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<password>" `
 -e "MSSQL_DATA_DIR=/my/file/path" `
 -v /my/host/path:/my/file/path `
 -p 1433:1433 `
@@ -676,7 +690,7 @@ docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=MyStrongPassword" `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" ^
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" ^
 -e "MSSQL_DATA_DIR=/my/file/path" ^
 -v /my/host/path:/my/file/path ^
 -p 1433:1433 ^
@@ -688,12 +702,12 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" ^
 ::: moniker-end
 
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=MyStrongPassword' \
+docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -e 'MSSQL_DATA_DIR=/my/file/path' \
 -v /my/host/path:/my/file/path \
 -p 1433:1433 \
@@ -705,7 +719,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=MyStrongPassword' \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=MyStrongPassword" `
+docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<password>" `
 -e "MSSQL_DATA_DIR=/my/file/path" `
 -v /my/host/path:/my/file/path `
 -p 1433:1433 `
@@ -717,7 +731,7 @@ docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=MyStrongPassword" `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" ^
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" ^
 -e "MSSQL_DATA_DIR=/my/file/path" ^
 -v /my/host/path:/my/file/path ^
 -p 1433:1433 ^
@@ -734,7 +748,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" ^
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=MyStrongPassword' \
+docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<password>' \
 -e 'MSSQL_DATA_DIR=/my/file/path' \
 -v /my/host/path:/my/file/path \
 -p 1433:1433 \
@@ -746,7 +760,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=MyStrongPassword' \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=MyStrongPassword" `
+docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=<password>" `
 -e "MSSQL_DATA_DIR=/my/file/path" `
 -v /my/host/path:/my/file/path `
 -p 1433:1433 `
@@ -758,7 +772,7 @@ docker run -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=MyStrongPassword" `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" ^
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" ^
 -e "MSSQL_DATA_DIR=/my/file/path" ^
 -v /my/host/path:/my/file/path ^
 -p 1433:1433 ^
@@ -801,14 +815,14 @@ For information on how to build and run Docker containers using Dockerfiles, see
 ## Related content
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 - Get started with [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] container images on Docker by going through the [quickstart](quickstart-install-connect-docker.md?view=sql-server-2017&preserve-view=true)
 
 ::: moniker-end
 
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 - Get started with [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] container images on Docker by going through the [quickstart](quickstart-install-connect-docker.md)
 

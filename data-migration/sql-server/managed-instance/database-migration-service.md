@@ -5,13 +5,14 @@ description: Learn how to migrate on-premises SQL Server to Azure SQL Managed In
 author: abhims14
 ms.author: abhishekum
 ms.reviewer: randolphwest
-ms.date: 06/26/2024
+ms.date: 11/20/2024
 ms.service: azure-database-migration-service
 ms.topic: tutorial
 ms.collection:
   - sql-migration-content
 ms.custom:
   - seo-lt-2019
+  - ignite-2024
 ---
 
 # Tutorial: Migrate SQL Server to Azure SQL Managed Instance with DMS
@@ -64,12 +65,14 @@ In this tutorial, you learn how to:
 To complete this tutorial, you need to:
 
 - [Download and install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
+
 - Install the [Azure SQL migration extension for Azure Data Studio](/azure-data-studio/extensions/azure-sql-migration-extension) from the Azure Data Studio marketplace
+
 - Have an Azure account that's assigned to one of the following built-in roles:
 
-  - Contributor for the target instance of Azure SQL Managed Instance and for the storage account where you upload your database backup files from a Server Message Block (SMB) network share
-  - Reader role for the Azure resource groups that contain the target instance of Azure SQL Managed Instance or your Azure storage account
-  - Owner or Contributor role for the Azure subscription (required if you create a new Database Migration Service instance)
+  - *Contributor* for the target instance of Azure SQL Managed Instance and for the storage account where you upload your database backup files from a Server Message Block (SMB) network share, and *Reader* role for the Azure resource groups that contain the target instance of Azure SQL Managed Instance or your Azure storage account.
+
+  - *Owner* or *Contributor* role for the Azure subscription (required if you create a new Database Migration Service instance).
 
   As an alternative to using one of these built-in roles, you can [assign custom roles](custom-roles.md).
 
@@ -83,8 +86,11 @@ To complete this tutorial, you need to:
 - Provide an SMB network share, Azure storage account file share, or Azure storage account blob container that contains your full database backup files and subsequent transaction log backup files. Database Migration Service uses the backup location during database migration.
 
   - The Azure SQL migration extension for Azure Data Studio doesn't take database backups, and doesn't initiate any database backups on your behalf. Instead, the service uses existing database backup files for the migration.
+
   - If your database backup files are in an SMB network share, [create an Azure storage account](/azure/storage/common/storage-account-create) that allows the DMS service to upload the database backup files, and to migrate databases. Make sure you create the Azure storage account in the same region where you create your instance of Database Migration Service.
+
   - You can write each backup to either a separate backup file or to multiple backup files. Appending multiple backups such as full and transaction logs into a single backup media isn't supported.
+
   - You can provide compressed backups to reduce the likelihood of experiencing potential issues associated with migrating large backups.
 
 - Ensure that the service account running the source SQL Server instance has read and write permissions on the SMB network share that contains database backup files.
@@ -386,22 +392,29 @@ After the migration, the availability of SQL Managed Instance with Business Crit
 
 ## Limitations
 
-> [!IMPORTANT]
+> [!IMPORTANT]  
 > Online migrations with the Azure SQL extension use the same technology as the Log Replay Service (LRS), and have the same limitations. Before you migrate databases to the **Business Critical** service tier, consider [these limitations](/azure/azure-sql/managed-instance/log-replay-service-migrate#limitations-when-migrating-to-the-business-critical-service-tier), which don't apply to the **General Purpose** service tier.
 
 Migrating to Azure SQL Managed Instance by using the Azure SQL extension for Azure Data Studio has the following limitations:
 
 - If you migrate a single database, the database backups must be placed in a flat-file structure inside a database folder (including the container root folder), and the folders can't be nested, as it isn't supported.
+
 - If you migrate multiple databases using the same Azure Blob Storage container, you must place backup files for different databases in separate folders inside the container.
+
 - Overwriting existing databases using DMS in your target Azure SQL Managed Instance isn't supported.
+
 - DMS doesn't support configuring high availability and disaster recovery on your target to match the source topology.
+
 - The following server objects aren't supported:
   - SQL Server Agent jobs
   - Credentials
   - SSIS packages
   - Server audit
+
 - You can't use an existing self-hosted integration runtime created from Azure Data Factory for database migrations with DMS. Initially, the self-hosted integration runtime should be created using the Azure SQL migration extension in Azure Data Studio and can be reused for further database migrations.
+
 - A single LRS job (created by DMS) can run for a maximum of 30 days. When this period expires, the job is automatically canceled thus your target database gets automatically deleted.
+
 - If you received the following error: `Memory-optimized filegroup must be empty in order to be restored on General Purpose tier of SQL Database Managed Instance`, this issue is by design. In-Memory OLTP isn't supported on the General Purpose tier of Azure SQL Managed Instance. To continue migration, one way is to upgrade to Business Critical tier, which supports In-Memory OLTP. Another way is to make sure the source database isn't using it while the Azure SQL Managed Instance is General Purpose.
 
 ## Related content

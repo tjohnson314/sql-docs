@@ -7,6 +7,8 @@ ms.date: "07/14/2016"
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "SQL13.SWB.DATABASESTATES.F1"
 helpviewer_keywords:

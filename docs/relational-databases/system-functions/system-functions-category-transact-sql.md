@@ -7,6 +7,8 @@ ms.date: 10/02/2023
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "system functions [SQL Server]"
 dev_langs:

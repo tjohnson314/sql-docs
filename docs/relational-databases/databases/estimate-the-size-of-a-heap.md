@@ -7,6 +7,8 @@ ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: supportability
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "disk space [SQL Server], indexes"
   - "estimating heap size"

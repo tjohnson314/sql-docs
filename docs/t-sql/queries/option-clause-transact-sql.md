@@ -10,6 +10,7 @@ ms.subservice: t-sql
 ms.topic: reference
 ms.custom:
   - build-2024
+  - ignite-2024
 f1_keywords:
   - "OPTION clause"
   - "OPTION_TSQL"

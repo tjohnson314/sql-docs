@@ -3,22 +3,24 @@ title: "CircularString"
 description: "CircularString is a collection of zero or more continuous circular arc segments in SQL Database Engine spatial data."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviwer: mlandzic, jovanpop
+ms.reviewer: mlandzic, jovanpop
 ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+ms.custom:
+  - ignite-2024
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # CircularString
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]  
 
 A **CircularString** is a collection of zero or more continuous circular arc segments. A circular arc segment is a curved segment defined by three points in a two-dimensional plane; the first point cannot be the same as the third point. If all three points of a circular arc segment are collinear, the arc segment is treated as a line segment.  
   
 ## CircularString instances  
  The drawing below shows valid **CircularString** instances:  
   
- :::image type="content" source="media/circularstring/circularstring.gif" alt-text="Images of CircularString example spatial measurements.":::
+ :::image type="content" source="media/circularstring/circularstring.gif" alt-text="Diagram of CircularString example spatial measurements.":::
   
 ### Accepted instances
  A **CircularString** instance is accepted if it is either empty or contains an odd number of points, n, where n > 1. The following **CircularString** instances are accepted.  

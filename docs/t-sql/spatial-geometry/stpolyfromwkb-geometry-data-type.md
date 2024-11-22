@@ -7,6 +7,8 @@ ms.date: "08/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "STPolyFromWKB_TSQL"
   - "STPolyFromWKB (geometry Data Type)"
@@ -57,4 +59,3 @@ SELECT @g.STAsText();
  [OGC Static Geometry Methods](../../t-sql/spatial-geometry/ogc-static-geometry-methods.md)  
   
   
-

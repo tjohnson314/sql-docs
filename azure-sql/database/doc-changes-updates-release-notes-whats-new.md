@@ -5,13 +5,14 @@ description: Learn about the new features and documentation improvements for Azu
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, randolphwest
-ms.service: azure-sql-database
 ms.date: 11/19/2024
+ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: whats-new
 ms.custom:
   - build-2024
-monikerRange: "=azuresql||=azuresql-db"
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db"
 ---
 # What's new in Azure SQL Database?
 
@@ -53,7 +54,6 @@ The following table lists the features of Azure SQL Database that are currently 
 | [JSON native data type](/sql/t-sql/data-types/json-data-type?view=azuresqldb-current&preserve-view=true) | The new native **json** data type and new JSON aggregate functions are currently in preview. For more information, see [JSON Type and aggregates preview](https://aka.ms/json-type-aggregates-public-preview). |
 | [JSON aggregate functions](/sql/relational-databases/json/json-data-sql-server?view=azuresqldb-current&preserve-view=true#json-data-from-aggregates) | Two new **json** aggregate functions `JSON_OBJECTAGG` and `JSON_ARRAYAGG` enable construction of JSON objects or arrays based on an aggregate from SQL data. For more information, see [JSON Type and aggregates preview](https://aka.ms/json-type-aggregates-public-preview). |
 | [License-free standby replica](standby-replica-how-to-configure.md) | Save on licensing costs by configuring your secondary database replica for disaster recovery standby. |
-| [Microsoft Entra nonunique name support](authentication-microsoft-entra-create-users-with-nonunique-names.md) | The [CREATE USER](/sql/t-sql/statements/create-user-transact-sql) Transact-SQL (T-SQL) syntax has been extended to include `WITH OBJECT_ID` to support creating Microsoft Entra logins and users in Azure SQL Database that have nonunique names. |
 | [Microsoft Entra server principals](authentication-azure-ad-logins.md) | Create server principals (logins) for Microsoft Entra identities to use for authentication with Azure SQL Database. |
 | [Network Security Perimeter](network-security-perimeter.md) | Azure Network Security Perimeter allows organizations to define a logical network isolation boundary for PaaS resources (for example, Azure Storage and SQL Database) that are deployed outside your organization’s virtual networks. It restricts public network access to PaaS resources outside of the perimeter, and access can be exempted by using explicit access rules for public inbound and outbound. |
 | [Query editor in the Azure portal](query-editor.md) | The query editor in the portal allows you to run queries against your Azure SQL Database directly from the [Azure portal](https://portal.azure.com). |
@@ -69,6 +69,7 @@ The following table lists features of Azure SQL Database that have been made gen
 | Feature | GA Month | Details |
 | --- | --- | --- |
 | [Fabric mirrored databases](/fabric/database/mirrored-database/overview) | November 2024 | With Fabric Mirroring, you can [mirror databases in Azure SQL Database to Microsoft Fabric](/fabric/database/mirrored-database/overview). You can continuously replicate your existing data estate directly into Fabric's OneLake, including data from Azure SQL Database.|
+| [Microsoft Entra nonunique name support](authentication-microsoft-entra-create-users-with-nonunique-names.md) | November 2024 | The [CREATE USER](/sql/t-sql/statements/create-user-transact-sql) Transact-SQL (T-SQL) syntax has been extended to include `WITH OBJECT_ID` to support creating Microsoft Entra logins and users in Azure SQL Database that have nonunique names. |
 | [Lower auto-pause delay for serverless](serverless-tier-overview.md) |October 2024| Reduce costs by lowering the [auto-pause delay for serverless compute in Azure SQL Database](https://aka.ms/AAs7lpz). |
 | [Hyperscale elastic pools](hyperscale-elastic-pool-overview.md) | September 2024 | Manage and scale multiple Hyperscale databases in Azure SQL Database by using Hyperscale elastic pools. Hyperscale elastic pools also support Premium-series hardware and zone redundancy. For more information, see [Hyperscale Elastic Pools are now generally available](https://aka.ms/hsep-ga). |
 | [Hyperscale elastic pool maintenance window support](maintenance-window.md) | September 2024 |You can configure a non-default [maintenance window](maintenance-window.md) for a [Hyperscale elastic pool](hyperscale-elastic-pool-overview.md). For more information, read [Blog: Maintenance window support for Azure SQL Database Hyperscale elastic pools](https://aka.ms/hsep-fmw). |
@@ -102,6 +103,7 @@ Learn about significant changes to the Azure SQL Database documentation. For pre
 | **Hyperscale increased log generation rate (preview)**| The transaction log generation rate in Azure SQL Database Hyperscale single databases is set to increase from 100 MB/s to 150 MB/s. The increased log generation rate is available as an opt-in preview feature. For more information and to opt-in to 150 MB/s, see [Blog: November 2024 Hyperscale enhancements](https://aka.ms/AAslnql).|
 | **Hyperscale continuous priming (preview)**| [Continuous priming](service-tier-hyperscale.md#buffer-pool-resilient-buffer-pool-extension-and-continuous-priming) is an innovative new feature is designed to optimize Hyperscale performance during failovers by priming secondary compute replicas. Continuous priming is currently in a gated preview. For more information and to opt-in to continuous priming, see [Blog: November 2024 Hyperscale enhancements](https://aka.ms/AAslnql).|
 | **Network Security Perimeter (preview)** | [Network Security Perimeter](network-security-perimeter.md) secures both inbound and outbound network traffic between Azure SQL Database and other Platform as a Service (PaaS) resources, and attempts made to communicate with Azure resources that aren't inside the perimeter are blocked. |
+| **OBJECT_ID T-SQL syntax (GA)** |The [CREATE USER](/sql/t-sql/statements/create-user-transact-sql) Transact-SQL (T-SQL) syntax has been extended to include `WITH OBJECT_ID` to support creating Microsoft Entra logins and users in Azure SQL Database that have nonunique names. For more information, see [Microsoft Entra nonunique name support](authentication-microsoft-entra-create-users-with-nonunique-names.md). | 
 
 ### October 2024
 

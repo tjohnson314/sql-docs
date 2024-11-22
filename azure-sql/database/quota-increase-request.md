@@ -104,7 +104,7 @@ To request zone redundant access, follow these steps:
 1. Enter the **Expected Consumption** in vCores. Then select **Save and continue** to save your changes and navigate back to the **New support request** page. 
 
 > [!NOTE]
-> Not all regions support availability zones. Review [Availability zones](/azure/reliability/cross-region-replication-azure#azure-paired-regions) for more information. 
+> Not all regions support availability zones. Review [Availability zones region support](/azure/reliability/availability-zones-region-support) for more information. 
 
 ## SQL Managed Instance quota request types 
 

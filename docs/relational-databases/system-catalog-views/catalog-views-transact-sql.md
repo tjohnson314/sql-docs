@@ -7,6 +7,8 @@ ms.date: 09/24/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.SysViewExpandPortal.f1"
 helpviewer_keywords:

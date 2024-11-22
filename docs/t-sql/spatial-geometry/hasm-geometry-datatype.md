@@ -7,6 +7,8 @@ ms.date: "05/05/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "HasM geometry"
 dev_langs:

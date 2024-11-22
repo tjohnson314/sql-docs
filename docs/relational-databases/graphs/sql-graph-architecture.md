@@ -6,10 +6,12 @@ ms.author: mikeray
 ms.date: 06/28/2023
 ms.service: sql
 ms.topic: "language-reference"
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "SQL graph"
   - "SQL graph, architecture"
-monikerRange: "=azuresqldb-current||>=sql-server-2017||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2017 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # SQL Graph Architecture
 [!INCLUDE[sqlserver2017-asdb](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi-fabricsqldb.md)]

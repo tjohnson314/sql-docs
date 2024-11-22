@@ -7,6 +7,8 @@ ms.date: 09/16/2024
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "index creation [SQL Server], nonclustered indexes"
   - "nonclustered indexes [SQL Server], creating"

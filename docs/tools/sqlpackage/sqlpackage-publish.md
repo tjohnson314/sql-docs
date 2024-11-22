@@ -84,6 +84,8 @@ SqlPackage /at:$($AccessToken_Object.Token) /Action:Publish /SourceFile:"C:\Adve
 |**/DeployScriptPath:**|**/dsp:**|{string}|Specifies an optional file path to output the deployment script. For Azure deployments, if there are Transact-SQL commands to create or modify the master database, a script will be written to the same path but with "Filename_Master.sql" as the output file name. |
 |**/Diagnostics:**|**/d:**|{True&#124;False}|Specifies whether diagnostic logging is output to the console. Defaults to False. |
 |**/DiagnosticsFile:**|**/df:**|{string}|Specifies a file to store diagnostic logs. |
+|**/DiagnosticsLevel:**|**/dl**|{None&#124;Off&#124;Critical&#124;Error&#124;Warning&#124;Information&#124;Verbose}|Specifies the levels of trace messages filtered diagnostics file|
+|**/DiagnosticsPackageFile:**|**/dpf**|{string}|Specifies a file to store diagnostic package.|
 |**/MaxParallelism:**|**/mp:**|{int}| Specifies the degree of parallelism for concurrent operations running against a database. The default value is 8. |
 |**/ModelFilePath:**|**/mfp:**|{string}|Specifies the file path to override the model.xml in the source file. Use of this setting may result in deployment failure and/or unintended data loss. This setting is intended only for use when troubleshooting issues with publish, import, or script generation.|
 |**/OverwriteFiles:**|**/of:**|{True&#124;False}|Specifies if SqlPackage should overwrite existing files. Specifying false causes SqlPackage to abort action if an existing file is encountered. Default value is True. |

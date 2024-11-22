@@ -37,7 +37,7 @@ This section covers how to configure an iSCSI initiator on the servers that serv
 
 For more information on iSCSI initiator for the supported distributions, see the following links:
 
-- [Red Hat](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/managing_storage_devices/configuring-an-iscsi-initiator_managing-storage-devices)
+- [Red Hat](https://docs.redhat.com/documentation/red_hat_enterprise_linux/8/html/managing_storage_devices/configuring-an-iscsi-initiator_managing-storage-devices)
 - [SUSE](https://documentation.suse.com/sles/15-SP2/html/SLES-all/cha-iscsi.html)
 - [Ubuntu](https://ubuntu.com/server/docs/iscsi-initiator-or-client)
 

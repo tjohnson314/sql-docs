@@ -7,6 +7,8 @@ ms.date: "05/25/2022"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "GRANT DATABASE SCOPED CREDENTIAL"
   - "GRANT_DATABASE_SCOPED_CREDENTIAL_TSQL"

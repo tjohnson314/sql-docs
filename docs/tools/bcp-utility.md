@@ -8,6 +8,8 @@ ms.date: 06/21/2024
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "bcp utility [SQL Server]"
   - "exporting data"

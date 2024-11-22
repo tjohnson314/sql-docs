@@ -8,8 +8,10 @@ ms.reviewer: mathoma, zoranrilak
 ms.date: 11/14/2023
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
-ms.custom: ignite-2023
 ms.topic: conceptual
+ms.custom:
+  - ignite-2023
+  - ignite-2024
 ---
 
 # Virtual cluster architecture - Azure SQL Managed Instance

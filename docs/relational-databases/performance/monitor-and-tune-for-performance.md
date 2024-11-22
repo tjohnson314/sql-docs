@@ -7,6 +7,8 @@ ms.date: "07/18/2016"
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "instances of SQL Server, monitoring performance"
   - "monitoring server performance [SQL Server]"

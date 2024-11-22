@@ -7,6 +7,8 @@ ms.date: "08/23/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "CONTAINS_TSQL"
   - "CONTAINS"
@@ -31,7 +33,7 @@ helpviewer_keywords:
   - "prefix searches [full-text search]"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current || >= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-mi-current || =fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # CONTAINS (Transact-SQL)
 

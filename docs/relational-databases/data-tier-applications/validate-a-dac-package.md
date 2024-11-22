@@ -6,6 +6,8 @@ ms.author: wiassaf
 ms.date: 7/12/2022
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "data-tier application [SQL Server], validate"
   - "data-tier application [SQL Server], compare"

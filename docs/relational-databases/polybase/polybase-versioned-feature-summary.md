@@ -47,7 +47,9 @@ PolyBase has the following limitations:
 
 - If you use Hive tables with transactional = true, PolyBase can't access the data in the Hive table's directory.
 
-- PolyBase services require SQL Server service to have TCP/IP network protocol enabled to function correctly. Additionally, if TCP/IP Protocol configuration setting **Listen All** is set to **No**, you must still have an entry for the correct listener port in either **TCP Dynamic Ports** or **TCP Ports** under **IPAll** in TCP/IP Properties. This is required due to the way PolyBase services resolve the listener port of the SQL Server Engine.
+- PolyBase services require SQL Server service to have TCP/IP network protocol enabled to function correctly. Additionally, if TCP/IP Protocol configuration setting **Listen All** is set to **No**, the following TCP/IP configurations are required:
+  - An entry for the correct listener port in either **TCP Dynamic Ports** or **TCP Ports** under **IPAll**. This is required due to the way PolyBase services resolve the listener port of the SQL Server Engine.
+  - Enable the desired IP address(es) in **TCP/IP Properties > IP Addresses**; otherwise, SQL Server Engine will not accept any TCP/IP connections and PolyBase services will still fail to connect to SQL Server Engine.
 
 - PolyBase on SQL Server on Linux doesn't function if IPv6 is disabled in the kernel. For more information, see [SQL Server on Linux: Known issues](../../linux/sql-server-linux-known-issues.md#network).
 

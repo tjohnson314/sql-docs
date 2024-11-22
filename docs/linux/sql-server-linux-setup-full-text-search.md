@@ -3,7 +3,7 @@ title: Install SQL Server Full-Text Search on Linux
 description: Learn how to install SQL Server Full-Text Search on Linux. Full-Text Search enables you to run full-text queries against character-based data in SQL Server tables.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 08/23/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -15,7 +15,7 @@ ms.custom:
 
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
-The following steps install [SQL Server Full-Text Search](../relational-databases/search/full-text-search.md) (**mssql-server-fts**) on Linux. Full-Text Search enables you to run full-text queries against character-based data in [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] tables. For known issues for this release, see the [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md).
+The following steps install [Full-Text Search](../relational-databases/search/full-text-search.md) (**mssql-server-fts**) on Linux. Full-Text Search enables you to run full-text queries against character-based data in [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] tables. For known issues for this release, see the [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md).
 
 > [!NOTE]  
 > Before installing [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Full-Text Search, first [install SQL Server](sql-server-linux-setup.md#platforms). This configures the keys and repositories that you use when installing the **mssql-server-fts** package.
@@ -37,7 +37,7 @@ sudo yum check-update
 sudo yum update mssql-server-fts
 ```
 
-If you need an offline installation, locate the Full-text Search package download in the [Release notes](sql-server-linux-release-notes-2017.md). Then use the same offline installation steps described in the article [Install SQL Server](sql-server-linux-setup.md#offline).
+If you need an offline installation, locate the Full-text Search package download in the [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md). Then use the same offline installation steps described in the article [Install SQL Server](sql-server-linux-setup.md#offline).
 
 ## [SUSE Linux Enterprise Server](#tab/sles)
 
@@ -54,7 +54,7 @@ sudo zypper refresh
 sudo zypper update mssql-server-fts
 ```
 
-If you need an offline installation, locate the Full-text Search package download in the [Release notes](sql-server-linux-release-notes-2017.md). Then use the same offline installation steps described in the article [Install SQL Server](sql-server-linux-setup.md#offline).
+If you need an offline installation, locate the Full-text Search package download in the [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md). Then use the same offline installation steps described in the article [Install SQL Server](sql-server-linux-setup.md#offline).
 
 ## [Ubuntu](#tab/ubuntu)
 
@@ -72,7 +72,7 @@ sudo apt-get update
 sudo apt-get install -y mssql-server-fts
 ```
 
-If you need an offline installation, locate the Full-text Search package download in the [Release notes](sql-server-linux-release-notes-2017.md). Then use the same offline installation steps described in the article [Install SQL Server](sql-server-linux-setup.md#offline).
+If you need an offline installation, locate the Full-text Search package download in the [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md). Then use the same offline installation steps described in the article [Install SQL Server](sql-server-linux-setup.md#offline).
 
 ---
 
@@ -262,22 +262,21 @@ To use Semantic Search, you must first restore the Semantic Language Statistics 
    FROM DISK = N'/opt/mssql/misc/semanticsdb.bak'
    WITH FILE = 1,
        MOVE N'semanticsdb' TO N'/var/opt/mssql/data/semanticsDB.mdf',
-       MOVE N'semanticsdb_log' TO N'/var/opt/mssql/data/semanticsdb_log.ldf',
-       NOUNLOAD,
-       STATS = 5
+       MOVE N'semanticsdb_log' TO N'/var/opt/mssql/data/semanticsdb_log.ldf', 
+       NOUNLOAD, STATS = 5;
    GO
    ```
 
    > [!NOTE]  
-   > If necessary, update the paths in the previous RESTORE command to adjust for your configuration.
+   > If necessary, update the paths in the previous `RESTORE` command to adjust for your configuration.
 
 1. Run the following Transact-SQL command to register the semantic language statistics database.
 
     ```sql
-    EXEC sp_fulltext_semantic_register_language_statistics_db @dbname = N'semanticsdb';
+    EXECUTE sp_fulltext_semantic_register_language_statistics_db @dbname = N'semanticsdb';
     GO
     ```
 
 ## Related content
 
-- [SQL Server Full-Text Search](../relational-databases/search/full-text-search.md)
+- [Full-Text Search](../relational-databases/search/full-text-search.md)

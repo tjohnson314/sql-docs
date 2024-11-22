@@ -9,6 +9,8 @@ ms.date: 11/19/2024
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 ---
 # What is an instance pool? - Azure SQL Managed Instance
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]

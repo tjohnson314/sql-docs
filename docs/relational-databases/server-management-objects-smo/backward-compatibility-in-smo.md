@@ -6,6 +6,8 @@ ms.author: "maghan"
 ms.date: "03/14/2017"
 ms.service: sql
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Backward Compatibility in SMO

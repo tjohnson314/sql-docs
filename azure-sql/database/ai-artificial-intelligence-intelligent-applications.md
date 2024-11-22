@@ -7,7 +7,10 @@ ms.reviewer: damauri, josephsack, randolphwest, mathoma
 ms.date: 11/05/2024
 ms.service: azure-sql-database
 ms.topic: conceptual
-ms.collection: ce-skilling-ai-copilot
+ms.collection:
+  - ce-skilling-ai-copilot
+ms.custom:
+  - ignite-2024
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 # Intelligent applications

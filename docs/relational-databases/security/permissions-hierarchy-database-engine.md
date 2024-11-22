@@ -7,6 +7,8 @@ ms.date: "03/23/2016"
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.swb.server.permissions.f1--May use common.permissions"
 helpviewer_keywords:

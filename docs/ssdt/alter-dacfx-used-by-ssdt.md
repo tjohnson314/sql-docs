@@ -8,6 +8,8 @@ ms.date: 03/15/2024
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 keywords: ssdt dacfx
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || =azuresqldb-mi-current || =fabric"
 ---

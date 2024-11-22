@@ -1,10 +1,10 @@
 ---
-title: Unattended install for SQL Server on SUSE Linux Enterprise Server
+title: Unattended Install for SQL Server on SUSE Linux Enterprise Server
 titleSuffix: SQL Server
 description: Use a sample bash script to install SQL Server on SUSE Linux Enterprise Server (SLES) without interactive input.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -38,13 +38,15 @@ Save the sample script to a file and then to customize it. You must replace the 
 > [!IMPORTANT]  
 > The `SA_PASSWORD` environment variable is deprecated. Use `MSSQL_SA_PASSWORD` instead.
 
+[!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 ```bash
 #!/bin/bash -e
 
 # Use the following variables to control your install:
 
 # Password for the SA user (required)
-MSSQL_SA_PASSWORD='<YourStrong!Passw0rd>'
+MSSQL_SA_PASSWORD='<password>'
 
 # Product ID of the version of SQL Server you're installing
 # Must be evaluation, developer, express, web, standard, enterprise, or your 25 digit product key
@@ -59,7 +61,7 @@ SQL_ENABLE_AGENT='y'
 
 # Create an additional user with sysadmin privileges (optional)
 # SQL_INSTALL_USER='<Username>'
-# SQL_INSTALL_USER_PASSWORD='<YourStrong!Passw0rd>'
+# SQL_INSTALL_USER_PASSWORD='<password>'
 
 if [ -z $MSSQL_SA_PASSWORD ]
 then
@@ -130,7 +132,7 @@ do
   sleep 5s
   /opt/mssql-tools/bin/sqlcmd \
     -S localhost \
-    -U SA \
+    -U sa \
     -P $MSSQL_SA_PASSWORD \
     -Q "SELECT @@VERSION" 2>/dev/null
   errstatus=$?
@@ -150,7 +152,7 @@ then
   echo Creating user $SQL_INSTALL_USER
   /opt/mssql-tools/bin/sqlcmd \
     -S localhost \
-    -U SA \
+    -U sa \
     -P $MSSQL_SA_PASSWORD \
     -Q "CREATE LOGIN [$SQL_INSTALL_USER] WITH PASSWORD=N'$SQL_INSTALL_USER_PASSWORD', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=ON, CHECK_POLICY=ON; ALTER SERVER ROLE [sysadmin] ADD MEMBER [$SQL_INSTALL_USER]"
 fi
@@ -216,12 +218,15 @@ Simplify multiple unattended installs and create a stand-alone bash script that 
 
 ```bash
 #!/bin/bash
-export MSSQL_SA_PASSWORD='<YourStrong!Passw0rd>'
+export MSSQL_SA_PASSWORD='<password>'
 export MSSQL_PID='evaluation'
 export SQL_ENABLE_AGENT='y'
 export SQL_INSTALL_USER='<Username>'
-export SQL_INSTALL_USER_PASSWORD='<YourStrong!Passw0rd>'
+export SQL_INSTALL_USER_PASSWORD='<password>'
 ```
+
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 Then run the bash script as follows:
 

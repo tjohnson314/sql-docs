@@ -7,6 +7,9 @@ ms.date: "01/08/2019"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2023
+  - ignite-2024
 f1_keywords:
   - "FOR"
   - "FOR CLAUSE"
@@ -18,8 +21,7 @@ helpviewer_keywords:
   - "FOR clause [Transact-SQL]"
 dev_langs:
   - "TSQL"
-ms.custom: ignite-2023
-monikerRange: "= azuresqldb-current || >= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-mi-current || =fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # SELECT - FOR Clause (Transact-SQL)
 

@@ -1,9 +1,9 @@
 ---
-title: Configure SQL Server settings on Linux
+title: Configure SQL Server Settings on Linux
 description: This article describes how to use the mssql-conf tool to configure SQL Server settings on Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/11/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -15,7 +15,7 @@ ms.custom:
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 **mssql-conf** is a configuration script that installs with [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] for Red Hat Enterprise Linux, SUSE Linux Enterprise Server, and Ubuntu. It modifies the [mssql.conf file](#mssql-conf-format) where configuration values are stored. You can use **mssql-conf** utility to set the following parameters:
 
@@ -47,7 +47,7 @@ ms.custom:
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 **mssql-conf** is a configuration script that installs with [!INCLUDE [SQL Server 2019](../includes/sssql19-md.md)] for Red Hat Enterprise Linux, SUSE Linux Enterprise Server, and Ubuntu. You can use this utility to set the following parameters:
 
@@ -138,11 +138,14 @@ ms.custom:
   You can deploy your container with the following commands:
 
   ```bash
-  docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong@Passw0rd>" \
+  docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" \
   -p 5433:1433 --name sql1 \
   -v /container/sql1:/var/opt/mssql \
   -d mcr.microsoft.com/mssql/server:2019-latest
   ```
+
+  > [!CAUTION]  
+  > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
   For more information, see [Create the config files to be used by the SQL Server container](sql-server-linux-containers-ad-auth-adutil-tutorial.md#create-the-config-files-to-be-used-by-the-sql-server-container).
 
@@ -150,7 +153,7 @@ ms.custom:
 
 ## Enable SQL Server Agent
 
-The `sqlagent.enabled` setting enables [SQL Server Agent](sql-server-linux-run-sql-server-agent-job.md). By default, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Agent is disabled. If `sqlagent.enabled` isn't present in the mssql.conf settings file, then [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] internally assumes that [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Agent is disabled.
+The `sqlagent.enabled` setting enables [SQL Server Agent](sql-server-linux-run-sql-server-agent-job.md). By default, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Agent is disabled. If `sqlagent.enabled` isn't present in the `mssql.conf` settings file, then [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] internally assumes that [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Agent is disabled.
 
 To change this setting, use the following steps:
 
@@ -204,7 +207,7 @@ sudo /opt/mssql/bin/mssql-conf set sqlagent.errorlogginglevel <level>
 
 Starting with [!INCLUDE [sssql22-md](../includes/sssql22-md.md)], you can configure Microsoft Entra ID for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. To configure Microsoft Entra ID, you must install the Azure extension for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] following the installation of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. For information on how to configure Microsoft Entra ID, see [Tutorial: Set up Microsoft Entra authentication for SQL Server](../relational-databases/security/authentication-access/azure-ad-authentication-sql-server-setup-tutorial.md).
 
-<a name='change-the-default-azure-ad-certificate-path'></a>
+<a id="change-the-default-azure-ad-certificate-path"></a>
 
 ### Change the default Microsoft Entra ID certificate path
 
@@ -221,7 +224,7 @@ The certificate for Microsoft Entra authentication, downloaded by the Azure exte
 > [!NOTE]  
 > The default Microsoft Entra ID certificate path can be changed at any time after [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is installed, but must be changed *before* enabling Microsoft Entra ID.
 
-<a name='azure-ad-configuration-options'></a>
+<a id="azure-ad-configuration-options"></a>
 
 ### Microsoft Entra ID configuration options
 
@@ -255,7 +258,7 @@ The following options are used by Microsoft Entra authentication for an instance
 
 ## Configure Windows Active Directory authentication
 
-The `setup-ad-keytab` option can be used to create a keytab, but the user and Service Principal Names (SPNs) must have been created to use this option. The Active Directory utility, [**adutil**](sql-server-linux-ad-auth-adutil-introduction.md) can be used to create users, SPNs, and keytabs.
+The `setup-ad-keytab` option can be used to create a keytab, but the user and Service Principal Names (SPNs) must have been created to use this option. The Active Directory utility, **[adutil](sql-server-linux-ad-auth-adutil-introduction.md)** can be used to create users, SPNs, and keytabs.
 
 For options on using `setup-ad-keytab`, run the following command:
 
@@ -400,7 +403,7 @@ To change these settings, use the following steps:
    ```
 
    > [!NOTE]  
-   > If [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] can't find `master.mdf` and `mastlog.ldf` files in the specified directory, a templated copy of the system databases is automatically created in the specified directory, and [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] successfully starts up. However, metadata such as user databases, server logins, server certificates, encryption keys, SQL agent jobs, or old SA login password aren't updated in the new `master` database. You'll have to stop [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] and move your old `master.mdf` and `mastlog.ldf` to the new specified location and start [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] to continue using the existing metadata.
+   > If [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] can't find `master.mdf` and `mastlog.ldf` files in the specified directory, a templated copy of the system databases is automatically created in the specified directory, and [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] successfully starts up. However, metadata such as user databases, server logins, server certificates, encryption keys, SQL agent jobs, or old `sa` password aren't updated in the new `master` database. You'll have to stop [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] and move your old `master.mdf` and `mastlog.ldf` to the new specified location and start [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] to continue using the existing metadata.
 
 <a id="masterdatabasename"></a>
 
@@ -725,7 +728,7 @@ There are several other settings for **mssql-conf** that you can use to monitor 
 | `distributedtransaction.tracefilepath` | Folder in which trace files should be stored |
 | `distributedtransaction.turnoffrpcsecurity` | Enable or disable RPC security for distributed transactions |
 
-::: moniker range=">= sql-server-linux-ver15 || >= sql-server-ver15"
+::: moniker range=">=sql-server-linux-ver15 || >=sql-server-ver15"
 
 <a id="mlservices-eula"></a>
 
@@ -758,13 +761,13 @@ accepteulaml = Y
 ```
 
 ::: moniker-end
-::: moniker range=">= sql-server-linux-ver15 || >= sql-server-ver15"
+::: moniker range=">=sql-server-linux-ver15 || >=sql-server-ver15"
 
 <a id="mlservices-outbound-access"></a>
 
 ## Enable outbound network access
 
-Outbound network access for R, Python, and Java extensions in the [SQL Server Machine Learning Services](sql-server-linux-setup-machine-learning.md) feature is disabled by default. To enable outbound requests, set the `outboundnetworkaccess` Boolean property using mssql-conf.
+Outbound network access for R, Python, and Java extensions in the [SQL Server Machine Learning Services](sql-server-linux-setup-machine-learning.md) feature is disabled by default. To enable outbound requests, set the `outboundnetworkaccess` Boolean property using **mssql-conf**.
 
 After setting the property, restart [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Launchpad service to read the updated values from the INI file. A restart message reminds you whenever an extensibility-related setting is modified.
 
@@ -995,7 +998,7 @@ traceflag = 3456
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range=">= sql-server-linux-ver15 || >= sql-server-ver15"
+::: moniker range=">=sql-server-linux-ver15 || >=sql-server-ver15"
 
 ```ini
 [EULA]

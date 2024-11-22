@@ -77,7 +77,7 @@ In this tutorial, you first use geo-replication to create replicas of the Wingti
 Later, in a separate repatriation step, you fail over the catalog and tenant databases in the recovery region to the original region. The application and databases stay available throughout repatriation. When complete, the application is fully functional in the original region.
 
 > [!Note]
-> The application is recovered into the _paired region_ of the region in which the application is deployed. For more information, see [Azure paired regions](/azure/availability-zones/cross-region-replication-azure).
+> The application is recovered into the _paired region_ of the region in which the application is deployed. For more information, see [Azure paired regions](/azure/reliability/cross-region-replication-azure).
 
 ## Review the healthy state of the application
 
@@ -178,7 +178,7 @@ Now imagine there is an outage in the region in which the application is deploye
 
 2. Press **F5** to run the script.  
     * The script opens in a new PowerShell window and then starts a series of PowerShell jobs that run in parallel. These jobs fail over tenant databases to the recovery region.
-    * The recovery region is the _paired region_ associated with the Azure region in which you deployed the application. For more information, see [Azure paired regions](/azure/availability-zones/cross-region-replication-azure). 
+    * The recovery region is the _paired region_ associated with the Azure region in which you deployed the application. For more information, see [Azure paired regions](/azure/reliability/cross-region-replication-azure). 
 
 3. Monitor the status of the recovery process in the PowerShell window.
     ![failover process](./media/saas-dbpertenant-dr-geo-replication/failover-process.png)

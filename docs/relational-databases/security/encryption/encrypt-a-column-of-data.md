@@ -9,6 +9,8 @@ ms.date: 03/24/2022
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "encryption [SQL Server], columns"
   - "cryptography [SQL Server], columns"

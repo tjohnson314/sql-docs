@@ -7,6 +7,8 @@ ms.date: 11/01/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 ---
 # SQL Data Developer
 Use Microsoft's SQL data platform to create data-centric solutions across mobile devices and desktops for web servers, enterprise servers, and the cloud.  

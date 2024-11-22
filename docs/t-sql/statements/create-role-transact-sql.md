@@ -7,6 +7,8 @@ ms.date: "04/10/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "CREATE ROLE"
   - "DATABASE ROLE"
@@ -94,5 +96,3 @@ GO
  [Getting Started with Database Engine Permissions](../../relational-databases/security/authentication-access/getting-started-with-database-engine-permissions.md)  
   
   
-
-

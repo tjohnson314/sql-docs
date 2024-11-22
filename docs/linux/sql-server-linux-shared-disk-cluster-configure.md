@@ -1,10 +1,10 @@
 ---
-title: Configure FCI - SQL Server on Linux (RHEL)
+title: "Configure FCI - SQL Server on Linux (RHEL)"
 description: Learn to configure a failover cluster instance (FCI) on Red Hat Enterprise Linux (RHEL) for SQL Server.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 08/23/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -27,7 +27,7 @@ A [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] two-node shared dis
 
 This article explains how to create a two-node shared disk failover cluster instance (FCI) for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The article includes instructions and script examples for Red Hat Enterprise Linux (RHEL). Ubuntu distributions are similar to RHEL so the script examples will normally also work on Ubuntu.
 
-For conceptual information, see [SQL Server Failover Cluster Instance (FCI) on Linux](sql-server-linux-shared-disk-cluster-concepts.md).
+For conceptual information, see [Failover Cluster Instances - SQL Server on Linux](sql-server-linux-shared-disk-cluster-concepts.md).
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ The first step is to configure the operating system on the cluster nodes. On eac
 
 ## Install and configure SQL Server
 
-1. Install and set up [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on both nodes. For detailed instructions, see [Install SQL Server on Linux](sql-server-linux-setup.md).
+1. Install and set up [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on both nodes. For detailed instructions, see [Installation guidance for SQL Server on Linux](sql-server-linux-setup.md).
 1. Designate one node as primary and the other as secondary, for purposes of configuration. Use these terms for the following this guide.
 1. On the secondary node, stop and disable [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
    The following example stops and disables [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]:
@@ -60,14 +60,20 @@ The first step is to configure the operating system on the cluster nodes. On eac
    sudo systemctl start mssql-server
    ```
 
-   Connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] `master` database with the sa account and run the following:
+   Connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] `master` database with the `sa` account and run the following:
 
    ```sql
-   USE [master]
+   USE [master];
    GO
-   CREATE LOGIN [<loginName>] with PASSWORD = N'<loginPassword>'
-   ALTER SERVER ROLE [sysadmin] ADD MEMBER [<loginName>]
+
+   CREATE LOGIN [<loginName>]
+       WITH PASSWORD = N'<password>';
+
+   ALTER SERVER ROLE [sysadmin] ADD MEMBER [<loginName>];
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
    Alternatively, you can set the permissions at a more granular level. The Pacemaker login requires `VIEW SERVER STATE` to query health status with `sp_server_diagnostics`, **setupadmin**, and ALTER ANY LINKED SERVER to update the FCI instance name with the resource name, by running `sp_dropserver` and `sp_addserver`.
 
@@ -104,7 +110,7 @@ You need to provide storage that both nodes can access. You can use iSCSI, NFS, 
 
 - [Configure failover cluster instance - iSCSI - SQL Server on Linux](sql-server-linux-shared-disk-cluster-configure-iscsi.md)
 - [Configure failover cluster instance - NFS - SQL Server on Linux](sql-server-linux-shared-disk-cluster-configure-nfs.md)
-- [Configure failover cluster instance - SMB - SQL Server on Linux](sql-server-linux-shared-disk-cluster-configure-smb.md)
+- [Configure SMB storage failover cluster instance - SQL Server on Linux](sql-server-linux-shared-disk-cluster-configure-smb.md)
 
 ## Install and configure Pacemaker on each cluster node
 
@@ -251,14 +257,6 @@ This example creates an FCI in the group NewLinFCIGrp. The name of the resource 
 
 1. Finally, fail the FCI back to the original node and remove the colocation constraint.
 
-<!---
-
-|Distribution |Topic  
-|----- |-----
-|**Red Hat Enterprise Linux with HA add-on** |[Configure](sql-server-linux-shared-disk-cluster-red-hat-7-configure.md)<br/>[Operate](sql-server-linux-shared-disk-cluster-red-hat-7-operate.md)
-|**SUSE Linux Enterprise Server with HA add-on** |[Configure](sql-server-linux-shared-disk-cluster-sles-configure.md)
-
--->
 ## Summary
 
 In this tutorial, you completed the following tasks.

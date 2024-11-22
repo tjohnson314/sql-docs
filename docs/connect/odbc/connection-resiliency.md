@@ -7,6 +7,8 @@ ms.date: 11/05/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 ---
 # Connection resiliency in the ODBC driver
 

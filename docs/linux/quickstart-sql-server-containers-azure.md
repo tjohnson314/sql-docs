@@ -1,9 +1,9 @@
 ---
-title: "Quickstart: Deploy a SQL Server container cluster on Azure"
+title: "Quickstart: Deploy a SQL Server Container Cluster on Azure"
 description: This tutorial shows how to deploy a SQL Server high availability solution with Azure Kubernetes Service or Azure Red Hat OpenShift.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/10/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
@@ -53,31 +53,36 @@ This quickstart uses the following command line tools to manage the cluster.
 
 ## Create an SA password
 
+The system administrator (`sa`) account must be secured with a strong password. [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 ### [Kubernetes](#tab/kubectl)
 
-1. Create an SA password in the Kubernetes cluster. Kubernetes can manage sensitive configuration information, like passwords as [secrets](https://kubernetes.io/docs/concepts/configuration/secret/).
+1. Create an `sa` password in the Kubernetes cluster. Kubernetes can manage sensitive configuration information, like passwords as [secrets](https://kubernetes.io/docs/concepts/configuration/secret/).
 
-1. To create a secret in Kubernetes named `mssql` that holds the value `MyC0m9l&xP@ssw0rd` for the `MSSQL_SA_PASSWORD`, run the following command. Remember to pick your own complex password:
+1. To create a secret in Kubernetes named `mssql` that holds the value `<password>` for the `MSSQL_SA_PASSWORD`, run the following command. Replace `<password>` with your complex password.
 
    > [!IMPORTANT]  
    > The `SA_PASSWORD` environment variable is deprecated. Use `MSSQL_SA_PASSWORD` instead.
 
    ```console
-   kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="MyC0m9l&xP@ssw0rd"
+   kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="<password>"
    ```
 
 ### [OpenShift](#tab/oc)
 
-1. Create an SA password in the OpenShift cluster. OpenShift can manage sensitive configuration information, like passwords as [secrets](https://docs.openshift.com/container-platform/4.12/nodes/pods/nodes-pods-secrets.html).
+1. Create an `sa` password in the OpenShift cluster. OpenShift can manage sensitive configuration information, like passwords as [secrets](https://docs.openshift.com/container-platform/4.12/nodes/pods/nodes-pods-secrets.html).
 
-1. To create a secret named `mssql` that holds the value `MyC0m9l&xP@ssw0rd` for the `MSSQL_SA_PASSWORD`, run the following command. Remember to pick your own complex password:
+1. To create a secret named `mssql` that holds the value `<password>` for the `MSSQL_SA_PASSWORD`, run the following command. Replace `<password>` with your complex password.
 
    > [!IMPORTANT]  
    > The `SA_PASSWORD` environment variable is deprecated. Use `MSSQL_SA_PASSWORD` instead.
 
    ```console
-   oc create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="MyC0m9l&xP@ssw0rd"
+   oc create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="<password>"
    ```
+
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 ---
 
@@ -87,7 +92,7 @@ This quickstart uses the following command line tools to manage the cluster.
 
 For a database in a Kubernetes cluster, you must use persisted storage. You can configure a [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) and [persistent volume claim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volume-claim-protection) in the Kubernetes cluster using the following steps:
 
-1. Create a manifest to define the storage class and the persistent volume claim.  The manifest specifies the storage provisioner, parameters, and [reclaim policy](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming). The Kubernetes cluster uses this manifest to create the persistent storage.
+1. Create a manifest to define the storage class and the persistent volume claim. The manifest specifies the storage provisioner, parameters, and [reclaim policy](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming). The Kubernetes cluster uses this manifest to create the persistent storage.
 
 1. The following YAML example defines a storage class and persistent volume claim. The storage class provisioner is `azure-disk`, because this Kubernetes cluster is in Azure. The storage account type is `Standard_LRS`. The persistent volume claim is named `mssql-data`. The persistent volume claim metadata includes an annotation connecting it back to the storage class.
 
@@ -161,9 +166,7 @@ For a database in a Kubernetes cluster, you must use persisted storage. You can 
    Events:        <none>
    ```
 
-   The value for volume matches part of the name of the blob in the following image from the Azure portal:
-
-   :::image type="content" source="media/quickstart-sql-server-containers-kubernetes/describe-volume-portal.png" alt-text="Screenshot of the Azure portal blob name.":::
+   The value for volume matches part of the name of the blob in the Azure portal.
 
 1. Verify the persistent volume.
 
@@ -239,9 +242,7 @@ For a database in an OpenShift cluster, you must use persisted storage. You can 
    Events:        <none>
    ```
 
-   The value for volume matches part of the name of the blob in the following image from the Azure portal:
-
-   :::image type="content" source="media/quickstart-sql-server-containers-kubernetes/describe-volume-portal.png" alt-text="Screenshot of the Azure portal blob name.":::
+   The value for volume matches part of the name of the blob in the Azure portal.
 
 1. Verify the persistent volume.
 
@@ -336,7 +337,7 @@ You create a manifest to describe the container, based on the SQL Server [mssql-
 
    - `persistentVolumeClaim`: This value requires an entry for `claimName:` that maps to the name used for the persistent volume claim. This tutorial uses `mssql-data`.
 
-   - `name: MSSQL_SA_PASSWORD`: Configures the container image to set the SA password, as defined in this section.
+   - `name: MSSQL_SA_PASSWORD`: Configures the container image to set the `sa` password, as defined in this section.
 
      ```yaml
      valueFrom:
@@ -495,7 +496,7 @@ You create a manifest to describe the container, based on the SQL Server [mssql-
 
    - `persistentVolumeClaim`: This value requires an entry for `claimName:` that maps to the name used for the persistent volume claim. This tutorial uses `mssql-data`.
 
-   - `name: MSSQL_SA_PASSWORD`: Configures the container image to set the SA password, as defined in this section.
+   - `name: MSSQL_SA_PASSWORD`: Configures the container image to set the `sa` password, as defined in this section.
 
      ```yaml
      valueFrom:
@@ -558,7 +559,7 @@ You create a manifest to describe the container, based on the SQL Server [mssql-
    oc.exe exec <nameOfSqlPod> -it -- /bin/bash
    ```
 
-   You are able to see the username as `mssql` if you run `whoami`. `mssql` is a non-root user.
+   You're able to see the username as `mssql` if you run `whoami`. `mssql` is a non-root user.
 
     ```console
     whoami
@@ -578,16 +579,16 @@ You can use the following applications to connect to the SQL Server instance.
 
 ### Connect with sqlcmd
 
-To connect with `sqlcmd`, run the following command:
+To connect with `sqlcmd`, run the following command.
 
 ```cmd
-sqlcmd -S <External IP Address> -U sa -P "MyC0m9l&xP@ssw0rd"
+sqlcmd -S <External IP address> -U sa -P "<password>"
 ```
 
-Replace the following values:
+Replace `<External IP address>` with the IP address for the `mssql-deployment` service, and `<password>` with your complex password.
 
-- `<External IP Address>` with the IP address for the `mssql-deployment` service
-- `MyC0m9l&xP@ssw0rd` with your complex password
+> [!CAUTION]  
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 ## Verify failure and recovery
 
@@ -648,5 +649,5 @@ az group delete --name <MyResourceGroup> --yes --no-wait
 ## Related content
 
 - [Introduction to Kubernetes](/azure/aks/intro-kubernetes)
-- [Quickstart: Run SQL Server container images with Docker](quickstart-install-connect-docker.md)
-- [Deploy availability group with DH2i for SQL Server containers on AKS](tutorial-sql-server-containers-kubernetes-dh2i.md)
+- [Quickstart: Run SQL Server Linux container images with Docker](quickstart-install-connect-docker.md)
+- [Deploy availability groups with DH2i DxEnterprise on Kubernetes](tutorial-sql-server-containers-kubernetes-dh2i.md)

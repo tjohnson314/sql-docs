@@ -1,9 +1,9 @@
 ---
-title: Create and run jobs for SQL Server on Linux
+title: Create and Run Jobs for SQL Server on Linux
 description: Learn how to create a SQL Server Agent job on Linux using both Transact-SQL and SQL Server Management Studio (SSMS).
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 11/16/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -67,13 +67,13 @@ Use the following steps to create a sample database named `SampleDB`. This datab
 1. Use **sqlcmd** to run a Transact-SQL `CREATE DATABASE` command.
 
    ```bash
-   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -Q 'CREATE DATABASE SampleDB'
+   /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -Q 'CREATE DATABASE SampleDB'
    ```
 
 1. Verify the database is created by listing the databases on your server.
 
    ```bash
-   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -Q 'SELECT Name FROM sys.Databases'
+   /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -Q 'SELECT name FROM sys.databases'
    ```
 
 ## Create a job with Transact-SQL
@@ -90,24 +90,21 @@ The following steps create a SQL Server Agent job on Linux with Transact-SQL com
    -- called 'Daily SampleDB Backup'
    USE msdb;
    GO
-   EXEC dbo.sp_add_job
-      @job_name = N'Daily SampleDB Backup';
+
+   EXECUTE dbo.sp_add_job @job_name = N'Daily SampleDB Backup';
    GO
    ```
 
 1. Call [sp_add_jobstep](../relational-databases/system-stored-procedures/sp-add-jobstep-transact-sql.md) to create a job step that creates a backup of the `SampleDB` database.
 
    ```sql
-   -- Adds a step (operation) to the job
-   EXEC sp_add_jobstep
-      @job_name = N'Daily SampleDB Backup',
-      @step_name = N'Backup database',
-      @subsystem = N'TSQL',
-      @command = N'BACKUP DATABASE SampleDB TO DISK = \
-         N''/var/opt/mssql/data/SampleDB.bak'' WITH NOFORMAT, NOINIT, \
-         NAME = ''SampleDB-full'', SKIP, NOREWIND, NOUNLOAD, STATS = 10',
-      @retry_attempts = 5,
-      @retry_interval = 5;
+   EXECUTE sp_add_jobstep
+       @job_name = N'Daily SampleDB Backup',
+       @step_name = N'Backup database',
+       @subsystem = N'TSQL',
+       @command = N'BACKUP DATABASE SampleDB TO DISK = \
+                        N''/var/opt/mssql/data/SampleDB.bak'' WITH NOFORMAT, NOINIT, \
+                        NAME = ''SampleDB-full'', SKIP, NOREWIND, NOUNLOAD, STATS = 10', @retry_attempts = 5, @retry_interval = 5;
    GO
    ```
 
@@ -115,11 +112,12 @@ The following steps create a SQL Server Agent job on Linux with Transact-SQL com
 
    ```sql
    -- Creates a schedule called 'Daily'
-   EXEC dbo.sp_add_schedule
-      @schedule_name = N'Daily SampleDB',
-      @freq_type = 4,
-      @freq_interval = 1,
-      @active_start_time = 233000;
+   EXECUTE dbo.sp_add_schedule
+       @schedule_name = N'Daily SampleDB',
+       @freq_type = 4,
+       @freq_interval = 1,
+       @active_start_time = 233000;
+
    USE msdb;
    GO
    ```
@@ -128,25 +126,25 @@ The following steps create a SQL Server Agent job on Linux with Transact-SQL com
 
    ```sql
    -- Sets the 'Daily' schedule to the 'Daily SampleDB Backup' Job
-   EXEC sp_attach_schedule
-      @job_name = N'Daily SampleDB Backup',
-      @schedule_name = N'Daily SampleDB';
+   EXECUTE sp_attach_schedule
+       @job_name = N'Daily SampleDB Backup',
+       @schedule_name = N'Daily SampleDB';
    GO
    ```
 
 1. Use [sp_add_jobserver](../relational-databases/system-stored-procedures/sp-add-jobserver-transact-sql.md) to assign the job to a target server. In this example, the target is the local server.
 
    ```sql
-   EXEC dbo.sp_add_jobserver
-      @job_name = N'Daily SampleDB Backup',
-      @server_name = N'(local)';
+   EXECUTE dbo.sp_add_jobserver
+       @job_name = N'Daily SampleDB Backup',
+       @server_name = N'(local)';
    GO
    ```
 
 1. Start the job with [sp_start_job](../relational-databases/system-stored-procedures/sp-start-job-transact-sql.md).
 
    ```sql
-   EXEC dbo.sp_start_job N' Daily SampleDB Backup' ;
+   EXECUTE dbo.sp_start_job N' Daily SampleDB Backup';
    GO
    ```
 

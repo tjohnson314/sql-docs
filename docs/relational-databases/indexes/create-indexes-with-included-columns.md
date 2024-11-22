@@ -8,6 +8,8 @@ ms.date: 09/17/2024
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "index size [SQL Server]"
   - "index keys [SQL Server]"

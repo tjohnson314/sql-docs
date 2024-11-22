@@ -8,6 +8,8 @@ ms.date: 09/24/2024
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sys.sp_has_change_feed_permissions_TSQL"
   - "sys.sp_has_change_feed_permissions"

@@ -11,8 +11,9 @@ ms.subservice: security
 ms.topic: conceptual
 ms.custom:
   - sqldbrb=1
+  - ignite-2024
 tags: azure-synapse
-monikerRange: "=azuresql || =azuresql-db || =azuresql-mi ||=fabricsql"
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabricsql"
 ---
 # Dynamic data masking
 

@@ -7,6 +7,8 @@ ms.date: "05/20/2020"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sys.all_objects"
   - "all_objects_TSQL"

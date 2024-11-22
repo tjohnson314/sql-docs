@@ -7,6 +7,8 @@ ms.date: 09/24/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 ---
 # Release notes for the Microsoft OLE DB Driver for SQL Server
 

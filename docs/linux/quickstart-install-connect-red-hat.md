@@ -4,7 +4,7 @@ titleSuffix: SQL Server
 description: This quickstart shows how to install SQL Server on Red Hat Enterprise Linux (RHEL) and then create and query a database with sqlcmd.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/24/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -17,7 +17,7 @@ ms.custom:
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 In this quickstart, you install [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] on Red Hat Enterprise Linux (RHEL) 8.x. Then you can connect with **sqlcmd** to create your first database and run queries.
 
@@ -25,7 +25,7 @@ For more information on supported platforms, see [Release notes for SQL Server 2
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 In this quickstart, you install [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] on Red Hat Enterprise Linux (RHEL) 8.x. Then you can connect with **sqlcmd** to create your first database and run queries.
 
@@ -37,7 +37,7 @@ For more information on supported platforms, see [Release notes for SQL Server 2
 
 In this quickstart, you install [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] on Red Hat Enterprise Linux (RHEL) 8.x or 9.x. Then you can connect with **sqlcmd** to create your first database and run queries.
 
-For more information on supported platforms, see [Release notes for [!INCLUDE [sssql22](../includes/sssql22-md.md)] on Linux](sql-server-linux-release-notes-2022.md).
+For more information on supported platforms, see [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md).
 
 ::: moniker-end
 
@@ -46,7 +46,7 @@ For more information on supported platforms, see [Release notes for [!INCLUDE [s
 If you choose to have a pre-installed [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] VM on RHEL ready to run your production-based workload, then please follow the [best practices](/azure/azure-sql/virtual-machines/windows/performance-guidelines-best-practices-checklist) for creating the SQL Server VM.
 
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 ## Azure Marketplace images
 
@@ -74,10 +74,12 @@ If you've previously installed a Community Technology Preview (CTP) or Release C
 
 For other system requirements, see [System requirements for SQL Server on Linux](sql-server-linux-setup.md#system).
 
-## <a id="install"></a> Install SQL Server
+<a id="install"></a>
+
+## Install SQL Server
 
 <!--SQL Server 2017 on Linux-->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 The following commands for installing [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] point to the RHEL 8 repository. RHEL 8 doesn't come preinstalled with `python2`, which is required by [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. Before you begin the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] install steps, execute the command and verify that `python2` is selected as the interpreter:
 
@@ -90,7 +92,7 @@ sudo yum install compat-openssl10
 sudo alternatives --config python
 ```
 
-For more information, see the following blog on installing `python2` and configuring it as the default interpreter: https://www.redhat.com/en/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta.
+For more information, see the following blog on installing `python2` and configuring it as the default interpreter: <https://www.redhat.com/en/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta>.
 
 To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on RHEL, run the following commands in a terminal to install the `mssql-server` package:
 
@@ -109,13 +111,14 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on RHEL,
    sudo yum install -y mssql-server
    ```
 
-1. After the package installation finishes, run `mssql-conf setup` using its full path, and follow the prompts to set the SA password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
+1. After the package installation finishes, run `mssql-conf setup` using its full path, and follow the prompts to set the `sa` password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-   Remember to specify a strong password for the SA account. You need a minimum length 8 characters, including uppercase and lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Once the configuration is done, verify that the service is running:
 
@@ -134,7 +137,7 @@ At this point, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is run
 
 ::: moniker-end
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 The following commands for installing [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] point to the RHEL 8 repository. RHEL 8 doesn't come preinstalled with `python2`, which is required by [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. Before you begin the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] install steps, execute the command and verify that `python2` is selected as the interpreter:
 
@@ -147,7 +150,7 @@ sudo yum install compat-openssl10
 sudo alternatives --config python
 ```
 
-For more information, see the following blog on installing `python2` and configuring it as the default interpreter: https://www.redhat.com/en/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta.
+For more information, see the following blog on installing `python2` and configuring it as the default interpreter: <https://www.redhat.com/en/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta>.
 
 To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on RHEL, run the following commands in a terminal to install the `mssql-server` package:
 
@@ -166,13 +169,14 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on RHEL,
    sudo yum install -y mssql-server
    ```
 
-1. After the package installation finishes, run `mssql-conf setup` using its full path, and follow the prompts to set the SA password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
+1. After the package installation finishes, run `mssql-conf setup` using its full path, and follow the prompts to set the `sa` password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-   Remember to specify a strong password for the SA account. You need a minimum length 8 characters, including uppercase and lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Once the configuration is done, verify that the service is running:
 
@@ -214,13 +218,14 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on RHEL,
    sudo yum install -y mssql-server
    ```
 
-1. After the package installation finishes, run `mssql-conf setup` using its full path, and follow the prompts to set the SA password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
+1. After the package installation finishes, run `mssql-conf setup` using its full path, and follow the prompts to set the `sa` password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-   Remember to specify a strong password for the SA account. You need a minimum length 8 characters, including uppercase and lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Once the configuration is done, verify that the service is running:
 
@@ -279,13 +284,14 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on RHEL 
    sudo yum install -y mssql-server-selinux
    ```
 
-1. After the package installation finishes, run `mssql-conf setup` using its full path, and follow the prompts to set the SA password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
+1. After the package installation finishes, run `mssql-conf setup` using its full path, and follow the prompts to set the `sa` password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf setup
    ```
 
-   Remember to specify a strong password for the SA account. You need a minimum length 8 characters, including uppercase and lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Once the configuration is done, verify that the service is running:
 
@@ -306,11 +312,13 @@ At this point, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is run
 
 ::: moniker-end
 
-## Disable the `sa` account as a best practice
+## Disable the SA account as a best practice
 
 [!INCLUDE [connect-with-sa](includes/connect-with-sa.md)]
 
-## <a id="tools"></a> Install the SQL Server command-line tools
+<a id="tools"></a>
+
+## Install the SQL Server command-line tools
 
 To create a database, you need to connect with a tool that can run Transact-SQL statements on [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The following steps install the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] command-line tools: [sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md) and [bcp utility](../tools/bcp-utility.md).
 

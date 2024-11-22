@@ -8,6 +8,8 @@ ms.date: 10/24/2023
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "IDENTITY_TSQL"
   - "IDENTITY"

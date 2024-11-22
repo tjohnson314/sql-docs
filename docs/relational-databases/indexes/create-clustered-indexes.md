@@ -8,6 +8,8 @@ ms.date: 01/12/2024
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "index creation [SQL Server], clustered indexes"
   - "clustered indexes, creating"

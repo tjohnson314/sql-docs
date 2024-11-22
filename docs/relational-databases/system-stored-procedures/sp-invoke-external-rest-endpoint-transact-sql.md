@@ -7,6 +7,8 @@ ms.reviewer: randolphwest
 ms.date: 09/10/2024
 ms.service: sql
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sp_invoke_external_rest_endpoint_TSQL"
   - "sys.sp_invoke_external_rest_endpoint"
@@ -16,7 +18,7 @@ helpviewer_keywords:
   - "sp_invoke_external_rest_endpoint"
 dev_langs:
   - "TSQL"
-monikerRange: "azuresqldb-current||=fabric"
+monikerRange: "=fabric"
 ---
 # sp_invoke_external_rest_endpoint (Transact-SQL)
 

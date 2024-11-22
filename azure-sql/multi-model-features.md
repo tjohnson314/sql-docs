@@ -8,8 +8,10 @@ ms.date: 11/06/2024
 ms.service: azure-sql
 ms.subservice: service-overview
 ms.topic: conceptual
-ms.custom: sqldbrb=2
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi||=fabricsql"
+ms.custom:
+  - sqldbrb=2
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabricsql"
 ---
 # Multi-model capabilities
 [!INCLUDE[appliesto-sqldb-sqlmi-fabricsqldb](includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]

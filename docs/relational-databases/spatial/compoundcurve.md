@@ -3,14 +3,16 @@ title: "CompoundCurve"
 description: "CompoundCurve is a collection of zero or more continuous CircularString or LineString instances of either geometry or geography types in SQL Database Engine spatial data."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviwer: mlandzic, jovanpop
+ms.reviewer: mlandzic, jovanpop
 ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+ms.custom:
+  - ignite-2024
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # CompoundCurve
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]  
 
   A **CompoundCurve** is a collection of zero or more continuous **CircularString** or **LineString** instances of either **geometry** or **geography** types.  
   
@@ -25,7 +27,7 @@ If a **CompoundCurve** contains a sequence of multiple **CircularString** and **
 ## CompoundCurve instances
 The following illustration shows valid **CompoundCurve** types.  
   
-:::image type="content" source="media/compoundcurve/compoundcurve.gif" alt-text="Images of CompoundCurve examples.":::  
+:::image type="content" source="media/compoundcurve/compoundcurve.gif" alt-text="Diagram of CompoundCurve examples.":::  
  
 ### Accepted instances
  **CompoundCurve** instance is accepted if it is an empty instance or meets the following criteria.  
@@ -172,7 +174,7 @@ SET @g = geometry::Parse('COMPOUNDCURVE(CIRCULARSTRING(7 5 4 2, 5 7 4 2, 3 5 4 2
   
 <a id="i-illustrating-why-circularstring-instances-must-be-explicitly-declared"></a>
 
-### I. Illustrat why CircularString instances must be explicitly declared
+### I. Why CircularString instances must be explicitly declared
  The following example shows why `CircularString` instances must be explicitly declared. The programmer is trying to store a circle in a `CompoundCurve` instance.  
   
 ```sql  

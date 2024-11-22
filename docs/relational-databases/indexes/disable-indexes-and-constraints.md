@@ -8,6 +8,8 @@ ms.date: 05/02/2024
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.swb.disableindexes.f1"
 helpviewer_keywords:

@@ -7,6 +7,8 @@ ms.date: 07/26/2024
 ms.service: sql
 ms.subservice: supportability
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "index design guide"
   - "index design guidance"

@@ -7,6 +7,8 @@ ms.reviewer: maghan
 ms.date: 04/21/2023
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.swb.registerdacwizard.summary.f1"
   - "sql13.swb.registerdacwizard.introduction.f1"

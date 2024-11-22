@@ -1,10 +1,10 @@
 ---
-title: Configure Active Directory authentication with SQL Server on Linux using adutil
+title: Configure Active Directory Authentication With SQL Server on Linux Using adutil
 description: Step by step on how to configure Active Directory authentication with SQL Server on Linux using adutil
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: tutorial
@@ -17,7 +17,7 @@ monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017 || =sqlallproducts-a
 
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
-This tutorial explains how to configure Windows Active Directory authentication for SQL Server on Linux using [**adutil**](sql-server-linux-ad-auth-adutil-introduction.md). For another method of configuring Active Directory authentication using **ktpass**, see [Tutorial: Use Active Directory authentication with SQL Server on Linux](sql-server-linux-active-directory-authentication.md).
+This tutorial explains how to configure Windows Active Directory authentication for SQL Server on Linux using **[adutil](sql-server-linux-ad-auth-adutil-introduction.md)**. For another method of configuring Active Directory authentication using **ktpass**, see [Tutorial: Use Active Directory authentication with SQL Server on Linux](sql-server-linux-active-directory-authentication.md).
 
 This tutorial consists of the following tasks:
 
@@ -53,7 +53,9 @@ To join `sql1` to the Active Directory domain, see [Join SQL Server on a Linux h
 
 To install **adutil**, follow the steps explained in the article [Introduction to adutil - Active Directory utility](sql-server-linux-ad-auth-adutil-introduction.md) on the host machine that you added to the domain in the previous step.
 
-## <a id="adutil-spn"></a> Use adutil to create an Active Directory user for SQL Server and set the Service Principal Name (SPN)
+<a id="adutil-spn"></a>
+
+## Use adutil to create an Active Directory user for SQL Server and set the Service Principal Name (SPN)
 
 1. Obtain or renew the Kerberos TGT (ticket-granting ticket) using the `kinit` command. You must use a privileged account for the `kinit` command, and the host machine should already be part of the domain. The account needs permission to connect to the domain, and create accounts and SPNs in the domain.
 
@@ -74,7 +76,7 @@ To install **adutil**, follow the steps explained in the article [Introduction t
    The environment variable or interactive input methods are more secure than the password flag.
 
    ```bash
-   adutil user create --name sqluser --distname CN=sqluser,CN=Users,DC=CONTOSO,DC=COM --password 'P@ssw0rd'
+   adutil user create --name sqluser --distname CN=sqluser,CN=Users,DC=CONTOSO,DC=COM --password '<password>'
    ```
 
    You can specify the name of the account using the distinguished name (`--distname`) as shown previously, or you can use the Organizational Unit (OU) name. The OU name (`--ou`) takes precedence over distinguished name in case you specify both. You can run the following command for more details:
@@ -82,6 +84,9 @@ To install **adutil**, follow the steps explained in the article [Introduction t
    ```bash
    adutil user create --help
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Register SPNs to the principal created previously. You must use the machine's fully qualified domain name (FQDN). In this tutorial, we're using SQL Server's default port, 1433. Your port number could be different.
 
@@ -151,7 +156,7 @@ Once you [create the user and SPNs](#adutil-spn), you can create the keytab usin
       4 12/30/2021 14:02:08 MSSQLSvc/sql1@CONTOSO.COM (aes256-cts-hmac-sha1-96)
    ```
 
-   If the `/var/opt/mssql/mssql.conf` file isn't owned by `mssql`, you must configure **mssql-conf** to set the **network.kerberoskeytabfile** and **network.privilegedadaccount** values according to the previous steps. Type the password when prompted.
+   If the `/var/opt/mssql/mssql.conf` file isn't owned by `mssql`, you must configure **mssql-conf** to set the `network.kerberoskeytabfile` and `network.privilegedadaccount` values according to the previous steps. Type the password when prompted.
 
    ```bash
    /opt/mssql/bin/mssql-conf set network.kerberoskeytabfile /var/opt/mssql/secrets/mssql.keytab
@@ -188,8 +193,11 @@ If you installed **adutil** and integrated it with **mssql-conf**, you can skip 
 1. Create the keytab file that contains entries for each of the four SPNs created previously, and one for the user.
 
    ```bash
-   adutil keytab createauto -k /var/opt/mssql/secrets/mssql.keytab -p 1433 -H sql1.contoso.com --password 'P@ssw0rd' -s MSSQLSvc
+   adutil keytab createauto -k /var/opt/mssql/secrets/mssql.keytab -p 1433 -H sql1.contoso.com --password '<password>' -s MSSQLSvc
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
    The possible command line options are:
 
@@ -211,8 +219,11 @@ If you installed **adutil** and integrated it with **mssql-conf**, you can skip 
 1. Add an entry in the keytab for the principal name and password that SQL Server uses to connect to Active Directory:
 
    ```bash
-   adutil keytab create -k /var/opt/mssql/secrets/mssql.keytab -p sqluser --password 'P@ssw0rd'
+   adutil keytab create -k /var/opt/mssql/secrets/mssql.keytab -p sqluser --password '<password>'
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
    - `-k`: Path where you would like to create the `mssql.keytab` file.
    - `-p`: Principal to add to the keytab.
@@ -248,8 +259,11 @@ sudo systemctl restart mssql-server
 Connect to the SQL Server and run the following commands to create the login, and confirm that it exists.
 
 ```sql
-CREATE LOGIN [contoso\privilegeduser] FROM WINDOWS;
-SELECT name FROM sys.server_principals;
+CREATE LOGIN [contoso\privilegeduser]
+    FROM WINDOWS;
+
+SELECT name
+FROM sys.server_principals;
 ```
 
 ## Connect to SQL Server using Active Directory authentication

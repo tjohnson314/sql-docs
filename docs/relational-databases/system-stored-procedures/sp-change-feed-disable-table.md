@@ -8,6 +8,8 @@ ms.date: 09/24/2024
 ms.service: azure-synapse-analytics
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sp_change_feed_disable_table_TSQL"
   - "sp_change_feed_disable_table"

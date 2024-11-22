@@ -7,6 +7,8 @@ ms.date: "05/12/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "DROP_USER_TSQL"
   - "DROP USER"

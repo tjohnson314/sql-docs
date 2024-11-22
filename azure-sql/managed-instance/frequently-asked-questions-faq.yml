@@ -3,16 +3,14 @@ metadata:
   title: Frequently asked questions (FAQ)
   titleSuffix: Azure SQL Managed Instance
   description: Azure SQL Managed Instance frequently asked questions (FAQ)
-  services: sql-database
-  ms.service: azure-sql-managed-instance
-  ms.subservice: service-overview
-  ms.custom: 
-  ms.devlang:
-  ms.topic: faq
   author: MashaMSFT
   ms.author: mathoma
   ms.reviewer: urmilano, danil, nnikolic, wiassaf, mathoma
   ms.date: 05/31/2024
+  ms.service: azure-sql-managed-instance
+  ms.subservice: service-overview
+  ms.topic: faq
+  ms.custom: ignite-2024
 title: Azure SQL Managed Instance frequently asked questions (FAQ)
 summary: |
   [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]

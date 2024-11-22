@@ -8,6 +8,8 @@ ms.date: "07/26/2019"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "ALTER EXTERNAL DATA SOURCE"
   - "ALTER_EXTERNAL_DATA_SOURCE"

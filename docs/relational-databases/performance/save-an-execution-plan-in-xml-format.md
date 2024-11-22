@@ -7,6 +7,8 @@ ms.date: "08/21/2017"
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "XML query plans [SQL Server]"
   - "opening execution plans"

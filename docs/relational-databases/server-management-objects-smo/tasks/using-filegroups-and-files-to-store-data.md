@@ -6,6 +6,8 @@ ms.author: "maghan"
 ms.date: "08/06/2017"
 ms.service: sql
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "filegroups [SMO]"
   - "storing data [SMO]"

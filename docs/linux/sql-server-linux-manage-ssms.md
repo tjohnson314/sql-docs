@@ -3,7 +3,7 @@ title: Use SSMS to Manage SQL Server on Linux
 description: This article introduces SQL Server Management Studio, an integrated environment to access, configure, manage, administer, and develop components of SQL Server.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/03/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -82,8 +82,8 @@ After you connect to your server, you can connect to a database and run Transact
 1. In the query window, write a T-SQL query to select return the names of all databases on your server.
 
    ```sql
-   SELECT [Name]
-   FROM sys.Databases
+   SELECT [name]
+   FROM sys.databases;
    ```
 
    If you're new to writing queries, see [Tutorial: Write Transact-SQL statements](../t-sql/tutorial-writing-transact-sql-statements.md).
@@ -118,7 +118,7 @@ The new database is successfully created in your server. If you prefer to create
 
 1. In the **Delete Object** dialog, select the **Close existing connections** checkbox, and then select **OK**.
 
-The database is successfully dropped from your server. If you prefer to drop a database using T-SQL, then see [DROP DATABASE (SQL Server Transact-SQL)](../t-sql/statements/drop-database-transact-sql.md).
+The database is successfully dropped from your server. If you prefer to drop a database using T-SQL, then see [DROP DATABASE](../t-sql/statements/drop-database-transact-sql.md).
 
 ## Use Activity Monitor to see information about SQL Server activity
 

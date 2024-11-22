@@ -8,6 +8,8 @@ ms.date: 07/22/2022
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sql13.swb.stat.properties.f1"
   - "sql13.swb.statistics.filter.f1"
@@ -16,7 +18,7 @@ f1_keywords:
 helpviewer_keywords:
   - "creating statistics"
   - "statistics [SQL Server], creating"
-monikerRange: ">= aps-pdw-2016 || = azuresqldb-current || = azure-sqldw-latest || >= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-mi-current || =fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Create statistics
 

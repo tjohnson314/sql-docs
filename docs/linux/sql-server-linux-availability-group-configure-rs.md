@@ -1,10 +1,10 @@
 ---
-title: Configure a read-scale availability group (SQL Server on Linux)
+title: "Configure a Read-Scale Availability Group (SQL Server on Linux)"
 description: Learn about configuring a SQL Server Always On Availability Group (AG) for read-scale workloads on Linux.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 06/28/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -29,7 +29,7 @@ Create the AG. Set `CLUSTER_TYPE = NONE`. In addition, set each replica with `FA
 
 The following Transact-SQL script creates an AG named `ag1`. The script configures the AG replicas with `SEEDING_MODE = AUTOMATIC`. This setting causes SQL Server to automatically create the database on each secondary server after it's added to the AG. Update the following script for your environment. Replace the `<node1>` and `<node2>` values with the names of the SQL Server instances that host the replicas. Replace the `<5022>` value with the port you set for the endpoint. Run the following Transact-SQL script on the primary SQL Server replica:
 
-```SQL
+```sql
 CREATE AVAILABILITY GROUP [ag1]
     WITH (CLUSTER_TYPE = NONE)
     FOR REPLICA ON
@@ -55,7 +55,7 @@ ALTER AVAILABILITY GROUP [ag1] GRANT CREATE ANY DATABASE;
 
 The following Transact-SQL script joins a server to an AG named `ag1`. Update the script for your environment. On each secondary SQL Server replica, run the following Transact-SQL script to join the AG:
 
-```SQL
+```sql
 ALTER AVAILABILITY GROUP [ag1] JOIN WITH (CLUSTER_TYPE = NONE);
 
 ALTER AVAILABILITY GROUP [ag1] GRANT CREATE ANY DATABASE;

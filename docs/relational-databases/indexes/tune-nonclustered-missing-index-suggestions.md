@@ -8,6 +8,7 @@ ms.service: sql
 ms.topic: how-to
 ms.custom:
   - template-how-to
+  - ignite-2024
 monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 

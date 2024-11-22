@@ -12,6 +12,7 @@ ms.custom:
   - sqldbrb=1
   - devx-track-azurecli
   - devx-track-azurepowershell
+  - ignite-2024
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 # Get the required values for authenticating an application to access Azure SQL Database from code

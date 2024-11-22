@@ -7,6 +7,8 @@ ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "stored procedures [SQL Server], dependencies"
   - "displaying stored procedure dependencies"

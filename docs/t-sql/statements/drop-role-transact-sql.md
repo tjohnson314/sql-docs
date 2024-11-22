@@ -7,6 +7,8 @@ ms.date: "05/11/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "DROP ROLE"
   - "DROP_ROLE_TSQL"
@@ -19,7 +21,7 @@ helpviewer_keywords:
   - "dropping roles"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
 ---
 # DROP ROLE (Transact-SQL)
 [!INCLUDE [sql-asdbmi-asa-pdw-fabricsqldb](../../includes/applies-to-version/sql-asdbmi-asa-pdw-fabricsqldb.md)]

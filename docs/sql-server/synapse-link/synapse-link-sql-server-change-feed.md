@@ -8,7 +8,9 @@ ms.date: 03/08/2024
 ms.service: sql
 ms.subservice: data-movement
 ms.topic: conceptual
-monikerRange: ">=sql-server-ver16||=azuresqldb-current||=azure-sqldw-latest"
+ms.custom:
+  - ignite-2024
+monikerRange: ">=sql-server-ver16 || =azuresqldb-current || =azure-sqldw-latest"
 ---
 # Azure Synapse Link for SQL change feed
 

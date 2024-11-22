@@ -5,4 +5,4 @@ ms.date: 01/29/2024
 ms.service: sql
 ms.topic: include
 ---
- SQL Server 2017 Analysis Services (SSAS) 
+ SQL Server Analysis Services (SSAS) 

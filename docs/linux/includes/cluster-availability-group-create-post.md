@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/16/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: include
@@ -17,18 +17,17 @@ CREATE DATABASE [db1];
 GO
 
 ALTER DATABASE [db1]
-SET RECOVERY FULL;
+    SET RECOVERY FULL;
 GO
 
 BACKUP DATABASE [db1]
-TO DISK = N'/var/opt/mssql/data/db1.bak';
+    TO DISK = N'/var/opt/mssql/data/db1.bak';
 ```
 
 On the primary [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] replica, run the following T-SQL script to add a database called `db1` to an availability group called `ag1`:
 
 ```sql
-ALTER AVAILABILITY GROUP [ag1]
-ADD DATABASE [db1];
+ALTER AVAILABILITY GROUP [ag1] ADD DATABASE [db1];
 ```
 
 ### Verify that the database is created on the secondary servers
@@ -36,12 +35,13 @@ ADD DATABASE [db1];
 On each secondary [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] replica, run the following query to see if the `db1` database was created and is synchronized:
 
 ```sql
-SELECT * FROM sys.databases
+SELECT *
+FROM sys.databases
 WHERE name = 'db1';
 GO
 
 SELECT DB_NAME(database_id) AS 'database',
-    synchronization_state_desc
+       synchronization_state_desc
 FROM sys.dm_hadr_database_replica_states;
 GO
 ```

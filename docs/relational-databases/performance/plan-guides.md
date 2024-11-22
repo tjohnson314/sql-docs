@@ -7,6 +7,8 @@ ms.date: 08/01/2022
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "TEMPLATE plan guide"
   - "SQL plan guides"

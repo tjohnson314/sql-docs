@@ -56,7 +56,7 @@ If your secondary replica is used *only* for disaster recovery (DR), and doesn't
 
    :::image type="content" source="media/active-geo-replication-configure-portal/subscription-resource-group.png" alt-text="Screenshot from the Azure portal of the subscription and resource group." lightbox="media/active-geo-replication-configure-portal/subscription-resource-group.png":::
 
-1. Select or create the server for the secondary database, and configure the **Compute + storage** options if necessary. You can select any region for your secondary server, but we recommend the [paired region](/azure/availability-zones/cross-region-replication-azure).
+1. Select or create the server for the secondary database, and configure the **Compute + storage** options if necessary. You can select any region for your secondary server, but we recommend the [paired region](/azure/reliability/cross-region-replication-azure).
 
     Optionally, you can add a secondary database to an elastic pool. To create the secondary database in a pool, select **Yes** next to **Want to use SQL elastic pool?** and select a pool on the target server. A pool must already exist on the target server. This workflow doesn't create a pool.
 
@@ -86,7 +86,7 @@ Select the database you want to set up for geo-replication. You need the followi
 > [!NOTE]  
 > The secondary database must have the same service tier as the primary.
 
-You can select any region for your secondary server, but we recommend the [paired region](/azure/availability-zones/cross-region-replication-azure).
+You can select any region for your secondary server, but we recommend the [paired region](/azure/reliability/cross-region-replication-azure).
 
 Run the [az sql db replica create](/cli/azure/sql/db/replica#az-sql-db-replica-create) command.
 
@@ -116,7 +116,7 @@ Select the database you want to set up for geo-replication. You need the followi
 > [!NOTE]  
 > The secondary database must have the same service tier as the primary.
 
-You can select any region for your secondary server, but we recommend the [paired region](/azure/availability-zones/cross-region-replication-azure).
+You can select any region for your secondary server, but we recommend the [paired region](/azure/reliability/cross-region-replication-azure).
 
 As usual, begin your PowerShell session with the following cmdlets to connect your Azure account and set the subscription context:
 

@@ -1,10 +1,10 @@
 ---
-title: Configure SLES shared disk cluster for SQL Server
+title: Configure SLES Shared Disk Cluster for SQL Server
 description: Implement high availability by configuring SUSE Linux Enterprise Server (SLES) shared disk cluster for SQL Server.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 08/23/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -17,7 +17,7 @@ ms.custom:
 
 This guide provides instructions to create a two-nodes shared disk cluster for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on SUSE Linux Enterprise Server (SLES). The clustering layer is based on SUSE [High Availability Extension (HAE)](https://www.suse.com/products/highavailability) built on top of [Pacemaker](https://clusterlabs.org/).
 
-For more information on cluster configuration, resource agent options, management, best practices, and recommendations, see [SUSE Linux Enterprise High Availability Extension 12 SP2](https://www.suse.com/documentation/sle-ha-12/index.html).
+For more information on cluster configuration, resource agent options, management, best practices, and recommendations, see [SUSE Linux Enterprise High Availability Extension 12 SP5](https://documentation.suse.com/sle-ha/12-SP5/).
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ The first step is to configure the operating system on the cluster nodes. For th
 
 ## Install and configure SQL Server on each cluster node
 
-1. Install and setup [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on both nodes. For detailed instructions, see [Install SQL Server on Linux](sql-server-linux-setup.md).
+1. Install and setup [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on both nodes. For detailed instructions, see [Installation guidance for SQL Server on Linux](sql-server-linux-setup.md).
 
 1. Designate one node as primary and the other as secondary, for purposes of configuration. Use these terms for the following this guide.
 
@@ -49,18 +49,21 @@ The first step is to configure the operating system on the cluster nodes. For th
    sudo systemctl start mssql-server
    ```
 
-   Connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] `master` database with the 'sa' account and run the following:
+   Connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] `master` database with the `sa` account and run the following:
 
    ```sql
    USE [master]
    GO
-   CREATE LOGIN [<loginName>] with PASSWORD= N'<loginPassword>'
+   CREATE LOGIN [<loginName>] with PASSWORD= N'<password>'
    GRANT VIEW SERVER STATE TO <loginName>
    ```
 
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 1. On the primary node, stop and disable [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
 
-1. Follow the directions [in the SUSE documentation](https://www.suse.com/documentation/sles11/book_sle_admin/data/sec_basicnet_yast.html) to configure and update the hosts file for each cluster node. The 'hosts' file must include the IP address and name of every cluster node.
+1. Follow the directions [in the SUSE documentation](https://documentation.suse.com/sle-ha/12-SP5/single-html/SLE-HA-guide/index.html#cha-ha-setup) to configure and update the hosts file for each cluster node. The `hosts` file must include the IP address and name of every cluster node.
 
    To check the IP address of the current node, run:
 
@@ -68,7 +71,7 @@ The first step is to configure the operating system on the cluster nodes. For th
    sudo ip addr show
    ```
 
-   Set the computer name on each node. Give each node a unique name that is 15 characters or less. Set the computer name by adding it to `/etc/hostname` using [YAST](https://www.suse.com/documentation/sles11/book_sle_admin/data/sec_basicnet_yast.html) or [manually](https://www.suse.com/documentation/sled11book_sle_admin/data/sec_basicnet_manconf.html).
+   Set the computer name on each node. Give each node a unique name that is 15 characters or less. Set the computer name by adding it to `/etc/hostname` using [YAST](https://documentation.suse.com/sle-ha/12-SP5/single-html/SLE-HA-guide/index.html#cha-ha-setup) or [manually](https://documentation.suse.com/sle-ha/12-SP5/single-html/SLE-HA-guide/index.html#sec-ha-install-manual).
 
    The following example shows `/etc/hosts` with additions for two nodes named `SLES1` and `SLES2`.
 
@@ -78,13 +81,13 @@ The first step is to configure the operating system on the cluster nodes. For th
    10.128.16.77   SLES2
    ```
 
-   All cluster nodes must be able to access each other via SSH. Tools like hb_report or crm_report (for troubleshooting) and Hawk's History Explorer require passwordless SSH access between the nodes, otherwise they can only collect data from the current node. In case you use a non-standard SSH port, use the -X option ([see man page](https://www.suse.com/documentation/sle_ha/book_sleha/data/sec_ha_requirements_other.html)). For example, if your SSH port is 3479, invoke an crm_report with:
+   All cluster nodes must be able to access each other via SSH. Tools like `hb_report` or `crm_report` (for troubleshooting) and Hawk's History Explorer require passwordless SSH access between the nodes, otherwise they can only collect data from the current node. In case you use a non-standard SSH port, use the `-X` option (see [Other Requirements and Recommendations](https://documentation.suse.com/sle-ha/12-SP5/single-html/SLE-HA-guide/index.html#sec-ha-requirements-other)). For example, if your SSH port is 3479, invoke `crm_report` with:
 
     ```bash
     crm_report -X "-p 3479" [...]
     ```
 
-    For more information, see [the Administration Guide](https://www.suse.com/documentation/sle-ha-12/singlehtml/book_sleha/book_sleha.html#sec.ha.troubleshooting.misc).
+    For more information, see [the Administration Guide](https://documentation.suse.com/sle-ha/12-SP5/single-html/SLE-HA-guide/index.html#app-ha-troubleshooting).
 
 In the next section you'll configure shared storage and move your database files to that storage.
 
@@ -123,7 +126,7 @@ Before configuring the client NFS to mount the [!INCLUDE [ssnoversion-md](../inc
    - [Configuring Clients](https://documentation.suse.com/sles/12-SP5/single-html/SLES-admin/#sec-nfs-configuring-nfs-clients)
 
    > [!NOTE]  
-   > It's recommended to follow SUSE's best practices and recommendations regarding Highly Available NFS storage: [Highly Available NFS Storage with DRBD and Pacemaker](https://www.suse.com/documentation/sle-ha-12/book_sleha_techguides/data/art_ha_quick_nfs.html).
+   > You should follow SUSE's best practices and recommendations regarding Highly Available NFS storage: [Highly Available NFS Storage with DRBD and Pacemaker](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/art-ha-quick-nfs.html).
 
 1. Validate that [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] starts successfully with the new file path. Do this on each node. At this point only one node should run [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] at a time. They can't both run at the same time because they will both try to access the data files simultaneously (to avoid accidentally starting [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on both nodes, use a File System cluster resource, to make sure the share isn't mounted twice by the different nodes). The following commands start [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], check the status, and then stop [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)].
 
@@ -142,10 +145,13 @@ At this point, both instances of [!INCLUDE [ssnoversion-md](../includes/ssnovers
     ```bash
     sudo touch /var/opt/mssql/secrets/passwd
     sudo echo '<loginName>' >> /var/opt/mssql/secrets/passwd
-    sudo echo '<loginPassword>' >> /var/opt/mssql/secrets/passwd
+    sudo echo '<password>' >> /var/opt/mssql/secrets/passwd
     sudo chown root:root /var/opt/mssql/secrets/passwd
     sudo chmod 600 /var/opt/mssql/secrets/passwd
     ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. **All cluster nodes must be able to access each other via SSH**. Tools like hb_report or crm_report (for troubleshooting) and Hawk's History Explorer require passwordless SSH access between the nodes, otherwise they can only collect data from the current node. In case you use a non-standard SSH port, use the -X option (see man page). For example, if your SSH port is 3479, invoke an hb_report with:
 
@@ -153,11 +159,11 @@ At this point, both instances of [!INCLUDE [ssnoversion-md](../includes/ssnovers
     crm_report -X "-p 3479" [...]
     ```
 
-    For more information, see [System Requirements and Recommendations in the SUSE documentation](https://www.suse.com/documentation/sle_ha/book_sleha/data/sec_ha_requirements_other.html).
+    For more information, see [System Requirements and Recommendations in the SUSE documentation](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/cha-ha-requirements.html).
 
 1. **Install the High Availability extension**. To install the extension, follow the steps in the following SUSE article:
 
-    [Installation and Setup Quick Start](https://www.suse.com/documentation/sle-ha-12/singlehtml/install-quick/install-quick.html)
+    [Installation and Setup Quick Start](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/art-ha-install-quick.html)
 
 1. **Install the FCI resource agent for SQL Server**. Run the following commands on both nodes:
 
@@ -167,7 +173,7 @@ At this point, both instances of [!INCLUDE [ssnoversion-md](../includes/ssnovers
     sudo zypper install mssql-server-ha
     ```
 
-1. **Automatically set up the first node**. The next step is to set up a running one-node cluster by configuring the first node, SLES1. Follow the instructions in the SUSE article, [Setting Up the First Node](https://www.suse.com/documentation/sle-ha-12/singlehtml/install-quick/install-quick.html#sec.ha.inst.quick.setup.1st-node).
+1. **Automatically set up the first node**. The next step is to set up a running one-node cluster by configuring the first node, SLES1. Follow the instructions in the SUSE article, [Setting Up the First Node](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/art-ha-install-quick.html#sec-ha-inst-quick-setup-1st-node).
 
     When finished, check the cluster status with `crm status`:
 
@@ -177,7 +183,7 @@ At this point, both instances of [!INCLUDE [ssnoversion-md](../includes/ssnovers
 
     It should show that one node, SLES1, is configured.
 
-1. **Add nodes to an existing cluster**. Next join the SLES2 node to the cluster. Follow the instructions in the SUSE article, [Adding the Second Node](https://www.suse.com/documentation/sle-ha-12/singlehtml/install-quick/install-quick.html#sec.ha.inst.quick.setup.2nd-node).
+1. **Add nodes to an existing cluster**. Next join the SLES2 node to the cluster. Follow the instructions in the SUSE article, [Adding the Second Node](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/art-ha-install-quick.html#sec-ha-inst-quick-setup-2nd-node).
 
     When finished, check the cluster status with **crm status**. If you have successfully added a second node, the output is similar to the following:
 
@@ -192,7 +198,7 @@ At this point, both instances of [!INCLUDE [ssnoversion-md](../includes/ssnovers
     > [!NOTE]  
     > **admin_addr** is the virtual IP cluster resource which is configured during initial one-node cluster setup.
 
-1. **Removal procedures**. If you need to remove a node from the cluster, use the **ha-cluster-remove** bootstrap script. For more information, see [Overview of the Bootstrap Scripts](https://www.suse.com/documentation/sle-ha-12/singlehtml/install-quick/install-quick.html#sec.ha.inst.quick.bootstrap).
+1. **Removal procedures**. If you need to remove a node from the cluster, use the **ha-cluster-remove** bootstrap script. For more information, see [Overview of the Bootstrap Scripts](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/art-ha-install-quick.html#sec-ha-inst-quick-bootstrap).
 
 ## Configure the cluster resources for SQL Server
 
@@ -225,7 +231,7 @@ exit
 
 After the configuration is committed, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] will start on the same node as the virtual IP resource.
 
-For more information, see [Configuring and Managing Cluster Resources (Command Line)](https://www.suse.com/documentation/sle-ha-12/singlehtml/book_sleha/book_sleha.html#cha.ha.manual_config).
+For more information, see [Configuring and Managing Cluster Resources (Command Line)](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/cha-ha-manual-config.html).
 
 ### Verify that SQL Server is started
 
@@ -252,7 +258,7 @@ Full list of resources:
 ## Manage cluster resources
 
 To manage your cluster resources, see the following SUSE article:
-[Managing Cluster Resources](https://www.suse.com/documentation/sle-ha-12/singlehtml/book_sleha/book_sleha.html#sec.ha.config.crm)
+[Managing Cluster Resources](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/cha-ha-manual-config.html#sec-ha-config-crm)
 
 ### Manual failover
 
@@ -267,4 +273,4 @@ migrate mssqlha SLES2
 
 ## Related content
 
-- [SUSE Linux Enterprise High Availability Extension - Administration Guide](https://www.suse.com/documentation/sle-ha-12/singlehtml/book_sleha/book_sleha.html)
+- [SUSE Linux Enterprise High Availability Extension - Administration Guide](https://documentation.suse.com/sle-ha/12-SP5/html/SLE-HA-all/art-ha-install-quick.html#sec-ha-inst-quick-installation)

@@ -1,10 +1,10 @@
 ---
-title: "Quickstart: Deploy a SQL Server Linux container to Kubernetes using Helm charts"
+title: "Quickstart: Deploy a SQL Server Linux Container to Kubernetes Using Helm Charts"
 description: Learn how to deploy a SQL Server on Linux container to Azure Kubernetes Service (AKS) using Helm charts.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
@@ -139,8 +139,8 @@ For example, if you connect to the SQL Server instance using SSMS, you can use t
 
 - **Server name:** Use the `External-IP` address for the `mssql-latest-deploy` service. In this example, it's `20.40.0.145`.
 - **Authentication:** Select **SQL Server Authentication** from the dropdown list.
-- **Login:** Use **sa**, which is the system administrator account.
-- **Password:** The **sa** password matches the value you provided in the `sa_password` configuration option, in the `values.yaml` file of the Helm chart.
+- **Login:** Use `sa`, which is the system administrator account.
+- **Password:** The `sa` password matches the value you provided in the `MSSQL_SA_PASSWORD` configuration option, in the `values.yaml` file of the Helm chart.
 
 Once you connect, you can expand the SQL Server instance in **Object Explorer**.
 

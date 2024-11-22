@@ -1,13 +1,13 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/24/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.topic: include
 ms.custom:
   - linux-related-content
 ---
-When you connect to your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance using the `sa` account for the first time after installation, it's important for you to follow these steps, and then immediately disable the `sa` login as a security best practice.
+When you connect to your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance using the system administrator (`sa`) account for the first time after installation, it's important for you to follow these steps, and then immediately disable the `sa` account as a security best practice.
 
 1. Create a new login, and make it a member of the **sysadmin** server role.
 

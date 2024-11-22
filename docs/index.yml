@@ -4,15 +4,16 @@ summary: "Learn how to use SQL Server and Azure SQL, both on-premises and in the
 brand: sql
 metadata:
   title: Microsoft SQL documentation
-  description: "Learn how to use SQL Server and Azure SQL to manage your database needs, both on-premises and in the cloud."
-  ms.topic: hub-page
-  ms.service: sql
+  description: Learn how to use SQL Server and Azure SQL to manage your database needs, both on-premises and in the cloud.
   author: MikeRayMSFT
   ms.author: mikeray
   ms.reviewer: randolphwest
   ms.date: 11/15/2024
-  ms.custom: FY22Q2Fresh
-
+  ms.service: sql
+  ms.topic: hub-page
+  ms.custom:
+    - FY22Q2Fresh
+    - ignite-2024
 # itemType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | video | whats-new
 
 highlightedContent:

@@ -8,6 +8,8 @@ ms.date: 02/13/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "UPDATE STATISTICS"
   - "UPDATE_STATISTICS_TSQL"
@@ -18,7 +20,7 @@ helpviewer_keywords:
   - "statistical information [SQL Server], updating"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 
 # UPDATE STATISTICS (Transact-SQL)

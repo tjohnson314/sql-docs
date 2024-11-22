@@ -7,6 +7,8 @@ ms.date: 08/29/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "Boolean expressions"
   - "expressions [SQL Server], about expressions"

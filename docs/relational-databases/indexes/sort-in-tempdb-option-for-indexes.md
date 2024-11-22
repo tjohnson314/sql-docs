@@ -7,6 +7,8 @@ ms.date: "04/24/2017"
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "SORT_IN_TEMPDB option"
   - "disk space [SQL Server], indexes"

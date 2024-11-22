@@ -98,7 +98,7 @@ For more information about creating the secondary SQL Managed Instance in the sa
 
 ## Use paired regions
 
-Deploy both managed instances to [paired regions](/azure/availability-zones/cross-region-replication-azure) for performance reasons. SQL Managed Instance failover groups in paired regions have better performance compared to unpaired regions.
+Deploy both managed instances to [paired regions](/azure/reliability/cross-region-replication-azure) for performance reasons. SQL Managed Instance failover groups in paired regions have better performance compared to unpaired regions.
 
 Azure SQL Managed Instance follows a safe deployment practice where Azure paired regions are generally not deployed to at the same time. However, it's not possible to predict which region will be upgraded first, so the order of deployment isn't guaranteed. Sometimes, your primary instance is upgraded first, and sometimes the secondary instance is upgraded first.
 

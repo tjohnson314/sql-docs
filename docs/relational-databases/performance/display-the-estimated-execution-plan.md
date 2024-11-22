@@ -7,6 +7,8 @@ ms.date: 03/01/2023
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "zoom [SQL Server]"
   - "estimated execution plan [SQL Server]"

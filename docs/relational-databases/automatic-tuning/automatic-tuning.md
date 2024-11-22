@@ -7,7 +7,9 @@ ms.reviewer: wiassaf
 ms.date: 10/25/2024
 ms.service: sql
 ms.topic: conceptual
-ms.custom: fasttrack-edit
+ms.custom:
+  - fasttrack-edit
+  - ignite-2024
 helpviewer_keywords:
   - "performance tuning [SQL Server]"
   - "automatic tuning"

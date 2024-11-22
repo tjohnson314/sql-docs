@@ -6,6 +6,8 @@ ms.author: "maghan"
 ms.date: 01/11/2019
 ms.service: sql
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "XML [SMO]"
 monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"

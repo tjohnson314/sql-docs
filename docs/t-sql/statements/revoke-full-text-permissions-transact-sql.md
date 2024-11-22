@@ -7,6 +7,8 @@ ms.date: "07/26/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "REVOKE statement, full-text permissions"
   - "full-text catalogs [SQL Server], permissions"

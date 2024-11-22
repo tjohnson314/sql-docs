@@ -3,21 +3,23 @@ title: "Spatial Data Types Overview"
 description: "Spatial Data Types represent information about the physical location and shape of geometric objects in the SQL Database Engine."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviwer: mlandzic, jovanpop
+ms.reviewer: mlandzic, jovanpop
 ms.date: 11/04/2024
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "geometry data type [SQL Server], understanding"
   - "geography data type [SQL Server], spatial data"
   - "planar spatial data [SQL Server], geometry data type"
   - "spatial data types [SQL Server]"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Spatial Data Types Overview
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw.md)]
-  
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Fabric SQL endpoint Fabric DW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]
+
 There are two types of spatial data. The **geometry** data type supports planar, or Euclidean (flat-earth), data. The **geometry** data type both conforms to the *Open Geospatial Consortium (OGC) Simple Features for SQL Specification* version 1.1.0 and is compliant with SQL MM (ISO standard).
 
 [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] also supports the **geography** data type, which stores ellipsoidal (round-earth) data, such as GPS latitude and longitude coordinates.
@@ -29,9 +31,9 @@ There are two types of spatial data. The **geometry** data type supports planar,
 
 The **geometry** and **geography** data types support 16 types of spatial data objects, or instance types. However, only 11 of these instance types are *instantiable*; you can create and work with these instances (or instantiate them) in a database. These instances derive certain properties from their parent data types.
 
-The figure below shows the geometry hierarchy upon which the **geometry** and **geography** data types are based. The instantiable types of **geometry** and **geography** are indicated in blue.  
+The following figure shows the geometry hierarchy upon which the **geometry** and **geography** data types are based. The instantiable types of **geometry** and **geography** are indicated in blue.  
 
-:::image type="content" source="media/spatial-data-types-overview/geom-hierarchy.png" alt-text="Diagram of the heirarchy of Geometry types." lightbox="media/spatial-data-types-overview/geom-hierarchy.png":::
+:::image type="content" source="media/spatial-data-types-overview/geom-hierarchy.png" alt-text="Diagram of the hierarchy of Geometry types." lightbox="media/spatial-data-types-overview/geom-hierarchy.png":::
 
 There's an additional instantiable type for the **geography** data type: **FullGlobe**. The **geometry** and **geography** types can recognize a specific instance as long as it's a well-formed instance, even if the instance isn't defined explicitly. For example, if you define a **Point** instance explicitly using the `STPointFromText()` method, **geometry** and **geography** recognize the instance as a **Point**, as long as the method input is well formed. If you define the same instance using the `STGeomFromText()` method, both the **geometry** and **geography** data types recognize the instance as a **Point**.  
 
@@ -102,7 +104,7 @@ For more information on OGC specifications, see the following documents:
 
 Three instantiable types can take circular arc segments: **CircularString**, **CompoundCurve**, and **CurvePolygon**.  A circular arc segment is defined by three points in a two-dimensional plane and the third point cannot be the same as the first point. Few examples of circular arc segments:
 
-:::image type="content" source="media/spatial-data-types-overview/spatial-types.gif" alt-text="Image of circular arc segments that can be represented in SQL Database Engine spatial types.":::
+:::image type="content" source="media/spatial-data-types-overview/spatial-types.gif" alt-text="Diagram of circular arc segments that can be represented in SQL Database Engine spatial types.":::
 
 First two examples show typical circular arc segments. Note how each of the three points lies on the perimeter of a circle.  
 
@@ -162,7 +164,7 @@ SET @g = geometry::Parse('COMPOUNDCURVE((2 2, 4 2), (4 2, 4 4), (4 4, 2 4), (2 4
 SET @g = geometry::Parse('COMPOUNDCURVE((2 2, 4 2, 4 4, 2 4, 2 2))');
 ```
 
-In the examples above, either a **LineString** instance or a **CompoundCurve** instance could store the figure.  This next example uses a **CompoundCurve** to store a pie slice:  
+In the previous examples, either a **LineString** instance or a **CompoundCurve** instance could store the figure. This next example uses a **CompoundCurve** to store a pie slice:  
 
 ```sql
 SET @g = geometry::Parse('COMPOUNDCURVE(CIRCULARSTRING(2 2, 1 3, 0 2),(0 2, 1 0, 2 2))');  
@@ -188,7 +190,7 @@ Storing the pie slice using a **CircularString** instance requires that three po
 SET @g = geometry::Parse('CIRCULARSTRING( 0 0, 3 6.3246, 3 6.3246, 0 7, -3 6.3246, 0 0, 0 0)');
 ```
 
-**CompoundCurve** instances allow both **LineString** and **CircularString** components so that only two points to the line segments of the pie slice need to be known.  This code example shows how to use a **CompoundCurve** to store the same figure:
+**CompoundCurve** instances allow both **LineString** and **CircularString** components so that only two points to the line segments of the pie slice need to be known. This code example shows how to use a **CompoundCurve** to store the same figure:
 
 ```sql
 DECLARE @g geometry;
@@ -199,6 +201,10 @@ SELECT @g.ToString(), @g.STLength();
 ### Polygon and CurvePolygon comparison
 
 **CurvePolygon** instances can use **CircularString** and **CompoundCurve** instances when defining their exterior and interior rings. **Polygon** instances can't.
+
+## Limitations
+
+In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], **geography** and **geometry** data types are supported but cannot be [mirrored to the Fabric OneLake](/fabric/database/sql/mirroring-overview).
 
 ## Related content
 

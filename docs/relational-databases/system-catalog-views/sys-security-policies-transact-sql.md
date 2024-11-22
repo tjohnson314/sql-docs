@@ -7,6 +7,8 @@ ms.date: "06/10/2016"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "SYS.SECURITY_POLICIES_TSQL"
   - "SECURITY_POLICIES_TSQL"

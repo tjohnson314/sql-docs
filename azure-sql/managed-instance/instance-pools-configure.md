@@ -12,6 +12,7 @@ ms.topic: how-to
 ms.custom:
   - devx-track-azurepowershell
   - devx-track-azurecli
+  - ignite-2024
 ---
 # Create an instance pool - Azure SQL Managed Instance
 

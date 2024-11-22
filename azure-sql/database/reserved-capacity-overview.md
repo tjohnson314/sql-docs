@@ -9,8 +9,10 @@ ms.date: 11/19/2024
 ms.service: azure-sql
 ms.subservice: service-overview
 ms.topic: conceptual
-ms.custom: sqldbrb=2
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
+ms.custom:
+  - sqldbrb=2
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ---
 # Save costs for resources with reserved capacity - Azure SQL Database & SQL Managed Instance
 [!INCLUDE [appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)] 

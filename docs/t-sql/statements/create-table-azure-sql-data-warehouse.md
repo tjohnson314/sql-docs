@@ -7,9 +7,11 @@ ms.reviewer: vanto, xiaoyul, mariyaali, maghan
 ms.date: 11/01/2024
 ms.service: sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azure-sqldw-latest||=fabric"
+monikerRange: ">=aps-pdw-2016 || =azure-sqldw-latest || =fabric"
 ---
 
 # CREATE TABLE

@@ -8,6 +8,8 @@ ms.date: "05/15/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "database roles [SQL Server], permissions"
   - "denying permissions [SQL Server], database roles"

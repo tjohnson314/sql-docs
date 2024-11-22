@@ -7,6 +7,8 @@ ms.date: "12/01/2022"
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "sp_recompile"
   - "WITH RECOMPILE clause"

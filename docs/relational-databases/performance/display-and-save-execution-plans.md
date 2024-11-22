@@ -8,6 +8,8 @@ ms.date: 06/01/2023
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "Showplan results"
   - "execution plans [SQL Server]"

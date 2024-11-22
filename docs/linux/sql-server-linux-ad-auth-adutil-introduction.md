@@ -4,7 +4,7 @@ description: Overview of adutil, a utility for configuring and managing Active D
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 06/24/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -47,9 +47,9 @@ To set up the keytab using **mssql-conf**, see [Create the SQL Server service ke
 
 ## Install adutil
 
-If you don't accept the EULA during the time of install, when you run the **adutil** command for the first time, you must run it with the `--accept-eula` flag (for all distributions).
+If you don't accept the end user license agreement (EULA) during the time of install, when you run the **adutil** command for the first time, you must run it with the `--accept-eula` flag (for all distributions).
 
-# [RHEL](#tab/rhel)
+# [Red Hat Enterprise Linux (RHEL)](#tab/rhel)
 
 1. Download the Microsoft Red Hat repository configuration file.
 
@@ -65,7 +65,7 @@ If you don't accept the EULA during the time of install, when you run the **adut
    sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/8/prod.repo
    ```
 
-1. If you had a previous preview version of **adutil** installed, remove any older **adutil** packages using the below command.
+1. If you had a previous preview version of **adutil** installed, remove any older **adutil** packages using the following command.
 
    ```bash
    sudo yum remove adutil-preview
@@ -102,7 +102,7 @@ If you don't accept the EULA during the time of install, when you run the **adut
    curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
    ```
 
-1. If you had a previous preview version of **adutil** installed, remove any older **adutil** packages using the below command.
+1. If you had a previous preview version of **adutil** installed, remove any older **adutil** packages using the following command.
 
    ```bash
    sudo apt-get remove adutil-preview
@@ -133,7 +133,7 @@ If you don't accept the EULA during the time of install, when you run the **adut
    sudo zypper addrepo -fc https://packages.microsoft.com/config/sles/12/prod.repo
    ```
 
-1. If you had a previous preview version of **adutil** installed, remove any older **adutil** packages using the below command.
+1. If you had a previous preview version of **adutil** installed, remove any older **adutil** packages using the following command.
 
    ```bash
    sudo zypper remove adutil-preview
@@ -232,13 +232,16 @@ Each command is documented so you can get started right away. Here are some of t
 - Create keytabs using **adutil**:
 
   ```bash
-  adutil keytab createauto -k /var/opt/mssql/secrets/mssql.keytab -p 1433 -H mymachine.contoso.com --password 'P@ssw0rd' -s MSSQLSvc
+  adutil keytab createauto -k /var/opt/mssql/secrets/mssql.keytab -p 1433 -H mymachine.contoso.com --password '<password>' -s MSSQLSvc
   ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 You can refer to the reference manual page of **adutil** using the command `man adutil`.
 
 ## Related content
 
-- [Configure Active Directory authentication with SQL Server on Linux using adutil](sql-server-linux-ad-auth-adutil-tutorial.md)
-- [Configure Active Directory authentication with SQL Server on Linux containers](sql-server-linux-containers-ad-auth-adutil-tutorial.md)
-- [Rotate SQL Server on Linux keytabs](sql-server-linux-ad-auth-rotate-keytabs.md)
+- [Tutorial: Use adutil to configure Active Directory authentication with SQL Server on Linux](sql-server-linux-ad-auth-adutil-tutorial.md)
+- [Tutorial: Configure Active Directory authentication with SQL Server on Linux containers](sql-server-linux-containers-ad-auth-adutil-tutorial.md)
+- [Rotate keytabs for SQL Server on Linux](sql-server-linux-ad-auth-rotate-keytabs.md)

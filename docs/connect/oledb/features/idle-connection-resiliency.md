@@ -7,6 +7,8 @@ ms.date: "06/04/2021"
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 ---
 
 # Idle connection resiliency in the OLE DB Driver

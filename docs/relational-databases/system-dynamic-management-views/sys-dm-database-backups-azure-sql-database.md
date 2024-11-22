@@ -7,6 +7,8 @@ ms.reviewer: randolphwest
 ms.date: 10/31/2024
 ms.service: azure-sql-database
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "dm_database_backups_TSQL"
   - "dm_database_backups"

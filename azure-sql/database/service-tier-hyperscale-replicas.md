@@ -84,7 +84,7 @@ In addition, named replicas offer flexibility and elasticity to also satisfy man
 
 ### Zone redundancy for Hyperscale named replicas
 
-Hyperscale named replicas configured for zone redundancy use [Azure Availability Zones](/azure/availability-zones/az-overview#availability-zones) to distribute named replicas compute nodes across different physical locations within an Azure region. By choosing zone redundancy for named replicas, you can enhance the resilience of all layers of your Hyperscale databases to a wider range of failures, including datacenter outages, without any modifications of the application logic. For more information, see [Hyperscale zone redundant availability](high-availability-sla-local-zone-redundancy.md#hyperscale-service-tier-zone-redundant-availability).
+Hyperscale named replicas configured for zone redundancy use [Azure Availability Zones](/azure/reliability/availability-zones-overview) to distribute named replicas compute nodes across different physical locations within an Azure region. By choosing zone redundancy for named replicas, you can enhance the resilience of all layers of your Hyperscale databases to a wider range of failures, including datacenter outages, without any modifications of the application logic. For more information, see [Hyperscale zone redundant availability](high-availability-sla-local-zone-redundancy.md#hyperscale-service-tier-zone-redundant-availability).
 
 For a tutorial to create a zone redundant Hyperscale named replica, see [Create a Hyperscale named replica](hyperscale-named-replica-configure.md#create-a-hyperscale-named-replica).
 

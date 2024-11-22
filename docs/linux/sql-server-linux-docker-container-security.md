@@ -1,17 +1,17 @@
 ---
-title: Secure SQL Server Linux containers
+title: Secure SQL Server Linux Containers
 description: Understand the different ways to secure SQL Server Linux containers and how you can run containers as different non-root users on the host.
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 02/15/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
 ms.custom:
   - engagement-fy23
   - linux-related-content
-monikerRange: ">=sql-server-linux-2017||>=sql-server-2017"
+monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017"
 ---
 
 # Secure SQL Server Linux containers
@@ -22,12 +22,14 @@ monikerRange: ">=sql-server-linux-2017||>=sql-server-2017"
 
 The examples in this article assume that you're using Docker, but you can apply the same principles to other container orchestration tools including Kubernetes.
 
-## <a id="buildnonrootcontainer"></a> Build and run non-root SQL Server 2017 containers
+<a id="buildnonrootcontainer"></a>
+
+## Build and run non-root SQL Server 2017 containers
 
 Follow these steps to build a [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] container that starts up as the `mssql` (non-root) user.
 
 > [!NOTE]  
-> Containers for [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] and later versions automatically start up as non-root, while [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] containers start as root by default. For more information on running SQL Server containers as non-root, see [Configure security](sql-server-linux-docker-container-security.md).
+> Containers for [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] and later versions automatically start up as non-root, while [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] containers start as root by default. For more information on running SQL Server containers as non-root, see [Secure SQL Server Linux containers](sql-server-linux-docker-container-security.md).
 
 1. Download the [sample Dockerfile for non-root SQL Server containers](https://raw.githubusercontent.com/microsoft/mssql-docker/master/linux/preview/examples/mssql-server-linux-non-root/Dockerfile) and save it as `dockerfile`.
 
@@ -44,7 +46,7 @@ Follow these steps to build a [!INCLUDE [sssql17-md](../includes/sssql17-md.md)]
    > The `SA_PASSWORD` environment variable is deprecated. Use `MSSQL_SA_PASSWORD` instead.
 
     ```bash
-    docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword@" --cap-add SYS_PTRACE --name sql1 -p 1433:1433 -d 2017-latest-non-root
+    docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" --cap-add SYS_PTRACE --name sql1 -p 1433:1433 -d 2017-latest-non-root
     ```
 
     > [!NOTE]  
@@ -62,7 +64,9 @@ Follow these steps to build a [!INCLUDE [sssql17-md](../includes/sssql17-md.md)]
     whoami
     ```
 
-## <a id="nonrootuser"></a> Run container as a different non-root user on the host
+<a id="nonrootuser"></a>
+
+## Run container as a different non-root user on the host
 
 To run the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container as a different non-root user, add the `-u` flag to the `docker run` command. The non-root container has the restriction that it must run as part of the `root` group unless a volume is mounted to `/var/opt/mssql` that the non-root user can access. The `root` group doesn't grant any extra root permissions to the non-root user.
 
@@ -71,7 +75,7 @@ To run the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container 
 You can start [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] with a custom UID. For example, the following command starts [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] with UID 4000:
 
 ```bash
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" --cap-add SYS_PTRACE -u 4000:0 -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" --cap-add SYS_PTRACE -u 4000:0 -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 
 > [!WARNING]  
@@ -82,7 +86,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" --cap-add 
 You can run the non-root container as the root user if necessary, which also grants all file permissions automatically to the container, because it has higher privilege.
 
 ```bash
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" -u 0:0 -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" -u 0:0 -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 
 #### Run as a user on your host machine
@@ -90,7 +94,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" -u 0:0 -p 
 You can start [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] with an existing user on the host machine with the following command:
 
 ```bash
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" --cap-add SYS_PTRACE -u $(id -u myusername):0 -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" --cap-add SYS_PTRACE -u $(id -u myusername):0 -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 
 #### Run as a different user and group
@@ -98,10 +102,12 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" --cap-add 
 You can start [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] with a custom user and group. In this example, the mounted volume has permissions configured for the user or group on the host machine.
 
 ```bash
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPassword" --cap-add SYS_PTRACE -u $(id -u myusername):$(id -g myusername) -v /path/to/mssql:/var/opt/mssql -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" --cap-add SYS_PTRACE -u $(id -u myusername):$(id -g myusername) -v /path/to/mssql:/var/opt/mssql -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 
-## <a id="storagepermissions"></a> Configure persistent storage permissions for non-root containers
+<a id="storagepermissions"></a>
+
+## Configure persistent storage permissions for non-root containers
 
 To allow the non-root user to access database files that are on mounted volumes, make sure that the user or group you run the container under, can read from and write to the persistent file storage.
 
@@ -156,7 +162,7 @@ Following is an example of how the connection can be encrypted to [!INCLUDE [ssn
 
 1. Now create a `mssql.conf` file with the below content to enable the Server Initiated encryption. For Client initiated encryption, change the last line to `forceencryption = 0`.
 
-   ```bash
+   ```ini
    [network]
    tlscert = /etc/ssl/certs/mssql.pem
    tlskey = /etc/ssl/private/mssql.key
@@ -178,21 +184,21 @@ Following is an example of how the connection can be encrypted to [!INCLUDE [ssn
    In the previous command, we have mounted the `mssql.conf`, `mssql.pem`, and `mssql.key` files to the container and mapped the 1433 ([!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] default port) port in the container to port 5434 on the host.
 
    > [!NOTE]  
-   > If you are using RHEL 8 and above, you can also use `podman run` command instead of `docker run`.
+   > If you use RHEL 8 and later versions, you can also use `podman run` command instead of `docker run`.
 
 Follow the "Register the certificate on your client machine" and "Example connection strings" sections documented in [Client Initiated Encryption](sql-server-linux-encrypted-connections.md?tabs=client#overview) to start encrypting connections to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux containers.
 
 ## Related content
 
 <!--SQL Server 2017 on Linux -->
-::: moniker range="= sql-server-linux-2017 || = sql-server-2017"
+::: moniker range="=sql-server-linux-2017 || =sql-server-2017"
 
 - Get started with [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] container images on Docker by going through the [quickstart](quickstart-install-connect-docker.md?view=sql-server-2017&preserve-view=true)
 
 ::: moniker-end
 
 <!--SQL Server 2019 on Linux-->
-::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
+::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 - Get started with [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] container images on Docker by going through the [quickstart](quickstart-install-connect-docker.md)
 
@@ -205,8 +211,8 @@ Follow the "Register the certificate on your client machine" and "Example connec
 
 ::: moniker-end
 
-- [Deploy and connect to SQL Server Docker containers](sql-server-linux-docker-container-deployment.md)
+- [Deploy and connect to SQL Server Linux containers](sql-server-linux-docker-container-deployment.md)
 
-- [Reference additional configuration and customization to Docker containers](sql-server-linux-docker-container-configure.md)
+- [Configure and customize SQL Server Linux containers](sql-server-linux-docker-container-configure.md)
 
-- [Troubleshooting SQL Server Docker containers](sql-server-linux-docker-container-troubleshooting.md)
+- [Troubleshoot SQL Server Docker containers](sql-server-linux-docker-container-troubleshooting.md)

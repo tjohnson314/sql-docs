@@ -9,6 +9,8 @@ ms.date: 03/08/2024
 ms.service: sql
 ms.subservice: big-data-cluster
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 monikerRange: ">=sql-server-ver15"
 ---
 # Big data options on the Microsoft SQL Server platform

@@ -6,7 +6,9 @@ ms.author: wiassaf
 ms.date: 04/12/2023
 ms.service: sql
 ms.topic: conceptual
-ms.custom: intro-deployment
+ms.custom:
+  - intro-deployment
+  - ignite-2024
 f1_keywords:
   - "sql13.swb.deploydacwizard.introduction.f1"
   - "sql13.swb.deploydacwizard.deploydac.f1"

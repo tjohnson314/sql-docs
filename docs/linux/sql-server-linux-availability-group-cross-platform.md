@@ -1,16 +1,16 @@
 ---
-title: Configure SQL Server Always On availability group on Windows and Linux
+title: Configure SQL Server Always on Availability Group on Windows and Linux
 description: Learn how to create a SQL Server Always On Availability Group (AG) with one replica on a Windows server and the other replica on a Linux server.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
 ms.custom:
   - linux-related-content
-monikerRange: ">= sql-server-2017"
+monikerRange: ">=sql-server-2017"
 ---
 # Configure SQL Server Always On availability group on Windows and Linux (cross-platform)
 
@@ -81,24 +81,34 @@ For the scripts in this article, angle brackets `<` and `>` identify values that
 1. On the primary replica, create a database login and password.
 
    ```sql
-   CREATE LOGIN dbm_login WITH PASSWORD = '<C0m9L3xP@55w0rd!>';
+   CREATE LOGIN dbm_login
+       WITH PASSWORD = '<password>';
+
    CREATE USER dbm_user FOR LOGIN dbm_login;
    GO
    ```
 
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 1. On the primary replica, create a master key and certificate, then back up the certificate with a private key.
 
    ```sql
-   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<C0m9L3xP@55w0rd!>';
-   CREATE CERTIFICATE dbm_certificate WITH SUBJECT = 'dbm';
-   BACKUP CERTIFICATE dbm_certificate
-   TO FILE = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\dbm_certificate.cer'
-   WITH PRIVATE KEY (
-           FILE = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\dbm_certificate.pvk',
-           ENCRYPTION BY PASSWORD = '<C0m9L3xP@55w0rd!>'
-       );
+   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<master-key-password>';
+
+   CREATE CERTIFICATE dbm_certificate
+       WITH SUBJECT = 'dbm';
+
+   BACKUP CERTIFICATE dbm_certificate TO FILE = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\dbm_certificate.cer'
+       WITH PRIVATE KEY (
+            FILE = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\dbm_certificate.pvk',
+            ENCRYPTION BY PASSWORD = '<private-key-password>'
+   );
    GO
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. Copy the certificate and private key to the Linux server (secondary replica) at `/var/opt/mssql/data`. You can use `pscp` to copy the files to the Linux server.
 
@@ -118,12 +128,18 @@ For the scripts in this article, angle brackets `<` and `>` identify values that
 1. On the secondary replica, create a database login and password and create a master key.
 
    ```sql
-   CREATE LOGIN dbm_login WITH PASSWORD = '<C0m9L3xP@55w0rd!>';
+   CREATE LOGIN dbm_login
+       WITH PASSWORD = '<password>';
+
    CREATE USER dbm_user FOR LOGIN dbm_login;
    GO
-   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<M@st3rKeyP@55w0rD!>'
+
+   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<master-key-password>';
    GO
    ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 1. On the secondary replica, restore the certificate you copied to `/var/opt/mssql/data`.
 
@@ -132,24 +148,35 @@ For the scripts in this article, angle brackets `<` and `>` identify values that
        AUTHORIZATION dbm_user
        FROM FILE = '/var/opt/mssql/data/dbm_certificate.cer'
        WITH PRIVATE KEY (
-       FILE = '/var/opt/mssql/data/dbm_certificate.pvk',
-       DECRYPTION BY PASSWORD = '<C0m9L3xP@55w0rd!>'
-   )
+           FILE = '/var/opt/mssql/data/dbm_certificate.pvk',
+           DECRYPTION BY PASSWORD = '<private-key-password>'
+   );
    GO
    ```
+
+   In the previous example, replace `<private-key-password>` with the same password you used when creating the certificate on the primary replica.
 
 1. On the primary replica, create an endpoint.
 
    ```sql
    CREATE ENDPOINT [Hadr_endpoint]
-       AS TCP (LISTENER_IP = (0.0.0.0), LISTENER_PORT = 5022)
-       FOR DATA_MIRRORING (
-           ROLE = ALL,
-           AUTHENTICATION = CERTIFICATE dbm_certificate,
-           ENCRYPTION = REQUIRED ALGORITHM AES
-           );
-   ALTER ENDPOINT [Hadr_endpoint] STATE = STARTED;
-   GRANT CONNECT ON ENDPOINT::[Hadr_endpoint] TO [dbm_login];
+       AS TCP
+   (
+               LISTENER_IP = (0.0.0.0),
+               LISTENER_PORT = 5022
+   )
+       FOR DATABASE_MIRRORING
+   (
+               ROLE = ALL,
+               AUTHENTICATION = CERTIFICATE dbm_certificate,
+               ENCRYPTION = REQUIRED ALGORITHM AES
+   );
+
+   ALTER ENDPOINT [Hadr_endpoint]
+       STATE = STARTED;
+
+   GRANT CONNECT
+       ON ENDPOINT::[Hadr_endpoint] TO [dbm_login];
    GO
    ```
 
@@ -222,10 +249,10 @@ For the scripts in this article, angle brackets `<` and `>` identify values that
    To create your database, run the script.
 
    ```sql
-   CREATE DATABASE [TestDB]
-      CONTAINMENT = NONE
-     ON  PRIMARY ( NAME = N'TestDB', FILENAME = N'<F:\Path>\TestDB.mdf')
-     LOG ON ( NAME = N'TestDB_log', FILENAME = N'<F:\Path>\TestDB_log.ldf');
+   CREATE DATABASE [TestDB] CONTAINMENT = NONE
+       ON
+       PRIMARY(NAME = N'TestDB', FILENAME = N'<F:\Path>\TestDB.mdf')
+       LOG ON (NAME = N'TestDB_log', FILENAME = N'<F:\Path>\TestDB_log.ldf');
    GO
    ```
 

@@ -7,6 +7,8 @@ ms.date: "08/08/2016"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "CHANGE_TRACKING_IS_COLUMN_IN_MASK_TSQL"
   - "CHANGE_TRACKING_IS_COLUMN_IN_MASK"

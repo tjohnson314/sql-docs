@@ -1,13 +1,15 @@
 ---
-title: "OVER clause (Transact-SQL)"
+title: "OVER Clause (Transact-SQL)"
 description: "Transact-SQL reference for the OVER clause, which defines a user-specified set of rows within a query result set."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 10/10/2024
+ms.date: 11/21/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "OVER_TSQL"
   - "OVER"
@@ -169,7 +171,7 @@ Defines the logical order of the rows within each partition of the result set. T
 
 - If not specified, the default order is `ASC` and the window function uses all rows in the partition.
 
-- If specified, and a `ROWS` or `RANGE` isn't specified, then default `RANGE UNBOUNDED PRECEDING AND CURRENT ROW` is used as the default for the window frame, by the functions that can accept an optional `ROWS` or `RANGE` specification (for example, `min` or `max`).
+- If specified, and a `ROWS` or `RANGE` isn't specified, then default `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` is used as the default for the window frame, by the functions that can accept an optional `ROWS` or `RANGE` specification (for example, `min` or `max`).
 
 ```sql
 SELECT object_id,
@@ -661,4 +663,4 @@ SO43659      229      2    16     18.75
 
 - [Aggregate Functions (Transact-SQL)](../functions/aggregate-functions-transact-sql.md)
 - [Analytic functions (Transact-SQL)](../functions/analytic-functions-transact-sql.md)
-- [Excellent blog post about window functions and OVER, on sqlmag.com, by Itzik Ben-Gan](https://www.itprotoday.com/sql-server/how-use-microsoft-sql-server-2012s-window-functions-part-1)
+- [Excellent blog post about window functions and OVER, on sqlmag.com, by Itzik Ben-Gan](https://www.itprotoday.com/innovations-of-the-2010s/how-to-use-microsoft-sql-server-2012-s-window-functions-part-1)

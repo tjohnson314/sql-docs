@@ -7,6 +7,8 @@ ms.date: "02/01/2021"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "ALTER_AUTHORIZATION_TSQL"
   - "ALTER AUTHORIZATION"

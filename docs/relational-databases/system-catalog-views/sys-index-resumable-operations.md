@@ -7,6 +7,8 @@ ms.date: "11/12/2019"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sys.index_resumable_operations_TSQL"
   - "sys.indexes_TSQL"

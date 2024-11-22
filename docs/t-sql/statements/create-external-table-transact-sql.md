@@ -8,6 +8,8 @@ ms.date: 07/11/2023
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "CREATE_EXTERNAL_TABLE"
   - "CREATE EXTERNAL TABLE"

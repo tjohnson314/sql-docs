@@ -7,6 +7,8 @@ ms.date: "03/27/2017"
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sys.database_scoped_credentials"
   - "sys.database_scoped_credentials_TSQL"

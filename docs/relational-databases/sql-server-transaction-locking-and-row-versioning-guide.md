@@ -8,6 +8,8 @@ ms.date: 10/01/2024
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "guide, transaction locking and row versioning"
   - "transaction locking and row versioning guide"

@@ -7,7 +7,9 @@ ms.date: 01/25/2024
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: quickstart
-ms.custom: intro-quickstart
+ms.custom:
+  - intro-quickstart
+  - ignite-2024
 helpviewer_keywords:
   - "new stored procedures"
   - "stored procedures [SQL Server], creating"

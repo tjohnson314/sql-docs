@@ -8,6 +8,8 @@ ms.date: 10/14/2022
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "filtered indexes [SQL Server], about filtered indexes"
   - "designing indexes [SQL Server], filtered"

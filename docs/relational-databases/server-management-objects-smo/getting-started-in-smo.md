@@ -6,7 +6,9 @@ ms.author: "maghan"
 ms.date: "08/06/2017"
 ms.service: sql
 ms.topic: conceptual
-ms.custom: intro-get-started
+ms.custom:
+  - intro-get-started
+  - ignite-2024
 helpviewer_keywords:
   - "SQL Server Management Objects, about SQL Server Management Objects"
   - "SMO [SQL Server], about SQL Server Management Objects"

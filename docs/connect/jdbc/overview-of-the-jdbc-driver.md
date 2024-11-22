@@ -7,6 +7,8 @@ ms.date: 08/06/2020
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 ---
 # Overview of the JDBC driver
 

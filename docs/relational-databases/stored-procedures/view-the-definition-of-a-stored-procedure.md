@@ -7,6 +7,8 @@ ms.date: 07/19/2024
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "stored procedures [SQL Server], viewing"
   - "definition of stored procedure"

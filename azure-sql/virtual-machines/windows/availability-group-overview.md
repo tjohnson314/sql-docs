@@ -32,7 +32,7 @@ The following diagram illustrates an availability group for SQL Server on Azure 
 
 ## VM redundancy 
 
-To increase redundancy and high availability, SQL Server VMs should either be in the same [availability set](/azure/virtual-machines/availability-set-overview), or different [availability zones](/azure/availability-zones/az-overview).
+To increase redundancy and high availability, SQL Server VMs should either be in the same [availability set](/azure/virtual-machines/availability-set-overview), or different [availability zones](/azure/reliability/availability-zones-overview).
 
 Placing a set of VMs in the same availability set protects from outages within a data center caused by equipment failure (VMs within an Availability Set don't share resources) or from updates (VMs within an availability set aren't updated at the same time). 
 

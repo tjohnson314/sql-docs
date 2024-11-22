@@ -1,10 +1,10 @@
 ---
-title: Performance best practices for SQL Server on Linux
+title: Performance Best Practices for SQL Server on Linux
 description: This article provides performance best practices and guidelines for running SQL Server on Linux.
 author: tejasaks
 ms.author: tejasaks
 ms.reviewer: vanto, randolphwest
-ms.date: 04/19/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -31,7 +31,7 @@ The storage subsystem hosting data, transaction logs, and other associated files
 
 Normally, in on-premises environments, the storage vendor supports appropriate hardware RAID configuration with striping across multiple disks to ensure appropriate IOPS, throughput, and redundancy. Though, this can differ across different storage vendors and different storage offerings with varying architectures.
 
-For [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux deployed on Azure Virtual Machines, consider using software RAID to ensure appropriate IOPS and throughput requirements are achieved. When configuring [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Azure virtual machines with similar storage considerations, see [Storage configuration for SQL Server VMs](/azure/azure-sql/virtual-machines/windows/storage-configuration).
+For [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux deployed on Azure Virtual Machines, consider using software RAID to ensure appropriate IOPS and throughput requirements are achieved. When configuring [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Azure virtual machines with similar storage considerations, see [Configure storage for SQL Server on Azure VMs](/azure/azure-sql/virtual-machines/windows/storage-configuration).
 
 The following example shows how to create software RAID in Linux on Azure Virtual Machines. Keep in mind that you should use the appropriate number of data disks for the required throughput and IOPS for volumes based on the data, transaction log, and `tempdb` I/O requirements. In the following example, eight data disks were attached to the Azure Virtual Machine; 4 to host data files, 2 for transaction logs, and 2 for `tempdb` workload.
 
@@ -106,7 +106,7 @@ Your production environment might require more connections than the default open
 mssql - nofile 1048576
 ```
 
-> [!NOTE]
+> [!NOTE]  
 > This setting doesn't apply to SQL Server services started by `systemd`. For more information, see [How to set limits for services in RHEL and systemd](https://access.redhat.com/solutions/1257953).
 
 ### Disable last accessed date/time on filesystems for SQL Server data and log files
@@ -166,7 +166,7 @@ net.core.wmem_max = 1048576
 kernel.numa_balancing=0
 ```
 
-If you are using Linux distributions with kernel versions greater than 4.18, comment the following options as shown; otherwise, uncomment the following options if you are using distributions with kernel versions earlier than 4.18.
+If you use Linux distributions with kernel versions greater than 4.18, comment the following options as shown; otherwise, uncomment the following options if you use distributions with kernel versions earlier than 4.18.
 
 ```ini
 # kernel.sched_latency_ns = 60000000
@@ -249,7 +249,7 @@ Using the `mssql` TuneD profile configures the `vm.max_map_count` option.
 
 ### Leave Transparent Huge Pages (THP) enabled
 
-Most Linux installations should have this option on by default. We recommend for the most consistent performance experience to leave this configuration option enabled. However, if there is high memory paging activity in [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] deployments with multiple instances, for example, or [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] execution with other memory demanding applications on the server, we suggest testing your applications performance after executing the following command:
+Most Linux installations should have this option on by default. We recommend for the most consistent performance experience to leave this configuration option enabled. However, if there's high memory paging activity in [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] deployments with multiple instances, for example, or [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] execution with other memory demanding applications on the server, we suggest testing your applications performance after executing the following command:
 
 ```bash
 echo madvise > /sys/kernel/mm/transparent_hugepage/enabled
@@ -304,8 +304,9 @@ Like there are storage and CPU recommendations, there are Network specific recom
    ```
 
    ```sql
-   EXEC sp_configure 'network packet size', '8060';
+   EXECUTE sp_configure 'network packet size', '8060';
    GO
+
    RECONFIGURE WITH OVERRIDE;
    GO
    ```
@@ -375,7 +376,7 @@ Like there are storage and CPU recommendations, there are Network specific recom
 
 1. Working with NIC port IRQ affinity. To achieve expected performance by tweaking the IRQ affinity, consider few important parameters like Linux handling of the server topology, NIC driver stack, default settings, and irqbalance setting. Optimizations of the NIC port IRQ affinities settings are done with the knowledge of server topology, disabling the irqbalance, and using the NIC vendor-specific settings.
 
-   The following example of Mellanox specific network infrastructure helps to explain the configuration. For more information, and to download the Mellanox **mlnx** tools, see [​​Performance Tuning tools for Mellanox Network Adapters](https://support.mellanox.com/s/article/MLNX2-117-2523kn). The commands change based on the environment. Contact the NIC vendor for further guidance.
+   The following example of Mellanox specific network infrastructure helps to explain the configuration. For more information, and to download the Mellanox **mlnx** tools, see [​​Performance Tuning tools for Mellanox Network Adapters](https://enterprise-support.nvidia.com/s/article/MLNX2-117-2523kn). The commands change based on the environment. Contact the NIC vendor for further guidance.
 
    Disable `irqbalance`, or get a snapshot of the IRQ settings and force the daemon to exit:
 
@@ -441,7 +442,7 @@ Like there are storage and CPU recommendations, there are Network specific recom
 
 ### Advanced kernel and OS configuration
 
-- For best storage I/O performance, use Linux multiqueue scheduling for block devices, which enables the block layer performance to scale well with fast solid-state drives (SSDs) and multi-core systems. Check the documentation if it is enabled by default in your Linux distribution. In most other cases, booting the kernel with `scsi_mod.use_blk_mq=y` enables it, though documentation of the Linux distribution in use might have further guidance on it. This is consistent with the upstream Linux kernel.
+- For best storage I/O performance, use Linux multiqueue scheduling for block devices, which enables the block layer performance to scale well with fast solid-state drives (SSDs) and multi-core systems. Check the documentation if it's enabled by default in your Linux distribution. In most other cases, booting the kernel with `scsi_mod.use_blk_mq=y` enables it, though documentation of the Linux distribution in use might have further guidance on it. This is consistent with the upstream Linux kernel.
 
 - As multipath I/O is often used for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] deployments, configure the device mapper (DM) multi-queue target to use the `blk-mq` infrastructure, by enabling the `dm_mod.use_blk_mq=y` kernel boot option. The default value is `n` (disabled). This setting, when the underlying SCSI devices are using `blk-mq`, reduces locking overhead at the DM layer. For more information on how to configure multipath I/O, refer to your Linux distribution's documentation.
 
@@ -465,7 +466,7 @@ Use `ALTER SERVER CONFIGURATION` to set `PROCESS AFFINITY` for all the `NUMANODE
 
 #### Configure multiple `tempdb` data files
 
-Because a [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux installation doesn't offer an option to configure multiple `tempdb` files, we recommend that you consider creating multiple `tempdb` data files after installation. For more information, see the guidance in the article, [Recommendations to reduce allocation contention in SQL Server tempdb database](https://support.microsoft.com/help/2154845/recommendations-to-reduce-allocation-contention-in-sql-server-tempdb-d).
+Because a [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux installation doesn't offer an option to configure multiple `tempdb` files, we recommend that you consider creating multiple `tempdb` data files after installation. For more information, see the guidance in the article, [Recommendations to reduce allocation contention in SQL Server tempdb database](/troubleshoot/sql/database-engine/performance/recommendations-reduce-allocation-contention).
 
 ### Advanced configuration
 
@@ -479,5 +480,5 @@ When changing this setting, be careful not to set this value too high. If you do
 
 ## Related content
 
-- [Get started with Performance features](sql-server-linux-performance-get-started.md)
-- [Overview of SQL Server on Linux](sql-server-linux-overview.md)
+- [Walkthrough for the performance features of SQL Server on Linux](sql-server-linux-performance-get-started.md)
+- [What is SQL Server on Linux?](sql-server-linux-overview.md)

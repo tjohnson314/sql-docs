@@ -8,6 +8,8 @@ ms.date: "01/18/2024"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "CREATE_MASTER_KEY_TSQL"
   - "CREATE MASTER KEY"

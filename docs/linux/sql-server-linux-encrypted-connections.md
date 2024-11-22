@@ -1,10 +1,10 @@
 ---
-title: Encrypt connections to SQL Server on Linux
+title: Encrypt Connections to SQL Server on Linux
 description: SQL Server on Linux uses TLS to encrypt data transmitted across a network between a client application and an instance of SQL Server.
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 10/29/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -41,7 +41,7 @@ You can create symbolic links in the `/opt/mssql/lib/` directory that reference 
 These symbolic links should be named `libcrypto.so` and `libssl.so` and placed in the `/opt/mssql/lib/` directory.
 
 > [!NOTE]  
-> For an example of using Let's Encrypt to generate a certificate, see the blog post [Unlock the power of data in Azure with SQL Server on Linux Azure VMs and Azure AI search](https://techcommunity.microsoft.com/t5/sql-server-blog/unlock-power-of-data-in-azure-with-sql-server-on-linux-azure-vms/ba-p/4144582).
+> For an example of using Let's Encrypt to generate a certificate, see the blog post [Unlock the power of data in Azure with SQL Server on Linux Azure VMs and Azure AI search](https://techcommunity.microsoft.com/blog/sqlserver/unlock-power-of-data-in-azure--with-sql-server-on-linux-azure-vms-and-azure-ai-s/4144582).
 
 ## Overview
 
@@ -110,7 +110,7 @@ systemctl restart mssql-server
 ### Example connection strings
 
 > [!CAUTION]  
-> Always use a strong password. For more information, see [Password Policy](../relational-databases/security/password-policy.md).
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 - **[!INCLUDE [ssmanstudiofull-md](../includes/ssmanstudiofull-md.md)]**
 
@@ -166,7 +166,7 @@ systemctl restart mssql-server
 ### Example connection strings
 
 > [!CAUTION]  
-> Always use a strong password. For more information, see [Password Policy](../relational-databases/security/password-policy.md).
+> [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
 - **sqlcmd**
 

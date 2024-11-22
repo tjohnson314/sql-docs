@@ -10,6 +10,7 @@ ms.subservice: t-sql
 ms.topic: "reference"
 ms.custom:
   - build-2024
+  - ignite-2024
 helpviewer_keywords:
   - "precedence [SQL Server]"
   - "data types [SQL Server], converting"

@@ -8,6 +8,8 @@ ms.date: 10/04/2023
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "TABLE_HINT_TSQL"
   - "Table Hint"
@@ -34,7 +36,7 @@ helpviewer_keywords:
   - "PAGLOCK table hint"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current || >= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-mi-current || =fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Table hints (Transact-SQL)
 

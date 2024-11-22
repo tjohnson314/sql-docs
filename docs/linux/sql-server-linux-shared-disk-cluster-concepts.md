@@ -34,7 +34,7 @@ Both the RHEL HA add-on and the SUSE HAE are built on [Pacemaker](https://cluste
 
 As the following diagram shows, storage is presented to two servers. Clustering components - Corosync and Pacemaker - coordinate communications and resource management. One of the servers has the active connection to the storage resources and the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. When Pacemaker detects a failure, the clustering components are responsible for moving the resources to the other node.
 
-:::image type="content" source="media/sql-server-linux-shared-disk-cluster-red-hat-7-configure/LinuxCluster.png" alt-text="Diagram of Red Hat Enterprise Linux 7 shared disk SQL Server cluster.":::
+:::image type="content" source="media/sql-server-linux-shared-disk-cluster-red-hat-7-operate/linux-cluster.png" alt-text="Diagram of Red Hat Enterprise Linux 7 shared disk SQL Server cluster.":::
 
 [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] integration with Pacemaker on Linux isn't as coupled as with WSFC on Windows. [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] has no knowledge about the presence of the cluster. All orchestration is outside in and the service is controlled as a standalone instance by Pacemaker. Also, virtual network name is specific to WSFC, which has no equivalent in Pacemaker. It's expected that `@@SERVERNAME` and `sys.servers` return the node name, while the cluster DMVs `sys.dm_os_cluster_nodes` and `sys.dm_os_cluster_properties` return no records. To use a connection string that points to a string server name and not use the IP, they have to register in their DNS server the IP used to create the virtual IP resource (as explained in the following sections) with the chosen server name.
 

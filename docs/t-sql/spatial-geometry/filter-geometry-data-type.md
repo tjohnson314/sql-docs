@@ -7,6 +7,8 @@ ms.date: "08/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "Filter"
   - "Filter_TSQL"
@@ -72,4 +74,3 @@ WHERE g.Filter(geometry::Parse('POLYGON((-1 -1, 1 -1, 1 1, -1 1, -1 -1))')) = 1;
  [STIntersects &#40;geometry Data Type&#41;](../../t-sql/spatial-geometry/stintersects-geometry-data-type.md)  
   
   
-

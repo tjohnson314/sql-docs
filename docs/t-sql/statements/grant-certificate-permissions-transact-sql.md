@@ -7,6 +7,8 @@ ms.date: "06/12/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "granting permissions [SQL Server], certificates"
   - "certificates [SQL Server], permissions"

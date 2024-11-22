@@ -6,7 +6,9 @@ ms.author: "maghan"
 ms.date: "08/06/2017"
 ms.service: sql
 ms.topic: "reference"
-ms.custom: intro-installation
+ms.custom:
+  - intro-installation
+  - ignite-2024
 helpviewer_keywords:
   - "installing SMO"
   - "SMO [SQL Server], installing"

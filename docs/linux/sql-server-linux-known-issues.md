@@ -1,10 +1,10 @@
 ---
-title: Known issues for SQL Server on Linux
+title: Known Issues for SQL Server on Linux
 description: This article contains the known issues for SQL Server running on Linux.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh, vanto
-ms.date: 01/03/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -25,7 +25,7 @@ The following table lists the most common issues with [!INCLUDE [ssnoversion-md]
 | Manually setting the system time backward in time causes [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] to stop updating the internal system time within the [!INCLUDE [ssde-md](../includes/ssde-md.md)]. | Restart [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. |
 | Only single instance installations are supported. | If you want to have more than one instance on a given host, consider using [virtual machines](/azure/azure-sql/virtual-machines/linux/sql-server-on-linux-vm-what-is-iaas-overview) or [Linux containers](sql-server-linux-docker-container-deployment.md). |
 | [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Configuration Manager can't connect to [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] on Linux. | None. |
-| The default language of the **sa** login is English. | Change the language of the **sa** login with the `ALTER LOGIN` statement. |
+| The default language of the `sa` account is English. | Change the language of the `sa` account with the `ALTER LOGIN` statement. |
 | The OLE DB provider logs the following warning:<br /><br />`Failed to verify the Authenticode signature of 'C:\binn\msoledbsql.dll'. Signature verification of SQL Server DLLs will be skipped. Genuine copies of SQL Server are signed. Failure to verify the Authenticode signature might indicate that this isn't an authentic release of SQL Server. Install a genuine copy of SQL Server or contact customer support.` | No action is required. The OLE DB provider is signed using SHA256. The [!INCLUDE [ssdenoversion-md](../includes/ssdenoversion-md.md)] doesn't validate the signed .dll correctly. |
 | The Reset password command using **mssql-conf** throws the following error:<br /><br />`Unable to set the system administrator password. Please consult the ERRORLOG in /path for more information.` | The error message is a false negative. The password reset was successful, and you can continue using the new password.<br /><br />**Applies to:** [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] container images only. |
 
@@ -72,9 +72,9 @@ Features that involve outbound TCP connections from the `sqlservr` process, such
 
 - The source instance has IPv6 disabled in the kernel. To verify if your system has IPv6 enabled in the kernel, all the following tests must pass:
 
-   - `cat /proc/cmdline` prints the boot cmdline of the current kernel. The output must not contain `ipv6.disable=1`.
-   - The `/proc/sys/net/ipv6/` directory must exist.
-   - A C program that calls `socket(AF_INET6, SOCK_STREAM, IPPROTO_IP)` should succeed - the syscall must return an `fd != -1` and not fail with `EAFNOSUPPORT`.
+  - `cat /proc/cmdline` prints the boot cmdline of the current kernel. The output must not contain `ipv6.disable=1`.
+  - The `/proc/sys/net/ipv6/` directory must exist.
+  - A C program that calls `socket(AF_INET6, SOCK_STREAM, IPPROTO_IP)` should succeed - the syscall must return an `fd != -1` and not fail with `EAFNOSUPPORT`.
 
 The exact error depends on the feature. For linked servers, you see a login timeout error. For availability groups, the `ALTER AVAILABILITY GROUP JOIN` DDL on the secondary will fail after five minutes with a `download configuration timeout` error.
 
@@ -126,7 +126,7 @@ Not all filters are available with this release, including filters for Microsoft
 
 The `mssql-server-is` package isn't supported on SUSE Linux Enterprise Server (SLES). The package is supported on Ubuntu, and Red Hat Enterprise Linux (RHEL).
 
-[!INCLUDE [ssISnoversion](../includes/ssisnoversion-md.md)] packages can use ODBC connections on Linux. This functionality was tested with the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] and the MySQL ODBC drivers, but is also expected to work with any Unicode ODBC driver that observes the ODBC specification. At design time, you can provide either a DSN or a connection string to connect to the ODBC data; you can also use Windows authentication. For more info, see the [blog post announcing ODBC support on Linux](https://techcommunity.microsoft.com/t5/sql-server-integration-services/bg-p/SSIS).
+[!INCLUDE [ssISnoversion](../includes/ssisnoversion-md.md)] packages can use ODBC connections on Linux. This functionality was tested with the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] and the MySQL ODBC drivers, but is also expected to work with any Unicode ODBC driver that observes the ODBC specification. At design time, you can provide either a DSN or a connection string to connect to the ODBC data; you can also use Windows authentication. For more info, see the [blog post announcing ODBC support on Linux](https://techcommunity.microsoft.com/category/sql-server/blog/ssis).
 
 The following features aren't supported in this release when you run SSIS packages on Linux:
 
@@ -144,7 +144,7 @@ For a list of built-in SSIS components that aren't currently supported, or that 
 
 For more info about SSIS on Linux, see the following articles:
 
-- [Blog post announcing SSIS support for Linux](https://techcommunity.microsoft.com/t5/sql-server-integration-services/bg-p/SSIS).
+- [Blog post announcing SSIS support for Linux](https://techcommunity.microsoft.com/category/sql-server/blog/ssis).
 - [Install SQL Server Integration Services (SSIS) on Linux](sql-server-linux-setup-ssis.md)
 - [Extract, transform, and load data on Linux with SSIS](sql-server-linux-migrate-ssis.md)
 
@@ -165,7 +165,6 @@ The following limitations apply to [!INCLUDE [ssManStudioFull](../includes/ssman
 **Applies to:** [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] only.
 
 When you run [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] on RHEL 9 as a confined application with SELinux enabled, Pacemaker clustering might not work as expected. You must install [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] as an unconfined application with SELinux turned on, to make use of Pacemaker clustering capabilities.
-
 
 ## Machine Learning Services
 
@@ -249,5 +248,5 @@ For Ubuntu 22.04, you should reach out to Canonical directly for the exact steps
 ## Related content
 
 - [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md)
-- [Editions and supported features of [!INCLUDE[sssql22](../includes/sssql22-md.md)] on Linux](sql-server-linux-editions-and-components-2022.md)
-- [Troubleshoot [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] on Linux](sql-server-linux-troubleshooting-guide.md)
+- [Editions and supported features of [!INCLUDE [sssql22](../includes/sssql22-md.md)] on Linux](sql-server-linux-editions-and-components-2022.md)
+- [Troubleshoot SQL Server on Linux](sql-server-linux-troubleshooting-guide.md)

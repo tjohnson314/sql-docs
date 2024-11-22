@@ -6,8 +6,10 @@ ms.author: davidengel
 ms.date: 11/01/2024
 ms.service: sql
 ms.subservice: connectivity
-ms.custom: linux-related-content
 ms.topic: conceptual
+ms.custom:
+  - linux-related-content
+  - ignite-2024
 ---
 # Microsoft PHP Drivers for SQL Server Support Matrix
 

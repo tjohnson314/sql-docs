@@ -1,10 +1,10 @@
 ---
-title: Configure availability group for SQL Server on Linux
+title: Configure Availability Group for SQL Server on Linux
 description: Learn about creating a SQL Server Always On availability group (AG) for high availability on Linux.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 10/30/2023
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -53,9 +53,9 @@ The steps to create an AG on Linux servers for high availability are different f
 
    The way to add the AG as a resource in the cluster depends on the Linux distribution. See the following links for distribution specific instructions:
 
-   * [RHEL](sql-server-linux-availability-group-cluster-pacemaker.md?tabs=rhel#create-availability-group-resource)
-   * [SLES](sql-server-linux-availability-group-cluster-pacemaker.md?tabs=sles#configure-the-cluster-resources-for-sql-server)
-   * [Ubuntu](sql-server-linux-availability-group-cluster-pacemaker.md?tabs=ubuntu#create-availability-group-resource)
+   - [RHEL](sql-server-linux-availability-group-cluster-pacemaker.md?tabs=rhel#create-availability-group-resource)
+   - [SLES](sql-server-linux-availability-group-cluster-pacemaker.md?tabs=sles#configure-the-cluster-resources-for-sql-server)
+   - [Ubuntu](sql-server-linux-availability-group-cluster-pacemaker.md?tabs=ubuntu#create-availability-group-resource)
 
 ### Considerations for multiple Network Interfaces (NICs)
 
@@ -92,7 +92,7 @@ Create the AG for high availability on Linux. Use the [CREATE AVAILABILITY GROUP
 
   Specifies that the replica interacts with an external cluster manager, like Pacemaker.
 
-The following Transact-SQL scripts create an AG for high availability named `ag1`. The script configures the AG replicas with `SEEDING_MODE = AUTOMATIC`. This setting causes SQL Server to automatically create the database on each secondary server. Update the following script for your environment. Replace the  `<node1>`, `<node2>`, or `<node3>` values with the names of the SQL Server instances that host the replicas. Replace the `<5022>` with the port you set for the data mirroring endpoint. To create the AG, run the following Transact-SQL on the SQL Server instance that hosts the primary replica.
+The following Transact-SQL scripts create an AG for high availability named `ag1`. The script configures the AG replicas with `SEEDING_MODE = AUTOMATIC`. This setting causes SQL Server to automatically create the database on each secondary server. Update the following script for your environment. Replace the `<node1>`, `<node2>`, or `<node3>` values with the names of the SQL Server instances that host the replicas. Replace the `<5022>` with the port you set for the data mirroring endpoint. To create the AG, run the following Transact-SQL on the SQL Server instance that hosts the primary replica.
 
 > [!IMPORTANT]  
 > In the current implementation of the SQL Server resource agent, the node name must match the `ServerName` property from your instance. For example, if your node name is *node1*, make sure SERVERPROPERTY('ServerName') returns *node1* in your SQL Server instance. If there's a mismatch, your replicas will go into a resolving state after the pacemaker resource is created.
@@ -108,11 +108,13 @@ Run **only one** of the following scripts:
 - [Create availability group with two synchronous replicas and a configuration replica](#configOnly)
 - [Create availability group with two synchronous replicas](#readScale)
 
-### <a id="threeSynch"></a> Create availability group with three synchronous replicas
+<a id="threeSynch"></a>
+
+### Create availability group with three synchronous replicas
 
 Create AG with three synchronous replicas:
 
-```SQL
+```sql
 CREATE AVAILABILITY GROUP [ag1]
       WITH (DB_FAILOVER = ON, CLUSTER_TYPE = EXTERNAL)
       FOR REPLICA ON
@@ -144,14 +146,16 @@ ALTER AVAILABILITY GROUP [ag1] GRANT CREATE ANY DATABASE;
 > [!IMPORTANT]  
 > After you run the preceding script to create an AG with three synchronous replicas, don't run the following script:
 
-### <a id="configOnly"></a> Create availability group with two synchronous replicas and a configuration replica
+<a id="configOnly"></a>
+
+### Create availability group with two synchronous replicas and a configuration replica
 
 Create AG with two synchronous replicas and a configuration replica:
 
 > [!IMPORTANT]  
 > This architecture allows any edition of SQL Server to host the third replica. For example, the third replica can be hosted on SQL Server Express Edition. On Express Edition, the only valid endpoint type is `WITNESS`.
 
-```SQL
+```sql
 CREATE AVAILABILITY GROUP [ag1]
    WITH (CLUSTER_TYPE = EXTERNAL)
    FOR REPLICA ON
@@ -174,7 +178,9 @@ CREATE AVAILABILITY GROUP [ag1]
 ALTER AVAILABILITY GROUP [ag1] GRANT CREATE ANY DATABASE;
 ```
 
-### <a id="readScale"></a> Create availability group with two synchronous replicas
+<a id="readScale"></a>
+
+### Create availability group with two synchronous replicas
 
 Create AG with two synchronous replicas
 
@@ -183,7 +189,7 @@ Include two replicas with synchronous availability mode. For example, the follow
 > [!IMPORTANT]  
 > Only run the following script to create an AG with two synchronous replicas. Don't run the following script if you ran either preceding script.
 
-```SQL
+```sql
 CREATE AVAILABILITY GROUP [ag1]
    WITH (CLUSTER_TYPE = EXTERNAL)
    FOR REPLICA ON

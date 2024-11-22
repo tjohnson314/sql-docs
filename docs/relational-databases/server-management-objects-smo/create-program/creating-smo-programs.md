@@ -6,6 +6,8 @@ ms.author: "maghan"
 ms.date: "03/14/2017"
 ms.service: sql
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "Visual Basic [SMO]"
   - "Visual C# [SMO]"

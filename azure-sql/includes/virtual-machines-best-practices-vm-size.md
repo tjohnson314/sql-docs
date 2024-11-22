@@ -4,6 +4,8 @@ ms.author: mathoma
 ms.date: 11/19/2024
 ms.service: virtual-machines
 ms.topic: include
+ms.custom:
+  - ignite-2024
 ---
 - Identify workload performance characteristics to determine the appropriate VM size for your business.
 - If you're migrating to Azure, use tools like [Data Migration Assistant](https://www.microsoft.com/download/details.aspx?id=53595) and [SKU recommendation](/sql/dma/dma-sku-recommend-sql-db) to find the right VM size for your existing SQL Server workload, and then migrate with [Azure Data Studio](/azure/dms/tutorial-sql-server-to-virtual-machine-online-ads). 
@@ -16,5 +18,3 @@ ms.topic: include
    - The [M-series family](../virtual-machines/windows/performance-guidelines-best-practices-vm-size.md#memory-optimized-m-series-vms) offers VMs with the highest memory allocation in Azure. 
    - The [Mbsv3 and Mbdsv3 series](../virtual-machines/windows/performance-guidelines-best-practices-vm-size.md#mbsv3-and-mbdsv3-series) VMs provide a high memory allocation and the highest I/O throughput-to-vCore ratio amongst the M-series family, along with a consistent memory-to-vCore ratio of at least 8:1. 
 - Start development environments with the lower-tier D-Series, B-Series, or Av2-series and grow your environment over time.
-
-

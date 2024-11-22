@@ -6,6 +6,8 @@ ms.author: "maghan"
 ms.date: 08/08/2023
 ms.service: sql
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "SQL Server Management Objects, connections"
   - "connections [SMO]"

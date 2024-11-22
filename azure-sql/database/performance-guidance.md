@@ -12,6 +12,7 @@ ms.topic: conceptual
 ms.custom:
   - sqldbrb=2
   - azure-sql-split
+  - ignite-2024
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 # Tune applications and databases for performance in Azure SQL Database

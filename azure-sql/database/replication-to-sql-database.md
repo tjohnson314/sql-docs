@@ -1,6 +1,6 @@
 ---
 title: Replication to Azure SQL Database
-description: You can configure a database in Azure SQL Database as the push subscriber in a one-way transactional or snapshot replication topology from SQL Server or Azure SQL Managed Instance. 
+description: You can configure a database in Azure SQL Database as the push subscriber in a one-way transactional or snapshot replication topology from SQL Server or Azure SQL Managed Instance.
 author: ferno-ms
 ms.author: ferno
 ms.reviewer: wiassaf, mathoma
@@ -8,7 +8,9 @@ ms.date: 11/01/2024
 ms.service: azure-sql-database
 ms.subservice: replication
 ms.topic: conceptual
-ms.custom: sqldbrb=1
+ms.custom:
+  - sqldbrb=1
+  - ignite-2024
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 # Replication to Azure SQL Database

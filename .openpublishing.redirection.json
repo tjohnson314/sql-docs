@@ -58306,6 +58306,11 @@
       "redirect_document_id": false
     },
     {
+      "source_path": "docs/relational-databases/system-catalog-views/sys-database-automatic-tuning-configuration-transact-sql.md",
+      "redirect_url": "/sql/relational-databases/system-dynamic-management-views/sys-database-automatic-tuning-configurations-transact-sql",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "docs/relational-databases/system-functions/index.md",
       "redirect_url": "/sql/relational-databases/system-functions/system-functions-for-transact-sql",
       "redirect_document_id": false

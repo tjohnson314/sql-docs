@@ -8,6 +8,8 @@ ms.date: 06/12/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "AT TIME ZONE"
   - "AT_TIME_ZONE_TSQL"

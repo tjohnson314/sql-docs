@@ -7,6 +7,8 @@ ms.date: "08/03/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "AsGml_(geometry_Data_Type)_TSQL"
   - "AsGml_(geometry Data Type)"
@@ -58,4 +60,3 @@ SELECT @g.AsGml();
  [Extended Methods on Geometry Instances](../../t-sql/spatial-geometry/extended-methods-on-geometry-instances.md)  
   
   
-

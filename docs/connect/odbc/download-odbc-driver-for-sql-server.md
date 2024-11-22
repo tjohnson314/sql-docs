@@ -6,8 +6,10 @@ ms.author: davidengel
 ms.date: 09/24/2024
 ms.service: sql
 ms.subservice: connectivity
-ms.custom: linux-related-content
 ms.topic: conceptual
+ms.custom:
+  - linux-related-content
+  - ignite-2024
 ---
 
 # Download ODBC Driver for SQL Server

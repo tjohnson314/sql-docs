@@ -8,7 +8,9 @@ ms.date: 04/19/2023
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: tutorial
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+ms.custom:
+  - ignite-2024
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Lesson 1: Create and query database objects
 

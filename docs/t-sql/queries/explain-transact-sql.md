@@ -8,7 +8,9 @@ ms.date: 09/12/2024
 ms.service: sql
 ms.subservice: data-warehouse
 ms.topic: reference
-monikerRange: "= azure-sqldw-latest "
+ms.custom:
+  - ignite-2024
+monikerRange: "=azure-sqldw-latest"
 ---
 # EXPLAIN (Transact-SQL)
 

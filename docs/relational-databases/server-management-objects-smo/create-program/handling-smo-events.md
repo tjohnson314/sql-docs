@@ -7,6 +7,8 @@ ms.reviewer: randolphwest
 ms.date: 01/18/2024
 ms.service: sql
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "events [SMO]"
   - "SQL Server Management Objects, events"

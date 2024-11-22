@@ -7,6 +7,8 @@ ms.date: "09/12/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "IsNull (geometry Data Type)"
 helpviewer_keywords:
@@ -40,4 +42,3 @@ The type of a **geometry** instance is null. Returns 0 if the instance isn't nul
  [Extended Methods on Geometry Instances](../../t-sql/spatial-geometry/extended-methods-on-geometry-instances.md)  
   
   
-

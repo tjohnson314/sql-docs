@@ -7,6 +7,8 @@ ms.date: "05/31/2024"
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "heaps"
   - "forward record"

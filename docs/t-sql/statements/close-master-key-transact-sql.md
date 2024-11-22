@@ -7,6 +7,8 @@ ms.date: "05/15/2017"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "CLOSE MASTER KEY"
   - "CLOSE_MASTER_KEY_TSQL"
@@ -70,4 +72,3 @@ GO
  [Encryption Hierarchy](../../relational-databases/security/encryption/encryption-hierarchy.md)  
   
   
-

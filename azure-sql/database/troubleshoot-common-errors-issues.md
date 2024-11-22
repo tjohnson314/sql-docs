@@ -11,7 +11,8 @@ ms.subservice: connect
 ms.topic: troubleshooting
 ms.custom:
   - sqldbrb=1
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi||=fabric"
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabric"
 ---
 
 # Troubleshoot connectivity issues and other errors

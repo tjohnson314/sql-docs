@@ -8,6 +8,8 @@ ms.date: 01/04/2024
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "storing programs as stored procedures"
   - "stored procedures [SQL Server], about stored procedures"

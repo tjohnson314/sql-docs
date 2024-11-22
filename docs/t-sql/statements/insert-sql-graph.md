@@ -7,6 +7,8 @@ ms.date: 06/28/2023
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "INSERT statement [SQL Server], SQL graph"
   - "SQL graph, INSERT statement"

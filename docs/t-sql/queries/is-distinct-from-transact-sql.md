@@ -8,6 +8,8 @@ ms.date: 07/25/2022
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "IS_[NOT]_DISTINCT_FROM_TSQL"
   - "IS [NOT] DISTINCT FROM"
@@ -20,7 +22,7 @@ helpviewer_keywords:
   - "conditions [SQL Server], IS [NOT] DISTINCT FROM"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current || >= sql-server-ver16 || >= sql-server-linux-ver16 || = azuresqldb-mi-current || =fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-ver16 || >=sql-server-linux-ver16 || =azuresqldb-mi-current || =fabric"
 ---
 
 # IS [NOT] DISTINCT FROM (Transact-SQL)

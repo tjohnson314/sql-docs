@@ -7,6 +7,8 @@ ms.date: "09/14/2023"
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "contained database, users"
   - "user [SQL Server], about contained database users"

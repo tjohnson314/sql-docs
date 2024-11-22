@@ -7,6 +7,8 @@ ms.date: "10/21/2021"
 ms.service: sql
 ms.subservice: supportability
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "space allocation [SQL Server], index size"
   - "size [SQL Server], tables"
@@ -19,7 +21,7 @@ helpviewer_keywords:
   - "nonclustered indexes [SQL Server], table size"
   - "designing databases [SQL Server], estimating size"
   - "calculating table size"
-monikerRange: "= azuresqldb-current || >= sql-server-2016 || =fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || =fabric"
 ---
 # Estimate the Size of a Clustered Index
 

@@ -8,6 +8,8 @@ ms.date: 09/28/2022
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "removing stored procedures"
   - "stored procedures [SQL Server], deleting"

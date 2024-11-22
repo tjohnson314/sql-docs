@@ -8,7 +8,9 @@ ms.date: 10/23/2024
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
-monikerRange: "=azuresqldb-current||>=sql-server-ver16||>=sql-server-linux-ver16||=azuresqldb-mi-current||=fabric"
+ms.custom:
+  - ignite-2024
+monikerRange: "=azuresqldb-current || >=sql-server-ver16 || >=sql-server-linux-ver16 || =azuresqldb-mi-current || =fabric"
 ---
 # Performance tuning with ordered clustered columnstore indexes
 

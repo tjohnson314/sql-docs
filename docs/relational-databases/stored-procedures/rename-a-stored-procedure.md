@@ -7,6 +7,8 @@ ms.date: "07/06/2017"
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "stored procedures [SQL Server], renaming"
   - "renaming stored procedures"

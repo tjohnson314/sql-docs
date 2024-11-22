@@ -7,6 +7,8 @@ ms.date: 11/01/2024
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "indexes creation, columnstore"
   - "indexes [SQL Server], columnstore"
@@ -14,7 +16,7 @@ helpviewer_keywords:
   - "batch mode execution"
   - "columnstore index, described"
   - "xVelocity, columnstore indexes"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Columnstore indexes: Overview
 

@@ -1,10 +1,10 @@
 ---
-title: Migrate SQL Server database from Windows to Linux
+title: Migrate SQL Server Database From Windows to Linux
 description: This tutorial shows how to take a SQL Server database backup on Windows and restore it to a Linux machine running SQL Server.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 07/15/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -60,10 +60,9 @@ There are several ways to create a backup file of a database on Windows. The fol
 Another option is to run a Transact-SQL query to create the backup file. The following Transact-SQL command performs the same actions as the previous steps for a database called `YourDB`:
 
 ```sql
-BACKUP DATABASE [YourDB] TO DISK =
-N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\YourDB.bak'
-WITH NOFORMAT, NOINIT, NAME = N'YourDB-Full Database Backup',
-SKIP, NOREWIND, NOUNLOAD, STATS = 10;
+BACKUP DATABASE [YourDB]
+    TO DISK = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\YourDB.bak'
+    WITH NOFORMAT, NOINIT, NAME = N'YourDB-Full Database Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10;
 GO
 ```
 
@@ -78,7 +77,9 @@ To restore the database, you must first transfer the backup file from the Window
 
 1. Open a bash session on Windows.
 
-## <a id="scp"></a> Copy the backup file to Linux
+<a id="scp"></a>
+
+## Copy the backup file to Linux
 
 1. In your bash session, navigate to the directory containing your backup file. For example:
 
@@ -86,13 +87,22 @@ To restore the database, you must first transfer the backup file from the Window
    cd 'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\'
    ```
 
-1. Use the **scp** command to transfer the file to the target Linux machine. The following example transfers `YourDB.bak` to the home directory of `user1` on the Linux server with an IP address of *192.0.2.9*:
+1. Use the **scp** command to transfer the file to the target Linux machine. The following example transfers `YourDB.bak` to the home directory of `user1` on the Linux server with an IP address of *192.168.2.9*:
 
    ```bash
-   scp YourDB.bak user1@192.0.2.9:./
+   scp YourDB.bak user1@192.168.2.9:./
    ```
 
-   :::image type="content" source="media/sql-server-linux-migrate-restore-database/scp-command.png" alt-text="Screenshot of scp command.":::
+   Here's the expected output:
+
+   ```output
+   The authenticity of host 192.168.2.9(192.168.2.9)' can't be established.
+   ECDSA key fingerprint is SHA256: aB1cD2eF-3gH4iJ5kL6-mN7oP8qR=
+   Are you sure you want to continue connecting (yes/no)? yes
+   Warning: Permanently added '192.168.2.9' (ECDSA) to the list of known hosts.
+   Password:
+   YourDB.bak                                      100% 8960KB 7.4MB/s 00:01
+   ```
 
 > [!TIP]  
 > There are alternatives to using **scp** for file transfer. One is to use [Samba](https://help.ubuntu.com/community/Samba) to configure an SMB network share between Windows and Linux. For a walkthrough on Ubuntu, see [Samba as a file server](https://ubuntu.com/server/docs/samba-as-a-file-server). Once established, you can access it as a network file share from Windows, such as `\\machinenameorip\share`.
@@ -101,10 +111,10 @@ To restore the database, you must first transfer the backup file from the Window
 
 At this point, the backup file is on your Linux server in your user's home directory. Before restoring the database to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], you must place the backup in a subdirectory of `/var/opt/mssql`, as this is owned by the user `mssql` and group `mssql`. If you're looking to change the default backup location, see the [Configure with mssql-conf](sql-server-linux-configure-mssql-conf.md#backupdir) article.
 
-1. In the same Windows bash session, connect remotely to your target Linux machine with **ssh**. The following example connects to the Linux machine `192.0.2.9` as user `user1`.
+1. In the same Windows bash session, connect remotely to your target Linux machine with **ssh**. The following example connects to the Linux machine `192.168.2.9` as user `user1`.
 
    ```bash
-   ssh user1@192.0.2.9
+   ssh user1@192.168.2.9
    ```
 
    You're now running commands on the remote Linux server.
@@ -139,19 +149,18 @@ To restore the database backup, you can use the `RESTORE DATABASE` Transact-SQL 
 
 The following steps use the **sqlcmd** tool. If you haven't installed [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] tools, see [Install the SQL Server command-line tools sqlcmd and bcp on Linux](sql-server-linux-setup-tools.md).
 
-1. In the same terminal, launch **sqlcmd**. The following example connects to the local [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance with the `SA` user. Enter the password when prompted, or specify the password by adding the `-P` parameter.
+1. In the same terminal, launch **sqlcmd**. The following example connects to the local [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance with the `sa` account. Enter the password when prompted, or specify the password by adding the `-P` parameter.
 
    ```bash
-   sqlcmd -S localhost -U SA
+   sqlcmd -S localhost -U sa
    ```
 
 1. At the `>1` prompt, enter the following `RESTORE DATABASE` command, pressing ENTER after each line (you can't copy and paste the entire multi-line command at once). Replace all occurrences of `YourDB` with the name of your database.
 
    ```sql
-   RESTORE DATABASE YourDB
-   FROM DISK = '/var/opt/mssql/backup/YourDB.bak'
-   WITH MOVE 'YourDB' TO '/var/opt/mssql/data/YourDB.mdf',
-   MOVE 'YourDB_Log' TO '/var/opt/mssql/data/YourDB_Log.ldf'
+   RESTORE DATABASE YourDB FROM DISK = '/var/opt/mssql/backup/YourDB.bak'
+       WITH MOVE 'YourDB' TO '/var/opt/mssql/data/YourDB.mdf',
+       MOVE 'YourDB_Log' TO '/var/opt/mssql/data/YourDB_Log.ldf';
    GO
    ```
 
@@ -188,27 +197,29 @@ The following steps use the **sqlcmd** tool. If you haven't installed [!INCLUDE 
    You can use this list to create `MOVE` clauses for the extra files. In this example, the `RESTORE DATABASE` is:
 
    ```sql
-   RESTORE DATABASE YourDB
-   FROM DISK = '/var/opt/mssql/backup/YourDB.bak'
-   WITH MOVE 'YourDB' TO '/var/opt/mssql/data/YourDB.mdf',
-   MOVE 'YourDB_Product' TO '/var/opt/mssql/data/YourDB_Product.ndf',
-   MOVE 'YourDB_Customer' TO '/var/opt/mssql/data/YourDB_Customer.ndf',
-   MOVE 'YourDB_Log' TO '/var/opt/mssql/data/YourDB_Log.ldf'
+   RESTORE DATABASE YourDB FROM DISK = '/var/opt/mssql/backup/YourDB.bak'
+       WITH MOVE 'YourDB' TO '/var/opt/mssql/data/YourDB.mdf',
+       MOVE 'YourDB_Product' TO '/var/opt/mssql/data/YourDB_Product.ndf',
+       MOVE 'YourDB_Customer' TO '/var/opt/mssql/data/YourDB_Customer.ndf',
+       MOVE 'YourDB_Log' TO '/var/opt/mssql/data/YourDB_Log.ldf';
    GO
    ```
 
 1. Verify the restoration by listing all of the databases on the server. The restored database should be listed.
 
    ```sql
-   SELECT Name FROM sys.Databases
+   SELECT name
+   FROM sys.databases;
    GO
    ```
 
 1. Run other queries on your migrated database. The following command switches context to the `YourDB` database and selects rows from one of its tables.
 
    ```sql
-   USE YourDB
-   SELECT * FROM YourTable
+   USE YourDB;
+
+   SELECT *
+   FROM YourTable;
    GO
    ```
 

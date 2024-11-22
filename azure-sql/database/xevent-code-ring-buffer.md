@@ -9,8 +9,10 @@ ms.date: 12/26/2023
 ms.service: azure-sql
 ms.subservice: performance
 ms.topic: sample
-ms.custom: sqldbrb=1
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi ||=fabricsql"
+ms.custom:
+  - sqldbrb=1
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabricsql"
 ---
 # Create an event session with a ring_buffer target in memory
 

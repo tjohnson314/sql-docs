@@ -8,6 +8,8 @@ ms.date: 09/24/2024
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "sys.dm_change_feed_errors_TSQL"
   - "sys.dm_change_feed_errors"
@@ -17,7 +19,7 @@ helpviewer_keywords:
   - "sys.dm_change_feed_errors dynamic management view"
 dev_langs:
   - "TSQL"
-monikerRange: ">=sql-server-ver16||=azuresqldb-current||=fabric||=azure-sqldw-latest"
+monikerRange: ">=sql-server-ver16 || =azuresqldb-current || =fabric || =azure-sqldw-latest"
 ---
 # sys.dm_change_feed_errors (Transact-SQL)
 

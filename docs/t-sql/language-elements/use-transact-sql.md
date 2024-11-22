@@ -7,6 +7,8 @@ ms.date: "11/28/2016"
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
 f1_keywords:
   - "USE_TSQL"
   - "USE"
@@ -17,7 +19,7 @@ helpviewer_keywords:
   - "modifying database context"
 dev_langs:
   - "TSQL"
-monikerRange: ">= aps-pdw-2016 || >= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-mi-current || =fabric"
+monikerRange: ">=aps-pdw-2016 || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # USE (Transact-SQL)
 [!INCLUDE [sql-asdbmi-pdw-fabricdw](../../includes/applies-to-version/sql-asdbmi-pdw-fabricdw.md)]

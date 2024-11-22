@@ -1,10 +1,10 @@
 ---
-title: Deploy availability groups with DH2i DxEnterprise on Kubernetes
+title: Deploy Availability Groups With DH2i DxEnterprise on Kubernetes
 description: Set up an availability group in SQL Server on Kubernetes using DH2i DxEnterprise.
 author: aravindmahadevan-ms
 ms.author: armaha
 ms.reviewer: amitkh, randolphwest
-ms.date: 08/20/2024
+ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: tutorial
@@ -205,6 +205,8 @@ This tutorial shows an example of an AG with three replicas. You need:
    kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="<password>"
    ```
 
+   [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
 1. Apply the StatefulSet configuration.
 
    ```bash
@@ -334,7 +336,7 @@ This ensures that the custom image is pushed to Azure Container Registry (ACR), 
 
 Use the short name for `<registry-name>`. The full qualified name of the registry isn't accepted in the below command.
 
-```bash
+```azurecli
 az aks update -n myAKSCluster -g <myResourceGroup> --attach-acr <registry-name>
 ```
 
@@ -360,13 +362,11 @@ This process deploys [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] 
       kubectl label node aks-nodepool1-75119571-vmss000001 <role=ags-secondary>
       ```
 
-1. Create the `sa` password secret on Kubernetes before deploying the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] containers using the following command.
+1. Create the `sa` password secret on Kubernetes before deploying the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] containers using the following command. Replace `<password>` with your own complex password.
 
    ```bash
-   kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="MyC0m9l&xP@ssw0rd"
+   kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="<password>"
    ```
-
-   Replace `MyC0m9l&xP@ssw0rd` with your own complex password.
 
 1. Create a manifest (a YAML file) to describe the deployment. The following example shows our current deployment, which makes use of the custom container image created in the preceding steps.
 
@@ -584,7 +584,7 @@ This process deploys [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] 
       statefulset.apps/mssql-sec   2/2     33h
       ```
 
-You should now have three [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instances, each with its own storage and services, exposing ports 1433 ([!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]) and 7979 (DxEnterprise Cluster). You can connect to each [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance using the External-IP address. The `SA` password is the same password you provided when creating the `mssql` secret in the preceding steps.
+You should now have three [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instances, each with its own storage and services, exposing ports 1433 ([!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]) and 7979 (DxEnterprise Cluster). You can connect to each [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance using the External-IP address. The `sa` password is the same password you provided when creating the `mssql` secret in the preceding steps.
 
 ## Configure the DxEnterprise cluster on the deployed containers
 

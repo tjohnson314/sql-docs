@@ -7,6 +7,8 @@ ms.date: "09/25/2017"
 ms.service: sql
 ms.subservice: data-movement
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
 helpviewer_keywords:
   - "exporting data"
   - "bulk importing [SQL Server], about bulk importing"

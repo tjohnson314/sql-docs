@@ -8,8 +8,10 @@ ms.date: 10/01/2018
 ms.service: azure-sql-database
 ms.subservice: development
 ms.topic: reference
-ms.custom: sqldbrb=2
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi ||=fabricsql"
+ms.custom:
+  - sqldbrb=2
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabricsql"
 ---
 
 # Public data sets for testing and prototyping

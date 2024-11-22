@@ -8,7 +8,9 @@ ms.date: 11/04/2024
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: conceptual
-monikerRange: ">= aps-pdw-2016 || = azuresqldb-current || = azure-sqldw-latest || >= sql-server-2016 || >= sql-server-linux-2017"
+ms.custom:
+  - ignite-2024
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017"
 ---
 # SQL Server docs navigation guide
 

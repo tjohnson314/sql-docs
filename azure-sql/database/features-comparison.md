@@ -11,7 +11,8 @@ ms.subservice: service-overview
 ms.topic: conceptual
 ms.custom:
   - build-2024
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
+  - ignite-2024
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ---
 
 # Features comparison: Azure SQL Database and Azure SQL Managed Instance
@@ -138,7 +139,7 @@ The Azure platform provides a number of PaaS capabilities that are added as an a
 | **Auto-scale** | Yes, but only in [serverless model](serverless-tier-overview.md?view=azuresql-db&preserve-view=true). In the non-serverless model, the change of service tier (change of vCore, storage, or DTU) is fast and online. The service tier change requires minimal or no downtime. | No, you need to choose reserved compute and storage. The change of service tier (vCore or max storage) is online and requires minimal or no downtime. |
 | **Automatic backups** | Yes, see [automated backups in Azure SQL Database](automated-backups-overview.md?view=azuresql-db&preserve-view=true). Full backups are taken every 7 days, differential 12 hours, and log backups every 5-10 min. | Yes, see [automated backups in Azure SQL Managed Instance](../managed-instance/automated-backups-overview.md?view=azuresql-mi&preserve-view=true). Full backups are taken every 7 days, differential 12 hours, and log backups every 5-10 min. |
 | **Automatic tuning (indexes)**| Yes, see [Automatic tuning](automatic-tuning-overview.md?view=azuresql-db&preserve-view=true)| No |
-| [Availability Zones](/azure/availability-zones/az-overview) | Yes | Yes, in preview, currently for the Business Critical tier only |
+| [Availability Zones](/azure/reliability/availability-zones-overview) | Yes | Yes, in preview, currently for the Business Critical tier only |
 | [Azure Resource Health](/azure/service-health/resource-health-overview) | Yes | Yes |
 | **Short-term backup retention** | Yes, see [short-term retention](automated-backups-overview.md?view=azuresql-db&preserve-view=true#short-term-retention). 7 days default, max 35 days. | Yes, see [short-term retention](../managed-instance/automated-backups-overview.md?view=azuresql-mi&preserve-view=true#short-term-retention). 1-35 days, 7 days default.  |
 | [Azure Database Migration Service (DMS)](/azure/dms/dms-overview) | Yes | Yes |
