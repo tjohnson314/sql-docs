@@ -30,7 +30,10 @@ From there, the entire setup of your SQL Server VM is automated. Once this featu
 > [!NOTE]  
 > You can also configure Key Vault integration by using a template. For more information, see [Azure quickstart template for Azure Key Vault integration](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.compute/vm-sql-existing-keyvault-update).
 >
-> SQL Server Connector version 1.0.4.0 is installed on the SQL Server VM through the [SQL infrastructure as a service (IaaS) extension](sql-server-iaas-agent-extension-automate-management.md). Upgrading the SQL IaaS Agent extension will not update the provider version. Consider manually upgrading the SQL Server Connector version if needed (for example, when using an Azure Key Vault Managed HSM, which needs at least version [15.0.2000.440](https://www.microsoft.com/en-us/download/details.aspx?id=45344)).
+> SQL Server Connector version 1.0.5.0 is installed on the SQL Server VM through the [SQL infrastructure as a service (IaaS) extension](sql-server-iaas-agent-extension-automate-management.md). Upgrading the SQL IaaS Agent extension will not update the provider version. Consider manually upgrading the SQL Server Connector version if you have an older version installed (for example, when using an Azure Key Vault Managed HSM, which needs at least version [15.0.2000.440](https://www.microsoft.com/en-us/download/details.aspx?id=45344)). You can check the SQL Server Connector version with the following T-SQL query:
+> ```sql
+> SELECT name, version from sys.cryptographic_providers
+> ```
 
 ## Enable and configure Key Vault integration
 
