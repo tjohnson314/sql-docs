@@ -55,7 +55,7 @@ After the UMI is created, some permissions are needed to allow the UMI to read f
 These permissions should be granted before you provision a logical server or managed instance. After you grant the permissions to the UMI, they're enabled for all servers or instances that are created with the UMI assigned as a server identity.
 
 > [!IMPORTANT]
-> Only a [Global Administrator](/entra/identity/role-based-access-control/permissions-reference#global-administrator) or [Privileged Role Administrator](/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator) can grant these permissions.
+> Only a [Privileged Role Administrator](/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator) or higher role can grant these permissions.
 
 - [User.Read.All](/graph/permissions-reference#user-permissions): Allows access to Microsoft Entra user information.
 - [GroupMember.Read.All](/graph/permissions-reference#group-permissions): Allows access to Microsoft Entra group information.
@@ -65,7 +65,7 @@ These permissions should be granted before you provision a logical server or man
 
 The following sample PowerShell script grants the necessary permissions for a managed identity. This sample assigns permissions to the user-assigned managed identity `umiservertest`.
 
-To run the script, you must sign in as a user with a Global Administrator or Privileged Role Administrator role.
+To run the script, you must sign in as a user with a Privileged Role Administrator or higher role.
 
 The script grants the `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.ALL` permissions to a managed identity to access [Microsoft Graph](/graph/auth/auth-concepts#microsoft-graph-permissions).
 
@@ -82,7 +82,7 @@ Import-Module Microsoft.Graph.Applications
 $tenantId = "<tenantId>"        # Your tenant ID
 $MSIName = "<managedIdentity>"; # Name of your managed identity
 
-# Log in as a user with the "Global Administrator" or "Privileged Role Administrator" role
+# Log in as a user with the "Privileged Role Administrator" role
 Connect-MgGraph -TenantId $tenantId -Scopes "AppRoleAssignment.ReadWrite.All,Application.Read.All"
 
 # Search for Microsoft Graph
