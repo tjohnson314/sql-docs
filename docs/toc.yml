@@ -1164,6 +1164,8 @@ items:
             href: relational-databases/databases/database-properties-filegroups-page.md
           - name: Options page
             href: relational-databases/databases/database-properties-options-page.md
+          - name: Configurations page
+            href: relational-databases/databases/database-properties-configurations-page.md
           - name: Change Tracking page
             href: relational-databases/databases/database-properties-changetracking-page.md
           - name: Transaction log shipping page
