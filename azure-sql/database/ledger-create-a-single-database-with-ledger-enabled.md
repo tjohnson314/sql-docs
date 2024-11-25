@@ -114,7 +114,7 @@ databaseName="myLedgerDatabase"
 storageAccountName="mystorage"$RANDOM
 subscription="<your subscription ID>"
 adminLogin=azureuser
-adminPassword=Azure1234567!
+adminPassword=<password>
 serverResourceId="/subscriptions/$subscription/resourceGroups/$resourceGroupName/providers/Microsoft.Sql/servers/$serverName"
 
 # The ip address range that you want to allow to access your server

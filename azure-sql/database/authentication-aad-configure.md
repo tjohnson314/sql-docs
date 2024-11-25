@@ -204,7 +204,7 @@ Setting the Microsoft Entra admin enables Microsoft Entra authentication for Azu
 
 #### [Azure portal](#tab/azure-portal)
 
-To grant your SQL managed instance read permissions to Microsoft Entra ID by using the Azure portal, sign in as a **Global Administrator** or **Privileged Role Administrator** and follow these steps:
+To grant your SQL managed instance read permissions to Microsoft Entra ID by using the Azure portal, sign in as a **Privileged Role Administrator** and follow these steps:
 
 1. In the [Azure portal](https://portal.azure.com), in the upper-right corner select your account, and then choose **Switch directories** to confirm which directory is your **Current directory**. Switch directories, if necessary.
 
@@ -323,7 +323,7 @@ For some operations, Azure SQL Database and Azure Synapse Analytics also require
 
 The **Microsoft Entra ID** page for SQL Managed Instance in the Azure portal displays a convenient banner when the instance isn't assigned the Directory Reader permissions.
 
-1. Select the banner on top of the **Microsoft Entra ID** page and grant permission to the system-assigned or user-assigned managed identity that represents your instance. Only a Global Administrator or Privileged Role Administrator in your tenant can perform this operation.
+1. Select the banner on top of the **Microsoft Entra ID** page and grant permission to the system-assigned or user-assigned managed identity that represents your instance. Only a Privileged Role Administrator or higher role in your tenant can perform this operation.
 
     :::image type="content" source="media/authentication-aad-configure/grant-permissions.png" alt-text="Screenshot of the dialog for granting permissions to a SQL managed instance for accessing Microsoft Entra ID with the Grant permissions button selected.":::
 
@@ -337,7 +337,7 @@ The following PowerShell script adds an identity to the Directory Readers role. 
 
 ```powershell
 # This script grants "Directory Readers" permission to a service principal representing a SQL Managed Instance or logical server.
-# It can be executed only by a user who is a member of the **Global Administrator** or **Privileged Roles Administrator** role.
+# It can be executed only by a user who is a member of the **Privileged Roles Administrator** role.
 
 Import-Module Microsoft.Graph.Authentication
 $instanceName = "<InstanceName>"        # Enter the name of your managed instance or server

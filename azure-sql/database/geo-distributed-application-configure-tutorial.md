@@ -197,7 +197,7 @@ Geo-replication settings can also be changed in the Azure portal, by selecting y
   
       private static final String DB_NAME = "<your database>";  // add database name
       private static final String USER = "<your admin>";  // add database user
-      private static final String PASSWORD = "<your password>";  // add database password
+      private static final String PASSWORD = "<password>";  // add database password
 
       private static final String READ_WRITE_URL = String.format("jdbc:" +
          "sqlserver://%s.database.windows.net:1433;database=%s;user=%s;password=%s;encrypt=true;" +

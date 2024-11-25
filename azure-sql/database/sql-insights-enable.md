@@ -46,10 +46,10 @@ The instructions below cover the process per type of SQL that you can monitor. T
 
 Connect to an Azure SQL database with [SQL Server Management Studio](./connect-query-ssms.md), [Query Editor (preview)](./query-editor.md) in the Azure portal, or any other SQL client tool.
 
-Run the following script to create a user with the required permissions. Replace *user* with a username and *mystrongpassword* with a strong password.
+Run the following script to create a user with the required permissions. Replace *user* with a username and *\<password>* with a strong password.
 
 ```sql
-CREATE USER [user] WITH PASSWORD = N'mystrongpassword'; 
+CREATE USER [user] WITH PASSWORD = N'<password>'; 
 GO 
 GRANT VIEW DATABASE STATE TO [user]; 
 GO 
@@ -75,13 +75,13 @@ order by username
 
 #### [Azure SQL Managed Instance](#tab/sqlmi)
 
-Connect to your Azure SQL Managed Instance using [SQL Server Management Studio](./connect-query-ssms.md) or a similar tool, and execute the following script to create the monitoring user with the permissions needed. Replace *user* with a username and *mystrongpassword* with a strong password.
+Connect to your Azure SQL Managed Instance using [SQL Server Management Studio](./connect-query-ssms.md) or a similar tool, and execute the following script to create the monitoring user with the permissions needed. Replace *user* with a username and *\<password>* with a strong password.
 
  
 ```sql
 USE master; 
 GO 
-CREATE LOGIN [user] WITH PASSWORD = N'mystrongpassword'; 
+CREATE LOGIN [user] WITH PASSWORD = N'<password>'; 
 GO 
 GRANT VIEW SERVER STATE TO [user]; 
 GO 
@@ -91,12 +91,12 @@ GO
 
 #### [SQL Server on Azure VMs](#tab/sqlvm)
 
-Connect to SQL Server on your Azure virtual machine and use [SQL Server Management Studio](./connect-query-ssms.md) or a similar tool to run the following script to create the monitoring user with the permissions needed. Replace *user* with a username and *mystrongpassword* with a strong password.
+Connect to SQL Server on your Azure virtual machine and use [SQL Server Management Studio](./connect-query-ssms.md) or a similar tool to run the following script to create the monitoring user with the permissions needed. Replace *user* with a username and *\<password>* with a strong password.
  
 ```sql
 USE master; 
 GO 
-CREATE LOGIN [user] WITH PASSWORD = N'mystrongpassword'; 
+CREATE LOGIN [user] WITH PASSWORD = N'<password>'; 
 GO 
 GRANT VIEW SERVER STATE TO [user]; 
 GO 

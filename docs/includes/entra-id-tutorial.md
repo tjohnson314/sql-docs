@@ -76,7 +76,7 @@ Select the newly created application, and on the left side menu, select **API Pe
 :::image type="content" source="../relational-databases/security/authentication-access/media/configured-app-permissions.png" alt-text="Screenshot of application permissions in the Azure portal.":::
 
 > [!NOTE]
-> To grant **Admin consent** to the permissions above, your Microsoft Entra account requires either the Global Administrator or Privileged Role Administrator role.
+> To grant **Admin consent** to the permissions above, your Microsoft Entra account requires the Privileged Role Administrator role or higher permissions.
 
 ## Create and assign a certificate
 

@@ -36,7 +36,7 @@ The **Directory Readers** role can be used as the server or instance identity to
 
 ## Assigning the Directory Readers role
 
-In order to assign the [**Directory Readers**](/azure/active-directory/roles/permissions-reference#directory-readers) role to an identity, a user with [Global Administrator](/azure/active-directory/roles/permissions-reference#global-administrator) or [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) permissions is needed. Users who often manage or deploy SQL Database, SQL Managed Instance, or Azure Synapse may not have access to these highly privileged roles. This can often cause complications for users that create unplanned Azure SQL resources, or need help from highly privileged role members that are often inaccessible in large organizations.
+In order to assign the [**Directory Readers**](/azure/active-directory/roles/permissions-reference#directory-readers) role to an identity, a user with [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) or higher permissions are needed. Users who often manage or deploy SQL Database, SQL Managed Instance, or Azure Synapse may not have access to these highly privileged roles. This can often cause complications for users that create unplanned Azure SQL resources, or need help from highly privileged role members that are often inaccessible in large organizations.
 
 For SQL Managed Instance, the **Directory Readers** role must be assigned to the managed instance identity before you can [set up a Microsoft Entra admin for the managed instance](authentication-aad-configure.md#provision-azure-ad-admin-sql-managed-instance). 
 
@@ -46,9 +46,9 @@ Assigning the **Directory Readers** role to the server identity isn't required f
 
 ## Granting the Directory Readers role to a Microsoft Entra group
 
-You can now have a [Global Administrator](/azure/active-directory/roles/permissions-reference#global-administrator) or [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) create a Microsoft Entra group and assign the [**Directory Readers**](/azure/active-directory/roles/permissions-reference#directory-readers) permission to the group. This will allow access to the Microsoft Graph API for members of this group. In addition, Microsoft Entra users who are owners of this group are allowed to assign new members for this group, including identities of the logical servers.
+You can now have a [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) create a Microsoft Entra group and assign the [**Directory Readers**](/azure/active-directory/roles/permissions-reference#directory-readers) permission to the group. This will allow access to the Microsoft Graph API for members of this group. In addition, Microsoft Entra users who are owners of this group are allowed to assign new members for this group, including identities of the logical servers.
 
-This solution still requires a high privilege user (Global Administrator or Privileged Role Administrator) to create a group and assign users as a one time activity, but the Microsoft Entra group owners will be able to assign additional members going forward. This eliminates the need to involve a high privilege user in the future to configure all SQL Databases, SQL Managed Instances, or Azure Synapse servers in their Microsoft Entra tenant.
+This solution still requires a high privilege user (Privileged Role Administrator or higher permissions) to create a group and assign users as a one time activity, but the Microsoft Entra group owners will be able to assign additional members going forward. This eliminates the need to involve a high privilege user in the future to configure all SQL Databases, SQL Managed Instances, or Azure Synapse servers in their Microsoft Entra tenant.
 
 ## Next steps
 

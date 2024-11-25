@@ -112,7 +112,7 @@ tag="create-and-configure-database"
 serverName="mysqlserver-$randomIdentifier"
 databaseName="mySampleDatabase"
 login="azureuser"
-password="Pa$$w0rD-$randomIdentifier"
+password="<password>-$randomIdentifier"
 # Specify appropriate IP address values for your environment
 # to limit access to the SQL Database server
 startIp=0.0.0.0
@@ -199,7 +199,7 @@ Before running the sample code, change the `location` as appropriate for your en
    $resourceGroupName = "myResourceGroup"
    $location = "eastus"
    $adminLogin = "azureuser"
-   $password = "Pa$$w0rD-$(Get-Random)"
+   $password = "<password>-$(Get-Random)"
    $serverName = "mysqlserver-$(Get-Random)"
    $databaseName = "mySampleDatabase"
 
