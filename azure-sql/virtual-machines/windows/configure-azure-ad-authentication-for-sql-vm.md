@@ -203,7 +203,7 @@ You can validate permissions have been correctly assigned to the specified manag
 
    ```azurecli
    az sql vm validate-azure-ad-auth -n sqlvm -g myresourcegroup 
-   --msi-client-id 11111111-2222-3333-4444-555555555555
+   --msi-client-id 00001111-aaaa-2222-bbbb-3333cccc4444
    ```
 
 <a name='enable-azure-ad-authentication-'></a>
@@ -231,14 +231,14 @@ Assuming your SQL Server VM name is `sqlvm` and your resource group is `myResour
 
    ```azurecli
    az sql vm enable-azure-ad-auth -n sqlvm -g myresourcegroup 
-   --msi-client-id 11111111-2222-3333-4444-555555555555
+   --msi-client-id 00001111-aaaa-2222-bbbb-3333cccc4444
    ```
 
 - Enable Microsoft Entra authentication with a user-assigned managed identity but skip client-side validation and rely on the server-side validation that always happens:
 
    ```azurecli
    az sql vm enable-azure-ad-auth -n sqlvm -g myresourcegroup 
-   --msi-client-id 11111111-2222-3333-4444-555555555555 --skip-client-validation 
+   --msi-client-id 00001111-aaaa-2222-bbbb-3333cccc4444 --skip-client-validation 
    ````
 
 <a name='check-status-of-azure-ad-authentication-'></a>
@@ -259,7 +259,7 @@ The following output indicates Microsoft Entra authentication has been enabled w
 
 ```
     "azureAdAuthenticationSettings": { 
-      "clientId": "11111111-2222-3333-4444-555555555555" },
+      "clientId": "00001111-aaaa-2222-bbbb-3333cccc4444" },
 ```
 
 ---
