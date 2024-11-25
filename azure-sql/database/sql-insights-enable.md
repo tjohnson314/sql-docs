@@ -75,7 +75,7 @@ order by username
 
 #### [Azure SQL Managed Instance](#tab/sqlmi)
 
-Connect to your Azure SQL Managed Instance using [SQL Server Management Studio](./connect-query-ssms.md) or a similar tool, and execute the following script to create the monitoring user with the permissions needed. Replace *user* with a username and *\<password* with a strong password.
+Connect to your Azure SQL Managed Instance using [SQL Server Management Studio](./connect-query-ssms.md) or a similar tool, and execute the following script to create the monitoring user with the permissions needed. Replace *user* with a username and *\<password>* with a strong password.
 
  
 ```sql

@@ -707,7 +707,7 @@ We currently don't support AD authentication to the AG endpoint. Therefore, we m
 
 1. Connect to the primary replica using SSMS or **sqlcmd**. The following commands create a certificate at `/var/opt/mssql/data/dbm_certificate.cer` and a private key at `var/opt/mssql/data/dbm_certificate.pvk` on your primary SQL Server replica:
 
-    - Replace the `<password` with your own password.
+    - Replace the `<password>` with your own password.
 
     ```sql
     CREATE CERTIFICATE dbm_certificate WITH SUBJECT = 'dbm';
@@ -766,7 +766,7 @@ Exit the **sqlcmd** session by running the `exit` command, and return back to yo
         FROM FILE = '/var/opt/mssql/data/dbm_certificate.cer'
         WITH PRIVATE KEY (
         FILE = '/var/opt/mssql/data/dbm_certificate.pvk',
-        DECRYPTION BY PASSWORD = 'password'
+        DECRYPTION BY PASSWORD = '<password>'
                 );
     GO
     ```
