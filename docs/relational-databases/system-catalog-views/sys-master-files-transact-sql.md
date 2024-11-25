@@ -3,7 +3,7 @@ title: "sys.master_files (Transact-SQL)"
 description: The sys.master_files system catalog view contains a row per file of a database as stored in the master database.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/31/2023
+ms.date: 11/25/2023
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -44,6 +44,7 @@ Contains a row per file of a database as stored in the `master` database. `sys.m
 | `is_sparse` | **bit** | `1` = File is a sparse file.<br /><br />`0` = File isn't a sparse file.<br /><br />For more information, see [View the Size of the Sparse File of a Database Snapshot (Transact-SQL)](../../relational-databases/databases/view-the-size-of-the-sparse-file-of-a-database-snapshot-transact-sql.md). |
 | `is_percent_growth` | **bit** | `1` = Growth of the file is a percentage.<br /><br />`0` = Absolute growth size in pages. |
 | `is_name_reserved` | **bit** | `1` = Dropped file name is reusable. A log backup must be taken before the name (`name` or `physical_name`) can be reused for a new file name.<br /><br />`0` = File name is unavailable for reuse. |
+| `is_persistent_log_buffer` | **bit** | `1` = The log file is a persistent log buffer.<br /><br />`0` = The file is not a persistent log buffer. For more information, see [Add persistent log buffer to a database](../databases/add-persisted-log-buffer.md). |
 | `create_lsn` | **numeric(25,0)** | Log sequence number (LSN) at which the file was created. |
 | `drop_lsn` | **numeric(25,0)** | LSN at which the file was dropped. |
 | `read_only_lsn` | **numeric(25,0)** | LSN at which the filegroup that contains the file changed from read/write to read-only (most recent change). |

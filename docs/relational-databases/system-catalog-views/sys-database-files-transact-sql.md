@@ -3,7 +3,7 @@ title: "sys.database_files (Transact-SQL)"
 description: sys.database_files (Transact-SQL)
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 02/26/2024
+ms.date: 11/25/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -43,6 +43,7 @@ monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-s
 | `is_sparse` |**bit**|1 = File is a sparse file.<br /><br />0 = File is not a sparse file.<br />For more information, see [View the Size of the Sparse File of a Database Snapshot (Transact-SQL)](../../relational-databases/databases/view-the-size-of-the-sparse-file-of-a-database-snapshot-transact-sql.md).|  
 | `is_percent_growth` |**bit**|1 = Growth of the file is a percentage.<br /><br />0 = Absolute growth size in pages.|  
 | `is_name_reserved` |**bit**|1 = Dropped file name (`name` or `physical_name`) is reusable only after the next log backup. When files are dropped from a database, the logical names stay in a reserved state until the next log backup. This column is relevant only under the full recovery model and the bulk-logged recovery model.|  
+| `is_persistent_log_buffer` | **bit** | `1` = The log file is a persistent log buffer.<br /><br />`0` = The file is not a persistent log buffer. For more information, see [Add persistent log buffer to a database](../databases/add-persisted-log-buffer.md). |
 | `create_lsn` |**numeric(25,0)**|Log sequence number (LSN) at which the file was created.|  
 | `drop_lsn` |**numeric(25,0)**|LSN at which the file was dropped.<br /><br />0 = The file name is unavailable for reuse.|  
 | `read_only_lsn` |**numeric(25,0)**|LSN at which the filegroup that contains the file changed from read/write to read-only (most recent change).|  
