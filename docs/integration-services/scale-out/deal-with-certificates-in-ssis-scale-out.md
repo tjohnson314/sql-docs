@@ -67,7 +67,7 @@ For example:
 
 ```dos
 netsh http delete sslcert ipport=0.0.0.0:8391
-netsh http add sslcert ipport=0.0.0.0:8391 certhash=0011001100110011001100110011001100110011 certstorename=Root appid={11111111-2222-3333-4444-555555555555}
+netsh http add sslcert ipport=0.0.0.0:8391 certhash=0011001100110011001100110011001100110011 certstorename=Root appid={00001111-aaaa-2222-bbbb-3333cccc4444}
 ```
 
 #### 3. Update the Scale Out Master service configuration file

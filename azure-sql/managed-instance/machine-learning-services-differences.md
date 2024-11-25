@@ -84,7 +84,7 @@ Machine Learning Services is currently not supported on [Azure SQL Managed Insta
 
 ## Outbound network access
 
-Network access is disallowed or blocked and cannot be enabled. The outbound network connection for Azure SQL Managed Instance is not avaialble for Machine Learning Services.
+Network access is disallowed or blocked and cannot be enabled. The outbound network connection for Azure SQL Managed Instance is not available for Machine Learning Services.
 
 ## Next steps
 

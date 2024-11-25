@@ -36,7 +36,7 @@ The following example shows how to use the new options in a simple fetch.
 ```php
 <?php
 $username = 'myusername';
-$password = 'mypasword';
+$password = '<password>';
 $tableName = 'mytable';
 
 $connectionInfo = array("UID" => $username, "PWD" => $password, "Database" => "myDB", "FormatDecimals" => true);  

@@ -4499,7 +4499,7 @@ items:
       href: database-engine/configure-windows/hybrid-buffer-pool.md
     - name: Persistent memory (PMEM)
       href: database-engine/configure-windows/configure-persistent-memory.md
-    - name: Add persisted log buffer
+    - name: Add persistent log buffer
       href: relational-databases/databases/add-persisted-log-buffer.md
     - name: Change Server Authentication Mode
       href: database-engine/configure-windows/change-server-authentication-mode.md

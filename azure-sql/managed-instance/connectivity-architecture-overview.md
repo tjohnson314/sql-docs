@@ -52,39 +52,35 @@ The *control plane* carries the deployment, management, and core service mainten
 
 ## Communication overview
 
-Applications can connect to SQL Managed Instance via three types of endpoints. These endpoints serve different scenarios and exhibit distinct network properties and behaviors.
-
-- [VNet-local endpoint](#vnet-local-endpoint)
-- [Public endpoint](#public-endpoint)
-- [Private endpoints](#private-endpoints)
+Applications can connect to SQL Managed Instance via three types of endpoints: [VNet-local endpoint](#vnet-local-endpoint), [public endpoint](#public-endpoint), and [private endpoints](#private-endpoints). These endpoints exhibit distinct properties and behaviors suitable for different scenarios.
 
 :::image type="content" source="media/connectivity-architecture-overview/4-connectivity-architecture-endpoints.png" alt-text="Diagram that shows the scope of visibility for VNet-local, public, and private endpoints to an Azure SQL Managed Instance." lightbox="media/connectivity-architecture-overview/4-connectivity-architecture-endpoints.png":::
 
 ### VNet-local endpoint
 
-The VNet-local endpoint is the default means to connect to SQL Managed Instance. The VNet-local endpoint is a domain name in the form of `<mi_name>.<dns_zone>.database.windows.net` that resolves to an IP address from the subnet's address pool; hence **VNet-local**, or an endpoint that is local to the virtual network. The VNet-local endpoint can be used to connect to a SQL Managed Instance in all standard connectivity scenarios.
+The VNet-local endpoint is the default means to connect to SQL Managed Instance. It is a domain name in the form of `<mi_name>.<dns_zone>.database.windows.net`. This domain name resolves to an IP address from the subnet's address range. The VNet-local endpoint can be used to connect to a SQL Managed Instance in all standard connectivity scenarios. VNet-local endpoint's port is 1433.
 
-VNet-local endpoints support both [proxy and redirect connection types](connection-types-overview.md).
+VNet-local endpoint supports [proxy and redirect connection types](connection-types-overview.md).
 
-When connecting to the VNet-local endpoint, always use its domain name as the underlying IP address can occasionally change.
+When connecting to the VNet-local endpoint, always use its domain name and allow inbound traffic on the required port(s) across the entire subnet range, as the underlying IP address can occasionally change.
 
 ### Public endpoint
 
-The public endpoint is an optional domain name in the form of `<mi_name>.public.<dns_zone>.database.windows.net` that resolves to a public IP address reachable from the Internet. Public endpoint allows TDS traffic only to reach SQL Managed Instance on port 3342 and can't be used for integration scenarios, such as failover groups, Managed Instance link, and similar technologies.
-
-When connecting to the public endpoint, always use its domain name as the underlying IP address can occasionally change.
+The public endpoint is a domain name in the form of `<mi_name>.public.<dns_zone>.database.windows.net`. This domain name resolves to a public IP address reachable from the Internet. Public endpoint is suitable for scenarios when a managed instance needs to be accessible via the public Internet, for example when connecting to it from a different virtual network when peering or private endpoints aren't available. Public endpoints only carry client traffic and can't be used for data replication between two instances, such as failover groups or Managed Instance Link. Public endpoint's port is 3342.
 
 Public endpoint always uses the [proxy connection type](connection-types-overview.md) regardless of the connection type setting.
+
+When connecting to the public endpoint, always use its domain name and allow inbound traffic on port 3342 across the entire subnet range, as the underlying IP address can occasionally change.
 
 Learn how to set up a public endpoint in [Configure public endpoint for Azure SQL Managed Instance](public-endpoint-configure.md).
 
 ### Private endpoints
 
-A private endpoint is an optional fixed IP address in another virtual network that conducts traffic to your SQL managed instance. One Azure SQL Managed Instance can have multiple private endpoints in multiple virtual networks. Private endpoints allow TDS traffic only to reach SQL Managed Instance on port 1433 and can't be used for integration scenarios, such as failover groups, Managed Instance link, and other similar technologies.
-
-When connecting to a private endpoint, always use the domain name since connecting to Azure SQL Managed Instance via its IP address isn't supported yet.
+A private endpoint is an optional fixed IP address in another virtual network that conducts traffic to your SQL managed instance. One Azure SQL Managed Instance can have multiple private endpoints in multiple virtual networks. Private endpoints only carry client traffic and can't be used for data replication between two instances, such as failover groups or Managed Instance Link. Private endpoint's port is 1143.
 
 Private endpoints always uses the [proxy connection type](connection-types-overview.md) regardless of the connection type setting.
+
+When connecting to a private endpoint, always use the domain name since connecting to Azure SQL Managed Instance via its IP address isn't supported yet. The IP address of a private endpoint, however, does not change.
 
 Learn more about private endpoints and how to configure them in [Azure Private Link for Azure SQL Managed Instance](private-endpoint-overview.md).
 

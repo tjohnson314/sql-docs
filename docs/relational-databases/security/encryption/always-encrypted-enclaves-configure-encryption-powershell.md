@@ -22,15 +22,7 @@ To set the target encryption configuration, you need to make sure:
 - an enclave-enabled column encryption key is configured in the database (if you're encrypting or re-encrypting a column). For details, see [Manage keys for Always Encrypted with secure enclaves](../../../relational-databases/security/encryption/always-encrypted-enclaves-manage-keys.md).
 - you're connected to the database with Always Encrypted enabled and the attestation properties specified in the connection string.
 - you can access the column master key for each column you want to encrypt, re-encrypt, or decrypt, from the computer running the PowerShell cmdlets.
-- you use SqlServer PowerShell module version 22.0.50 or later.
-
-## Availability Considerations
-
-The in-place **Set-SqlColumnEncryption** cmdlet doesn't support online encryption.
-
-With the offline approach, the target tables (and any tables related to the target tables, for example, any tables a target table have foreign key relationships with) are unavailable to write transactions throughout the duration of the operation. The semantics of foreign key constraints (**CHECK** or **NOCHECK**) are always preserved when using the offline approach.
-
-If you can't afford downtime during the encryption process, we suggest using [Configure column encryption in-place with Transact-SQL](always-encrypted-enclaves-configure-encryption-tsql.md), which supports online encryption.
+- you use SqlServer PowerShell module version 22.0.50 or later. For in-place online encryption use SqlServer PowerShell module version 22.3.0 or later.
 
 ## Security Considerations
 

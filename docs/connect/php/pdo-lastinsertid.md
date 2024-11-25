@@ -42,7 +42,7 @@ Sequences are supported only in SQL Server 2012 and above.
 $server = "myserver";
 $databaseName = "mydatabase";
 $uid = "myusername";
-$pwd = "mypasword";
+$pwd = "<password>";
 
 try {
     $conn = new PDO("sqlsrv:Server=$server;Database=$databaseName", $uid, $pwd);

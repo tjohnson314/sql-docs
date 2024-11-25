@@ -105,6 +105,7 @@ SET
   | <query_store_options>
   | <recovery_option>
   | <remote_data_archive_option>
+  | <persistent_log_buffer_option>
   | <service_broker_option>
   | <snapshot_option>
   | <sql_option>
@@ -262,6 +263,15 @@ SET
     }
 }
 
+<persistent_log_buffer_option> ::=
+{
+    PERSISTENT_LOG_BUFFER 
+    {
+          = ON (DIRECTORY_NAME= 'path-to-directory-on-a-DAX-volume')
+        | = OFF
+    }
+}
+
 <service_broker_option> ::=
 {
     ENABLE_BROKER
@@ -277,6 +287,7 @@ SET
   | READ_COMMITTED_SNAPSHOT { ON | OFF }
   | MEMORY_OPTIMIZED_ELEVATE_TO_SNAPSHOT = { ON | OFF }
 }
+
 <sql_option> ::=
 {
     ANSI_NULL_DEFAULT { ON | OFF }
@@ -1154,6 +1165,12 @@ Enables or disables Stretch Database for the database. For more info, see [Stret
   You can only disable Stretch Database for a database after the database no longer contains any tables that are enabled for Stretch Database. After you disable Stretch Database, data migration stops. Also, query results no longer include results from remote tables.
 
   Disabling Stretch Database doesn't remove the remote database. To delete the remote database, drop it by using the Azure portal.
+
+#### PERSISTENT_LOG_BUFFER
+
+**Applies to**: [!INCLUDE[ssSQL17](../../includes/sssql17-md.md)] and later.
+
+When this option is specified, the transaction log buffer is created on a volume that is located on a disk device backed by Storage Class Memory (NVDIMM-N nonvolatile storage), also known as a persistent log buffer. For more information, see [Transaction Commit latency acceleration using Storage Class Memory](/archive/blogs/sqlserverstorageengine/transaction-commit-latency-acceleration-using-storage-class-memory-in-windows-server-2016sql-server-2016-sp1) and [Add persistent log buffer to a database](../../relational-databases/databases/add-persisted-log-buffer.md).
 
 #### \<service_broker_option> ::=
 

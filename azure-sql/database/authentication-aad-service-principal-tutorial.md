@@ -33,7 +33,7 @@ In this tutorial, you learn how to:
 ## Prerequisites
 
 - An existing [Azure SQL Database](single-database-create-quickstart.md) deployment. We assume you have a working SQL Database for this tutorial.
-- Microsoft Entra `Global Administrator` or `Privileged Role Administrator` permissions in the tenant where your SQL database resides.
+- Microsoft Entra `Privileged Role Administrator` permissions in the tenant where your SQL database resides.
 - The latest version of the [Az.Sql](https://www.powershellgallery.com/packages/Az.Sql/) PowerShell module. 
 - The latest version of the [Microsoft.Graph](https://www.powershellgallery.com/packages/Microsoft.Graph) PowerShell module.
 
@@ -83,8 +83,8 @@ Assign Microsoft Entra query permissions to the server identity by adding it to 
 - [GroupMember.Read.All](/graph/permissions-reference#groupmemberreadall), and 
 - [Application.Read.All](/graph/permissions-reference#applicationreadall). 
 
-> [!NOTE] 
-> This script must be executed by a Microsoft Entra ID `Global Administrator` or a `Privileged Role Administrator`.
+> [!NOTE]
+> This script must be executed by a Microsoft Entra `Privileged Role Administrator` or higher role.
 
 The following script grants the Microsoft Entra **Directory Readers** permission to an identity that represents the logical server for Azure SQL Database.
 
@@ -93,7 +93,7 @@ The following script grants the Microsoft Entra **Directory Readers** permission
 
 ```powershell
 # This script grants "Directory Readers" permission to a service principal representing a logical server for Azure SQL Database
-# It can be executed only by a user who is a member of the **Global Administrator** or **Privileged Role Administrator** role.
+# It can be executed only by a user who is a member of the **Privileged Role Administrator** or higher role.
 # To check if the "Directory Readers" role was granted, re-execute this script
 
 Import-Module Microsoft.Graph.Authentication
@@ -146,7 +146,7 @@ if ($isDirReader -eq $null) {
 
 For a similar approach on how to assign the **Directory Readers** role for SQL Managed Instance, see [Set Microsoft Entra admin](authentication-aad-configure.md#azure-sql-managed-instance).
 
-In production environments, a common management practice is to assign the **Directory Readers** role to a role-assignable group in Microsoft Entra ID. Then, group owners can add managed identities to the group. This maintains the principle of least privilege, and bypasses the need for a **Global Administrator** or **Privileged Role Administrator** to grant the **Directory Readers** role individually to every SQL instance. For more information on this feature, see [Directory Readers role in Microsoft Entra ID for Azure SQL](authentication-aad-directory-readers-role.md).
+In production environments, a common management practice is to assign the **Directory Readers** role to a role-assignable group in Microsoft Entra ID. Then, group owners can add managed identities to the group. This maintains the principle of least privilege, and bypasses the need for a **Privileged Role Administrator** to grant the **Directory Readers** role individually to every SQL instance. For more information on this feature, see [Directory Readers role in Microsoft Entra ID for Azure SQL](authentication-aad-directory-readers-role.md).
 
 <a name='create-a-service-principal-an-azure-ad-application-in-azure-ad'></a>
 

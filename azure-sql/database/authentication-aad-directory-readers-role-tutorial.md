@@ -17,12 +17,11 @@ monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
 
 [!INCLUDE[appliesto-sqldb-sqlmi-asa](../includes/appliesto-sqldb-sqlmi-asa.md)]
 
-This article guides you through creating a group in Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)), and assigning that group the [**Directory Readers**](/azure/active-directory/roles/permissions-reference#directory-readers) role. The Directory Readers permissions allow the group owners to add additional members to the group, such as a [managed identity](/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types) of [Azure SQL Database](sql-database-paas-overview.md), [Azure SQL Managed Instance](../managed-instance/sql-managed-instance-paas-overview.md), and [Azure Synapse Analytics](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is). This bypasses the need for a [Global Administrator](/azure/active-directory/roles/permissions-reference#global-administrator) or [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) to assign the Directory Readers role directly for each [logical server](logical-servers.md) identity in the tenant.
+This article guides you through creating a group in Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)), and assigning that group the [**Directory Readers**](/azure/active-directory/roles/permissions-reference#directory-readers) role. The Directory Readers permissions allow the group owners to add additional members to the group, such as a [managed identity](/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types) of [Azure SQL Database](sql-database-paas-overview.md), [Azure SQL Managed Instance](../managed-instance/sql-managed-instance-paas-overview.md), and [Azure Synapse Analytics](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is). This bypasses the need for a [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) to assign the Directory Readers role directly for each [logical server](logical-servers.md) identity in the tenant.
 
 [!INCLUDE [entra-id](../includes/entra-id.md)]
 
-
-This tutorial uses the feature introduced in [Use Microsoft Entra groups to manage role assignments](/azure/active-directory/roles/groups-concept). 
+This tutorial uses the feature introduced in [Use Microsoft Entra groups to manage role assignments](/azure/active-directory/roles/groups-concept).
 
 For more information on the benefits of assigning the Directory Readers role to a Microsoft Entra group for Azure SQL, see [Directory Readers role in Microsoft Entra ID for Azure SQL](authentication-aad-directory-readers-role.md).
 
@@ -38,7 +37,7 @@ For more information on the benefits of assigning the Directory Readers role to 
 
 ### Create a new group and assign owners and role
 
-1. A user with [Global Administrator](/azure/active-directory/roles/permissions-reference#global-administrator) or [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) permissions is required for this initial setup.
+1. A user with [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) permissions is required for this initial setup.
 1. Have the privileged user sign into the [Azure portal](https://portal.azure.com).
 1. Go to the **Microsoft Entra ID** resource. Under **Managed**, go to **Groups**. Select **New group** to create a new group.
 1. Select **Security** as the group type, and fill in the rest of the fields. Make sure that the setting **Microsoft Entra roles can be assigned to the group** is switched to **Yes**. Then assign the Microsoft Entra ID **Directory readers** role to the group.
@@ -62,7 +61,7 @@ To check and manage the group that was created, go back to the **Groups** pane i
 > [!NOTE]
 > We're using SQL Managed Instance for this example, but similar steps can be applied for SQL Database or Azure Synapse to achieve the same results.
 
-For subsequent steps, the Global Administrator or Privileged Role Administrator user is no longer needed.
+For subsequent steps, the Privileged Role Administrator user is no longer needed.
 
 1. Log into the Azure portal as the user managing SQL Managed Instance, and is an owner of the group created earlier.
 
@@ -94,7 +93,7 @@ Assigning the **Directory Readers** role to the server identity isn't required f
 ## Directory Readers role assignment using PowerShell
 
 > [!IMPORTANT]
-> A [Global Administrator](/azure/active-directory/roles/permissions-reference#global-administrator) or [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) will need to run these initial steps. In addition to PowerShell, Microsoft Entra ID offers Microsoft Graph API to [Create a role-assignable group in Microsoft Entra ID](/azure/active-directory/roles/groups-create-eligible#microsoft-graph-api).
+> A [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) will need to run these initial steps. In addition to PowerShell, Microsoft Entra ID offers Microsoft Graph API to [Create a role-assignable group in Microsoft Entra ID](/azure/active-directory/roles/groups-create-eligible#microsoft-graph-api).
 
 1. Download the Microsoft Graph PowerShell module using the following commands. You may need to run PowerShell as an administrator.
 
@@ -157,7 +156,7 @@ Assigning the **Directory Readers** role to the server identity isn't required f
 
 ### Assigning the service principal as a member of the group
 
-For subsequent steps, the Global Administrator or Privileged Role Administrator user is no longer needed.
+For subsequent steps, the Privileged Role Administrator user is no longer needed.
 
 1. Using an owner of the group that also manages the Azure SQL resource, run the following command to connect to your Microsoft Entra ID.
 

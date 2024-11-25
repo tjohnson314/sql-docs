@@ -39,8 +39,8 @@ This section describes how to retrieve data stored in encrypted columns as ciphe
 - Your column master key(s) must be stored in a key vault in Azure Key Vault or Windows Certificate Store. Azure Data Studio does not support other key stores and it does not support column master keys stored in [managed HSMs](/azure/key-vault/managed-hsm/overview) in Azure Key Vault.
 
 ### Steps
-1.	Enable Always Encrypted for the database connection for the query window, from which you will run a `SELECT` query retrieving and decrypting your data. This will instruct the [Microsoft .NET Data Provider for SQL Server](../../../connect/ado-net/sql/sqlclient-support-always-encrypted.md) (used by Azure Data Studio) to decrypt the encrypted columns in the query result set. See [Enabling and disabling Always Encrypted for a database connection](#enabling-and-disabling-always-encrypted-for-a-database-connection) below.
-1.	Run your `SELECT` query. Any data retrieved from encrypted columns will be returned as plaintext values of the original data types.
+1.    Enable Always Encrypted for the database connection for the query window, from which you will run a `SELECT` query retrieving and decrypting your data. This will instruct the [Microsoft .NET Data Provider for SQL Server](../../../connect/ado-net/sql/sqlclient-support-always-encrypted.md) (used by Azure Data Studio) to decrypt the encrypted columns in the query result set. See [Enabling and disabling Always Encrypted for a database connection](#enabling-and-disabling-always-encrypted-for-a-database-connection) below.
+1.    Run your `SELECT` query. Any data retrieved from encrypted columns will be returned as plaintext values of the original data types.
  
 ### Example
 Assuming SSN is an encrypted column in the `Patients` table, the query shown below will return plaintext values if Always Encrypted is enabled for the database connection, and if you have access to the column master key configured for the `SSN` column.   
@@ -77,8 +77,8 @@ In addition to the above permissions, to decrypt any query results or to encrypt
 When you connect to a database in Azure Data Studio, you can either enable or disable Always Encrypted for the database connection. By default, Always Encrypted is disabled. 
 
 Enabling Always Encrypted for a database connection instructs the [Microsoft .NET Data Provider for SQL Server](../../../connect/ado-net/sql/sqlclient-support-always-encrypted.md), used by Azure Data Studio, to attempt to transparently:   
--	Decrypt any values retrieved from encrypted columns and returned in query results.   
--	Encrypt the values of the parameterized Transact-SQL variables that target encrypted database columns.   
+-    Decrypt any values retrieved from encrypted columns and returned in query results.   
+-    Encrypt the values of the parameterized Transact-SQL variables that target encrypted database columns.   
 
 If you don't enable Always Encrypted for a connection, the Microsoft .NET Data Provider for SQL Server won't try to encrypt query parameters or decrypt results.
 
@@ -96,7 +96,7 @@ To enable (disable) Always Encrypted:
 To run statements that leverage a server-side secure enclave when you're using [Always Encrypted with secure enclaves](always-encrypted-enclaves.md), you need to specify an enclave attestation protocol and an enclave attestation URL, in addition to enabling Always Encrypted for the connection. For detailed information, see [Prerequisites for running T-SQL statements using enclaves in Azure Data Studio](always-encrypted-enclaves-query-columns.md#prerequisites-for-running-t-sql-statements-using-enclaves-in-azure-data-studio).
 
 > [!TIP]
-> To toggle between Always Encrypted being enabled and disabled for an existing query window, click **Disconnect** and then click **Connnect** and complete the above steps to reconnect to your database with the desired values of the **Always Encrypted** field. 
+> To toggle between Always Encrypted being enabled and disabled for an existing query window, click **Disconnect** and then click **Connect** and complete the above steps to reconnect to your database with the desired values of the **Always Encrypted** field. 
 
 > [!NOTE] 
 > The **Change Connection** button in a query window does not currently support toggling between Always Encrypted being enabled and disabled.

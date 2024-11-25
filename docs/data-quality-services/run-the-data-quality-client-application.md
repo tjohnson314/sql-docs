@@ -25,7 +25,7 @@ f1_keywords:
 ###  <a name="Security"></a> Security  
   
 ####  <a name="Permissions"></a> Permissions  
- You must have one of the three DQS roles (dqs_adminstrator, dqs_kb_editor, or dqs_kb_operator) granted on the DQS_MAIN database to be able to log on to [!INCLUDE[ssDQSServer](../includes/ssdqsserver-md.md)].  
+ You must have one of the three DQS roles (dqs_administrator, dqs_kb_editor, or dqs_kb_operator) granted on the DQS_MAIN database to be able to log on to [!INCLUDE[ssDQSServer](../includes/ssdqsserver-md.md)].  
   
 ##  <a name="Run"></a> Run Data Quality Client  
  To run [!INCLUDE[ssDQSClient](../includes/ssdqsclient-md.md)] on the computer where you have installed it:  

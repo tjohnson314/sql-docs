@@ -1,6 +1,6 @@
 ---
-title: "Dimension Processing Destination Custom Properies"
-description: "Dimension Processing Destination Custom Properies"
+title: "Dimension Processing Destination Custom Properties"
+description: "Dimension Processing Destination Custom Properties"
 author: chugugrace
 ms.author: chugu
 ms.date: "03/01/2017"
@@ -8,7 +8,7 @@ ms.service: sql
 ms.subservice: integration-services
 ms.topic: conceptual
 ---
-# Dimension Processing Destination Custom Properies
+# Dimension Processing Destination Custom Properties
 
 [!INCLUDE[sqlserver-ssis](../../includes/applies-to-version/sqlserver-ssis.md)]
 

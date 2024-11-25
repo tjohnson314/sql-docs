@@ -636,7 +636,7 @@ $cert = ConvertFrom-StringArray (az keyvault certificate show --name $certSubjec
 
 if (!$cert)
 {
-  Write-Error "Supplied certificate $certSubjectName was not found for this key vault. Please specify an existing certficate"
+  Write-Error "Supplied certificate $certSubjectName was not found for this key vault. Please specify an existing certificate"
     exit 1    
 }
 
@@ -1303,7 +1303,7 @@ Use a [Custom deployment in the Azure portal](https://portal.azure.com/#create/M
 Once the Microsoft Entra admin has been set up, using the Microsoft Entra admin credentials allows you to connect to SQL Server. However, any further database activities involving creating new Microsoft Entra logins and users will fail until admin consent is granted to the Microsoft Entra application.
 
 > [!NOTE]
-> To grant **Admin consent** for the application, the account granting consent requires a role of Microsoft Entra ID Global Administrator or Privileged Role Administrator. These roles are necessary to grant admin consent for the application, but is not necessary to set up Microsoft Entra admin.
+> To grant **Admin consent** for the application, the account granting consent requires a role of Microsoft Entra ID Privileged Role Administrator. These roles are necessary to grant admin consent for the application, but is not necessary to set up Microsoft Entra admin.
 
 1. In the [Azure portal](https://portal.azure.com), select **Microsoft Entra ID** > **App registrations**, select the newly created application. The application should have a name like `<hostname>-<instanceName><uniqueNumber>`.
 1. Select the **API permissions** menu.

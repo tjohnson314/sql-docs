@@ -61,15 +61,15 @@ CREATE USER [user_name] FROM EXTERNAL PROVIDER
   WITH OBJECT_ID = 'objectid'
 ```
 
-With the T-SQL DDL supportability extension to create logins or users with the Object ID, you can avoid error *33131* and also specify an alias for the login or user created with the Object ID. For example, the following T-SQL sample will create a login `myapp4466e` using the application Object ID `4466e2f8-0fea-4c61-a470-xxxxxxxxxxxx`.
+With the T-SQL DDL supportability extension to create logins or users with the Object ID, you can avoid error *33131* and also specify an alias for the login or user created with the Object ID. For example, the following T-SQL sample will create a login `myapp4466e` using the application Object ID `aaaaaaaa-0000-1111-2222-bbbbbbbbbbbb`.
 
 ```sql
 CREATE LOGIN [myapp4466e] FROM EXTERNAL PROVIDER 
-  WITH OBJECT_ID = '4466e2f8-0fea-4c61-a470-xxxxxxxxxxxx' 
+  WITH OBJECT_ID = 'aaaaaaaa-0000-1111-2222-bbbbbbbbbbbb' 
 ```
 
 - To execute this T-SQL query, the specified Object ID must exist in the Microsoft Entra tenant where the Azure SQL resource resides. Otherwise, the `CREATE` command will fail with the error message: `Msg 37545, Level 16, State 1, Line 1 '' is not a valid object id for '' or you do not have permission.`
-- The login or user name must contain the original service principal name extended by a user-defined suffix when using the `CREATE LOGIN` or `CREATE USER` statement. As a best practice, the suffix can include an initial part of its Object ID. For example, `myapp2ba6c` for the Object ID `2ba6c0a3-cda4-4878-a5ca-xxxxxxxxxxxx`. However, you can also define a custom suffix. Forming the suffix from the Object ID is not required.
+- The login or user name must contain the original service principal name extended by a user-defined suffix when using the `CREATE LOGIN` or `CREATE USER` statement. As a best practice, the suffix can include an initial part of its Object ID. For example, `myapp2ba6c` for the Object ID `bbbbbbbb-1111-2222-3333-cccccccccccc`. However, you can also define a custom suffix. Forming the suffix from the Object ID is not required.
 
 This naming convention is recommended to explicitly associate the database user or login back to its object in Microsoft Entra ID.
 

@@ -586,6 +586,7 @@ WITH
  [ , FIELDTERMINATOR =  'field_terminator' ]
  [ , ROWTERMINATOR = 'row_terminator' ]
  [ , FIRSTROW = first_row ]
+ [ , DATEFORMAT = 'date_format' ]
  [ , ENCODING = { 'UTF8' | 'UTF16' } ]
  [ , PARSER_VERSION = { '1.0' | '2.0' } ]
 )
@@ -758,6 +759,10 @@ Extended ASCII and multi-byte characters aren't supported with UTF-8 for ROWTERM
 
 *FIRSTROW* only applies to CSV. Specifies the row number that is read first in all files for the COPY command. Values start from 1, which is the default value. If the value is set to two, the first row in every file (header row) is skipped when the data is loaded. Rows are skipped based on the existence of row terminators.
 
+#### *DATEFORMAT = { 'mdy' | 'dmy' | 'ymd' | 'ydm' | 'myd' | 'dym' }*
+
+DATEFORMAT only applies to CSV and specifies the date format of the date mapping to SQL Server date formats. For an overview of all Transact-SQL date and time data types and functions, see [Date and Time Data Types and Functions (Transact-SQL)](../functions/date-and-time-data-types-and-functions-transact-sql.md). DATEFORMAT within the COPY command takes precedence over [DATEFORMAT configured at the session level](set-dateformat-transact-sql.md).
+
 #### *ENCODING = 'UTF8' | 'UTF16'*
 
 *ENCODING* only applies to CSV. Default is UTF8. Specifies the data encoding standard for the files loaded by the COPY command.
@@ -781,9 +786,7 @@ Parser version 1.0 is available for backward compatibility only, and should be u
 
 ## Remarks
 
-COPY INTO in [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] doesn't allow setting a date format for interpreting date character strings. By default, all dates are considered to have the month-day-year format. To ingest a CSV file with a different date format, use *SET DATEFORMAT* to specify the desired date format at the session level. For more information, see [SET DATEFORMAT (Transact-SQL)](set-dateformat-transact-sql.md).
-
-Additionally, the COPY statement accepts only UTF-8 and UTF-16 valid characters for row data and command parameters. Source files or parameters (such as ROW TERMINATOR or FIELD TERMINATOR) that use invalid characters may be interpreted incorrectly by the COPY statement and cause unexpected results such as data corruption, or other failures. Make sure your source files and parameters are UTF-8 or UTF-16 compliant before you invoke the COPY statement.  
+The COPY statement accepts only UTF-8 and UTF-16 valid characters for row data and command parameters. Source files or parameters (such as ROW TERMINATOR or FIELD TERMINATOR) that use invalid characters may be interpreted incorrectly by the COPY statement and cause unexpected results such as data corruption, or other failures. Make sure your source files and parameters are UTF-8 or UTF-16 compliant before you invoke the COPY statement.  
 
 ## Examples
 

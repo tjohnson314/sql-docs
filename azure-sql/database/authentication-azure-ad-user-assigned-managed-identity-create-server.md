@@ -233,7 +233,7 @@ Login-AzAccount -tenantId $tenantId
 
 $result = Get-MsalToken -RedirectUri $uri -ClientId $clientId -TenantId $tenantId -Scopes "https://management.core.windows.net/.default"
 
-#Authetication header
+#Authentication header
 $authHeader = @{
 'Content-Type'='application\json; '
 'Authorization'=$result.CreateAuthorizationHeader()

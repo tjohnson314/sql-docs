@@ -261,7 +261,7 @@ For information about custom properties, see the following topics
   
 -   [DataReader Destination Custom Properties](../../integration-services/data-flow/datareader-destination-custom-properties.md)  
   
--   [Dimension Processing Destination Custom Properies](../../integration-services/data-flow/dimension-processing-destination-custom-properies.md)  
+-   [Dimension Processing Destination Custom Properties](../../integration-services/data-flow/dimension-processing-destination-custom-properies.md)  
   
 -   [Excel Custom Properties](../../integration-services/data-flow/excel-custom-properties.md)  
   

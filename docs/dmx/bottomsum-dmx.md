@@ -79,7 +79,7 @@ NATURAL PREDICTION JOIN
   
  The first argument to the BottomSum function is the name of a table column. In this example, the nested table is returned by calling the Predict function and using the INCLUDE_STATISTICS argument.  
   
- The second argument to the BottomSum function is the column in the nested table that you use to order the results. In this example, the INCLUDE_STATISTICS option returns the columns $SUPPORT, $PROBABILTY, and $ADJUSTED PROBABILITY. This example uses $PROBABILITY to return rows that sum to at least 50% probability.  
+ The second argument to the BottomSum function is the column in the nested table that you use to order the results. In this example, the INCLUDE_STATISTICS option returns the columns $SUPPORT, $PROBABILITY, and $ADJUSTED PROBABILITY. This example uses $PROBABILITY to return rows that sum to at least 50% probability.  
   
  The third argument to the BottomSum function specifies the target sum, as a double. To get the rows for the lowest-count products that sum to 10 percent probability, you type .1.  
   

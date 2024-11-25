@@ -32,7 +32,7 @@ The following examples omit error checking for clarity. This one shows how to se
 $server = 'myserver';
 $databaseName = 'mydatabase';
 $username = 'myusername';
-$passwd = 'mypasword';
+$passwd = '<password>';
 $tableName = 'mytable';
 
 $conn = new PDO("sqlsrv:Server = $server; Database = $databaseName", $username, $passwd);
