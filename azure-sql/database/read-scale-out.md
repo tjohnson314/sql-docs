@@ -58,7 +58,7 @@ When you enable read scale-out for a database, the `ApplicationIntent` option in
 For example, the following connection string connects the client to a read-only replica (replacing the items in the angle brackets with the correct values for your environment and dropping the angle brackets):
 
 ```sql
-Server=tcp:<server>.database.windows.net;Database=<mydatabase>;ApplicationIntent=ReadOnly;User ID=<myLogin>;Password=<myPassword>;Trusted_Connection=False; Encrypt=True;
+Server=tcp:<server>.database.windows.net;Database=<mydatabase>;ApplicationIntent=ReadOnly;User ID=<myLogin>;Password=<password>;Trusted_Connection=False; Encrypt=True;
 ```
 
 To connect to a read-only replica using SQL Server Management Studio (SSMS), select **Options**
@@ -72,9 +72,9 @@ Select **Additional Connection Parameters** and enter `ApplicationIntent=ReadOnl
 Either of the following connection strings connects the client to a read-write replica (replacing the items in the angle brackets with the correct values for your environment and dropping the angle brackets):
 
 ```text
-Server=tcp:<server>.database.windows.net;Database=<mydatabase>;ApplicationIntent=ReadWrite;User ID=<myLogin>;Password=<myPassword>;Trusted_Connection=False; Encrypt=True;
+Server=tcp:<server>.database.windows.net;Database=<mydatabase>;ApplicationIntent=ReadWrite;User ID=<myLogin>;Password=<password>;Trusted_Connection=False; Encrypt=True;
 
-Server=tcp:<server>.database.windows.net;Database=<mydatabase>;User ID=<myLogin>;Password=<myPassword>;Trusted_Connection=False; Encrypt=True;
+Server=tcp:<server>.database.windows.net;Database=<mydatabase>;User ID=<myLogin>;Password=<password>;Trusted_Connection=False; Encrypt=True;
 ```
 
 ## Verify that a connection is to a read-only replica

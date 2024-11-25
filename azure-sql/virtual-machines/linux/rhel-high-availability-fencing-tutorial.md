@@ -220,7 +220,7 @@ You should get the following results once the command completes:
     - `<availabilitySetName>`
     - `<VM-Size>` - An example would be "Standard_D16_v3"
     - `<username>`
-    - `<adminPassword>`
+    - `<password>`
 
     ```azurecli-interactive
     for i in `seq 1 3`; do
@@ -231,7 +231,7 @@ You should get the following results once the command completes:
              --size "<VM-Size>"  \
              --image "RedHat:RHEL-HA:7.6:7.6.2019062019" \
              --admin-username "<username>" \
-             --admin-password "<adminPassword>" \
+             --admin-password "<password>" \
              --authentication-type all \
              --generate-ssh-keys
     done
@@ -573,13 +573,13 @@ Assign the custom role `Linux Fence Agent Role-<username>` that was created in t
 Run the following commands on node 1:
 
 - Replace the `<ApplicationID>` with the ID value from your application registration.
-- Replace the `<servicePrincipalPassword>` with the value from the client secret.
+- Replace the `<password>` with the value from the client secret.
 - Replace the `<resourceGroupName>` with the resource group from your subscription used for this tutorial.
 - Replace the `<tenantID>` and the `<subscriptionId>` from your Azure Subscription.
 
 ```bash
 sudo pcs property set stonith-timeout=900
-sudo pcs stonith create rsc_st_azure fence_azure_arm login="<ApplicationID>" passwd="<servicePrincipalPassword>" resourceGroup="<resourceGroupName>" tenantId="<tenantID>" subscriptionId="<subscriptionId>" power_timeout=240 pcmk_reboot_timeout=900
+sudo pcs stonith create rsc_st_azure fence_azure_arm login="<ApplicationID>" passwd="<password>" resourceGroup="<resourceGroupName>" tenantId="<tenantID>" subscriptionId="<subscriptionId>" power_timeout=240 pcmk_reboot_timeout=900
 ```
 
 Since we already added a rule to our firewall to allow the HA service (`--add-service=high-availability`), there's no need to open the following firewall ports on all nodes: 2224, 3121, 21064, 5405. However, if you're experiencing any type of connection issues with HA, use the following command to open these ports that are associated with HA.
@@ -697,17 +697,17 @@ We currently don't support AD authentication to the AG endpoint. Therefore, we m
     > [!IMPORTANT]  
     > If you're connecting remotely to your SQL Server instance, you'll need to have port 1433 open on your firewall. You'll also need to allow inbound connections to port 1433 in your NSG for each VM. For more information, see [Create a security rule](/azure/virtual-network/manage-network-security-group#create-a-security-rule) for creating an inbound security rule.
 
-    - Replace the `<Master_Key_Password>` with your own password.
+    - Replace the `<password>` with your own password.
 
     ```sql
     ALTER EVENT SESSION  AlwaysOn_health ON SERVER WITH (STARTUP_STATE=ON);
     GO
-    CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Master_Key_Password>';
+    CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<password>';
     ```
 
 1. Connect to the primary replica using SSMS or **sqlcmd**. The following commands create a certificate at `/var/opt/mssql/data/dbm_certificate.cer` and a private key at `var/opt/mssql/data/dbm_certificate.pvk` on your primary SQL Server replica:
 
-    - Replace the `<Private_Key_Password>` with your own password.
+    - Replace the `<password>` with your own password.
 
     ```sql
     CREATE CERTIFICATE dbm_certificate WITH SUBJECT = 'dbm';
@@ -717,7 +717,7 @@ We currently don't support AD authentication to the AG endpoint. Therefore, we m
        TO FILE = '/var/opt/mssql/data/dbm_certificate.cer'
        WITH PRIVATE KEY (
                FILE = '/var/opt/mssql/data/dbm_certificate.pvk',
-               ENCRYPTION BY PASSWORD = '<Private_Key_Password>'
+               ENCRYPTION BY PASSWORD = '<password>'
            );
     GO
     ```
@@ -766,7 +766,7 @@ Exit the **sqlcmd** session by running the `exit` command, and return back to yo
         FROM FILE = '/var/opt/mssql/data/dbm_certificate.cer'
         WITH PRIVATE KEY (
         FILE = '/var/opt/mssql/data/dbm_certificate.pvk',
-        DECRYPTION BY PASSWORD = '<Private_Key_Password>'
+        DECRYPTION BY PASSWORD = '<password>'
                 );
     GO
     ```

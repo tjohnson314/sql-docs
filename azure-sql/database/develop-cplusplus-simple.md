@@ -103,8 +103,8 @@ Like with the Windows ODBC sample, you need to replace the SQLDriverConnect call
 ```c
      retcode = SQLDriverConnect(
         hdbc, NULL, "Driver=ODBC Driver 13 for SQL"
-                    "Server;Server=<yourserver>;Uid=<yourusername>;Pwd=<"
-                    "yourpassword>;database=<yourdatabase>",
+                    "Server;Server=<yourserver>;Uid=<yourusername>;Pwd="
+                    "<password>;database=<yourdatabase>",
         SQL_NTS, outstr, sizeof(outstr), &outstrlen, SQL_DRIVER_NOPROMPT);
 ```
 

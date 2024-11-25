@@ -267,7 +267,7 @@ CLR modules in SQL Managed Instance and linked servers or distributed queries th
 ```csharp
 using (var scope = new TransactionScope())
 {
-    using (var conn1 = new SqlConnection("Server=quickstartbmi.neu15011648751ff.database.windows.net;Database=b;User ID=myuser;Password=mypassword;Encrypt=true"))
+    using (var conn1 = new SqlConnection("Server=quickstartbmi.neu15011648751ff.database.windows.net;Database=b;User ID=myuser;Password=<password>;Encrypt=true"))
     {
         conn1.Open();
         SqlCommand cmd1 = conn1.CreateCommand();
@@ -275,7 +275,7 @@ using (var scope = new TransactionScope())
         cmd1.ExecuteNonQuery();
     }
 
-    using (var conn2 = new SqlConnection("Server=quickstartbmi.neu15011648751ff.database.windows.net;Database=b;User ID=myuser;Password=mypassword;Encrypt=true"))
+    using (var conn2 = new SqlConnection("Server=quickstartbmi.neu15011648751ff.database.windows.net;Database=b;User ID=myuser;Password=<password>;Encrypt=true"))
     {
         conn2.Open();
         var cmd2 = conn2.CreateCommand();

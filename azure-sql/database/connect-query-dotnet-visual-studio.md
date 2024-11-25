@@ -51,7 +51,7 @@ To complete this quickstart, you need:
    
 1. When the install completes, you can close **NuGet Package Manager**. 
    
-1. In the code editor, replace the **Program.cs** contents with the following code. Replace your values for `<your_server>`, `<your_username>`, `<your_password>`, and `<your_database>`.
+1. In the code editor, replace the **Program.cs** contents with the following code. Replace your values for `<your_server>`, `<your_username>`, `<password>`, and `<your_database>`.
    
    ```csharp
    using System;
@@ -69,7 +69,7 @@ To complete this quickstart, you need:
                    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                    builder.DataSource = "<your_server>.database.windows.net"; 
                    builder.UserID = "<your_username>";            
-                   builder.Password = "<your_password>";     
+                   builder.Password = "<password>";     
                    builder.InitialCatalog = "<your_database>";
    
                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
