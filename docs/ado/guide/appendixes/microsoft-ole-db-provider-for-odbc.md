@@ -35,7 +35,7 @@ MSDASQL
  A typical connection string for this provider is:
 
 ```
-"Provider=MSDASQL;DSN=dsnName;UID=MyUserID;PWD=MyPassword;"
+"Provider=MSDASQL;DSN=dsnName;UID=MyUserID;PWD=<password>;"
 ```
 
  The string consists of these keywords:
@@ -61,14 +61,14 @@ MSDASQL
 
 ```
 "[Provider=MSDASQL;] { DSN=name | FileDSN=filename } ;
-[DATABASE=database;] UID=user; PWD=password"
+[DATABASE=database;] UID=user; PWD=<password>"
 ```
 
 ## Syntax without a DSN (DSN-less connection):
 
 ```
 "[Provider=MSDASQL;] DRIVER=driver; SERVER=server;
-DATABASE=database; UID=MyUserID; PWD=MyPassword"
+DATABASE=database; UID=MyUserID; PWD=<password>"
 ```
 
 ## Remarks

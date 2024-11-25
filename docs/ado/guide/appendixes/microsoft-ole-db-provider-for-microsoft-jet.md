@@ -28,7 +28,7 @@ Microsoft.Jet.OLEDB.4.0
  A typical connection string for this provider is:
 
 ```vb
-"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=databaseName;User ID=MyUserID;Password=MyPassword;"
+"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=databaseName;User ID=MyUserID;Password=<password>;"
 ```
 
  The string consists of these keywords:

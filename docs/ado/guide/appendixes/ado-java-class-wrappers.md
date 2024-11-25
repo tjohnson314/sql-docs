@@ -18,7 +18,7 @@ public static void main( String args[])
 {  
    msado15._Recordset   Rs1 = new msado15.Recordset();  
    Variant Source     = new Variant( "SELECT * FROM Authors" );  
-   Variant Connect    = new Variant( "DSN=AdoDemo;UID=admin;PWD=;" );  
+   Variant Connect    = new Variant( "DSN=AdoDemo;UID=admin;PWD=<password>;" );  
    int     LockType   = msado15.CursorTypeEnum.adOpenForwardOnly;  
    int     CursorType = msado15.LockTypeEnum.adLockReadOnly;  
    int     Options    = -1;  

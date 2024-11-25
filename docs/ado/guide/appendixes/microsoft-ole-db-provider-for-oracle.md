@@ -33,7 +33,7 @@ MSDAORA
  A typical connection string for this provider is:
 
 ```vb
-"Provider=MSDAORA;Data Source=serverName;User ID=MyUserID; Password=MyPassword;"
+"Provider=MSDAORA;Data Source=serverName;User ID=MyUserID; Password=<password>;"
 ```
 
  The string consists of these keywords:

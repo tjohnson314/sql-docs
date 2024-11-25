@@ -47,13 +47,13 @@ Five Azure resources are defined in the Bicep file:
     # [CLI](#tab/CLI)
 
     ```azurecli
-    az deployment group create --resource-group exampleRG --template-file main.bicep --parameters existingSubnetName=<subnet-name> adminUsername=<admin-user> adminPassword=<admin-pass>
+    az deployment group create --resource-group exampleRG --template-file main.bicep --parameters existingSubnetName=<subnet-name> adminUsername=<admin-user> adminPassword=<password>
     ```
 
     # [PowerShell](#tab/PowerShell)
 
     ```azurepowershell
-    New-AzResourceGroupDeployment -ResourceGroupName exampleRG -TemplateFile ./main.bicep -administratorLogin "<admin-login>" -adminUsername "<admin-user>" -adminPassword "<admin-pass>"
+    New-AzResourceGroupDeployment -ResourceGroupName exampleRG -TemplateFile ./main.bicep -administratorLogin "<admin-login>" -adminUsername "<admin-user>" -adminPassword "<password>"
     ```
 
     ---

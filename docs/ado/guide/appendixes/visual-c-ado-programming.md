@@ -141,7 +141,7 @@ rs->Fields->Item["au_fname"]->Value = "value";
   
  The `ActiveConnection` argument takes a reference to a **_variant_t**, which you may code as a connection string or a pointer to an open **Connection** object.  
   
- The correct **_variant_t** will be constructed implicitly if you pass a string such as "`DSN=pubs;uid=MyUserName;pwd=MyPassword;`", or a pointer such as "`(IDispatch *) pConn`".  
+ The correct **_variant_t** will be constructed implicitly if you pass a string such as "`DSN=pubs;uid=MyUserName;pwd=<password>;`", or a pointer such as "`(IDispatch *) pConn`".  
   
 > [!NOTE]
 >  If you are connecting to a data source provider that supports Windows authentication, you should specify **Trusted_Connection=yes** or **Integrated Security = SSPI** instead of user ID and password information in the connection string.  

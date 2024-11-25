@@ -28,13 +28,13 @@ MSDAIPP.DSO
  A typical connection string for this provider is:
 
 ```vb
-"Provider=MSDAIPP.DSO;Data Source=ResourceURL;User ID=MyUserID;Password=MyPassword;"
+"Provider=MSDAIPP.DSO;Data Source=ResourceURL;User ID=MyUserID;Password=<password>;"
 ```
 
  -or-
 
 ```vb
-"URL=ResourceURL;User ID=MyUserID;Password=MyPassword;"
+"URL=ResourceURL;User ID=MyUserID;Password=<password>;"
 ```
 
  The string consists of these keywords:

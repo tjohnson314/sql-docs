@@ -36,7 +36,7 @@ recordset.CursorLocation=adUseClient
 Recordset1.CursorLocation = adUseClient     'invokes cursor service
 Recordset1.Open "authors", _
     "Provider=SQLOLEDB;Data Source=DBServer;User Id=MyUserID;" & _
-    "Password=MyPassword;Initial Catalog=pubs;",,adCmdTable
+    "Password=<password>;Initial Catalog=pubs;",,adCmdTable
 Recordset1.Properties.Item("Command Time out") = 50
 ' 'Command Time out' property on DBServer is still default (30).
 
