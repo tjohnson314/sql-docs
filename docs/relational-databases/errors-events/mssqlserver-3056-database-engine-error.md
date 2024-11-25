@@ -46,7 +46,7 @@ The error message includes the name of the unexpected file. Investigate how this
    Msg 7906, Level 16, State 1, Line 8
    Database error: The file "\782fc3bb-dc63-4ab8-9de6-e9dfa36454d2\NO_USER_FILE_SHOULD_BE_HERE.txt" is not a valid FILESTREAM file in container ID 65537.
    Msg 7908, Level 16, State 1, Line 8
-   Table error: The file "\782fc3bb-dc63-4ab8-9de6-e9dfa36454d2\NO_USER_FILE_SHOULD_BE_HERE.txt" in the rowset directory ID 3068163f-7398-4ae7-843c-67672e29c37e is not a valid FILESTREAM file in container ID    65537.
+   Table error: The file "\782fc3bb-dc63-4ab8-9de6-e9dfa36454d2\NO_USER_FILE_SHOULD_BE_HERE.txt" in the rowset directory ID aaaabbbb-0000-cccc-1111-dddd2222eeee is not a valid FILESTREAM file in container ID    65537.
    ```
 
    > [!NOTE]
