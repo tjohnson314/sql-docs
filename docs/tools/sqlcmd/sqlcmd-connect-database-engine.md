@@ -1,10 +1,10 @@
 ---
-title: Connect with sqlcmd
+title: Connect to SQL Server With sqlcmd
 description: "Learn how to select which protocol sqlcmd uses to communicate with SQL Server. The choices are: TCP/IP, named pipes, and shared memory."
 author: dlevy-msft
 ms.author: dlevy
 ms.reviewer: maghan, randolphwest, mathoma
-ms.date: 09/27/2024
+ms.date: 11/25/2024
 ms.service: sql
 ms.subservice: ssms
 ms.topic: conceptual
@@ -20,7 +20,7 @@ helpviewer_keywords:
   - "client protocols [SQL Server]"
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
-#  Connect to SQL Server with sqlcmd
+# Connect to SQL Server with sqlcmd
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
@@ -32,7 +32,7 @@ This article describes how to connect to the SQL Server database engine by using
 
 - **sqlcmd** uses the protocol specified as part of the connection string, as described later in this article.
 
-- If no protocol is specified as part the connection string, **sqlcmd** uses the protocol defined as part of the alias that's connected. To configure **sqlcmd** to use a specific network protocol by creating an alias, see [Create or Delete a Server Alias for Use by a Client (SQL Server Configuration Manager)](../../database-engine/configure-windows/create-or-delete-a-server-alias-for-use-by-a-client.md).
+- If no protocol is specified as part the connection string, **sqlcmd** uses the protocol defined as part of the alias that's connected. To configure **sqlcmd** to use a specific network protocol by creating an alias, see [Create or delete a server alias for use by a client](../../database-engine/configure-windows/create-or-delete-a-server-alias-for-use-by-a-client.md).
 
 - If the protocol isn't specified in some other way, **sqlcmd** uses the network protocol determined by the protocol order in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Configuration Manager.
 
@@ -40,90 +40,90 @@ The following examples show various ways of connecting to the default instance o
 
 Connect to the Database Engine by specifying the instance name:
 
-```
+```console
 sqlcmd -S ComputerA
 sqlcmd -S ComputerA\instanceB
 ```
 
 Connect to the Database Engine by specifying the IP address:
 
-```
+```console
 sqlcmd -S 127.0.0.1
 sqlcmd -S 127.0.0.1\instanceB
 ```
 
 Connect to the Database Engine by specifying the TCP\IP port number:
 
-```
+```console
 sqlcmd -S ComputerA,1433
 sqlcmd -S ComputerA,1691
 sqlcmd -S 127.0.0.1,1433
 sqlcmd -S 127.0.0.1,1691
 ```
 
-## Connect using tcp/ip
+## Connect using TCP/IP
 
 - Connect using the following general syntax:
 
-    ```
-    sqlcmd -S tcp:<computer name>,<port number>
-    ```
+  ```console
+  sqlcmd -S tcp:<computer name>,<port number>
+  ```
 
 - Connect to the default instance:
 
-    ```
-    sqlcmd -S tcp:ComputerA,1433
-    sqlcmd -S tcp:127.0.0.1,1433
-    ```
+  ```console
+  sqlcmd -S tcp:ComputerA,1433
+  sqlcmd -S tcp:127.0.0.1,1433
+  ```
 
 - Connect to a named instance:
 
-    ```
-    sqlcmd -S tcp:ComputerA,1691
-    sqlcmd -S tcp:127.0.0.1,1691
-    ```
+  ```console
+  sqlcmd -S tcp:ComputerA,1691
+  sqlcmd -S tcp:127.0.0.1,1691
+  ```
 
 ## Connect using named pipes
 
 - Connect using one of the following general syntaxes:
 
-    ```
-    sqlcmd -S np:\\<computer name>\<pipe name>
-    ```
+  ```console
+  sqlcmd -S np:\\<computer name>\<pipe name>
+  ```
 
 - Connect to the default instance:
 
-    ```
-    sqlcmd -S np:\\ComputerA\pipe\sql\query
-    sqlcmd -S np:\\127.0.0.1\pipe\sql\query
-    ```
+  ```console
+  sqlcmd -S np:\\ComputerA\pipe\sql\query
+  sqlcmd -S np:\\127.0.0.1\pipe\sql\query
+  ```
 
 - Connect to a named instance:
 
-    ```
-    sqlcmd -S np:\\ComputerA\pipe\MSSQL$<instancename>\sql\query
-    sqlcmd -S np:\\127.0.0.1\pipe\MSSQL$<instancename>\sql\query
-    ```
+  ```console
+  sqlcmd -S np:\\ComputerA\pipe\MSSQL$<instancename>\sql\query
+  sqlcmd -S np:\\127.0.0.1\pipe\MSSQL$<instancename>\sql\query
+  ```
 
 ## Connect using shared memory (a local procedure call) from a client on the server
 
 - Connect using one of the following general syntaxes:
 
-    ```
-    sqlcmd -S lpc:<computer name>
-    ```
+  ```console
+  sqlcmd -S lpc:<computer name>
+  ```
 
 - Connect to the default instance:
 
-    ```
-    sqlcmd -S lpc:ComputerA
-    ```
+  ```console
+  sqlcmd -S lpc:ComputerA
+  ```
 
 - Connect to a named instance:
 
-    ```
-    sqlcmd -S lpc:ComputerA\<instancename>
-    ```
+  ```console
+  sqlcmd -S lpc:ComputerA\<instancename>
+  ```
 
 ## Related content
 
