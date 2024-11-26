@@ -3,7 +3,7 @@ title: "sys.master_files (Transact-SQL)"
 description: The sys.master_files system catalog view contains a row per file of a database as stored in the master database.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/31/2023
+ms.date: 11/25/2023
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -44,6 +44,7 @@ Contains a row per file of a database as stored in the `master` database. `sys.m
 | `is_sparse` | **bit** | `1` = File is a sparse file.<br /><br />`0` = File isn't a sparse file.<br /><br />For more information, see [View the Size of the Sparse File of a Database Snapshot (Transact-SQL)](../../relational-databases/databases/view-the-size-of-the-sparse-file-of-a-database-snapshot-transact-sql.md). |
 | `is_percent_growth` | **bit** | `1` = Growth of the file is a percentage.<br /><br />`0` = Absolute growth size in pages. |
 | `is_name_reserved` | **bit** | `1` = Dropped file name is reusable. A log backup must be taken before the name (`name` or `physical_name`) can be reused for a new file name.<br /><br />`0` = File name is unavailable for reuse. |
+| `is_persistent_log_buffer` | **bit** | `1` = The log file is a persistent log buffer.<br /><br />`0` = The file is not a persistent log buffer.<br /><br />For more information, see [Add persistent log buffer to a database](../databases/add-persisted-log-buffer.md). |
 | `create_lsn` | **numeric(25,0)** | Log sequence number (LSN) at which the file was created. |
 | `drop_lsn` | **numeric(25,0)** | LSN at which the file was dropped. |
 | `read_only_lsn` | **numeric(25,0)** | LSN at which the filegroup that contains the file changed from read/write to read-only (most recent change). |
@@ -51,9 +52,9 @@ Contains a row per file of a database as stored in the `master` database. `sys.m
 | `differential_base_lsn` | **numeric(25,0)** | Base for differential backups. Data extents changed after this LSN are included in a differential backup. |
 | `differential_base_guid` | **uniqueidentifier** | Unique identifier of the base backup on which a differential backup is based. |
 | `differential_base_time` | **datetime** | Time corresponding to `differential_base_lsn`. |
-| `redo_start_lsn` | **numeric(25,0)** | LSN at which the next roll forward must start.<br /><br />`NULL` unless `state = RESTORING` or `state = RECOVERY_PENDING`. |
+| `redo_start_lsn` | **numeric(25,0)** | LSN at which the next roll-forward must start.<br /><br />`NULL` unless `state = RESTORING` or `state = RECOVERY_PENDING`. |
 | `redo_start_fork_guid` | **uniqueidentifier** | Unique identifier of the recovery fork. The `first_fork_guid` of the next log backup restored must match this value. This represents the current state of the container. |
-| `redo_target_lsn` | **numeric(25,0)** | LSN at which the online roll forward on this file can stop.<br /><br />`NULL` unless `state = RESTORING` or `state = RECOVERY_PENDING`. |
+| `redo_target_lsn` | **numeric(25,0)** | LSN at which the online roll-forward on this file can stop.<br /><br />`NULL` unless `state = RESTORING` or `state = RECOVERY_PENDING`. |
 | `redo_target_fork_guid` | **uniqueidentifier** | The recovery fork on which the container can be recovered. Paired with `redo_target_lsn`. |
 | `backup_lsn` | **numeric(25,0)** | The LSN of the most recent data or differential backup of the file. |
 | `credential_id` | **int** | The `credential_id` from `sys.credentials` used for storing the file. For example, when [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is running on an Azure Virtual Machine and the database files are stored in Azure Blob Storage, a credential is configured with the access credentials to the storage location. |
