@@ -33,7 +33,7 @@ SQLOLEDB
 ```vb
 "Provider=SQLOLEDB;Data Source=serverName;"
 Initial Catalog=databaseName;
-User ID=MyUserID;Password=MyPassword;"
+User ID=MyUserID;Password=<password>;"
 ```
 
  The string consists of these keywords:

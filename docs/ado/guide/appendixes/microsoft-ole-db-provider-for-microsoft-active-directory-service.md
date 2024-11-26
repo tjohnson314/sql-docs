@@ -29,7 +29,7 @@ ADSDSOObject
  A typical connection string for this provider is as follows:  
   
 ```vb
-"Provider=ADSDSOObject;User ID=MyUserID;Password=MyPassword;"  
+"Provider=ADSDSOObject;User ID=MyUserID;Password=<password>;"  
 ```  
   
  The string consists of the following keywords.  
