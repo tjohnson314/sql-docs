@@ -4,7 +4,7 @@ description: This article discusses the Transact-SQL (T-SQL) differences between
 author: danimir
 ms.author: danil
 ms.reviewer: mathoma, bonova, danil, randolphwest
-ms.date: 11/22/2024
+ms.date: 11/27/2024
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: reference
@@ -471,7 +471,7 @@ Transport security is supported, dialog security isn't:
 
 - `CREATE REMOTE SERVICE BINDING`isn't supported.
 
-Service broker is enabled by default and can't be disabled. The following ALTER DATABASE options aren't supported:
+Service broker is enabled by default for newly created databases and can't be disabled. Service broker state for restored/migrated databases is inherited from the source database and can't be changed. The following ALTER DATABASE options aren't supported:
 
 - `ENABLE_BROKER`
 - `DISABLE_BROKER`
