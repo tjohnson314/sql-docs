@@ -66,7 +66,7 @@ To complete this quickstart, you need:
 > setting the server, database, username, and password with the line below. In
 > the string, set your username and password.
 >
-> `builder.ConnectionString="<your_ado_net_connection_string>";`
+> `builder.ConnectionString="<connection-string>";`
 
 ```csharp
 using Microsoft.Data.SqlClient;
@@ -83,7 +83,7 @@ namespace sqltest
             {
                 DataSource = "<your_server.database.windows.net>",
                 UserID = "<your_username>",
-                Password = "<your_password>",
+                Password = "<password>",
                 InitialCatalog = "<your_database>"
             };
 
@@ -122,7 +122,7 @@ namespace sqltest
 }
 ```
 
-Remember to replace `<your_server.database.windows.net>`, `<your_username>`, `<your_password>`, and `<your_database>` with your actual SQL Server details. Also, replace `/* specific error number */` with the actual SQL error number you want to handle.
+Remember to replace `<your_server.database.windows.net>`, `<your_username>`, `<password>`, and `<your_database>` with your actual SQL Server details. Also, replace `/* specific error number */` with the actual SQL error number you want to handle.
 
 ## Run the code
 

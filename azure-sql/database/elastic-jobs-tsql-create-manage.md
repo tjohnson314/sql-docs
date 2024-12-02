@@ -88,16 +88,16 @@ The same credential must be used to *Create a Login* and *Create a User from Log
 --Connect to the new job database specified when creating the elastic job agent
 
 -- Create a database master key if one does not already exist, using your own password.  
-CREATE MASTER KEY ENCRYPTION BY PASSWORD='<EnterStrongPasswordHere>';  
+CREATE MASTER KEY ENCRYPTION BY PASSWORD='<password>';  
 
 -- Create two database-scoped credentials.  
 -- The credential to connect to the Azure SQL logical server, to execute jobs
 CREATE DATABASE SCOPED CREDENTIAL job_credential WITH IDENTITY = 'job_credential',
-    SECRET = '<EnterStrongPasswordHere>';
+    SECRET = '<password>';
 GO
 -- The credential to connect to the Azure SQL logical server, to refresh the database metadata in server
 CREATE DATABASE SCOPED CREDENTIAL refresh_credential WITH IDENTITY = 'refresh_credential',
-    SECRET = '<EnterStrongPasswordHere>';
+    SECRET = '<password>';
 GO
 ```
 
@@ -110,7 +110,7 @@ Create a login in the `master` database of the logical SQL server, and users in 
 
 ```sql
 --Create a login on the master database
-CREATE LOGIN job_credential WITH PASSWORD='<Enter_same_StrongPassword_as_database_scoped_credential>';
+CREATE LOGIN job_credential WITH PASSWORD='<password>';
 ```
 
 ```sql
@@ -126,7 +126,7 @@ Create a contained database user if a login is not needed on the logical server.
 
 ```sql
 --Create a contained database user on a user database mapped to a Microsoft Entra account
-CREATE USER [job_credential] WITH PASSWORD='<Enter_same_StrongPassword_as_database_scoped_credential>';
+CREATE USER [job_credential] WITH PASSWORD='<password>';
 
 -- Grant permissions as necessary to execute your jobs. For example, ALTER and CREATE TABLE:
 GRANT ALTER ON SCHEMA::dbo TO job_credential;

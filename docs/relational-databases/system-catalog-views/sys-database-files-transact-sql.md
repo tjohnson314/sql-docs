@@ -3,7 +3,7 @@ title: "sys.database_files (Transact-SQL)"
 description: sys.database_files (Transact-SQL)
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 02/26/2024
+ms.date: 11/25/2024
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -37,22 +37,23 @@ monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-s
 | `state_desc` |**nvarchar(60)**|Description of the file state:<br /><br />`ONLINE`<br />`RESTORING`<br />`RECOVERING`<br />`RECOVERY_PENDING`<br />`SUSPECT`<br />`OFFLINE`<br />`DEFUNCT`<br />For more information, see [File States](../../relational-databases/databases/file-states.md).|  
 | `size` |**int**|Current size of the file, in 8-KB pages.<br /><br />0 = Not applicable<br />For a database snapshot, size reflects the maximum space that the snapshot can ever use for the file.<br />For FILESTREAM filegroup containers, size reflects the current used size of the container.|  
 | `max_size` |**int**|Maximum file size, in 8-KB pages:<br /><br />0 = No growth is allowed.<br />-1 = File can grow until the disk is full.<br />268435456 = Log file can grow to a maximum size of 2 TB.<br />For FILESTREAM filegroup containers, `max_size` reflects the maximum size of the container.<br />Databases that are upgraded with an unlimited log file size report `-1` for the maximum size of the log file.<br />In Azure SQL Database, the sum of `max_size` values for all data files can be less than the maximum data size for the database. Use `DATABASEPROPERTYEX(DB_NAME(), 'MaxSizeInBytes')` to determine maximum data size.|  
-| `growth` |**int**|0 = File is fixed size and will not grow.<br /><br /> Greater than 0 = File will grow automatically.<br />If `is_percent_growth` = 0, growth increment is in units of 8-KB pages, rounded to the nearest 64 KB.<br />If `is_percent_growth` = 1, growth increment is expressed as a whole number percentage.|  
+| `growth` |**int**|0 = File is fixed size and does not grow.<br /><br /> Greater than 0 = File grows automatically.<br />If `is_percent_growth` = 0, growth increment is in units of 8-KB pages, rounded to the nearest 64 KB.<br />If `is_percent_growth` = 1, growth increment is expressed as a whole number percentage.|  
 | `is_media_read_only` |**bit**|1 = File is on read-only media.<br /><br />0 = File is on read-write media.|  
 | `is_read_only` |**bit**|1 = File is marked read-only.<br /><br />0 = File is marked read/write.|  
 | `is_sparse` |**bit**|1 = File is a sparse file.<br /><br />0 = File is not a sparse file.<br />For more information, see [View the Size of the Sparse File of a Database Snapshot (Transact-SQL)](../../relational-databases/databases/view-the-size-of-the-sparse-file-of-a-database-snapshot-transact-sql.md).|  
 | `is_percent_growth` |**bit**|1 = Growth of the file is a percentage.<br /><br />0 = Absolute growth size in pages.|  
 | `is_name_reserved` |**bit**|1 = Dropped file name (`name` or `physical_name`) is reusable only after the next log backup. When files are dropped from a database, the logical names stay in a reserved state until the next log backup. This column is relevant only under the full recovery model and the bulk-logged recovery model.|  
+| `is_persistent_log_buffer` | **bit** | `1` = The log file is a persistent log buffer.<br /><br />`0` = The file is not a persistent log buffer.<br /><br />For more information, see [Add persistent log buffer to a database](../databases/add-persisted-log-buffer.md). |
 | `create_lsn` |**numeric(25,0)**|Log sequence number (LSN) at which the file was created.|  
 | `drop_lsn` |**numeric(25,0)**|LSN at which the file was dropped.<br /><br />0 = The file name is unavailable for reuse.|  
 | `read_only_lsn` |**numeric(25,0)**|LSN at which the filegroup that contains the file changed from read/write to read-only (most recent change).|  
 | `read_write_lsn` |**numeric(25,0)**|LSN at which the filegroup that contains the file changed from read-only to read/write (most recent change).|  
-| `differential_base_lsn` |**numeric(25,0)**|Base for differential backups. Data extents changed after this LSN will be included in a differential backup.|  
-| `differential_base_guid` |**uniqueidentifier**|Unique identifier of the base backup on which a differential backup will be based.|  
+| `differential_base_lsn` |**numeric(25,0)**|Base for differential backups. Data extents changed after this LSN are included in a differential backup.|  
+| `differential_base_guid` |**uniqueidentifier**|Unique identifier of the base backup on which a differential backup is based.|  
 | `differential_base_time` |**datetime**|Time corresponding to `differential_base_lsn`.|  
-| `redo_start_lsn` |**numeric(25,0)**|LSN at which the next roll forward must start.<br /><br />Is `NULL` unless `state` = `RESTORING` or `state` = `RECOVERY_PENDING`.|  
+| `redo_start_lsn` |**numeric(25,0)**|LSN at which the next roll-forward must start.<br /><br />Is `NULL` unless `state` = `RESTORING` or `state` = `RECOVERY_PENDING`.|  
 | `redo_start_fork_guid` |**uniqueidentifier**|Unique identifier of the recovery fork. The `first_fork_guid` of the next log backup restored must match this value. This represents the current state of the file.|  
-| `redo_target_lsn` |**numeric(25,0)**|LSN at which the online roll forward on this file can stop.<br /><br />Is `NULL` unless `state` = `RESTORING` or `state` = `RECOVERY_PENDING`.|  
+| `redo_target_lsn` |**numeric(25,0)**|LSN at which the online roll-forward on this file can stop.<br /><br />Is `NULL` unless `state` = `RESTORING` or `state` = `RECOVERY_PENDING`.|  
 | `redo_target_fork_guid` |**uniqueidentifier**|The recovery fork on which the file can be recovered. Paired with `redo_target_lsn`.|  
 | `backup_lsn` |**numeric(25,0)**|The LSN of the most recent data or differential backup of the file.|  
   
