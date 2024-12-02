@@ -4,7 +4,7 @@ description: The vector data type stores vector data optimized for machine learn
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
-ms.date: 10/29/2024
+ms.date: 12/02/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: quickstart
@@ -20,16 +20,17 @@ monikerRange: "= azuresqldb-current"
 ---
 # Vector data type (preview)
 
-[!INCLUDE [Azure SQL Database](../../includes/applies-to-version/asdb.md)]
+[!INCLUDE [Azure SQL Database FabricSQLDB](../../includes/applies-to-version/asdb-fabricsqldb.md)]
 
 The **vector** data type is designed to store vector data optimized for operations such as similarity search and machine learning applications. Vectors are stored in an optimized binary format but are exposed as JSON arrays for convenience. Each element of the vector is stored as a single-precision (4-byte) floating-point value.
 
 > [!NOTE]
 > This data type is in preview and is subject to change. Make sure to read preview usage terms in the [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) document. For limitations of the current preview, see [Limitations](#limitations) and [Known issues](#known-issues).
 
-For more information on working with Vector data in SQL Database, see:
+For more information on working with vector data, see:
 
-- [Intelligent applications with Azure SQL Database](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications#vector-search)
+- [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
+- [Intelligent applications](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications#vector-search)
 
 ## Sample syntax
 
@@ -92,8 +93,6 @@ END
 ```
 
 ## Feature availability
-
-The native support for vectors is currently in preview in Azure SQL Database.
 
 The new **vector** type is available under all database compatibility levels.
 
@@ -239,5 +238,5 @@ These issues will be fixed in future updates and documentation will be updated a
 ## Related content
 
 - [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
-- [Intelligent applications with Azure SQL Database](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications?view=azuresql&preserve-view=true#vector-search)
+- [Intelligent applications](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications?view=azuresql&preserve-view=true#vector-search)
 - [Vector functions](../functions/vector-functions-transact-sql.md)
