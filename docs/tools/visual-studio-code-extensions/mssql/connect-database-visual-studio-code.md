@@ -6,7 +6,7 @@ ms.author: roblescarlos
 ms.reviewer: maghan, randolphwest
 ms.date: 11/20/2024
 ms.service: sql
-ms.subservice: tools-other
+ms.subservice: vs-code-sql-extensions
 ms.topic: quickstart
 ---
 

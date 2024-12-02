@@ -6,7 +6,7 @@ ms.author: vabhog
 ms.reviewer: drskwier, maghan, randolphwest
 ms.date: 11/18/2024
 ms.service: sql
-ms.subservice: tools-other
+ms.subservice: vs-code-sql-extensions
 ms.topic: conceptual
 ---
 
