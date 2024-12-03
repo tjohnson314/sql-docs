@@ -21,7 +21,7 @@ Query Azure Resource Graph to identify the state the Azure extension for SQL Ser
 
 ## Identify unhealthy extensions
 
-This query returns instances of SQL Server on servers with extensions installed, but not healthy. The dates are hard-coded into the query. It returns resources where the extension status is unhealthy, or the extension last upload time isn't in May 2024 (`2024/05`) or June 2024 (`2024/06`). Replace those dates for your resources.
+This query returns instances of SQL Server on servers with extensions installed, but not healthy. 
 
 ```kusto
 resources
