@@ -277,7 +277,7 @@ Please ensure the two managed instances have switched roles and that the failove
 To perform a data lossless failback to the original managed instance roles, using manual planned failover instead of forced failover is **strongly recommended**. To proceed with forced failback:
 
 - Follow the same steps as for the data lossless failover.
-- Longer failback execution time is expected if the forced failback is executed **shortly after** the initial forced failover is completed, as it has to wait for completion of outstanding automatic backup operations on the former primary managed instance.
+- Longer failback execution time is expected if the forced failback is executed **shortly after** the initial forced failover is completed, as it has to wait for completion of outstanding automatic backup operations on the former primary managed instance. Any outstanding automatic backup operations on the managed instance transitioning from the primary to the secondary role will impact database availability on this instance. Please use the failover group status to determine whether both instances have successfully changed their roles and are ready to accept client connections.
 
 ## Related content
 
