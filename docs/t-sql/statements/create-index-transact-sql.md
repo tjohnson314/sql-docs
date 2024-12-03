@@ -4,7 +4,7 @@ description: CREATE INDEX (Transact-SQL)
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: wiassaf
-ms.date: 06/06/2023
+ms.date: 12/03/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -501,9 +501,11 @@ Indexes, including indexes on global temp tables, can be created online except f
 - Index on a local temp table
 - Initial unique clustered index on a view
 - Disabled clustered indexes
-- Columnstore indexes
+- Clustered columnstore indexes in [!INCLUDE[ssSQL17](../../includes/sssql17-md.md)]) and older
+- Nonclustered columnstore indexes in [!INCLUDE[ssSQL16](../../includes/sssql16-md.md)]) and older
 - Clustered index, if the underlying table contains LOB data types (**image**, **ntext**, **text**) and spatial data types
 - **varchar(max)** and **varbinary(max)** columns can't be part of an index key. In [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)]) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], when a table contains **varchar(max)** or **varbinary(max)** columns, a clustered index containing other columns can be built or rebuilt using the `ONLINE` option.
+- Nonclustered indexes on a table with a clustered columnstore index
 
 For more information, see [How Online Index Operations Work](../../relational-databases/indexes/how-online-index-operations-work.md).
 
