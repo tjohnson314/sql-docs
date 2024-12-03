@@ -302,7 +302,7 @@ Alternatively, you can run the following T-SQL script on *both* SQL Server and S
 ```sql
 -- Execute on SQL Server and SQL Managed Instance 
 
-declare @link_name varchar(max) = '<DAGName>' 
+DECLARE @link_name varchar(max) = '<DAGName>' 
 USE master
 
 SELECT
