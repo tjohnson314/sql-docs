@@ -81,11 +81,11 @@ resources
     LastExtensionStatusMessage = properties.instanceView.status.message
 ```
 
-To identify possible specific problems, review the value in the **Message** property from the query results.
+To identify possible specific problems, review the value in the **RecommendedAction** or the **FailureReasons** column from the results. The ReccommendedAction column will provide possible first steps tosolve the issue or clues as to what should be investigated first. For futher information FailureReasons contains a list of all the reasons the resources was deemed unhealthy. Finally for even more information on your resource view the **LastExtensionStatusMessage** to see the last reported message by the agent.
 
 ## Identify unhealthy extension (PowerShell)
 
-This example runs in PowerShell. With PowerShell, you can run with dates that aren't hard coded. The example returns resource where the extension status is unhealthy, or the extension last upload time isn't in this month or the previous month.
+This example runs in PowerShell. The example returns the same result as the above querry but through a powershell script.
 
 ```powershell
 # PowerShell script to execute an Azure Resource Graph query using Azure CLI
