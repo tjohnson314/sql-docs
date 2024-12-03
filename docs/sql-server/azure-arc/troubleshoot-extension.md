@@ -162,7 +162,7 @@ $result = Search-AzGraph -Query $query
 $result | Format-Table -Property ExtensionHealth, LastUploadTimestamp, LastUploadStatus, Message
 ```
 
-To identify possible specific problems, review the value in the **Message** column from the results.
+To identify possible specific problems, review the value in the **RecommendedAction** or the **FailureReasons** column from the results. The ReccommendedAction column will provide possible first steps tosolve the issue or clues as to what should be investigated first. For futher information FailureReasons contains a list of all the reasons the resources was deemed unhealthy. Finally for even more information on your resource view the **LastExtensionStatusMessage** to see the last reported message by the agent.
 
 ## Identify extensions missing updates
 
