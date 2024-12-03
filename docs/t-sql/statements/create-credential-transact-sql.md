@@ -130,7 +130,7 @@ The following example creates a [!INCLUDE[ssNoVersion](../../includes/ssnoversio
 > [!IMPORTANT]
 > The **IDENTITY** argument of **CREATE CREDENTIAL** requires the key vault name. The **SECRET** argument of **CREATE CREDENTIAL** requires the *\<Client ID>* (without hyphens) and *\<Secret>* to be passed together without a space between them.
 
-In the following example, the **Client ID** (`11111111-2222-3333-4444-555555555555`) is stripped of the hyphens and entered as the string `11111111222233334444555555555555` and the **Secret** is represented by the string `SECRET_DBEngine`.
+In the following example, the **Client ID** (`00001111-aaaa-2222-bbbb-3333cccc4444`) is stripped of the hyphens and entered as the string `11111111222233334444555555555555` and the **Secret** is represented by the string `SECRET_DBEngine`.
 
 ```sql
 USE master;

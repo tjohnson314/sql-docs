@@ -301,11 +301,8 @@ Alternatively, you can run the following T-SQL script on *both* SQL Server and S
 
 ```sql
 -- Execute on SQL Server and SQL Managed Instance 
-
-declare @link_name varchar(max) = '<DAGName>' 
-USE MASTER 
-GO
-
+USE master
+DECLARE @link_name varchar(max) = '<DAGName>'
 SELECT
    ag.name [Link name], 
    rs.role_desc [Link role] 
