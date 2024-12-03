@@ -502,7 +502,7 @@ You can create an alias for your *login_name* by specifying the Object ID of the
 
 ```sql
 CREATE LOGIN [myapp4466e] FROM EXTERNAL PROVIDER 
-  WITH OBJECT_ID='4466e2f8-0fea-4c61-a470-xxxxxxxxxxxx';
+  WITH OBJECT_ID='aaaaaaaa-0000-1111-2222-bbbbbbbbbbbb';
 ```
 
 For more information on obtaining the Object ID of a service principal, see [service principal objects in Microsoft Entra ID](/entra/identity-platform/app-objects-and-service-principals#service-principal-object).
