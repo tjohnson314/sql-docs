@@ -16,9 +16,9 @@ ms.custom: sqldbrb=3
 
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa-formerly-sqldw.md)]
 
-When you create a logical server from the [Azure portal](single-database-create-quickstart.md) for Azure SQL Database and Azure Synapse Analytics, the result is a public endpoint in the format, *yourservername.database.windows.net*.
+When you create a logical server from the [Azure portal](single-database-create-quickstart.md) for Azure SQL Database and Azure Synapse Analytics, the result is a public endpoint in the format: `yourservername.database.windows.net`.
 
-You can use the following network access controls to selectively allow access to a database via **the public endpoint**:
+By default, the logical server denies all connections to ensure security. You can use one or more of the following network access controls to selectively allow access to a database via the **public endpoint**
 
 - **IP based firewall rules**: Use this feature to explicitly allow connections from a specific IP address. For example, from on-premises machines or a range of IP addresses by specifying the start and end IP address.
 
@@ -35,7 +35,21 @@ You can also allow **private access** to the database from [virtual networks](/a
 
 ## IP firewall rules
 
-IP based firewall is a feature of the logical server in Azure that prevents all access to your server until you explicitly [add IP addresses](firewall-create-server-level-portal-quickstart.md) for the client machines.
+IP based firewall rules is a feature of the logical server in Azure that prevents all access to your server until you explicitly [add IP addresses](firewall-create-server-level-portal-quickstart.md) of the client machines.
+
+There are two types of firewall rules:
+- **Server-level firewall rules**: These rules apply to all databases on the server. They can be configured through the Azure portal, PowerShell, or T-SQL commands like [sp_set_firewall_rule](/sql/relational-databases/system-stored-procedures/sp-set-firewall-rule-azure-sql-database).
+- **Database-level firewall rules**: These rules apply to individual databases and can **only** be configured using T-SQL commands like [sp_set_database_firewall_rule](/sql/relational-databases/system-stored-procedures/sp-set-database-firewall-rule-azure-sql-database)
+
+The following are constraints for naming firewall rules:
+
+- The firewall rule name can't be empty.
+- It can't contain the following characters: `<, >, *, %, &, :, \\, /, ?.`
+- It can't end with a period (.).
+- The firewall rule name cannot exceed 128 characters.
+
+Any attempts to create firewall rules that do not meet these constraints fails with an error message. Any modifications made to existing IP based firewall rules can take up to 5 minutes to take effect.
+
 
 ## Allow Azure services
 
@@ -45,7 +59,9 @@ You can also change this setting via the **Networking** setting after the logica
   
 ![Screenshot of manage server firewall][2]
 
-When **Allow Azure services and resources to access this server** is enabled, your server allows communications from all resources inside the Azure boundary, **regardless of whether they are part of your subscription**. In many cases, enabling the setting is more permissive than what most customers want. You might want to uncheck this setting and replace it with more restrictive IP firewall rules or use one the options for private access.
+When **Allow Azure services and resources to access this server** is enabled, your server allows communications from all resources inside the Azure boundary, **regardless of whether they are part of your subscription**. Behind the scenes, a special server-level firewall rule is added that starts and ends with IP address of `0.0.0.0`.
+
+In many cases, enabling the setting is more permissive than what most customers want. You might want to uncheck this setting and replace it with more restrictive IP firewall rules or use one the options for private access. 
 
 > [!IMPORTANT]
 > Checking *Allow Azure services and resources to access this server* adds an IP based firewall rule with start and end IP address of 0.0.0.0
