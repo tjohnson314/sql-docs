@@ -4,7 +4,7 @@ description: Learn how to set database options such as Automatic tuning, encrypt
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/06/2024
+ms.date: 12/04/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -31,10 +31,10 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 ---
 # ALTER DATABASE SET options (Transact-SQL)
 
-Sets database options in Microsoft [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]. For other ALTER DATABASE options, see [ALTER DATABASE](../../t-sql/statements/alter-database-transact-sql.md).
+Sets database options in Microsoft [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]. For other ALTER DATABASE options, see [ALTER DATABASE](alter-database-transact-sql.md).
 
 > [!NOTE]  
-> Setting some options with ALTER DATABASE may require exclusive database access. If the ALTER DATABASE statement does not complete in a timely manner, check to see if other sessions within the database are blocking the ALTER DATABASE session.
+> Setting some options with ALTER DATABASE might require exclusive database access. If the ALTER DATABASE statement doesn't complete in a timely manner, check to see if other sessions within the database are blocking the ALTER DATABASE session.
 
 For more information about the syntax conventions, see [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md).
 
@@ -66,12 +66,12 @@ In the following row, select whichever product name you're interested in. Doing 
 
 ## SQL Server
 
-Database mirroring, [!INCLUDE[ssHADR](../../includes/sshadr-md.md)], and compatibility levels are `SET` options but are described in separate articles because of their length. For more information, see [ALTER DATABASE Database Mirroring](../../t-sql/statements/alter-database-transact-sql-database-mirroring.md), [ALTER DATABASE SET HADR](../../t-sql/statements/alter-database-transact-sql-set-hadr.md), and [ALTER DATABASE compatibility level](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md).
+Database mirroring, [!INCLUDE[ssHADR](../../includes/sshadr-md.md)], and compatibility levels are `SET` options but are described in separate articles because of their length. For more information, see [ALTER DATABASE Database Mirroring](alter-database-transact-sql-database-mirroring.md), [ALTER DATABASE SET HADR](alter-database-transact-sql-set-hadr.md), and [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md).
 
-Database scoped configurations are used to set several database configurations at the individual database level. For more information, see [ALTER DATABASE SCOPED CONFIGURATION](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md).
+Database scoped configurations are used to set several database configurations at the individual database level. For more information, see [ALTER DATABASE SCOPED CONFIGURATION](alter-database-scoped-configuration-transact-sql.md).
 
 > [!NOTE]  
-> Many database set options can be configured for the current session by using [SET statements](../../t-sql/statements/set-statements-transact-sql.md) and are often configured by applications when they connect. Session-level set options override the `ALTER DATABASE SET` values. The database options described in the following sections are values that you can set for sessions that don't explicitly provide other set option values.
+> Many database set options can be configured for the current session by using [SET statements](set-statements-transact-sql.md) and are often configured by applications when they connect. Session-level set options override the `ALTER DATABASE SET` values. The database options described in the following sections are values that you can set for sessions that don't explicitly provide other set option values.
 
 ## Syntax
 
@@ -338,7 +338,7 @@ Runs the action in the current database. `CURRENT` isn't supported for all optio
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)])
 
-Enables [accelerated database recovery](../../relational-databases/accelerated-database-recovery-management.md) (ADR) per-database. ADR is set to OFF by default in [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)]. By using this syntax, you can designate a specific file group for the Persistent Version Store (PVS) data. If no file group is specified, the PVS will be stored in the PRIMARY file group. For examples and more information, see [Accelerated database recovery](../../relational-databases/accelerated-database-recovery-management.md).
+Enables [accelerated database recovery (ADR)](../../relational-databases/accelerated-database-recovery-management.md). ADR is set to OFF by default in [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)] and later. By using this syntax, you can designate a specific filegroup for the Persistent Version Store (PVS) data. If no filegroup is specified, the PVS is stored in the `PRIMARY` filegroup. For more information, see [Manage accelerated database recovery](../../relational-databases/accelerated-database-recovery-management.md).
 
 #### \<auto_option> ::=
 
@@ -350,7 +350,7 @@ Controls automatic options.
 
   The database is shut down cleanly and its resources are freed after the last user exits.
 
-  The database automatically reopens when a user tries to use the database again. For example, this re-open behavior occurs when a user issues a `USE database_name` statement. The database may shut down cleanly with AUTO_CLOSE set to ON. If so, the database doesn't re-open until a user tries to use the database the next time the [!INCLUDE[ssDE](../../includes/ssde-md.md)] restarts.
+  The database automatically reopens when a user tries to use the database again. For example, this behavior occurs when a user issues a `USE database_name` statement. The database might shut down cleanly with AUTO_CLOSE set to ON. If so, the database doesn't reopen until a user tries to use the database the next time the [!INCLUDE[ssDE](../../includes/ssde-md.md)] restarts.
 
   After a database is shut down, the next time an application attempts to use the database, the database must first be opened, and then the status changed to online. This might take some time and can result in application timeouts.
 
@@ -362,15 +362,15 @@ Controls automatic options.
 
 > [!NOTE]  
 > The AUTO_CLOSE option isn't available in a contained database or on [!INCLUDE[ssSDS](../../includes/sssds-md.md)].
-> You can determine this option's status by examining the `is_auto_close_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsAutoClose` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+> You can determine this option's status by examining the `is_auto_close_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsAutoClose` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 >  
-> When AUTO_CLOSE is set to ON, some columns in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view and the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function will return NULL because the database is unavailable to retrieve the data. To resolve this issue, run a USE statement to open the database.
+> When AUTO_CLOSE is set to ON, some columns in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view and the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function returns NULL because the database is unavailable to retrieve the data. To resolve this issue, run a USE statement to open the database.
 >  
 > Database mirroring requires AUTO_CLOSE set to OFF.
 
 When the database is set to `AUTOCLOSE = ON`, an operation that initiates an automatic database shutdown clears the plan cache for the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. Clearing the plan cache causes a recompilation of all subsequent execution plans and can cause a sudden, temporary decrease in query performance. Starting with [!INCLUDE[ssVersion2005](../../includes/ssversion2005-md.md)] Service Pack 2, for each cleared cache store in the plan cache, the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] error log contains the following informational message: `SQL Server has encountered %d occurrence(s) of cachestore flush for the '%s' cachestore (part of plan cache) due to some database maintenance or reconfigure operations`. This message is logged every five minutes as long as the cache is flushed within that time interval.
 
-The AUTO_CLOSE setting can be a useful feature in some rare situations, for example, in a SQL Server instance without enough memory to operate stably with a large number of databases, or for a legacy 32-bit SQL Server instance with a large number of databases. In such scenarios, it may be useful to enable AUTO_CLOSE and conserve the memory resources required to keep a database open when there is no application using the database. When the database is open, some default memory allocations are required (for example, internal structures to represent various database metadata objects and transaction log buffers).
+The AUTO_CLOSE setting can be a useful feature in some rare situations, for example, in a SQL Server instance without enough memory to operate stably with a large number of databases, or for a legacy 32-bit SQL Server instance with a large number of databases. In such scenarios, it might be useful to enable AUTO_CLOSE and conserve the memory resources required to keep a database open when there's no application using the database. When the database is open, some default memory allocations are required (for example, internal structures to represent various database metadata objects and transaction log buffers).
 
 #### <a id="auto_create_statistics"></a> AUTO_CREATE_STATISTICS { ON | OFF }
 
@@ -384,7 +384,7 @@ The AUTO_CLOSE setting can be a useful feature in some rare situations, for exam
 
   The Query Optimizer doesn't create statistics on single columns in query predicates when it's compiling queries. Setting this option to OFF can cause suboptimal query plans and degraded query performance.
 
-You can determine this option's status by examining the `is_auto_create_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoCreateStatistics` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_auto_create_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoCreateStatistics` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 For more information, see the section "Using the Database-wide statistics options" in [Statistics](../../relational-databases/statistics/statistics.md).
 
@@ -392,13 +392,13 @@ For more information, see the section "Using the Database-wide statistics option
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)]) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
 
-Set AUTO_CREATE_STATISTICS to ON, and set INCREMENTAL to ON. This sets automatically created stats as incremental whenever incremental stats are supported. The default value is OFF. For more information, see [CREATE STATISTICS](../../t-sql/statements/create-statistics-transact-sql.md).
+Set AUTO_CREATE_STATISTICS to ON, and set INCREMENTAL to ON. This sets automatically created stats as incremental whenever incremental stats are supported. The default value is OFF. For more information, see [CREATE STATISTICS](create-statistics-transact-sql.md).
 
 #### <a id="auto_shrink"></a> AUTO_SHRINK { ON | OFF }
 
 - ON
 
-  The database files are candidates for periodic shrinking. Unless you have a specific requirement, do not set the AUTO_SHRINK database option to ON. For more information, see [Shrink a database](../../relational-databases/databases/shrink-a-database.md).
+  The database files are candidates for periodic shrinking. Unless you have a specific requirement, don't set the AUTO_SHRINK database option to ON. For more information, see [Shrink a database](../../relational-databases/databases/shrink-a-database.md).
 
   Both data files and log files can be automatically shrunk. AUTO_SHRINK reduces the size of the transaction log only if you set the database to SIMPLE recovery model or if you back up the log. When you set AUTO_SHRINK to OFF, the database files aren't automatically shrunk during periodic checks for unused space.
 
@@ -411,9 +411,9 @@ Set AUTO_CREATE_STATISTICS to ON, and set INCREMENTAL to ON. This sets automatic
 
 - OFF
 
-  The database files are not automatically shrunk during periodic checks for unused space.
+  The database files aren't automatically shrunk during periodic checks for unused space.
 
-You can determine this option's status by examining the `is_auto_shrink_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoShrink` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_auto_shrink_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoShrink` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 > [!NOTE]  
 > The AUTO_SHRINK option isn't available in a Contained Database.
@@ -436,7 +436,7 @@ You can determine this option's status by examining the `is_auto_shrink_on` colu
 
   Specifies that Query Optimizer doesn't update statistics when they're used by a query. Query Optimizer also doesn't update statistics when they might be out-of-date. Setting this option to OFF can cause suboptimal query plans and degraded query performance.
 
-You can determine this option's status by examining the `is_auto_update_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoUpdateStatistics` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_auto_update_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoUpdateStatistics` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 For more information, see the section "Using the Database-wide statistics options" in [Statistics](../../relational-databases/statistics/statistics.md).
 
@@ -477,11 +477,11 @@ Enables or disables `FORCE_LAST_GOOD_PLAN` [Automatic tuning](../../relational-d
 
   The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] automatically forces the last known good plan on the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] queries where new query plan causes performance regressions. The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] continuously monitors query performance of the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] query with the forced plan.
 
-  If there are performance gains, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] will keep using last known good plan. If performance gains are not detected, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] will produce a new query plan. The statement will fail if the [Query Store](../../relational-databases/performance/monitoring-performance-by-using-the-query-store.md) isn't enabled or if the Query Store isn't in *Read-Write* mode.
+  If there are performance gains, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] keeps using last known good plan. If performance gains aren't detected, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] produces a new query plan. The statement fails if the [Query Store](../../relational-databases/performance/monitoring-performance-by-using-the-query-store.md) isn't enabled or if the Query Store isn't in *Read-Write* mode.
 
 - OFF
 
-  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] reports potential query performance regressions caused by query plan changes in [sys.dm_db_tuning_recommendations](../../relational-databases/system-dynamic-management-views/sys-dm-db-tuning-recommendations-transact-sql.md) view. However, these recommendations are not automatically applied. Users can monitor active recommendations and fix identified problems by applying [!INCLUDE[tsql-md](../../includes/tsql-md.md)] scripts that are shown in the view. The default value is OFF.
+  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] reports potential query performance regressions caused by query plan changes in [sys.dm_db_tuning_recommendations](../../relational-databases/system-dynamic-management-views/sys-dm-db-tuning-recommendations-transact-sql.md) view. However, these recommendations aren't automatically applied. Users can monitor active recommendations and fix identified problems by applying [!INCLUDE[tsql-md](../../includes/tsql-md.md)] scripts that are shown in the view. The default value is OFF.
 
 #### \<change_tracking_option> ::=
 
@@ -528,7 +528,7 @@ Controls database containment options.
 
 - PARTIAL
 
-  The database is a contained database. Setting database containment to partial will fail if the database has replication, change data capture, or change tracking enabled. Error checking stops after one failure. For more information about contained databases, see [Contained Databases](../../relational-databases/databases/contained-databases.md).
+  The database is a contained database. Setting database containment to partial fails if the database has replication, change data capture, or change tracking enabled. Error checking stops after one failure. For more information about contained databases, see [Contained Databases](../../relational-databases/databases/contained-databases.md).
 
 #### \<cursor_option> ::=
 
@@ -542,11 +542,11 @@ Controls cursor options.
 
 - OFF
 
-  Cursors remain open when a transaction is committed; rolling back a transaction closes any cursors except those defined as INSENSITIVE or STATIC.
+  Cursors remain open when a transaction is committed; rolling back a transaction closes any cursors, except those cursors defined as INSENSITIVE or STATIC.
 
-Connection-level settings that are set by using the SET statement override the default database setting for CURSOR_CLOSE_ON_COMMIT. ODBC and OLE DB clients issue a connection-level SET statement setting CURSOR_CLOSE_ON_COMMIT to OFF for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CURSOR_CLOSE_ON_COMMIT](../../t-sql/statements/set-cursor-close-on-commit-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for CURSOR_CLOSE_ON_COMMIT. ODBC and OLE DB clients issue a connection-level SET statement setting CURSOR_CLOSE_ON_COMMIT to OFF for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CURSOR_CLOSE_ON_COMMIT](set-cursor-close-on-commit-transact-sql.md).
 
-You can determine this option's status by examining the `is_cursor_close_on_commit_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsCloseCursorsOnCommitEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_cursor_close_on_commit_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsCloseCursorsOnCommitEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### CURSOR_DEFAULT { LOCAL | GLOBAL }
 
@@ -564,9 +564,9 @@ Controls whether cursor scope uses LOCAL or GLOBAL.
 
   When GLOBAL is specified, and a cursor isn't defined as LOCAL when created, the scope of the cursor is global to the connection. The cursor name can be referenced in any stored procedure or batch executed by the connection.
 
-  The cursor is implicitly deallocated only at disconnect. For more information, see [DECLARE CURSOR](../../t-sql/language-elements/declare-cursor-transact-sql.md).
+  The cursor is implicitly deallocated only at disconnect. For more information, see [DECLARE CURSOR](../language-elements/declare-cursor-transact-sql.md).
 
-You can determine this option's status by examining the `is_local_cursor_default` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsLocalCursorsDefault` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_local_cursor_default` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsLocalCursorsDefault` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### \<temporal_history_retention> ::=
 
@@ -580,11 +580,11 @@ ON by default but also automatically set to OFF after point in time restore oper
 
 - OFF
 
-  Do not perform temporal historical retention policy.
+  Don't perform temporal historical retention policy.
 
 #### \<data_retention_policy> ::=
 
-**Applies to**: Azure SQL Edge *Only*
+**Applies to**: Azure SQL Edge only.
 
 #### DATA_RETENTION { ON | OFF }
 
@@ -600,7 +600,7 @@ ON by default but also automatically set to OFF after point in time restore oper
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]
 
-For the argument descriptions, see [ALTER DATABASE Database Mirroring](../../t-sql/statements/alter-database-transact-sql-database-mirroring.md).
+For the argument descriptions, see [ALTER DATABASE Database Mirroring](alter-database-transact-sql-database-mirroring.md).
 
 #### \<date_correlation_optimization_option> ::=
 
@@ -616,7 +616,7 @@ Controls the date_correlation_optimization option.
 
 - OFF
 
-  Correlation statistics are not maintained.
+  Correlation statistics aren't maintained.
 
 To set DATE_CORRELATION_OPTIMIZATION to ON, there must be no active connections to the database except for the connection that's executing the ALTER DATABASE statement. Afterwards, multiple connections are supported.
 
@@ -640,7 +640,7 @@ Controls the database encryption state.
 
   **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)])
 
-  Can be used to pause the encryption scan after transparent data encryption has been enabled or disabled, or after the encryption key has been changed.
+  Can be used to pause the encryption scan after transparent data encryption was enabled or disabled, or after the encryption key was changed.
 
 - RESUME
 
@@ -648,9 +648,9 @@ Controls the database encryption state.
 
   Can be used to resume a previously paused encryption scan.
 
-For more information about database encryption, see [Transparent Data Encryption](../../relational-databases/security/encryption/transparent-data-encryption.md), and [Transparent Data Encryption with Azure SQL Database](/azure/azure-sql/database/transparent-data-encryption-tde-overview).
+For more information about database encryption, see [Transparent data encryption (TDE)](../../relational-databases/security/encryption/transparent-data-encryption.md), and [Transparent data encryption for Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics](/azure/azure-sql/database/transparent-data-encryption-tde-overview).
 
-When encryption is enabled at the database level, all file groups will be encrypted. Any new file groups will inherit the encrypted property. If any file groups in the database are set to READ ONLY, the database encryption operation will fail.
+When encryption is enabled at the database level, all file groups are encrypted. Any new file groups inherit the encrypted property. If any file groups in the database are set to READ ONLY, the database encryption operation fails.
 
 You can see the encryption state of the database and the state of the encryption scan by using the [sys.dm_database_encryption_keys](../../relational-databases/system-dynamic-management-views/sys-dm-database-encryption-keys-transact-sql.md) dynamic management view.
 
@@ -674,9 +674,9 @@ Controls the state of the database.
 
 Requires the `ALTER DATABASE` permission for the subject database, to change a database to the offline or emergency state, and the server level `ALTER ANY DATABASE` permission to move a database from offline to online.
 
-You can determine this option's status by examining the `state` and `state_desc` columns in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `Status` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function. For more information, see [Database States](../../relational-databases/databases/database-states.md).
+You can determine this option's status by examining the `state` and `state_desc` columns in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `Status` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function. For more information, see [Database States](../../relational-databases/databases/database-states.md).
 
-A database marked as RESTORING can't be set to OFFLINE, ONLINE, or EMERGENCY. A database may be in the RESTORING state during an active restore operation or when a restore operation of a database or log file fails because of a corrupted backup file.
+A database marked as RESTORING can't be set to OFFLINE, ONLINE, or EMERGENCY. A database could be in the RESTORING state during an active restore operation or when a restore operation of a database or log file fails because of a corrupted backup file.
 
 #### \<db_update_option> ::=
 
@@ -687,7 +687,7 @@ Controls whether updates are allowed on the database.
   Users can read data from the database but not modify it.
 
   > [!NOTE]  
-  > To improve query performance, update statistics before setting a database to READ_ONLY. If additional statistics are needed after a database is set to READ_ONLY, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] will create statistics in the `tempdb` system database. For more information about statistics for a read-only database, see [Statistics](../../relational-databases/statistics/statistics.md).
+  > To improve query performance, update statistics before setting a database to READ_ONLY. If additional statistics are needed after a database is set to READ_ONLY, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] creates statistics in the `tempdb` system database. For more information about statistics for a read-only database, see [Statistics](../../relational-databases/statistics/statistics.md).
 
 - READ_WRITE
 
@@ -710,13 +710,13 @@ Specifies that only one user at a time can access the database. If you specify S
 
 The database remains in SINGLE_USER mode even if the user that set the option signs out. At that point, a different user, but only one, can connect to the database.
 
-Before you set the database to SINGLE_USER, verify the AUTO_UPDATE_STATISTICS_ASYNC option is set to OFF. When set to ON, the background thread used to update statistics takes a connection against the database, and you'll be unable to access the database in single-user mode. To view the status of this option, query the `is_auto_update_stats_async_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. If the option is set to ON, perform the following tasks:
+Before you set the database to SINGLE_USER, verify the AUTO_UPDATE_STATISTICS_ASYNC option is set to OFF. When set to ON, the background thread used to update statistics takes a connection against the database, and you can't access the database in single-user mode. To view the status of this option, query the `is_auto_update_stats_async_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. If the option is set to ON, perform the following tasks:
 
 1. Set AUTO_UPDATE_STATISTICS_ASYNC to OFF.
 
 1. Check for active asynchronous statistics jobs by querying the [sys.dm_exec_background_job_queue](../../relational-databases/system-dynamic-management-views/sys-dm-exec-background-job-queue-transact-sql.md) dynamic management view.
 
-If there are active jobs, either allow the jobs to complete or manually terminate them by using [KILL STATS JOB](../../t-sql/language-elements/kill-stats-job-transact-sql.md).
+If there are active jobs, either allow the jobs to complete or manually terminate them by using [KILL STATS JOB](../language-elements/kill-stats-job-transact-sql.md).
 
 #### RESTRICTED_USER
 
@@ -724,7 +724,7 @@ Allows for only members of the `db_owner` fixed database role and `dbcreator` an
 
 #### MULTI_USER
 
-All users that have the appropriate permissions to connect to the database are allowed. You can determine this option's status by examining the `user_access` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `UserAccess` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+All users that have the appropriate permissions to connect to the database are allowed. You can determine this option's status by examining the `user_access` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `UserAccess` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### \<delayed_durability_option> ::=
 
@@ -761,7 +761,7 @@ Controls whether the database can be accessed by external resources, such as obj
   Database can't participate in cross-database ownership chaining.
 
 > [!IMPORTANT]  
-> The instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] will recognize this setting when the cross db ownership chaining server option is 0 (OFF). When cross db ownership chaining is 1 (ON), all user databases can participate in cross-database ownership chains, regardless of the value of this option. This option is set by using [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md).
+> The instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] recognizes this setting when the cross db ownership chaining server option is 0 (OFF). When cross db ownership chaining is 1 (ON), all user databases can participate in cross-database ownership chains, regardless of the value of this option. This option is set by using [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md).
 
 To set this option, requires `CONTROL SERVER` permission on the database.
 
@@ -794,31 +794,31 @@ You can determine this option's status by examining the `is_trustworthy_on` colu
 Specifies the default language value for full-text indexed columns.
 
 > [!IMPORTANT]  
-> This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors will occur.
+> This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors occur.
 
 #### DEFAULT_LANGUAGE
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)])
 
-Specifies the default language for all newly created logins. Language can be specified by providing the local ID (lcid), the language name, or the language alias. For a list of acceptable language names and aliases, see [sys.syslanguages](../../relational-databases/system-compatibility-views/sys-syslanguages-transact-sql.md). This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors will occur.
+Specifies the default language for all newly created logins. Language can be specified by providing the local ID (lcid), the language name, or the language alias. For a list of acceptable language names and aliases, see [sys.syslanguages](../../relational-databases/system-compatibility-views/sys-syslanguages-transact-sql.md). This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors occur.
 
 #### NESTED_TRIGGERS
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)])
 
-Specifies whether an AFTER trigger can cascade; that is, perform an action that initiates another trigger, which initiates another trigger, and so on. This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors will occur.
+Specifies whether an AFTER trigger can cascade; that is, perform an action that initiates another trigger, which initiates another trigger, and so on. This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors occur.
 
 #### TRANSFORM_NOISE_WORDS
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)])
 
-Used to suppress an error message if noise words, or stopwords, cause a Boolean operation on a full-text query to fail. This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors will occur.
+Used to suppress an error message if noise words, or stopwords, cause a Boolean operation on a full-text query to fail. This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors occur.
 
 #### TWO_DIGIT_YEAR_CUTOFF
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)])
 
-Specifies an integer from 1753 to 9999 that represents the cutoff year for interpreting two-digit years as four-digit years. This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors will occur.
+Specifies an integer from 1753 to 9999 that represents the cutoff year for interpreting two-digit years as four-digit years. This option is allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors occur.
 
 #### \<FILESTREAM_option> ::=
 
@@ -848,7 +848,7 @@ A Windows-compatible directory name. This name should be unique among all the da
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]
 
-See [ALTER DATABASE SET HADR](../../t-sql/statements/alter-database-transact-sql-set-hadr.md).
+See [ALTER DATABASE SET HADR](alter-database-transact-sql-set-hadr.md).
 
 #### \<mixed_page_allocation_option> ::=
 
@@ -896,14 +896,14 @@ Controls whether the Query Store is enabled in this database, and also controls 
 
   Enables the Query Store.
 
-  Many new performance features of [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] such as Query Store hints, CE Feedback, Degree of Parallelism (DOP) feedback, and Memory Grant feedback (MGF) persistence required Query Store to be enabled. For databases that have been restored from other SQL Server instances and for those databases that are upgraded from an in-place upgrade to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], these databases will retain the previous Query Store settings. If there is concern about the overhead Query Store may introduce, administrators can leverage [custom capture policies](#query_capture_policy_option_list--) with `QUERY_CAPTURE_MODE = CUSTOM`. For examples of how to enable the Query Store with custom capture policy options, see the [Examples](#examples) section later in this article.
+  Many new performance features of [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] such as Query Store hints, CE Feedback, Degree of Parallelism (DOP) feedback, and Memory Grant feedback (MGF) persistence required Query Store to be enabled. For databases that have been restored from other SQL Server instances and for those databases that are upgraded from an in-place upgrade to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], these databases retain the previous Query Store settings. If there is concern about the overhead Query Store can introduce, administrators can leverage [custom capture policies](#query_capture_policy_option_list--) with `QUERY_CAPTURE_MODE = CUSTOM`. For examples of how to enable the Query Store with custom capture policy options, see the [Examples](#examples) section later in this article.
 
 - OFF [ ( FORCED ) ]
 
-  Disables the Query Store. <!--OFF is the default value for [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)], [!INCLUDE[sssql17-md](../../includes/sssql17-md.md)], and [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)].--> FORCED is optional. FORCED aborts all running Query Store background tasks, and skips the synchronous flush when Query Store is turned off. Causes the Query Store to shut down as fast as possible. FORCED applies to [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] SP2 CU14, [!INCLUDE[ssSQL17](../../includes/sssql17-md.md)] CU21, [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)] CU6, and later builds.
+  Disables the Query Store. FORCED is optional. FORCED aborts all running Query Store background tasks, and skips the synchronous flush when Query Store is turned off. Causes the Query Store to shut down as fast as possible. FORCED applies to [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] SP2 CU14, [!INCLUDE[ssSQL17](../../includes/sssql17-md.md)] CU21, [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)] CU6, and later builds.
 
   > [!NOTE]  
-  > Query Store cannot be disabled in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] single database and Elastic Pool. Executing `ALTER DATABASE [database] SET QUERY_STORE = OFF` will return the warning `'QUERY_STORE=OFF' is not supported in this version of SQL Server.`.
+  > Query Store cannot be disabled in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]. Executing `ALTER DATABASE [database] SET QUERY_STORE = OFF` returns the warning `'QUERY_STORE=OFF' is not supported in this version of SQL Server.`.
 
 - CLEAR [ ALL ]
 
@@ -919,7 +919,7 @@ The Query Store collects and persists query plan and runtime execution statistic
 
 #### READ_ONLY
 
-Information can be read from the Query Store, but new information isn't added. If the maximum issued space of the Query Store has been exhausted, the Query Store will change is operation mode to READ_ONLY.
+Information can be read from the Query Store, but new information isn't added. If the maximum issued space of the Query Store has been exhausted, the Query Store changes its operation mode to READ_ONLY.
 
 #### CLEANUP_POLICY
 
@@ -935,12 +935,12 @@ Determines the space issued to the Query Store. MAX_STORAGE_SIZE_MB is type **bi
 
 `MAX_STORAGE_SIZE_MB` limit isn't strictly enforced. Storage size is checked only when Query Store writes data to disk. This interval is set by the `DATA_FLUSH_INTERVAL_SECONDS` option or the [!INCLUDE[ssManStudio](../../includes/ssManStudio-md.md)] Query Store dialog option **Data Flush Interval**. The interval default value is 900 seconds (or 15 minutes).
 
-If the Query Store has breached the `MAX_STORAGE_SIZE_MB` limit between storage size checks, it will transition to read-only mode. If `SIZE_BASED_CLEANUP_MODE` is enabled, the cleanup mechanism to enforce the `MAX_STORAGE_SIZE_MB` limit is also triggered.
+If the Query Store has breached the `MAX_STORAGE_SIZE_MB` limit between storage size checks, it transitions to read-only mode. If `SIZE_BASED_CLEANUP_MODE` is enabled, the cleanup mechanism to enforce the `MAX_STORAGE_SIZE_MB` limit is also triggered.
 
-Once enough space has been cleared, the Query Store mode will automatically switch back to read-write.
+Once enough space has been cleared, the Query Store mode automatically switches back to read-write.
 
 > [!IMPORTANT]  
-> If you think that your workload capture will need more than 10 GB of disk space, you should probably rethink and optimize your workload to reuse query plans (for example using [forced parameterization](../../relational-databases/query-processing-architecture-guide.md#forced-parameterization), or adjust the Query Store configurations.
+> If you think that your workload capture needs more than 10 GB of disk space, you should probably rethink and optimize your workload to reuse query plans (for example using [forced parameterization](../../relational-databases/query-processing-architecture-guide.md#forced-parameterization), or adjust the Query Store configurations.
 > Starting with [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)] and in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you can set `QUERY_CAPTURE_MODE` to CUSTOM for additional control over the query capture policy.
 
 #### INTERVAL_LENGTH_MINUTES
@@ -953,11 +953,11 @@ Controls whether cleanup automatically activates when the total amount of data g
 
 - AUTO
 
-  Size-based cleanup will be automatically activated when size on disk reaches 90% of **MAX_STORAGE_SIZE_MB**. Size-based cleanup removes the least expensive and oldest queries first. It stops at approximately 80% of **MAX_STORAGE_SIZE_MB**. This value is the default configuration value.
+  Size-based cleanup is automatically activated when size on disk reaches 90% of **MAX_STORAGE_SIZE_MB**. Size-based cleanup removes the least expensive and oldest queries first. It stops at approximately 80% of **MAX_STORAGE_SIZE_MB**. This value is the default configuration value.
 
 - OFF
 
-  Size-based cleanup won't be automatically activated.
+  Size-based cleanup isn't automatically activated.
 
 SIZE_BASED_CLEANUP_MODE is type **nvarchar**.
 
@@ -978,7 +978,7 @@ Designates the currently active query capture mode. Each mode defines specific q
 
 - NONE
 
-  Stop capturing new queries. The Query Store will continue to collect compile and runtime statistics for queries that were captured already. Use this configuration with caution since you may miss capturing important queries.
+  Stop capturing new queries. The Query Store continues to collect compile and runtime statistics for queries that were captured already. Use this configuration with caution since you might miss capturing important queries.
 
 - CUSTOM
 
@@ -994,7 +994,7 @@ Defines the maximum number of plans maintained for each query. MAX_PLANS_PER_QUE
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL17](../../includes/sssql17-md.md)]))
 
-Controls whether wait statistics will be captured per query.
+Controls whether wait statistics are captured per query.
 
 - ON
 
@@ -1002,7 +1002,7 @@ Controls whether wait statistics will be captured per query.
 
 - OFF
 
-  Wait statistics information per query won't be captured.
+  Wait statistics information per query aren't captured.
 
 #### \<query_capture_policy_option_list> :: =
 
@@ -1050,22 +1050,22 @@ Controls database recovery options and disk I/O error checking.
 
 - FULL
 
-  Provides full recovery after media failure by using transaction log backups. If a data file is damaged, media recovery can restore all committed transactions. For more information, see [Recovery Models](../../relational-databases/backup-restore/recovery-models-sql-server.md).
+  Provides full recovery after media failure by using transaction log backups. If a data file is damaged, media recovery can restore all committed transactions. For more information, see [Recovery models](../../relational-databases/backup-restore/recovery-models-sql-server.md).
 
 - BULK_LOGGED
 
-  Provides recovery after media failure. Combines the best performance and least amount of log-space use for certain large-scale or bulk operations. For information about what operations can be minimally logged, see [The Transaction Log](../../relational-databases/logs/the-transaction-log-sql-server.md). Under the BULK_LOGGED recovery model, logging for these operations is minimal. For more information, see [Recovery Models](../../relational-databases/backup-restore/recovery-models-sql-server.md).
+  Provides recovery after media failure. Combines the best performance and least amount of log-space use for certain large-scale or bulk operations. For information about what operations can be minimally logged, see [The transaction log](../../relational-databases/logs/the-transaction-log-sql-server.md). Under the BULK_LOGGED recovery model, logging for these operations is minimal. For more information, see [Recovery models](../../relational-databases/backup-restore/recovery-models-sql-server.md).
 
 - SIMPLE
 
-  A simple backup strategy that uses minimal log space is provided. Log space can be automatically reused when it's no longer required for server failure recovery. For more information, see [Recovery Models](../../relational-databases/backup-restore/recovery-models-sql-server.md).
+  A simple backup strategy that uses minimal log space is provided. Log space can be automatically reused when it's no longer required for server failure recovery. For more information, see [Recovery models](../../relational-databases/backup-restore/recovery-models-sql-server.md).
 
   > [!IMPORTANT]  
   > The simple recovery model is easier to manage than the other two models but at the expense of greater data loss exposure if a data file is damaged. All changes since the most recent database or differential database backup are lost and must be manually reentered.
 
-The default recovery model is determined by the recovery model of the `model` system database. For more information about selecting the appropriate recovery model, see [Recovery Models](../../relational-databases/backup-restore/recovery-models-sql-server.md).
+The default recovery model is determined by the recovery model of the `model` system database. For more information about selecting the appropriate recovery model, see [Recovery models](../../relational-databases/backup-restore/recovery-models-sql-server.md).
 
-You can determine this option's status by examining the `recovery_model` and `recovery_model_desc` columns in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `Recovery` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `recovery_model` and `recovery_model_desc` columns in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `Recovery` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### TORN_PAGE_DETECTION { ON | OFF }
 
@@ -1096,7 +1096,7 @@ Discovers damaged database pages caused by disk I/O path errors. Disk I/O path e
 
 - NONE
 
-  Database page writes won't generate a CHECKSUM or TORN_PAGE_DETECTION value. [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] will not verify a checksum or torn page during a read even if a CHECKSUM or TORN_PAGE_DETECTION value is present in the page header.
+  Database page writes don't generate a CHECKSUM or TORN_PAGE_DETECTION value. [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] doesn't verify a checksum or torn page during a read even if a CHECKSUM or TORN_PAGE_DETECTION value is present in the page header.
 
 Consider the following important points when you use the PAGE_VERIFY option:
 
@@ -1106,21 +1106,21 @@ Consider the following important points when you use the PAGE_VERIFY option:
   > [!NOTE]  
   > In earlier versions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], the PAGE_VERIFY database option is set to NONE for the `tempdb` database and can't be modified. Starting with [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)], the default value for the `tempdb` database is CHECKSUM for new installations of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. When upgrading an installation [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], the default value remains NONE. The option can be modified. We recommend that you use CHECKSUM for the `tempdb` database.
 
-- TORN_PAGE_DETECTION may use fewer resources but provides a minimal subset of the CHECKSUM protection.
+- TORN_PAGE_DETECTION might use fewer resources, but provides a minimal subset of the CHECKSUM protection.
 - PAGE_VERIFY can be set without taking the database offline, locking the database, or otherwise impeding concurrency on that database.
 - CHECKSUM is mutually exclusive to TORN_PAGE_DETECTION. Both options can't be enabled at the same time.
 
-When a torn page or checksum failure is detected, you can recover by restoring the data or potentially rebuilding the index if the failure is limited only to index pages. If you encounter a checksum failure, to determine the type of database page or pages affected, run DBCC CHECKDB. For more information about restore options, see [RESTORE Arguments](../../t-sql/statements/restore-statements-arguments-transact-sql.md). Although restoring the data will resolve the data corruption problem, the root cause, for example, disk hardware failure, should be diagnosed and corrected as soon as possible to prevent continuing errors.
+When a torn page or checksum failure is detected, you can recover by restoring the data or potentially rebuilding the index if the failure is limited only to index pages. If you encounter a checksum failure, to determine the type of database page or pages affected, run DBCC CHECKDB. For more information about restore options, see [RESTORE Arguments](restore-statements-arguments-transact-sql.md). Although restoring the data resolves the data corruption problem, the root cause (for example, disk hardware failure) should be diagnosed and corrected as soon as possible to prevent continuing errors.
 
-[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] will retry any read that fails with a checksum, torn page, or other I/O error four times. If the read is successful in any one of the retry attempts, a message is written to the error log. The command that triggered the read will continue. The command will fail with error message 824 if the retry attempts fail.
+[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] retries any read that fails with a checksum, torn page, or other I/O error four times. If the read is successful in any one of the retry attempts, a message is written to the error log. The command that triggered the read continues. The command fails with error message 824 if the retry attempts fail.
 
 For more information about error messages 823, 824 and 825, see:
 
-- [How to troubleshoot a Msg 823 error in SQL Server](https://support.microsoft.com/help/2015755)
-- [How to troubleshoot Msg 824 in SQL Server](https://support.microsoft.com/help/2015756)
-- [How to troubleshoot Msg - read retry](https://support.microsoft.com/help/2015757).
+- [Troubleshoot MSSQLSERVER error 823](../../relational-databases/errors-events/mssqlserver-823-database-engine-error.md)
+- [Troubleshoot MSSQLSERVER error 824](../../relational-databases/errors-events/mssqlserver-824-database-engine-error.md)
+- [Troubleshoot MSSQLSERVER error 825 (read retry)](../../relational-databases/errors-events/mssqlserver-825-database-engine-error.md).
 
-The current setting of this option can be determined by examining the `page_verify_option` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsTornPageDetectionEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+The current setting of this option can be determined by examining the `page_verify_option` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsTornPageDetectionEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### \<remote_data_archive_option> ::=
 
@@ -1145,14 +1145,14 @@ Enables or disables Stretch Database for the database. For more info, see [Stret
 
   - CREDENTIAL = \<db_scoped_credential_name>
 
-    Specifies the database scoped credential that the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] uses to connect to the Azure server. Make sure the credential exists before you run this command. For more info, see [CREATE DATABASE SCOPED CREDENTIAL](../../t-sql/statements/create-database-scoped-credential-transact-sql.md).
+    Specifies the database scoped credential that the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] uses to connect to the Azure server. Make sure the credential exists before you run this command. For more info, see [CREATE DATABASE SCOPED CREDENTIAL](create-database-scoped-credential-transact-sql.md).
 
   - FEDERATED_SERVICE_ACCOUNT = { ON | OFF }
 
     You can use a federated service account for the on-premises SQL Server to communicate with the remote Azure server when the following conditions are all true.
 
     - The service account under which the instance of SQL Server is running is a domain account.
-    - The domain account belongs to a domain whose Active Directory is federated with Microsoft Entra ID ([formerly Azure Active Directory](/azure/active-directory/fundamentals/new-name)).
+    - The domain account belongs to a domain whose Active Directory is federated with Microsoft Entra ID.
     - The remote Azure server is configured to support Microsoft Entra authentication.
     - The service account under which the instance of SQL Server is running must be configured as a `dbmanager` or `sysadmin` account on the remote Azure server.
 
@@ -1183,7 +1183,7 @@ Controls the following [!INCLUDE[ssSB](../../includes/sssb-md.md)] options: enab
 Specifies that [!INCLUDE[ssSB](../../includes/sssb-md.md)] is enabled for the specified database. Message delivery is started, and the `is_broker_enabled` flag is set to true in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. The database keeps the existing [!INCLUDE[ssSB](../../includes/sssb-md.md)] identifier. Service broker can't be enabled while the database is the principal in a database mirroring configuration.
 
 > [!NOTE]  
-> ENABLE_BROKER requires an exclusive database lock. If other sessions have locked resources in the database, ENABLE_BROKER will wait until the other sessions release their locks. To enable [!INCLUDE[ssSB](../../includes/sssb-md.md)] in a user database, ensure that no other sessions are using the database before you run the `ALTER DATABASE SET ENABLE_BROKER` statement, such as by putting the database in single user mode. To enable [!INCLUDE[ssSB](../../includes/sssb-md.md)] in the `msdb` database, first stop [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Agent so that [!INCLUDE[ssSB](../../includes/sssb-md.md)] can obtain the necessary lock.
+> ENABLE_BROKER requires an exclusive database lock. If other sessions have locked resources in the database, ENABLE_BROKER waits until the other sessions release their locks. To enable [!INCLUDE[ssSB](../../includes/sssb-md.md)] in a user database, ensure that no other sessions are using the database before you run the `ALTER DATABASE SET ENABLE_BROKER` statement, such as by putting the database in single user mode. To enable [!INCLUDE[ssSB](../../includes/sssb-md.md)] in the `msdb` database, first stop [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Agent so that [!INCLUDE[ssSB](../../includes/sssb-md.md)] can obtain the necessary lock.
 
 #### DISABLE_BROKER
 
@@ -1207,7 +1207,7 @@ Specifies that [!INCLUDE[ssSB](../../includes/sssb-md.md)] message delivery is e
 
   Send operations run as if all conversations have the default priority level.
 
-Changes to the HONOR_BROKER_PRIORITY option take effect immediately for new dialogs or dialogs that have no messages waiting to be sent. Dialogs with messages to be sent when ALTER DATABASE is run won't pick up the new setting until some of the messages for the dialog are sent. The amount of time before all dialogs start using the new setting can vary considerably.
+Changes to the HONOR_BROKER_PRIORITY option take effect immediately for new dialogs or dialogs that have no messages waiting to be sent. Dialogs with messages to be sent when ALTER DATABASE is run don't pick up the new setting until some of the messages for the dialog are sent. The amount of time before all dialogs start using the new setting can vary considerably.
 
 The current setting of this property is reported in the `is_broker_priority_honored` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view.
 
@@ -1225,11 +1225,11 @@ Calculates the transaction isolation level.
 
   Turns off the Snapshot option at the database level. Transactions can't specify the SNAPSHOT transaction isolation level.
 
-When you set ALLOW_SNAPSHOT_ISOLATION to a new state (from ON to OFF, or from OFF to ON), ALTER DATABASE doesn't return control to the caller until all existing transactions in the database are committed. If the database is already in the state specified in the ALTER DATABASE statement, control is returned to the caller immediately. If the ALTER DATABASE statement doesn't return quickly, use [sys.dm_tran_active_snapshot_database_transactions](../../relational-databases/system-dynamic-management-views/sys-dm-tran-active-snapshot-database-transactions-transact-sql.md) to determine whether there are long-running transactions. If the ALTER DATABASE statement is canceled, the database remains in the state it was in when ALTER DATABASE was started. The [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view indicates the state of snapshot-isolation transactions in the database. If `snapshot_isolation_state_desc` = IN_TRANSITION_TO_ON, the command `ALTER DATABASE ... ALLOW_SNAPSHOT_ISOLATION OFF` will pause six seconds and retry the operation.
+When you set ALLOW_SNAPSHOT_ISOLATION to a new state (from ON to OFF, or from OFF to ON), ALTER DATABASE doesn't return control to the caller until all existing transactions in the database are committed. If the database is already in the state specified in the ALTER DATABASE statement, control is returned to the caller immediately. If the ALTER DATABASE statement doesn't return quickly, use [sys.dm_tran_active_snapshot_database_transactions](../../relational-databases/system-dynamic-management-views/sys-dm-tran-active-snapshot-database-transactions-transact-sql.md) to determine whether there are long-running transactions. If the ALTER DATABASE statement is canceled, the database remains in the state it was in when ALTER DATABASE was started. The [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view indicates the state of snapshot-isolation transactions in the database. If `snapshot_isolation_state_desc` = IN_TRANSITION_TO_ON, the command `ALTER DATABASE ... ALLOW_SNAPSHOT_ISOLATION OFF` pauses six seconds and retries the operation.
 
 You can't change the state of ALLOW_SNAPSHOT_ISOLATION if the database is OFFLINE.
 
-If you set ALLOW_SNAPSHOT_ISOLATION in a READ_ONLY database, the setting will be kept if the database is later set to READ_WRITE.
+If you set ALLOW_SNAPSHOT_ISOLATION in a READ_ONLY database, the setting is kept if the database is later set to READ_WRITE.
 
 You can change the ALLOW_SNAPSHOT_ISOLATION settings for the `master`, `model`, `msdb`, and `tempdb` databases. The setting is kept every time the instance of the [!INCLUDE[ssDE](../../includes/ssde-md.md)] is stopped and restarted if you change the setting for `tempdb`. If you change the setting for `model`, that setting becomes the default for any new databases that are created, except for `tempdb`.
 
@@ -1249,14 +1249,14 @@ The current setting of this option can be determined by examining the `snapshot_
 
 To set READ_COMMITTED_SNAPSHOT ON or OFF, there must be no active connections to the database except for the connection running the ALTER DATABASE command. However, the database doesn't have to be in single-user mode. You can't change the state of this option when the database is OFFLINE.
 
-If you set READ_COMMITTED_SNAPSHOT in a READ_ONLY database, the setting will be kept when the database is later set to READ_WRITE.
+If you set READ_COMMITTED_SNAPSHOT in a READ_ONLY database, the setting is kept when the database is later set to READ_WRITE.
 
 READ_COMMITTED_SNAPSHOT can't be turned ON for the `master`, `tempdb`, or `msdb` system databases. If you change the setting for `model`, that setting becomes the default for any new databases created, except for `tempdb`.
 
 The current setting of this option can be determined by examining the `is_read_committed_snapshot_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view.
 
 > [!WARNING]  
-> When a table is created with **DURABILITY = SCHEMA_ONLY**, and **READ_COMMITTED_SNAPSHOT** is subsequently changed using **ALTER DATABASE**, data in the table will be lost.
+> When a table is created with **DURABILITY = SCHEMA_ONLY**, and **READ_COMMITTED_SNAPSHOT** is subsequently changed using **ALTER DATABASE**, data in the table is lost.
 
 #### MEMORY_OPTIMIZED_ELEVATE_TO_SNAPSHOT { ON | OFF }
 
@@ -1282,7 +1282,7 @@ Controls the ANSI compliance options at the database level.
 
 #### ANSI_NULL_DEFAULT { ON | OFF }
 
-Determines the default value, NULL or NOT NULL, of a column or [CLR user-defined type](../../relational-databases/clr-integration-database-objects-user-defined-types/clr-user-defined-types.md) for which the nullability isn't explicitly defined in CREATE TABLE or ALTER TABLE statements. Columns that are defined with constraints follow constraint rules whatever this setting may be.
+Determines the default value, NULL or NOT NULL, of a column or [CLR user-defined type](../../relational-databases/clr-integration-database-objects-user-defined-types/clr-user-defined-types.md) for which the nullability isn't explicitly defined in CREATE TABLE or ALTER TABLE statements. Columns that are defined with constraints follow constraint rules whatever this setting might be.
 
 - ON
 
@@ -1292,11 +1292,11 @@ Determines the default value, NULL or NOT NULL, of a column or [CLR user-defined
 
   The default value for an undefined column is NOT NULL.
 
-Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_NULL_DEFAULT. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULL_DEFAULT to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULL_DFLT_ON](../../t-sql/statements/set-ansi-null-dflt-on-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_NULL_DEFAULT. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULL_DEFAULT to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULL_DFLT_ON](set-ansi-null-dflt-on-transact-sql.md).
 
 For ANSI compatibility, setting the database option ANSI_NULL_DEFAULT to ON changes the database default to NULL.
 
-You can determine this option's status by examining the `is_ansi_null_default_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullDefault` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_null_default_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullDefault` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ANSI_NULLS { ON | OFF }
 
@@ -1311,12 +1311,12 @@ You can determine this option's status by examining the `is_ansi_null_default_on
 > [!IMPORTANT]  
 > In a future version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], ANSI_NULLS will always be ON and any applications that explicitly set the option to OFF will produce an error. Avoid using this feature in new development work, and plan to modify applications that currently use this feature.
 
-Connection-level settings that are set by using the SET statement override the default database setting for ANSI_NULLS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULLS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULLS](../../t-sql/statements/set-ansi-nulls-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for ANSI_NULLS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULLS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULLS](set-ansi-nulls-transact-sql.md).
 
 > [!IMPORTANT]  
 > SET ANSI_NULLS also must be set to ON when you create or make changes to indexes on computed columns or indexed views.
 
-You can determine this option's status by examining the `is_ansi_nulls_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullsEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_nulls_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullsEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ANSI_PADDING { ON | OFF }
 
@@ -1335,9 +1335,9 @@ You can determine this option's status by examining the `is_ansi_nulls_on` colum
 
 **char(*n*)** and **binary(*n*)** columns that allow for nulls are padded to the column length when ANSI_PADDING is set to ON. Trailing blanks and zeros are trimmed when ANSI_PADDING is OFF. **char(_n_)** and **binary(_n_)** columns that don't allow nulls are always padded to the length of the column.
 
-Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_PADDING. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_PADDING to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_PADDING](../../t-sql/statements/set-ansi-padding-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_PADDING. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_PADDING to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_PADDING](set-ansi-padding-transact-sql.md).
 
-You can determine this option's status by examining the `is_ansi_padding_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiPaddingEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_padding_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiPaddingEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ANSI_WARNINGS { ON | OFF }
 
@@ -1352,9 +1352,9 @@ You can determine this option's status by examining the `is_ansi_padding_on` col
 > [!IMPORTANT]  
 > SET ANSI_WARNINGS must be set to ON when you create or make changes to indexes on computed columns or indexed views.
 
-Connection-level settings that are set by using the SET statement override the default database setting for ANSI_WARNINGS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_WARNINGS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_WARNINGS](../../t-sql/statements/set-ansi-warnings-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for ANSI_WARNINGS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_WARNINGS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_WARNINGS](set-ansi-warnings-transact-sql.md).
 
-You can determine this option's status by examining the `is_ansi_warnings_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiWarningsEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_warnings_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiWarningsEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ARITHABORT { ON | OFF }
 
@@ -1369,11 +1369,11 @@ You can determine this option's status by examining the `is_ansi_warnings_on` co
 > [!IMPORTANT]  
 > SET ARITHABORT must be set to ON when you create or make changes to indexes on computed columns or indexed views.
 
-You can determine this option's status by examining the `is_arithabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsArithmeticAbortEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_arithabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsArithmeticAbortEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### COMPATIBILITY_LEVEL = { 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 
-For more information, see [ALTER DATABASE Compatibility Level](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md).
+For more information, see [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md).
 
 #### CONCAT_NULL_YIELDS_NULL { ON | OFF }
 
@@ -1390,9 +1390,9 @@ For more information, see [ALTER DATABASE Compatibility Level](../../t-sql/state
 >  
 > In upcoming versions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], CONCAT_NULL_YIELDS_NULL will always be ON, and any applications that explicitly set the option to OFF will trigger an error. Avoid using this feature in new development work, and plan to modify applications that currently use this feature.
 
-Connection-level settings that are set by using the SET statement override the default database setting for CONCAT_NULL_YIELDS_NULL. By default, ODBC and OLE DB clients issue a connection-level SET statement setting CONCAT_NULL_YIELDS_NULL to ON for the session when connecting to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CONCAT_NULL_YIELDS_NULL](../../t-sql/statements/set-concat-null-yields-null-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for CONCAT_NULL_YIELDS_NULL. By default, ODBC and OLE DB clients issue a connection-level SET statement setting CONCAT_NULL_YIELDS_NULL to ON for the session when connecting to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CONCAT_NULL_YIELDS_NULL](set-concat-null-yields-null-transact-sql.md).
 
-You can determine this option's status by examining the `is_concat_null_yields_null_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNullConcat` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_concat_null_yields_null_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNullConcat` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### NUMERIC_ROUNDABORT { ON | OFF }
 
@@ -1407,7 +1407,7 @@ You can determine this option's status by examining the `is_concat_null_yields_n
   > [!IMPORTANT]  
   > NUMERIC_ROUNDABORT must be set to OFF when you create or make changes to indexes on computed columns or indexed views.
 
-You can determine the status of this option in the `is_numeric_roundabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNumericRoundAbortEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine the status of this option in the `is_numeric_roundabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNumericRoundAbortEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### QUOTED_IDENTIFIER { ON | OFF }
 
@@ -1421,13 +1421,13 @@ You can determine the status of this option in the `is_numeric_roundabort_on` co
 
   Identifiers can't be in quotation marks and must follow all [!INCLUDE[tsql](../../includes/tsql-md.md)] rules for identifiers. Literals can be delimited by either single or double quotation marks.
 
-[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] also allows for identifiers to be delimited by square brackets (`[` and `]`). Bracketed identifiers can always be used, whatever the QUOTED_IDENTIFIER setting is. For more information, see [Database Identifiers](../../relational-databases/databases/database-identifiers.md).
+[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] also allows for identifiers to be delimited by square brackets (`[` and `]`). Bracketed identifiers can always be used, whatever the QUOTED_IDENTIFIER setting is. For more information, see [Database identifiers](../../relational-databases/databases/database-identifiers.md).
 
 When a table is created, the QUOTED IDENTIFIER option is always stored as ON in the metadata of the table. The option is stored even if the option is set to OFF when the table is created.
 
-Connection-level settings that are set by using the SET statement override the default database setting for QUOTED_IDENTIFIER. ODBC and OLE DB clients issue a connection-level SET statement setting QUOTED_IDENTIFIER to ON, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET QUOTED_IDENTIFIER](../../t-sql/statements/set-quoted-identifier-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for QUOTED_IDENTIFIER. ODBC and OLE DB clients issue a connection-level SET statement setting QUOTED_IDENTIFIER to ON, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET QUOTED_IDENTIFIER](set-quoted-identifier-transact-sql.md).
 
-You can determine this option's status by examining the `is_quoted_identifier_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsQuotedIdentifiersEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_quoted_identifier_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsQuotedIdentifiersEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### RECURSIVE_TRIGGERS { ON | OFF }
 
@@ -1437,18 +1437,18 @@ You can determine this option's status by examining the `is_quoted_identifier_on
 
 - OFF
 
-  You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+  You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 > [!NOTE]  
 > Only direct recursion is prevented when RECURSIVE_TRIGGERS is set to OFF. To disable indirect recursion, you must also set the nested triggers server option to 0.
 
-You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### \<suspend_for_snapshot_backup> ::=
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL22](../../includes/sssql22-md.md)])
 
-Suspends databases for snapshot backup. May define a group of one or more databases. May designate copy only mode.
+Suspends databases for snapshot backup. Can define a group of one or more databases. Can designate copy only mode.
 
 #### SET SUSPEND_FOR_SNAPSHOT_BACKUP = { ON | **OFF** }
 
@@ -1462,7 +1462,7 @@ Optional. Uses COPY_ONLY mode.
 
 **Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)])
 
-Specifies the frequency of indirect checkpoints on a per-database basis. Starting with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] the default value for new databases is **1 minute**, which indicates database will use indirect checkpoints. For older versions the default is 0, which indicates that the database will use automatic checkpoints, whose frequency depends on the recovery interval setting of the server instance. [!INCLUDE[msCoName](../../includes/msconame-md.md)] recommends 1 minute for most systems.
+Specifies the frequency of indirect checkpoints on a per-database basis. Starting with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] the default value for new databases is **1 minute**, which indicates the database uses indirect checkpoints. For older versions the default is 0, which indicates that the database uses automatic checkpoints, whose frequency depends on the recovery interval setting of the server instance. [!INCLUDE[msCoName](../../includes/msconame-md.md)] recommends 1 minute for most systems.
 
 #### TARGET_RECOVERY_TIME = *target_recovery_time* { SECONDS | MINUTES }
 
@@ -1478,7 +1478,7 @@ Specifies the frequency of indirect checkpoints on a per-database basis. Startin
 
   Indicates that *target_recovery_time* is expressed as the number of minutes.
 
-For more information about indirect checkpoints, see [Database Checkpoints](../../relational-databases/logs/database-checkpoints-sql-server.md).
+For more information about indirect checkpoints, see [Database checkpoints](../../relational-databases/logs/database-checkpoints-sql-server.md).
 
 #### WITH \<termination> ::=
 
@@ -1493,11 +1493,11 @@ Specifies when to roll back incomplete transactions when the database is transit
 
 - NO_WAIT
 
-  Specifies that the request will fail if the requested database state or option change can't complete immediately. Completing immediately means not waiting for transactions to commit or roll back on their own.
+  Specifies that the request fails if the requested database state or option change can't complete immediately. Completing immediately means not waiting for transactions to commit or roll back on their own.
 
 ## <a id="SettingOptions"></a> Set options
 
-To retrieve current settings for database options, use the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md)
+To retrieve current settings for database options, use the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md)
 
 After you set a database option, the new setting takes effect immediately.
 
@@ -1594,7 +1594,7 @@ GO
 Changing the state of a database or file group to READ_ONLY or READ_WRITE requires exclusive access to the database. The following example sets the database to `SINGLE_USER` mode to obtain exclusive access. The example then sets the state of the [!INCLUDE[ssSampleDBobject](../../includes/sssampledbobject-md.md)] database to `READ_ONLY` and returns access to the database to all users.
 
 > [!NOTE]  
-> This example uses the termination option `WITH ROLLBACK IMMEDIATE` in the first `ALTER DATABASE` statement. All incomplete transactions will be rolled back and any other connections to the [!INCLUDE[ssSampleDBobject](../../includes/sssampledbobject-md.md)] database will be immediately disconnected.
+> This example uses the termination option `WITH ROLLBACK IMMEDIATE` in the first `ALTER DATABASE` statement. All incomplete transactions are rolled back, and any other connections to the [!INCLUDE[ssSampleDBobject](../../includes/sssampledbobject-md.md)] database are immediately disconnected.
 
 ```sql
 USE master;
@@ -1729,26 +1729,23 @@ SET QUERY_STORE = ON
     );
 ```
 
-## See also
+## Related content
 
 - [Statistics](../../relational-databases/statistics/statistics.md)
-- [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md)
+- [DATABASEPROPERTYEX (Transact-SQL)](../functions/databasepropertyex-transact-sql.md)
 - [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md)
 - [sys.data_spaces](../../relational-databases/system-catalog-views/sys-data-spaces-transact-sql.md)
 - [sys.database_automatic_tuning_options](../../relational-databases/system-catalog-views/sys-database-automatic-tuning-options-transact-sql.md)
 - [sys.database_automatic_tuning_mode](../../relational-databases/system-catalog-views/sys-database-automatic-tuning-mode-transact-sql.md)
-
-## Next steps
-
-- [ALTER DATABASE Compatibility Level](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md)
-- [ALTER DATABASE Database Mirroring](../../t-sql/statements/alter-database-transact-sql-database-mirroring.md)
-- [ALTER DATABASE SET HADR](../../t-sql/statements/alter-database-transact-sql-set-hadr.md)
-- [CREATE DATABASE](../../t-sql/statements/create-database-transact-sql.md)
-- [Enable and Disable Change Tracking](../../relational-databases/track-changes/enable-and-disable-change-tracking-sql-server.md)
-- [DROP DATABASE](../../t-sql/statements/drop-database-transact-sql.md)
-- [SET TRANSACTION ISOLATION LEVEL](../../t-sql/statements/set-transaction-isolation-level-transact-sql.md)
+- [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md)
+- [ALTER DATABASE Database Mirroring](alter-database-transact-sql-database-mirroring.md)
+- [ALTER DATABASE SET HADR](alter-database-transact-sql-set-hadr.md)
+- [CREATE DATABASE](create-database-transact-sql.md)
+- [Enable and Disable Change Tracking (SQL Server)](../../relational-databases/track-changes/enable-and-disable-change-tracking-sql-server.md)
+- [DROP DATABASE (Transact-SQL)](drop-database-transact-sql.md)
+- [SET TRANSACTION ISOLATION LEVEL (Transact-SQL)](set-transaction-isolation-level-transact-sql.md)
 - [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md)
-- [Best Practice with the Query Store](../../relational-databases/performance/best-practice-with-the-query-store.md)
+- [Best practices for monitoring workloads with Query Store](../../relational-databases/performance/best-practice-with-the-query-store.md)
 
 ::: moniker-end
 ::: moniker range="=azuresqldb-current"
@@ -1775,10 +1772,10 @@ SET QUERY_STORE = ON
 
 ## SQL Database
 
-Compatibility levels are `SET` options but are described in [ALTER DATABASE Compatibility Level](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md).
+Compatibility levels are `SET` options but are described in [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md).
 
 > [!NOTE]  
-> Many database set options can be configured for the current session by using [SET Statements](../../t-sql/statements/set-statements-transact-sql.md) and are often configured by applications when they connect. Session-level set options override the `ALTER DATABASE SET` values. The database options described in the following sections are values that can be set for sessions that don't explicitly provide other set option values.
+> Many database set options can be configured for the current session by using [SET Statements](set-statements-transact-sql.md) and are often configured by applications when they connect. Session-level set options override the `ALTER DATABASE SET` values. The database options described in the following sections are values that can be set for sessions that don't explicitly provide other set option values.
 
 ## Syntax
 
@@ -1928,7 +1925,7 @@ SET
 
 #### *database_name*
 
-Is the name of the database to be modified.
+The name of the database to be modified.
 
 - CURRENT
 
@@ -1942,7 +1939,7 @@ Controls automatic options.
 
 - ON
 
-  Query Optimizer creates statistics on single columns in query predicates, as necessary, to improve query plans and query performance. These single-column statistics are created when Query Optimizer compiles queries. The single-column statistics are created only on columns that are not already the first column of an existing statistics object.
+  Query Optimizer creates statistics on single columns in query predicates, as necessary, to improve query plans and query performance. These single-column statistics are created when Query Optimizer compiles queries. The single-column statistics are created only on columns that aren't already the first column of an existing statistics object.
 
   The default is ON. We recommend that you use the default setting for most databases.
 
@@ -1950,19 +1947,19 @@ Controls automatic options.
 
   Query Optimizer doesn't create statistics on single columns in query predicates when it's compiling queries. Setting this option to OFF can cause suboptimal query plans and degraded query performance.
 
-You can determine this option's status by examining the `is_auto_create_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoCreateStatistics` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_auto_create_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoCreateStatistics` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 For more information, see the "Statistics options" section in [Statistics](../../relational-databases/statistics/statistics.md#statistics-options).
 
 #### INCREMENTAL = ON | OFF
 
-Set AUTO_CREATE_STATISTICS to ON, and set INCREMENTAL to ON. This setting creates automatically created stats as incremental whenever incremental stats are supported. The default value is OFF. For more information, see [CREATE STATISTICS](../../t-sql/statements/create-statistics-transact-sql.md).
+Set AUTO_CREATE_STATISTICS to ON, and set INCREMENTAL to ON. This setting creates automatically created stats as incremental whenever incremental stats are supported. The default value is OFF. For more information, see [CREATE STATISTICS](create-statistics-transact-sql.md).
 
 #### <a id="auto_shrink"></a> AUTO_SHRINK { ON | OFF }
 
 - ON
 
-  The database files are candidates for periodic shrinking. Unless you have a specific requirement, do not set the AUTO_SHRINK database option to ON. For more information, see [Shrink a database](../../relational-databases/databases/shrink-a-database.md).
+  The database files are candidates for periodic shrinking. Unless you have a specific requirement, don't set the AUTO_SHRINK database option to ON. For more information, see [Shrink a database](../../relational-databases/databases/shrink-a-database.md).
 
 Both data file and log files can be automatically shrunk. AUTO_SHRINK reduces the size of the transaction log only if you set the database to SIMPLE recovery model or if you back up the log. When set to OFF, the database files aren't automatically shrunk during periodic checks for unused space.
 
@@ -1975,9 +1972,9 @@ You can't shrink a read-only database.
 
 - OFF
 
-  The database files are not automatically shrunk during periodic checks for unused space.
+  The database files aren't automatically shrunk during periodic checks for unused space.
 
-You can determine this option's status by examining the `is_auto_shrink_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoShrink` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_auto_shrink_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoShrink` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 > [!NOTE]  
 > The AUTO_SHRINK option isn't available in a contained database.
@@ -2000,7 +1997,7 @@ You can determine this option's status by examining the `is_auto_shrink_on` colu
 
   Specifies that Query Optimizer doesn't update statistics when they're used by a query. Query Optimizer also doesn't update statistics when they might be out-of-date. Setting this option to OFF can cause suboptimal query plans and degraded query performance.
 
-  You can determine this option's status by examining the `is_auto_update_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoUpdateStatistics` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+  You can determine this option's status by examining the `is_auto_update_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoUpdateStatistics` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
   For more information, see the "Statistics options" section in [Statistics](../../relational-databases/statistics/statistics.md#statistics-options).
 
@@ -2032,15 +2029,15 @@ Controls automatic options for [Automatic tuning](../../relational-databases/aut
 
 - AUTO
 
-  Setting the Automatic tuning value to AUTO will apply Azure configuration defaults for Automatic tuning.  In the Azure portal, this reflects the option to "Inherit from: Azure defaults".
+  Setting the Automatic tuning value to AUTO applies Azure configuration defaults for Automatic tuning. In the Azure portal, this reflects the option to "Inherit from: Azure defaults".
 
 - INHERIT
 
-  Using the INHERIT value inherits the default configuration from the parent server. In the Azure portal, this reflects the option to "Inherit from: Server". This is especially useful if you would like to customize Automatic tuning configuration on a parent server, and have all the databases on such server INHERIT these custom settings. Please note that in order for the inheritance to work, the three individual tuning options FORCE_LAST_GOOD_PLAN, CREATE_INDEX, and DROP_INDEX need to be set to DEFAULT on databases.
+  Using the INHERIT value inherits the default configuration from the parent server. In the Azure portal, this reflects the option to "Inherit from: Server". This is especially useful if you would like to customize Automatic tuning configuration on a parent server, and have all the databases on such server INHERIT these custom settings. In order for the inheritance to work, the three individual tuning options FORCE_LAST_GOOD_PLAN, CREATE_INDEX, and DROP_INDEX need to be set to DEFAULT on databases.
 
 - CUSTOM
 
-  Using the CUSTOM value, you'll need to custom-configure each of the Automatic Tuning options available on databases. In the Azure portal, this reflects the option to "Inherit from: Don't inherit".
+  Using the CUSTOM value, you need to custom-configure each of the Automatic Tuning options available on databases. In the Azure portal, this reflects the option to "Inherit from: Don't inherit".
 
 #### CREATE_INDEX = { DEFAULT | ON | OFF }
 
@@ -2060,7 +2057,7 @@ Enables or disables automatic index management `CREATE_INDEX` option of [Automat
 
 #### DROP_INDEX = { DEFAULT | ON | OFF }
 
-Enables or disables automatic index management `DROP_INDEX` option of [Automatic Tuning](../../relational-databases/automatic-tuning/automatic-tuning.md). You can view the status for this option in the Azure portal or via T-SQL in the view `sys.database_automatic_tuning_options`.
+Enables or disables automatic index management `DROP_INDEX` option of [Automatic tuning](../../relational-databases/automatic-tuning/automatic-tuning.md). You can view the status for this option in the Azure portal or via T-SQL in the view `sys.database_automatic_tuning_options`.
 
 - DEFAULT
 
@@ -2080,15 +2077,15 @@ Enables or disables automatic plan correction `FORCE_LAST_GOOD_PLAN` option of [
 
 - DEFAULT
 
-  Inherits default settings from the server. In this case, options of enabling or disabling individual Automatic tuning features are defined at the server level. This is the default value. The default value for new Azure SQL servers is ON, meaning that by default, new databases will inherit the setting of ON.
+  Inherits default settings from the server. In this case, options of enabling or disabling individual Automatic tuning features are defined at the server level. This is the default value. The default value for new Azure SQL servers is ON, meaning that by default, new databases inherit the setting of ON.
 
 - ON
 
-  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] automatically forces the last known good plan on the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] queries where new query plan causes performance regressions. The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] continuously monitors query performance of the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] query with the forced plan. If there are performance gains, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] will keep using last known good plan. If performance gains are not detected, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] will produce a new query plan. The statement will fail if the Query Store isn't enabled or if it's not in *Read-Write* mode.
+  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] automatically forces the last known good plan on the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] queries where new query plan causes performance regressions. The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] continuously monitors query performance of the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] query with the forced plan. If there are performance gains, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] keeps using last known good plan. If performance gains aren't detected, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] produces a new query plan. The statement fails if the Query Store isn't enabled, or isn't in *Read-Write* mode.
 
 - OFF
 
-  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] reports potential query performance regressions caused by query plan changes in [sys.dm_db_tuning_recommendations](../../relational-databases/system-dynamic-management-views/sys-dm-db-tuning-recommendations-transact-sql.md) view. However, these recommendations are not automatically applied. Users can monitor active recommendations and fix identified problems by applying [!INCLUDE[tsql-md](../../includes/tsql-md.md)] scripts that are shown in the view.
+  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] reports potential query performance regressions caused by query plan changes in [sys.dm_db_tuning_recommendations](../../relational-databases/system-dynamic-management-views/sys-dm-db-tuning-recommendations-transact-sql.md) view. However, these recommendations aren't automatically applied. Users can monitor active recommendations and fix identified problems by applying [!INCLUDE[tsql-md](../../includes/tsql-md.md)] scripts that are shown in the view.
 
 #### \<change_tracking_option> ::=
 
@@ -2132,11 +2129,11 @@ Controls cursor options.
 
 - OFF
 
-  Cursors remain open when a transaction is committed; rolling back a transaction closes any cursors except those defined as INSENSITIVE or STATIC.
+  Cursors remain open when a transaction is committed; rolling back a transaction closes any cursors except those cursors defined as INSENSITIVE or STATIC.
 
-Connection-level settings that are set by using the SET statement override the default database setting for CURSOR_CLOSE_ON_COMMIT. ODBC and OLE DB clients issue a connection-level SET statement setting CURSOR_CLOSE_ON_COMMIT to OFF for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CURSOR_CLOSE_ON_COMMIT](../../t-sql/statements/set-cursor-close-on-commit-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for CURSOR_CLOSE_ON_COMMIT. ODBC and OLE DB clients issue a connection-level SET statement setting CURSOR_CLOSE_ON_COMMIT to OFF for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CURSOR_CLOSE_ON_COMMIT](set-cursor-close-on-commit-transact-sql.md).
 
-You can determine this option's status by examining the `is_cursor_close_on_commit_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsCloseCursorsOnCommitEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function. The cursor is implicitly deallocated only at disconnect. For more information, see [DECLARE CURSOR](../../t-sql/language-elements/declare-cursor-transact-sql.md).
+You can determine this option's status by examining the `is_cursor_close_on_commit_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsCloseCursorsOnCommitEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function. The cursor is implicitly deallocated only at disconnect. For more information, see [DECLARE CURSOR](../language-elements/declare-cursor-transact-sql.md).
 
 #### \<db_encryption_option> ::=
 
@@ -2144,9 +2141,9 @@ Controls the database encryption state.
 
 #### ENCRYPTION { ON | OFF }
 
-Sets the database to be encrypted (ON) or not encrypted (OFF). For more information about database encryption, see [Transparent Data Encryption](../../relational-databases/security/encryption/transparent-data-encryption.md), and [Transparent Data Encryption with Azure SQL Database](/azure/azure-sql/database/transparent-data-encryption-tde-overview).
+Sets the database to be encrypted (ON) or not encrypted (OFF). For more information about database encryption, see [Transparent data encryption (TDE)](../../relational-databases/security/encryption/transparent-data-encryption.md), and [Transparent data encryption for Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics](/azure/azure-sql/database/transparent-data-encryption-tde-overview).
 
-When encryption is enabled at the database level, all file groups will be encrypted. Any new file groups will inherit the encrypted property. If any file groups in the database are set to READ ONLY, the database encryption operation will fail.
+When encryption is enabled at the database level, all file groups are encrypted. Any new file groups inherit the encrypted property. If any file groups in the database are set to READ ONLY, the database encryption operation fails.
 
 You can see the encryption state of the database by using the [sys.dm_database_encryption_keys](../../relational-databases/system-dynamic-management-views/sys-dm-database-encryption-keys-transact-sql.md) dynamic management view.
 
@@ -2159,7 +2156,7 @@ Controls whether updates are allowed on the database.
   Users can read data from the database but not modify it.
 
   > [!NOTE]  
-  > To improve query performance, update statistics before setting a database to READ_ONLY. If additional statistics are needed after a database is set to READ_ONLY, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] will create statistics in `tempdb`. For more information about statistics for a read-only database, see [Statistics](../../relational-databases/statistics/statistics.md).
+  > To improve query performance, update statistics before setting a database to READ_ONLY. If additional statistics are needed after a database is set to READ_ONLY, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] creates statistics in `tempdb`. For more information about statistics for a read-only database, see [Statistics](../../relational-databases/statistics/statistics.md).
 
 - READ_WRITE
 
@@ -2176,11 +2173,11 @@ Controls user access to the database.
 
 - RESTRICTED_USER
 
-  Allows for only members of the `db_owner` fixed database role and `dbcreator` and `sysadmin` fixed server roles to connect to the database, but doesn't limit their number. All connections to the database are disconnected in the timeframe specified by the termination clause of the ALTER DATABASE statement. After the database has transitioned to the RESTRICTED_USER state, connection attempts by unqualified users are refused.  In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], should be executed from within the user database. From the `master` database, you may encounter an error message `Msg 42008, Level 16, State 3, Line 1 ODBC error: State: 28000: Error: 18456 Message:'[Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user '##MS_InstanceCertificate##'.'.`
+  Allows for only members of the `db_owner` fixed database role and `dbcreator` and `sysadmin` fixed server roles to connect to the database, but doesn't limit their number. All connections to the database are disconnected in the timeframe specified by the termination clause of the ALTER DATABASE statement. After the database has transitioned to the RESTRICTED_USER state, connection attempts by unqualified users are refused. In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], should be executed from within the user database. From the `master` database, you might encounter an error message `Msg 42008, Level 16, State 3, Line 1 ODBC error: State: 28000: Error: 18456 Message:'[Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user '##MS_InstanceCertificate##'.'.`
 
 - MULTI_USER
 
-  All users that have the appropriate permissions to connect to the database are allowed. You can determine this option's status by examining the `user_access` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `UserAccess` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.  In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], should be executed from within the user database. From the `master` database, you may encounter an error message `Msg 42008, Level 16, State 3, Line 1 ODBC error: State: 28000: Error: 18456 Message:'[Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user '##MS_InstanceCertificate##'.'.`
+  All users that have the appropriate permissions to connect to the database are allowed. You can determine this option's status by examining the `user_access` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `UserAccess` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function. In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], should be executed from within the user database. From the `master` database, you might encounter an error message `Msg 42008, Level 16, State 3, Line 1 ODBC error: State: 28000: Error: 18456 Message:'[Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user '##MS_InstanceCertificate##'.'.`
 
 #### \<delayed_durability_option> ::=
 
@@ -2229,7 +2226,7 @@ The current setting of this option can be determined by examining the `is_parame
     Disables the Query Store.
 
     > [!NOTE]  
-    > Query Store cannot be disabled in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] single database and Elastic Pool. Executing `ALTER DATABASE [database] SET QUERY_STORE = OFF` will return the warning `'QUERY_STORE=OFF' is not supported in this version of SQL Server.`.
+    > Query Store cannot be disabled in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] single database and Elastic Pool. Executing `ALTER DATABASE [database] SET QUERY_STORE = OFF` returns the warning `'QUERY_STORE=OFF' is not supported in this version of SQL Server.`.
 
   - CLEAR
 
@@ -2237,7 +2234,7 @@ The current setting of this option can be determined by examining the `is_parame
 
 #### OPERATION_MODE
 
-Describes the operation mode of the Query Store. Valid values are READ_ONLY and READ_WRITE. In READ_WRITE mode, the Query Store collects and persists query plan and runtime execution statistics information. In READ_ONLY mode, information can be read from the Query Store, but new information isn't added. If the maximum allocated space of the Query Store has been exhausted, the Query Store will change is operation mode to READ_ONLY.
+Describes the operation mode of the Query Store. Valid values are READ_ONLY and READ_WRITE. In READ_WRITE mode, the Query Store collects and persists query plan and runtime execution statistics information. In READ_ONLY mode, information can be read from the Query Store, but new information isn't added. If the maximum allocated space of the Query Store has been exhausted, the Query Store changes its operation mode to READ_ONLY.
 
 #### CLEANUP_POLICY
 
@@ -2256,11 +2253,11 @@ Determines the space allocated to the Query Store. MAX_STORAGE_SIZE_MB is type *
 
 > [!NOTE]  
 > `MAX_STORAGE_SIZE_MB` limit isn't strictly enforced. Storage size is checked only when Query Store writes data to disk. This interval is set by the `DATA_FLUSH_INTERVAL_SECONDS` option or the [!INCLUDE[ssManStudio](../../includes/ssManStudio-md.md)] Query Store dialog option **Data Flush Interval**. The interval default value is 900 seconds (or 15 minutes).
-> If the Query Store has breached the `MAX_STORAGE_SIZE_MB` limit between storage size checks, it will transition to read-only mode. If `SIZE_BASED_CLEANUP_MODE` is enabled, the cleanup mechanism to enforce the `MAX_STORAGE_SIZE_MB` limit is also triggered.
-> Once enough space has been cleared, the Query Store mode will automatically switch back to read-write.
+> If the Query Store has breached the `MAX_STORAGE_SIZE_MB` limit between storage size checks, it transitions to read-only mode. If `SIZE_BASED_CLEANUP_MODE` is enabled, the cleanup mechanism to enforce the `MAX_STORAGE_SIZE_MB` limit is also triggered.
+> Once enough space has been cleared, the Query Store mode automatically switches back to read-write.
 
 > [!IMPORTANT]  
-> If you think that your workload capture will need more than 10 GB of disk space, you should probably rethink and optimize your workload to reuse query plans (for example using [forced parameterization](../../relational-databases/query-processing-architecture-guide.md#forced-parameterization), or adjust the Query Store configurations.
+> If you think that your workload capture needs more than 10 GB of disk space, you should probably rethink and optimize your workload to reuse query plans (for example using [forced parameterization](../../relational-databases/query-processing-architecture-guide.md#forced-parameterization), or adjust the Query Store configurations.
 > Starting with [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)] and in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you can set `QUERY_CAPTURE_MODE` to CUSTOM for additional control over the query capture policy.
 
 #### INTERVAL_LENGTH_MINUTES
@@ -2269,15 +2266,15 @@ Determines the time interval at which runtime execution statistics data is aggre
 
 #### SIZE_BASED_CLEANUP_MODE = { AUTO | OFF }
 
-Controls whether cleanup will be automatically activated when the total amount of data gets close to maximum size.
+Controls whether cleanup is automatically activated when the total amount of data gets close to maximum size.
 
 - OFF
 
-  Size-based cleanup won't be automatically activated.
+  Size-based cleanup aren't automatically activated.
 
 - AUTO
 
-  Size-based cleanup will be automatically activated when size on disk reaches 90% of **max_storage_size_mb**. Size-based cleanup removes the least expensive and oldest queries first. It stops at approximately 80% of **max_storage_size_mb**. This is the default configuration value.
+  Size-based cleanup is automatically activated when size on disk reaches 90% of **max_storage_size_mb**. Size-based cleanup removes the least expensive and oldest queries first. It stops at approximately 80% of **max_storage_size_mb**. This is the default configuration value.
 
 SIZE_BASED_CLEANUP_MODE is type **nvarchar**.
 
@@ -2298,7 +2295,7 @@ Designates the currently active query capture mode. Each mode defines specific q
 
 - NONE
 
-  Stop capturing new queries. The Query Store will continue to collect compile and runtime statistics for queries that were captured already. Use this configuration with caution since you may miss capturing important queries.
+  Stop capturing new queries. The Query Store continues to collect compile and runtime statistics for queries that were captured already. Use this configuration with caution since you might miss capturing important queries.
 
 - CUSTOM
 
@@ -2312,7 +2309,7 @@ Defines the maximum number of plans maintained for each query. MAX_PLANS_PER_QUE
 
 #### WAIT_STATS_CAPTURE_MODE { ON | OFF }
 
-Controls whether wait statistics will be captured per query.
+Controls whether wait statistics are captured per query.
 
 - ON
 
@@ -2320,7 +2317,7 @@ Controls whether wait statistics will be captured per query.
 
 - OFF
 
-  Wait statistics information per query won't be captured.
+  Wait statistics information per query aren't captured.
 
 #### \<query_capture_policy_option_list> :: =
 
@@ -2356,11 +2353,11 @@ Determines the transaction isolation level.
 
   Turns off the Snapshot option at the database level. Transactions can't specify the SNAPSHOT transaction isolation level.
 
-When you set ALLOW_SNAPSHOT_ISOLATION to a new state (from ON to OFF, or from OFF to ON), ALTER DATABASE doesn't return control to the caller until all existing transactions in the database are committed. If the database is already in the state specified in the ALTER DATABASE statement, control is returned to the caller immediately. If the ALTER DATABASE statement doesn't return quickly, use [sys.dm_tran_active_snapshot_database_transactions](../../relational-databases/system-dynamic-management-views/sys-dm-tran-active-snapshot-database-transactions-transact-sql.md) to determine whether there are long-running transactions. If the ALTER DATABASE statement is canceled, the database remains in the state it was in when ALTER DATABASE was started. The [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view indicates the state of snapshot-isolation transactions in the database. If `snapshot_isolation_state_desc` = IN_TRANSITION_TO_ON, the statement `ALTER DATABASE .... ALLOW_SNAPSHOT_ISOLATION OFF` will pause six seconds and retry the operation.
+When you set ALLOW_SNAPSHOT_ISOLATION to a new state (from ON to OFF, or from OFF to ON), ALTER DATABASE doesn't return control to the caller until all existing transactions in the database are committed. If the database is already in the state specified in the ALTER DATABASE statement, control is returned to the caller immediately. If the ALTER DATABASE statement doesn't return quickly, use [sys.dm_tran_active_snapshot_database_transactions](../../relational-databases/system-dynamic-management-views/sys-dm-tran-active-snapshot-database-transactions-transact-sql.md) to determine whether there are long-running transactions. If the ALTER DATABASE statement is canceled, the database remains in the state it was in when ALTER DATABASE was started. The [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view indicates the state of snapshot-isolation transactions in the database. If `snapshot_isolation_state_desc = IN_TRANSITION_TO_ON`, the statement `ALTER DATABASE .... ALLOW_SNAPSHOT_ISOLATION OFF` pauses six seconds and retries the operation.
 
 You can't change the state of ALLOW_SNAPSHOT_ISOLATION if the database is OFFLINE.
 
-If you set ALLOW_SNAPSHOT_ISOLATION in a READ_ONLY database, the setting will be kept if the database is later set to READ_WRITE.
+If you set ALLOW_SNAPSHOT_ISOLATION in a READ_ONLY database, the setting is kept if the database is later set to READ_WRITE.
 
 The current setting of this option can be determined by examining the `snapshot_isolation_state` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view.
 
@@ -2376,14 +2373,14 @@ The current setting of this option can be determined by examining the `snapshot_
 
 To set READ_COMMITTED_SNAPSHOT ON or OFF, there must be no active connections to the database except for the connection running the ALTER DATABASE command. However, the database doesn't have to be in single-user mode. You can't change the state of this option when the database is OFFLINE.
 
-If you set READ_COMMITTED_SNAPSHOT in a READ_ONLY database, the setting will be kept when the database is later set to READ_WRITE.
+If you set READ_COMMITTED_SNAPSHOT in a READ_ONLY database, the setting is kept when the database is later set to READ_WRITE.
 
 READ_COMMITTED_SNAPSHOT can't be turned ON for the `master`, `tempdb`, or `msdb` system databases. If you change the setting for `model`, that setting becomes the default for any new databases created, except for `tempdb`.
 
 The current setting of this option can be determined by examining the `is_read_committed_snapshot_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view.
 
 > [!WARNING]  
-> When a table is created with `DURABILITY = SCHEMA_ONLY`, and **READ_COMMITTED_SNAPSHOT** is subsequently changed using `ALTER DATABASE`, data in the table will be lost.
+> When a table is created with `DURABILITY = SCHEMA_ONLY`, and **READ_COMMITTED_SNAPSHOT** is subsequently changed using `ALTER DATABASE`, data in the table is lost.
 
 > [!TIP]  
 > In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], the `ALTER DATABASE` command to set READ_COMMITTED_SNAPSHOT ON or OFF for a database must be executed in the `master` database.
@@ -2410,7 +2407,7 @@ Controls the ANSI compliance options at the database level.
 
 #### ANSI_NULL_DEFAULT { ON | OFF }
 
-Determines the default value, NULL or NOT NULL, of a column or [CLR user-defined type](../../relational-databases/clr-integration-database-objects-user-defined-types/clr-user-defined-types.md) for which the nullability isn't explicitly defined in CREATE TABLE or ALTER TABLE statements. Columns that are defined with constraints follow constraint rules whatever this setting may be.
+Determines the default value, NULL or NOT NULL, of a column or [CLR user-defined type](../../relational-databases/clr-integration-database-objects-user-defined-types/clr-user-defined-types.md) for which the nullability isn't explicitly defined in CREATE TABLE or ALTER TABLE statements. Columns that are defined with constraints follow constraint rules whatever this setting might be.
 
 - ON
 
@@ -2420,11 +2417,11 @@ Determines the default value, NULL or NOT NULL, of a column or [CLR user-defined
 
   The default value is NOT NULL.
 
-Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_NULL_DEFAULT. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULL_DEFAULT to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULL_DFLT_ON](../../t-sql/statements/set-ansi-null-dflt-on-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_NULL_DEFAULT. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULL_DEFAULT to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULL_DFLT_ON](set-ansi-null-dflt-on-transact-sql.md).
 
 For ANSI compatibility, setting the database option ANSI_NULL_DEFAULT to ON changes the database default to NULL.
 
-You can determine this option's status by examining the `is_ansi_null_default_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullDefault` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_null_default_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullDefault` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ANSI_NULLS { ON | OFF }
 
@@ -2439,12 +2436,12 @@ You can determine this option's status by examining the `is_ansi_null_default_on
 > [!IMPORTANT]  
 > In a future version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], ANSI_NULLS will always be ON and any applications that explicitly set the option to OFF will produce an error. Avoid using this feature in new development work, and plan to modify applications that currently use this feature.
 
-Connection-level settings that are set by using the SET statement override the default database setting for ANSI_NULLS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULLS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULLS](../../t-sql/statements/set-ansi-nulls-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for ANSI_NULLS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULLS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULLS](set-ansi-nulls-transact-sql.md).
 
 > [!NOTE]  
 > SET ANSI_NULLS also must be set to ON when you create or make changes to indexes on computed columns or indexed views.
 
-You can determine this option's status by examining the `is_ansi_nulls_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullsEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_nulls_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullsEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ANSI_PADDING { ON | OFF }
 
@@ -2463,9 +2460,9 @@ You can determine this option's status by examining the `is_ansi_nulls_on` colum
 
 **char(*n*)** and **binary(*n*)** columns that allow for nulls are padded to the column length when ANSI_PADDING is set to ON. Trailing blanks and zeros are trimmed when ANSI_PADDING is OFF. **char(_n_)** and **binary(_n_)** columns that don't allow nulls are always padded to the length of the column.
 
-Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_PADDING. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_PADDING to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_PADDING](../../t-sql/statements/set-ansi-padding-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_PADDING. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_PADDING to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_PADDING](set-ansi-padding-transact-sql.md).
 
-You can determine this option's status by examining the `is_ansi_padding_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiPaddingEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_padding_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiPaddingEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ANSI_WARNINGS { ON | OFF }
 
@@ -2480,9 +2477,9 @@ You can determine this option's status by examining the `is_ansi_padding_on` col
 > [!NOTE]  
 > SET ANSI_WARNINGS must be set to ON when you create or make changes to indexes on computed columns or indexed views.
 
-Connection-level settings that are set by using the SET statement override the default database setting for ANSI_WARNINGS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_WARNINGS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_WARNINGS](../../t-sql/statements/set-ansi-warnings-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for ANSI_WARNINGS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_WARNINGS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_WARNINGS](set-ansi-warnings-transact-sql.md).
 
-You can determine this option's status by examining the `is_ansi_warnings_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiWarningsEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_warnings_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiWarningsEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ARITHABORT { ON | OFF }
 
@@ -2497,11 +2494,11 @@ You can determine this option's status by examining the `is_ansi_warnings_on` co
 > [!NOTE]  
 > SET ARITHABORT must be set to ON when you create or make changes to indexes on computed columns or indexed views.
 
-You can determine this option's status by examining the `is_arithabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsArithmeticAbortEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_arithabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsArithmeticAbortEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### COMPATIBILITY_LEVEL = { 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 
-For more information, see [ALTER DATABASE Compatibility Level](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md).
+For more information, see [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md).
 
 #### CONCAT_NULL_YIELDS_NULL { ON | OFF }
 
@@ -2518,9 +2515,9 @@ For more information, see [ALTER DATABASE Compatibility Level](../../t-sql/state
 >  
 > In a future version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], CONCAT_NULL_YIELDS_NULL will always be ON and any applications that explicitly set the option to OFF will produce an error. Avoid using this feature in new development work, and plan to modify applications that currently use this feature.
 
-Connection-level settings that are set by using the SET statement override the default database setting for CONCAT_NULL_YIELDS_NULL. By default, ODBC and OLE DB clients issue a connection-level SET statement setting CONCAT_NULL_YIELDS_NULL to ON for the session when connecting to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CONCAT_NULL_YIELDS_NULL](../../t-sql/statements/set-concat-null-yields-null-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for CONCAT_NULL_YIELDS_NULL. By default, ODBC and OLE DB clients issue a connection-level SET statement setting CONCAT_NULL_YIELDS_NULL to ON for the session when connecting to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CONCAT_NULL_YIELDS_NULL](set-concat-null-yields-null-transact-sql.md).
 
-You can determine this option's status by examining the `is_concat_null_yields_null_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNullConcat` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_concat_null_yields_null_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNullConcat` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### NUMERIC_ROUNDABORT { ON | OFF }
 
@@ -2535,7 +2532,7 @@ You can determine this option's status by examining the `is_concat_null_yields_n
 > [!IMPORTANT]  
 > NUMERIC_ROUNDABORT must be set to OFF when you create or make changes to indexes on computed columns or indexed views.
 
-You can determine the status for this option in the `is_numeric_roundabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNumericRoundAbortEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine the status for this option in the `is_numeric_roundabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNumericRoundAbortEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### QUOTED_IDENTIFIER { ON | OFF }
 
@@ -2549,13 +2546,13 @@ You can determine the status for this option in the `is_numeric_roundabort_on` c
 
   Identifiers can't be in quotation marks and must follow all [!INCLUDE[tsql](../../includes/tsql-md.md)] rules for identifiers. Literals can be delimited by either single or double quotation marks.
 
-[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] also allows for identifiers to be delimited by square brackets (`[` and `]`). Bracketed identifiers can always be used, whatever the QUOTED_IDENTIFIER setting is. For more information, see [Database Identifiers](../../relational-databases/databases/database-identifiers.md).
+[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] also allows for identifiers to be delimited by square brackets (`[` and `]`). Bracketed identifiers can always be used, whatever the QUOTED_IDENTIFIER setting is. For more information, see [Database identifiers](../../relational-databases/databases/database-identifiers.md).
 
 When a table is created, the QUOTED IDENTIFIER option is always stored as ON in the metadata of the table. The option is stored even if the option is set to OFF when the table is created.
 
-Connection-level settings that are set by using the SET statement override the default database setting for QUOTED_IDENTIFIER. ODBC and OLE DB clients issue a connection-level SET statement setting QUOTED_IDENTIFIER to ON, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET QUOTED_IDENTIFIER](../../t-sql/statements/set-quoted-identifier-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for QUOTED_IDENTIFIER. ODBC and OLE DB clients issue a connection-level SET statement setting QUOTED_IDENTIFIER to ON, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET QUOTED_IDENTIFIER](set-quoted-identifier-transact-sql.md).
 
-You can determine this option's status by examining the `is_quoted_identifier_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsQuotedIdentifiersEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_quoted_identifier_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsQuotedIdentifiersEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### RECURSIVE_TRIGGERS { ON | OFF }
 
@@ -2565,16 +2562,16 @@ You can determine this option's status by examining the `is_quoted_identifier_on
 
 - OFF
 
-  You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+  You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 > [!NOTE]  
 > Only direct recursion is prevented when RECURSIVE_TRIGGERS is set to OFF. To disable indirect recursion, you must also set the nested triggers server option to 0.
 
-You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### \<target_recovery_time_option> ::=
 
-Specifies the frequency of indirect checkpoints on a per-database basis. Starting with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] the default value for new databases is **1 minute**, which indicates database will use indirect checkpoints. For older versions the default is 0, which indicates that the database will use automatic checkpoints, whose frequency depends on the recovery interval setting of the server instance. [!INCLUDE[msCoName](../../includes/msconame-md.md)] recommends 1 minute for most systems.
+Specifies the frequency of indirect checkpoints on a per-database basis. Starting with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] the default value for new databases is **1 minute**, which indicates the database uses indirect checkpoints. For older versions the default is 0, which indicates that the database uses automatic checkpoints, whose frequency depends on the recovery interval setting of the server instance. [!INCLUDE[msCoName](../../includes/msconame-md.md)] recommends 1 minute for most systems.
 
 #### TARGET_RECOVERY_TIME = *target_recovery_time* { SECONDS | MINUTES }
 
@@ -2590,7 +2587,7 @@ Specifies the frequency of indirect checkpoints on a per-database basis. Startin
 
   Indicates that *target_recovery_time* is expressed as the number of minutes.
 
-For more information about indirect checkpoints, see [Database Checkpoints](../../relational-databases/logs/database-checkpoints-sql-server.md).
+For more information about indirect checkpoints, see [Database checkpoints](../../relational-databases/logs/database-checkpoints-sql-server.md).
 
 #### WITH \<termination> ::=
 
@@ -2605,7 +2602,7 @@ Specifies when to roll back incomplete transactions when the database is transit
 
 - NO_WAIT
 
-  Specifies that the request will fail if the requested database state or option change can't complete immediately. Completing immediately means not waiting for transactions to commit or roll back on their own.
+  Specifies that the request fails if the requested database state or option change can't complete immediately. Completing immediately means not waiting for transactions to commit or roll back on their own.
 
 #### \<temporal_history_retention> ::=
 
@@ -2619,11 +2616,11 @@ Specifies when to roll back incomplete transactions when the database is transit
 
   - OFF
 
-    Do not perform temporal historical retention policy.
+    Don't perform temporal historical retention policy.
 
 ## <a id="SettingOptions"></a> Set options
 
-To retrieve current settings for database options, use the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md)
+To retrieve current settings for database options, use the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md)
 
 After you set a database option, the new setting takes effect immediately.
 
@@ -2652,7 +2649,7 @@ Not all database options use the WITH \<termination> clause or can be specified 
 
 ### A. Set the database to READ_ONLY
 
-Changing the state of a database or file group to READ_ONLY or READ_WRITE requires exclusive access to the database and may take a few seconds to complete. The following example sets the database to `RESTRICTED_USER` mode to limit access. The example then sets the state of the [!INCLUDE[ssSampleDBobject](../../includes/sssampledbobject-md.md)] database to `READ_ONLY` and returns access to the database to all users.
+Changing the state of a database or file group to READ_ONLY or READ_WRITE requires exclusive access to the database and might take a few seconds to complete. The following example sets the database to `RESTRICTED_USER` mode to limit access. The example then sets the state of the [!INCLUDE[ssSampleDBobject](../../includes/sssampledbobject-md.md)] database to `READ_ONLY` and returns access to the database to all users.
 
 ```sql
 --Connect to [database_name];
@@ -2662,7 +2659,7 @@ SET RESTRICTED_USER;
 GO
 ALTER DATABASE [database_name]
 SET READ_ONLY
---`SET READ_ONLY` command may take a few seconds to complete.
+--`SET READ_ONLY` command might take a few seconds to complete.
 GO
 ALTER DATABASE [database_name]
 SET MULTI_USER;
@@ -2808,25 +2805,22 @@ SET QUERY_STORE = ON
     );
 ```
 
-## See also
+## Related content
 
 - [Statistics](../../relational-databases/statistics/statistics.md)
-- [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md)
+- [DATABASEPROPERTYEX (Transact-SQL)](../functions/databasepropertyex-transact-sql.md)
 - [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md)
 - [sys.data_spaces](../../relational-databases/system-catalog-views/sys-data-spaces-transact-sql.md)
 - [sys.database_automatic_tuning_options](../../relational-databases/system-catalog-views/sys-database-automatic-tuning-options-transact-sql.md)
 - [sys.database_automatic_tuning_mode](../../relational-databases/system-catalog-views/sys-database-automatic-tuning-mode-transact-sql.md)
-
-## Next steps
-
-- [ALTER DATABASE Compatibility Level](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md)
-- [ALTER DATABASE Database Mirroring](../../t-sql/statements/alter-database-transact-sql-database-mirroring.md)
-- [CREATE DATABASE](../../t-sql/statements/create-database-transact-sql.md)
-- [Enable and Disable Change Tracking](../../relational-databases/track-changes/enable-and-disable-change-tracking-sql-server.md)
-- [DROP DATABASE](../../t-sql/statements/drop-database-transact-sql.md)
-- [SET TRANSACTION ISOLATION LEVEL](../../t-sql/statements/set-transaction-isolation-level-transact-sql.md)
+- [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md)
+- [ALTER DATABASE Database Mirroring](alter-database-transact-sql-database-mirroring.md)
+- [CREATE DATABASE](create-database-transact-sql.md)
+- [Enable and Disable Change Tracking (SQL Server)](../../relational-databases/track-changes/enable-and-disable-change-tracking-sql-server.md)
+- [DROP DATABASE (Transact-SQL)](drop-database-transact-sql.md)
+- [SET TRANSACTION ISOLATION LEVEL (Transact-SQL)](set-transaction-isolation-level-transact-sql.md)
 - [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md)
-- [Best Practice with the Query Store](../../relational-databases/performance/best-practice-with-the-query-store.md)
+- [Best practices for monitoring workloads with Query Store](../../relational-databases/performance/best-practice-with-the-query-store.md)
 - [Query Store hints](../../relational-databases/performance/query-store-hints.md)
 
 ::: moniker-end
@@ -2854,10 +2848,10 @@ SET QUERY_STORE = ON
 
 ## Azure SQL Managed Instance
 
-Compatibility levels are `SET` options but are described in [ALTER DATABASE Compatibility Level](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md).
+Compatibility levels are `SET` options but are described in [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md).
 
 > [!NOTE]  
-> Many database set options can be configured for the current session by using [SET Statements](../../t-sql/statements/set-statements-transact-sql.md) and are often configured by applications when they connect. Session-level set options override the `ALTER DATABASE SET` values. The database options described in the following sections are values that can be set for sessions that don't explicitly provide other set option values.
+> Many database set options can be configured for the current session by using [SET Statements](set-statements-transact-sql.md) and are often configured by applications when they connect. Session-level set options override the `ALTER DATABASE SET` values. The database options described in the following sections are values that can be set for sessions that don't explicitly provide other set option values.
 
 ## Syntax
 
@@ -2987,7 +2981,7 @@ SET
 
 #### *database_name*
 
-Is the name of the database to be modified.
+The name of the database to be modified.
 
 #### CURRENT
 
@@ -3001,7 +2995,7 @@ Controls automatic options.
 
 - ON
 
-  Query Optimizer creates statistics on single columns in query predicates, as necessary, to improve query plans and query performance. These single-column statistics are created when Query Optimizer compiles queries. The single-column statistics are created only on columns that are not already the first column of an existing statistics object.
+  Query Optimizer creates statistics on single columns in query predicates, as necessary, to improve query plans and query performance. These single-column statistics are created when Query Optimizer compiles queries. The single-column statistics are created only on columns that aren't already the first column of an existing statistics object.
 
   The default is ON. We recommend that you use the default setting for most databases.
 
@@ -3009,19 +3003,19 @@ Controls automatic options.
 
   Query Optimizer doesn't create statistics on single columns in query predicates when it's compiling queries. Setting this option to OFF can cause suboptimal query plans and degraded query performance.
 
-  You can determine this option's status by examining the `is_auto_create_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoCreateStatistics` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+  You can determine this option's status by examining the `is_auto_create_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoCreateStatistics` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
   For more information, see the "Statistics options" section in [Statistics](../../relational-databases/statistics/statistics.md#statistics-options).
 
 #### INCREMENTAL = ON | OFF
 
-Set AUTO_CREATE_STATISTICS to ON, and set INCREMENTAL to ON. This setting creates automatically created stats as incremental whenever incremental stats are supported. The default value is OFF. For more information, see [CREATE STATISTICS](../../t-sql/statements/create-statistics-transact-sql.md).
+Set AUTO_CREATE_STATISTICS to ON, and set INCREMENTAL to ON. This setting creates automatically created stats as incremental whenever incremental stats are supported. The default value is OFF. For more information, see [CREATE STATISTICS](create-statistics-transact-sql.md).
 
 #### <a id="auto_shrink"></a> AUTO_SHRINK { ON | OFF }
 
 - ON
 
-  The database files are candidates for periodic shrinking. Unless you have a specific requirement, do not set the AUTO_SHRINK database option to ON. For more information, see [Shrink a database](../../relational-databases/databases/shrink-a-database.md).
+  The database files are candidates for periodic shrinking. Unless you have a specific requirement, don't set the AUTO_SHRINK database option to ON. For more information, see [Shrink a database](../../relational-databases/databases/shrink-a-database.md).
 
   Both data file and log files can be automatically shrunk. AUTO_SHRINK reduces the size of the transaction log only if you set the database to SIMPLE recovery model or if you back up the log. When set to OFF, the database files aren't automatically shrunk during periodic checks for unused space.
 
@@ -3034,9 +3028,9 @@ Set AUTO_CREATE_STATISTICS to ON, and set INCREMENTAL to ON. This setting create
 
 - OFF
 
-  The database files are not automatically shrunk during periodic checks for unused space.
+  The database files aren't automatically shrunk during periodic checks for unused space.
 
-You can determine this option's status by examining the `is_auto_shrink_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoShrink` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_auto_shrink_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoShrink` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 > [!NOTE]  
 > The AUTO_SHRINK option isn't available in a Contained Database.
@@ -3059,7 +3053,7 @@ You can determine this option's status by examining the `is_auto_shrink_on` colu
 
   Specifies that Query Optimizer doesn't update statistics when they're used by a query. Query Optimizer also doesn't update statistics when they might be out-of-date. Setting this option to OFF can cause suboptimal query plans and degraded query performance.
 
-You can determine this option's status by examining the `is_auto_update_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoUpdateStatistics` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_auto_update_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoUpdateStatistics` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 For more information, see the section "Using the database-wide statistics options" in [Statistics](../../relational-databases/statistics/statistics.md).
 
@@ -3097,11 +3091,11 @@ Enables or disables `FORCE_LAST_GOOD_PLAN` [Automatic tuning](../../relational-d
 
 - ON
 
-  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] automatically forces the last known good plan on the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] queries where new query plan causes performance regressions. The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] continuously monitors query performance of the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] query with the forced plan. If there are performance gains, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] will keep using last known good plan. If performance gains are not detected, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] will produce a new query plan. The statement will fail if the Query Store isn't enabled or if it's not in *Read-Write* mode.  This is the default value.
+  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] automatically forces the last known good plan on the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] queries where new query plan causes performance regressions. The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] continuously monitors query performance of the [!INCLUDE[tsql-md](../../includes/tsql-md.md)] query with the forced plan. If there are performance gains, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] keeps using last known good plan. If performance gains aren't detected, the [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] produces a new query plan. The statement fails if the Query Store isn't enabled, or isn't in *Read-Write* mode. This is the default value.
 
 - OFF
 
-  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] reports potential query performance regressions caused by query plan changes in [sys.dm_db_tuning_recommendations](../../relational-databases/system-dynamic-management-views/sys-dm-db-tuning-recommendations-transact-sql.md) view. However, these recommendations are not automatically applied. Users can monitor active recommendations and fix identified problems by applying [!INCLUDE[tsql-md](../../includes/tsql-md.md)] scripts that are shown in the view.
+  The [!INCLUDE[ssDE-md](../../includes/ssde-md.md)] reports potential query performance regressions caused by query plan changes in [sys.dm_db_tuning_recommendations](../../relational-databases/system-dynamic-management-views/sys-dm-db-tuning-recommendations-transact-sql.md) view. However, these recommendations aren't automatically applied. Users can monitor active recommendations and fix identified problems by applying [!INCLUDE[tsql-md](../../includes/tsql-md.md)] scripts that are shown in the view.
 
 #### \<change_tracking_option> ::=
 
@@ -3147,9 +3141,9 @@ Controls cursor options.
 
   Cursors remain open when a transaction is committed; rolling back a transaction closes any cursors except those defined as INSENSITIVE or STATIC.
 
-Connection-level settings that are set by using the SET statement override the default database setting for CURSOR_CLOSE_ON_COMMIT. ODBC and OLE DB clients issue a connection-level SET statement setting CURSOR_CLOSE_ON_COMMIT to OFF for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CURSOR_CLOSE_ON_COMMIT](../../t-sql/statements/set-cursor-close-on-commit-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for CURSOR_CLOSE_ON_COMMIT. ODBC and OLE DB clients issue a connection-level SET statement setting CURSOR_CLOSE_ON_COMMIT to OFF for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CURSOR_CLOSE_ON_COMMIT](set-cursor-close-on-commit-transact-sql.md).
 
-You can determine this option's status by examining the `is_cursor_close_on_commit_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the IsCloseCursorsOnCommitEnabled property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function. The cursor is implicitly deallocated only at disconnect. For more information, see [DECLARE CURSOR](../../t-sql/language-elements/declare-cursor-transact-sql.md).
+You can determine this option's status by examining the `is_cursor_close_on_commit_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the IsCloseCursorsOnCommitEnabled property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function. The cursor is implicitly deallocated only at disconnect. For more information, see [DECLARE CURSOR](../language-elements/declare-cursor-transact-sql.md).
 
 #### \<db_encryption_option> ::=
 
@@ -3157,9 +3151,9 @@ Controls the database encryption state.
 
 #### ENCRYPTION { ON | OFF }
 
-Sets the database to be encrypted (ON) or not encrypted (OFF). For more information about database encryption, see [Transparent Data Encryption](../../relational-databases/security/encryption/transparent-data-encryption.md), and [Transparent Data Encryption with Azure SQL Database](/azure/azure-sql/database/transparent-data-encryption-tde-overview).
+Sets the database to be encrypted (ON) or not encrypted (OFF). For more information about database encryption, see [Transparent data encryption (TDE)](../../relational-databases/security/encryption/transparent-data-encryption.md), and [Transparent data encryption for Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics](/azure/azure-sql/database/transparent-data-encryption-tde-overview).
 
-When encryption is enabled at the database level, all file groups will be encrypted. Any new file groups will inherit the encrypted property. If any file groups in the database are set to READ ONLY, the database encryption operation will fail.
+When encryption is enabled at the database level, all file groups are encrypted. Any new file groups inherit the encrypted property. If any file groups in the database are set to READ ONLY, the database encryption operation fails.
 
 You can see the encryption state of the database by using the [sys.dm_database_encryption_keys](../../relational-databases/system-dynamic-management-views/sys-dm-database-encryption-keys-transact-sql.md) dynamic management view.
 
@@ -3215,7 +3209,7 @@ The current setting of this option can be determined by examining the `is_parame
 
 #### OPERATION_MODE
 
-Describes the operation mode of the Query Store. Valid values are READ_ONLY and READ_WRITE. In READ_WRITE mode, the Query Store collects and persists query plan and runtime execution statistics information. In READ_ONLY mode, information can be read from the Query Store, but new information isn't added. If the maximum allocated space of the Query Store has been exhausted, the Query Store will change is operation mode to READ_ONLY.
+Describes the operation mode of the Query Store. Valid values are READ_ONLY and READ_WRITE. In READ_WRITE mode, the Query Store collects and persists query plan and runtime execution statistics information. In READ_ONLY mode, information can be read from the Query Store, but new information isn't added. If the maximum allocated space of the Query Store has been exhausted, the Query Store changes its operation mode to READ_ONLY.
 
 #### CLEANUP_POLICY
 
@@ -3231,12 +3225,12 @@ Determines the space allocated to the Query Store. MAX_STORAGE_SIZE_MB is type *
 
 `MAX_STORAGE_SIZE_MB` limit isn't strictly enforced. Storage size is checked only when Query Store writes data to disk. This interval is set by the `DATA_FLUSH_INTERVAL_SECONDS` option or the [!INCLUDE[ssManStudio](../../includes/ssManStudio-md.md)] Query Store dialog option **Data Flush Interval**. The interval default value is 900 seconds (or 15 minutes).
 
-If the Query Store has breached the `MAX_STORAGE_SIZE_MB` limit between storage size checks, it will transition to read-only mode. If `SIZE_BASED_CLEANUP_MODE` is enabled, the cleanup mechanism to enforce the `MAX_STORAGE_SIZE_MB` limit is also triggered.
+If the Query Store has breached the `MAX_STORAGE_SIZE_MB` limit between storage size checks, it transitions to read-only mode. If `SIZE_BASED_CLEANUP_MODE` is enabled, the cleanup mechanism to enforce the `MAX_STORAGE_SIZE_MB` limit is also triggered.
 
-Once enough space has been cleared, the Query Store mode will automatically switch back to read-write.
+Once enough space has been cleared, the Query Store mode automatically switches back to read-write.
 
 > [!IMPORTANT]  
-> - If you think that your workload capture will need more than 10 GB of disk space, you should probably rethink and optimize your workload to reuse query plans (for example using [forced parameterization](../../relational-databases/query-processing-architecture-guide.md#forced-parameterization), or adjust the Query Store configurations.
+> - If you think that your workload capture needs more than 10 GB of disk space, you should probably rethink and optimize your workload to reuse query plans (for example using [forced parameterization](../../relational-databases/query-processing-architecture-guide.md#forced-parameterization), or adjust the Query Store configurations.
 > - Starting with [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)] and in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you can set `QUERY_CAPTURE_MODE` to CUSTOM for additional control over the query capture policy.
 > - `MAX_STORAGE_SIZE_MB` setting limit is 10,240 MB on [!INCLUDE[ssazuremi](../../includes/ssazuremi-md.md)]. 
 
@@ -3246,15 +3240,15 @@ Determines the time interval at which runtime execution statistics data is aggre
 
 #### SIZE_BASED_CLEANUP_MODE = { AUTO | OFF }
 
-Controls whether cleanup will be automatically activated when the total amount of data gets close to maximum size.
+Controls whether cleanup is automatically activated when the total amount of data gets close to maximum size.
 
 - OFF
 
-  Size-based cleanup won't be automatically activated.
+  Size-based cleanup aren't automatically activated.
 
 - AUTO
 
-  Size-based cleanup will be automatically activated when size on disk reaches 90% of **max_storage_size_mb**. Size-based cleanup removes the least expensive and oldest queries first. It stops at approximately 80% of **max_storage_size_mb**. This is the default configuration value.
+  Size-based cleanup is automatically activated when size on disk reaches 90% of **max_storage_size_mb**. Size-based cleanup removes the least expensive and oldest queries first. It stops at approximately 80% of **max_storage_size_mb**. This is the default configuration value.
 
 SIZE_BASED_CLEANUP_MODE is type **nvarchar**.
 
@@ -3272,7 +3266,7 @@ Designates the currently active query capture mode.
 
 - NONE
 
-  Stop capturing new queries. The Query Store will continue to collect compile and runtime statistics for queries that were captured already. Use this configuration with caution since you may miss capturing important queries.
+  Stop capturing new queries. The Query Store continues to collect compile and runtime statistics for queries that were captured already. Use this configuration with caution since you might miss capturing important queries.
 
 QUERY_CAPTURE_MODE is type **nvarchar**.
 
@@ -3282,7 +3276,7 @@ An integer representing the maximum number of plans maintained for each query. M
 
 #### WAIT_STATS_CAPTURE_MODE { ON | OFF }
 
-Controls whether wait statistics will be captured per query.
+Controls whether wait statistics are captured per query.
 
 - ON
 
@@ -3290,7 +3284,7 @@ Controls whether wait statistics will be captured per query.
 
 - OFF
 
-  Wait statistics information per query won't be captured.
+  Wait statistics information per query aren't captured.
 
 #### \<query_capture_policy_option_list> :: =
 
@@ -3326,7 +3320,7 @@ Determines the transaction isolation level.
 
   Turns off the Snapshot option at the database level. Transactions can't specify the SNAPSHOT transaction isolation level.
 
-When you set ALLOW_SNAPSHOT_ISOLATION to a new state (from ON to OFF, or from OFF to ON), ALTER DATABASE doesn't return control to the caller until all existing transactions in the database are committed. If the database is already in the state specified in the ALTER DATABASE statement, control is returned to the caller immediately. If the ALTER DATABASE statement doesn't return quickly, use [sys.dm_tran_active_snapshot_database_transactions](../../relational-databases/system-dynamic-management-views/sys-dm-tran-active-snapshot-database-transactions-transact-sql.md) to determine whether there are long-running transactions. If the ALTER DATABASE statement is canceled, the database remains in the state it was in when ALTER DATABASE was started. The [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view indicates the state of snapshot-isolation transactions in the database. If **snapshot_isolation_state_desc** = IN_TRANSITION_TO_ON, the statement `ALTER DATABASE ... ALLOW_SNAPSHOT_ISOLATION OFF` will pause six seconds and retry the operation.
+When you set ALLOW_SNAPSHOT_ISOLATION to a new state (from ON to OFF, or from OFF to ON), ALTER DATABASE doesn't return control to the caller until all existing transactions in the database are committed. If the database is already in the state specified in the ALTER DATABASE statement, control is returned to the caller immediately. If the ALTER DATABASE statement doesn't return quickly, use [sys.dm_tran_active_snapshot_database_transactions](../../relational-databases/system-dynamic-management-views/sys-dm-tran-active-snapshot-database-transactions-transact-sql.md) to determine whether there are long-running transactions. If the ALTER DATABASE statement is canceled, the database remains in the state it was in when ALTER DATABASE was started. The [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view indicates the state of snapshot-isolation transactions in the database. If **snapshot_isolation_state_desc** = IN_TRANSITION_TO_ON, the statement `ALTER DATABASE ... ALLOW_SNAPSHOT_ISOLATION OFF` pauses six seconds and retry the operation.
 
 You can't change the state of ALLOW_SNAPSHOT_ISOLATION if the database is OFFLINE.
 
@@ -3353,7 +3347,7 @@ READ_COMMITTED_SNAPSHOT can't be turned ON for the `master`, `tempdb`, or `msdb`
 The current setting of this option can be determined by examining the `is_read_committed_snapshot_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view.
 
 > [!WARNING]  
-> When a table is created with **DURABILITY = SCHEMA_ONLY**, and **READ_COMMITTED_SNAPSHOT** is subsequently changed using **ALTER DATABASE**, data in the table will be lost.
+> When a table is created with **DURABILITY = SCHEMA_ONLY**, and **READ_COMMITTED_SNAPSHOT** is subsequently changed using **ALTER DATABASE**, data in the table is lost.
 
 #### MEMORY_OPTIMIZED_ELEVATE_TO_SNAPSHOT { ON | OFF }
 
@@ -3377,7 +3371,7 @@ Controls the ANSI compliance options at the database level.
 
 #### ANSI_NULL_DEFAULT { ON | OFF }
 
-Determines the default value, NULL or NOT NULL, of a column or [CLR user-defined type](../../relational-databases/clr-integration-database-objects-user-defined-types/clr-user-defined-types.md) for which the nullability isn't explicitly defined in CREATE TABLE or ALTER TABLE statements. Columns that are defined with constraints follow constraint rules whatever this setting may be.
+Determines the default value, NULL or NOT NULL, of a column or [CLR user-defined type](../../relational-databases/clr-integration-database-objects-user-defined-types/clr-user-defined-types.md) for which the nullability isn't explicitly defined in CREATE TABLE or ALTER TABLE statements. Columns that are defined with constraints follow constraint rules whatever this setting might be.
 
 - ON
 
@@ -3387,11 +3381,11 @@ Determines the default value, NULL or NOT NULL, of a column or [CLR user-defined
 
   The default value is NOT NULL.
 
-Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_NULL_DEFAULT. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULL_DEFAULT to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULL_DFLT_ON](../../t-sql/statements/set-ansi-null-dflt-on-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_NULL_DEFAULT. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULL_DEFAULT to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULL_DFLT_ON](set-ansi-null-dflt-on-transact-sql.md).
 
 For ANSI compatibility, setting the database option ANSI_NULL_DEFAULT to ON changes the database default to NULL.
 
-You can determine this option's status by examining the `is_ansi_null_default_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullDefault` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_null_default_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullDefault` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ANSI_NULLS { ON | OFF }
 
@@ -3406,12 +3400,12 @@ You can determine this option's status by examining the `is_ansi_null_default_on
 > [!IMPORTANT]  
 > In a future version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], ANSI_NULLS will always be ON and any applications that explicitly set the option to OFF will produce an error. Avoid using this feature in new development work, and plan to modify applications that currently use this feature.
 
-Connection-level settings that are set by using the SET statement override the default database setting for ANSI_NULLS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULLS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULLS](../../t-sql/statements/set-ansi-nulls-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for ANSI_NULLS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_NULLS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_NULLS](set-ansi-nulls-transact-sql.md).
 
 > [!IMPORTANT]  
 > SET ANSI_NULLS also must be set to ON when you create or make changes to indexes on computed columns or indexed views.
 
-You can determine this option's status by examining the `is_ansi_nulls_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullsEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_nulls_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiNullsEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ANSI_PADDING { ON | OFF }
 
@@ -3430,9 +3424,9 @@ You can determine this option's status by examining the `is_ansi_nulls_on` colum
 
 **char(*n*)** and **binary(*n*)** columns that allow for nulls are padded to the column length when ANSI_PADDING is set to ON. Trailing blanks and zeros are trimmed when ANSI_PADDING is OFF. **char(_n_)** and **binary(_n_)** columns that don't allow nulls are always padded to the length of the column.
 
-  Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_PADDING. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_PADDING to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_PADDING](../../t-sql/statements/set-ansi-padding-transact-sql.md).
+  Connection-level settings that are set by using the SET statement override the default database-level setting for ANSI_PADDING. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_PADDING to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_PADDING](set-ansi-padding-transact-sql.md).
 
-You can determine this option's status by examining the `is_ansi_padding_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiPaddingEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_padding_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiPaddingEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ANSI_WARNINGS { ON | OFF }
 
@@ -3447,9 +3441,9 @@ You can determine this option's status by examining the `is_ansi_padding_on` col
 > [!IMPORTANT]  
 > SET ANSI_WARNINGS must be set to ON when you create or make changes to indexes on computed columns or indexed views.
 
-Connection-level settings that are set by using the SET statement override the default database setting for ANSI_WARNINGS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_WARNINGS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_WARNINGS](../../t-sql/statements/set-ansi-warnings-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for ANSI_WARNINGS. ODBC and OLE DB clients issue a connection-level SET statement setting ANSI_WARNINGS to ON for the session, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET ANSI_WARNINGS](set-ansi-warnings-transact-sql.md).
 
-You can determine this option's status by examining the `is_ansi_warnings_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiWarningsEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_ansi_warnings_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAnsiWarningsEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### ARITHABORT { ON | OFF }
 
@@ -3464,11 +3458,11 @@ You can determine this option's status by examining the `is_ansi_warnings_on` co
 > [!IMPORTANT]  
 > SET ARITHABORT must be set to ON when you create or make changes to indexes on computed columns or indexed views.
 
-You can determine this option's status by examining the `is_arithabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsArithmeticAbortEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_arithabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsArithmeticAbortEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### COMPATIBILITY_LEVEL = { 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 
-For more information, see [ALTER DATABASE Compatibility Level](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md).
+For more information, see [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md).
 
 #### CONCAT_NULL_YIELDS_NULL { ON | OFF }
 
@@ -3485,9 +3479,9 @@ For more information, see [ALTER DATABASE Compatibility Level](../../t-sql/state
 >  
 > In a future version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], CONCAT_NULL_YIELDS_NULL will always be ON and any applications that explicitly set the option to OFF will produce an error. Avoid using this feature in new development work, and plan to modify applications that currently use this feature.
 
-Connection-level settings that are set by using the SET statement override the default database setting for CONCAT_NULL_YIELDS_NULL. By default, ODBC and OLE DB clients issue a connection-level SET statement setting CONCAT_NULL_YIELDS_NULL to ON for the session when connecting to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CONCAT_NULL_YIELDS_NULL](../../t-sql/statements/set-concat-null-yields-null-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for CONCAT_NULL_YIELDS_NULL. By default, ODBC and OLE DB clients issue a connection-level SET statement setting CONCAT_NULL_YIELDS_NULL to ON for the session when connecting to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET CONCAT_NULL_YIELDS_NULL](set-concat-null-yields-null-transact-sql.md).
 
-You can determine this option's status by examining the `is_concat_null_yields_null_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNullConcat` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_concat_null_yields_null_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNullConcat` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### NUMERIC_ROUNDABORT { ON | OFF }
 
@@ -3502,7 +3496,7 @@ You can determine this option's status by examining the `is_concat_null_yields_n
 > [!IMPORTANT]  
 > NUMERIC_ROUNDABORT must be set to OFF when you create or make changes to indexes on computed columns or indexed views.
 
-You can determine the status of this option in the `is_numeric_roundabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNumericRoundAbortEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine the status of this option in the `is_numeric_roundabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsNumericRoundAbortEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### QUOTED_IDENTIFIER { ON | OFF }
 
@@ -3516,13 +3510,13 @@ You can determine the status of this option in the `is_numeric_roundabort_on` co
 
   Identifiers can't be in quotation marks and must follow all [!INCLUDE[tsql](../../includes/tsql-md.md)] rules for identifiers. Literals can be delimited by either single or double quotation marks.
 
-[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] also allows for identifiers to be delimited by square brackets (`[` and `]`). Bracketed identifiers can always be used, whatever the QUOTED_IDENTIFIER setting is. For more information, see [Database Identifiers](../../relational-databases/databases/database-identifiers.md).
+[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] also allows for identifiers to be delimited by square brackets (`[` and `]`). Bracketed identifiers can always be used, whatever the QUOTED_IDENTIFIER setting is. For more information, see [Database identifiers](../../relational-databases/databases/database-identifiers.md).
 
 When a table is created, the QUOTED IDENTIFIER option is always stored as ON in the metadata of the table. The option is stored even if the option is set to OFF when the table is created.
 
-Connection-level settings that are set by using the SET statement override the default database setting for QUOTED_IDENTIFIER. ODBC and OLE DB clients issue a connection-level SET statement setting QUOTED_IDENTIFIER to ON, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET QUOTED_IDENTIFIER](../../t-sql/statements/set-quoted-identifier-transact-sql.md).
+Connection-level settings that are set by using the SET statement override the default database setting for QUOTED_IDENTIFIER. ODBC and OLE DB clients issue a connection-level SET statement setting QUOTED_IDENTIFIER to ON, by default. The clients run the statement when you connect to an instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [SET QUOTED_IDENTIFIER](set-quoted-identifier-transact-sql.md).
 
-You can determine this option's status by examining the `is_quoted_identifier_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsQuotedIdentifiersEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_quoted_identifier_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsQuotedIdentifiersEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### RECURSIVE_TRIGGERS { ON | OFF }
 
@@ -3532,18 +3526,18 @@ You can determine this option's status by examining the `is_quoted_identifier_on
 
 - OFF
 
-  You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+  You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
   > [!NOTE]  
   > Only direct recursion is prevented when RECURSIVE_TRIGGERS is set to OFF. To disable indirect recursion, you must also set the nested triggers server option to 0.
 
-You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_recursive_triggers_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the `IsRecursiveTriggersEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 #### \<target_recovery_time_option> ::=
 
 **target_recovery_time_option** isn't supported on Azure SQL Managed Instance.
 
-Specifies the frequency of indirect checkpoints on a per-database basis. Starting with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] the default value for new databases is **1 minute**, which indicates database will use indirect checkpoints. For older versions the default is 0, which indicates that the database will use automatic checkpoints, whose frequency depends on the recovery interval setting of the server instance. [!INCLUDE[msCoName](../../includes/msconame-md.md)] recommends 1 minute for most systems.
+Specifies the frequency of indirect checkpoints on a per-database basis. Starting with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] the default value for new databases is **1 minute**, which indicates database uses indirect checkpoints. For older versions the default is 0, which indicates that the database uses automatic checkpoints, whose frequency depends on the recovery interval setting of the server instance. [!INCLUDE[msCoName](../../includes/msconame-md.md)] recommends 1 minute for most systems.
 
 #### WITH \<termination> ::=
 
@@ -3558,7 +3552,7 @@ Specifies when to roll back incomplete transactions when the database is transit
 
 - NO_WAIT
 
-  Specifies that the request will fail if the requested database state or option change can't complete immediately. Completing immediately means not waiting for transactions to commit or roll back on their own.
+  Specifies that the request fails if the requested database state or option change can't complete immediately. Completing immediately means not waiting for transactions to commit or roll back on their own.
 
 #### \<temporal_history_retention> ::=
 
@@ -3572,11 +3566,11 @@ Specifies when to roll back incomplete transactions when the database is transit
 
   - OFF
 
-    Do not perform temporal historical retention policy.
+    Don't perform temporal historical retention policy.
 
 ## <a id="SettingOptions"></a> Set options
 
-To retrieve current settings for database options, use the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md)
+To retrieve current settings for database options, use the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md)
 
 After you set a database option, the new setting takes effect immediately.
 
@@ -3695,27 +3689,22 @@ SET QUERY_STORE = ON
     );
 ```
 
-
-
-## See also
+## Related content
 
 - [Statistics](../../relational-databases/statistics/statistics.md)
-- [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md)
+- [DATABASEPROPERTYEX (Transact-SQL)](../functions/databasepropertyex-transact-sql.md)
 - [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md)
 - [sys.data_spaces](../../relational-databases/system-catalog-views/sys-data-spaces-transact-sql.md)
 - [sys.database_automatic_tuning_options](../../relational-databases/system-catalog-views/sys-database-automatic-tuning-options-transact-sql.md)
 - [sys.database_automatic_tuning_mode](../../relational-databases/system-catalog-views/sys-database-automatic-tuning-mode-transact-sql.md)
-
-## Next steps
-
-- [ALTER DATABASE Compatibility Level](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md)
-- [ALTER DATABASE Database Mirroring](../../t-sql/statements/alter-database-transact-sql-database-mirroring.md)
+- [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md)
+- [ALTER DATABASE Database Mirroring](alter-database-transact-sql-database-mirroring.md)
 - [CREATE DATABASE](../../t-sql/statements/create-database-transact-sql.md?view=azuresqldb-mi-current&preserve-view=true)
-- [Enable and Disable Change Tracking](../../relational-databases/track-changes/enable-and-disable-change-tracking-sql-server.md)
-- [DROP DATABASE](../../t-sql/statements/drop-database-transact-sql.md)
-- [SET TRANSACTION ISOLATION LEVEL](../../t-sql/statements/set-transaction-isolation-level-transact-sql.md)
+- [Enable and Disable Change Tracking (SQL Server)](../../relational-databases/track-changes/enable-and-disable-change-tracking-sql-server.md)
+- [DROP DATABASE (Transact-SQL)](drop-database-transact-sql.md)
+- [SET TRANSACTION ISOLATION LEVEL (Transact-SQL)](set-transaction-isolation-level-transact-sql.md)
 - [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md)
-- [Best Practice with the Query Store](../../relational-databases/performance/best-practice-with-the-query-store.md)
+- [Best practices for monitoring workloads with Query Store](../../relational-databases/performance/best-practice-with-the-query-store.md)
 
 ::: moniker-end
 ::: moniker range="=azure-sqldw-latest"
@@ -3792,7 +3781,7 @@ SET
 
 #### *database_name*
 
-Is the name of the database to be modified.
+The name of the database to be modified.
 
 #### <auto_option> ::=
 
@@ -3802,7 +3791,7 @@ Controls automatic options.
 
 - ON
 
-  Query Optimizer creates statistics on single columns in query predicates, as necessary, to improve query plans and query performance. These single-column statistics are created when Query Optimizer compiles queries. The single-column statistics are created only on columns that are not already the first column of an existing statistics object.
+  Query Optimizer creates statistics on single columns in query predicates, as necessary, to improve query plans and query performance. These single-column statistics are created when Query Optimizer compiles queries. The single-column statistics are created only on columns that aren't already the first column of an existing statistics object.
 
   The default is ON. We recommend that you use the default setting for most databases.
 
@@ -3812,7 +3801,7 @@ Controls automatic options.
 
 This command must be run while connected to the user database.
 
-You can determine this option's status by examining the `is_auto_create_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoCreateStatistics` property of the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+You can determine this option's status by examining the `is_auto_create_stats_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsAutoCreateStatistics` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
 For more information, see the section "Using the database-wide statistics options" in [Statistics](../../relational-databases/statistics/statistics.md).
 
@@ -3830,9 +3819,9 @@ Controls the database encryption state.
 
   Sets the database to not be encrypted.
 
-For more information about database encryption, see [Transparent data encryption (TDE)](../../relational-databases/security/encryption/transparent-data-encryption.md), and [Transparent data encryption for SQL Database, SQL Managed Instance, and Azure Synapse Analytics](/azure/azure-sql/database/transparent-data-encryption-tde-overview).
+For more information about database encryption, see [Transparent data encryption (TDE)](../../relational-databases/security/encryption/transparent-data-encryption.md), and [Transparent data encryption for Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics](/azure/azure-sql/database/transparent-data-encryption-tde-overview).
 
-When encryption is enabled at the database level, all file groups will be encrypted. Any new file groups will inherit the encrypted property. If any file groups in the database are set to READ ONLY, the database encryption operation will fail.
+When encryption is enabled at the database level, all file groups are encrypted. Any new file groups inherit the encrypted property. If any file groups in the database are set to READ ONLY, the database encryption operation fails.
 
 You can see the encryption state of the database and the state of the encryption scan by using the `sys.dm_database_encryption_keys` dynamic management view.
 
@@ -3854,7 +3843,7 @@ Controls whether the Query Store is enabled in this data warehouse.
 > For [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], you must execute `ALTER DATABASE SET QUERY_STORE` from the user database. Executing the statement from another data warehouse instance isn't supported.
 
 > [!NOTE]  
-> For Azure Synapse Analytics, the Query Store can be enabled as on other platforms but additional configuration options are not supported.
+> For Azure Synapse Analytics, the Query Store can be enabled as on other platforms but additional configuration options aren't supported.
 
 #### <result_set_caching_option> ::=
 
@@ -3866,22 +3855,22 @@ Controls whether query result is cached in the database.
 
 - ON
 
-  Specifies that query result sets returned from this database will be cached in the database.
+  Specifies that query result sets returned from this database are cached in the database.
 
 - OFF
 
-  Specifies that query result sets returned from this database will not be cached in the database.
+  Specifies that query result sets returned from this database aren't cached in the database.
 
-This command must be run while connected to the `master` database.  Change to this database setting takes effect immediately.  Storage costs are incurred by caching query result sets. After disabling result caching for a database, previously persisted result cache will immediately be deleted from Azure Synapse storage.
+This command must be run while connected to the `master` database. Change to this database setting takes effect immediately. Storage costs are incurred by caching query result sets. After disabling result caching for a database, the previously persisted result cache is immediately deleted from Azure Synapse storage.
 
-Run this command to check a database's result set caching configuration.  If result set caching is turned ON, `is_result_set_caching_on` will return 1.
+Run this command to check a database's result set caching configuration. If result set caching is turned ON, `is_result_set_caching_on` returns 1.
 
 ```sql
 SELECT name, is_result_set_caching_on FROM sys.databases
 WHERE name = <'Your_Database_Name'>
 ```
 
-Run this command to check if a query was executed using cached result.  The `result_cache_hit` column returns 1 for cache hit, 0 for cache miss, and negative values for reasons why result set caching was not used.  Check [sys.dm_pdw_exec_requests](../../relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-requests-transact-sql.md?view=aps-pdw-2016-au7&preserve-view=true) for details.
+Run this command to check if a query was executed using cached result. The `result_cache_hit` column returns 1 for cache hit, 0 for cache miss, and negative values for reasons why result set caching wasn't used. Check [sys.dm_pdw_exec_requests](../../relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-requests-transact-sql.md?view=aps-pdw-2016-au7&preserve-view=true) for details.
 
 ```sql
 SELECT request_id, command, result_cache_hit FROM sys.dm_pdw_exec_requests
@@ -3889,7 +3878,7 @@ WHERE request_id = <'Your_Query_Request_ID'>
 ```
 
 > [!NOTE]  
-> Result set caching should not be used in conjunction with [DECRYPTBYKEY](../functions/decryptbykey-transact-sql.md). If this cryptographic function must be used, ensure you have result set caching disabled (either at [session-level](./set-result-set-caching-transact-sql.md) or [database-level](alter-database-transact-sql-set-options.md)) at the time of execution.
+> Result set caching should not be used in conjunction with [DECRYPTBYKEY](../functions/decryptbykey-transact-sql.md). If this cryptographic function must be used, ensure you have result set caching disabled (either at [session-level](set-result-set-caching-transact-sql.md) or [database-level](alter-database-transact-sql-set-options.md)) at the time of execution.
 
 > [!IMPORTANT]  
 > The operations to create result set cache and retrieve data from the cache happen on the control node of a data warehouse instance. When result set caching is turned ON, running queries that return large result set (for example, >1 million rows) can cause high CPU usage on the control node and slow down the overall query response on the instance. Those queries are commonly used during data exploration or ETL operations. To avoid stressing the control node and cause performance issue, users should turn OFF result set caching on the database before running those types of queries.
@@ -3916,9 +3905,9 @@ Controls the transaction isolation level of a database.
 
   Turn off the READ_COMMITTED_SNAPSHOT option at the database level.
 
-This command must be run while connected to the `master` database. Turning READ_COMMITTED_SNAPSHOT ON or OFF for a user database will kill all open connections to this database. You may want to make this change during database maintenance window or wait until there's no active connection to the database except for the connection running the ALTER DATABASE command.  The database doesn't have to be in single-user mode. Changing READ_COMMITTED_SNAPSHOT setting at session level isn't supported.  To verify this setting for a database, check the `is_read_committed_snapshot_on` column in `sys.databases`.
+This command must be run while connected to the `master` database. Turning READ_COMMITTED_SNAPSHOT ON or OFF for a user database kills all open connections to this database. You should make this change during a database maintenance window or wait until there's no active connection to the database except for the connection running the ALTER DATABASE command. The database doesn't have to be in single-user mode. Changing READ_COMMITTED_SNAPSHOT setting at session level isn't supported. To verify this setting for a database, check the `is_read_committed_snapshot_on` column in `sys.databases`.
 
-In a database with READ_COMMITTED_SNAPSHOT enabled, queries may experience slower performance due to the scan of versions if multiple data versions are present. Long-open transactions can also cause an increase in the size of the database. This issue occurs if there are data changes by these transactions that block version cleanup.
+In a database with READ_COMMITTED_SNAPSHOT enabled, queries can experience slower performance due to the scan of versions if multiple data versions are present. Long-open transactions can also cause an increase in the size of the database. This issue occurs if there are data changes by these transactions that block version cleanup.
 
 ##### Permissions
 
@@ -3964,15 +3953,12 @@ ALTER DATABASE MyDatabase
 SET READ_COMMITTED_SNAPSHOT ON;
 ```
 
-## See also
+## Related content
 
-- [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md)
+- [DATABASEPROPERTYEX (Transact-SQL)](../functions/databasepropertyex-transact-sql.md)
 - [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md)
 - [Azure Synapse Analytics language elements](/azure/sql-data-warehouse/sql-data-warehouse-reference-tsql-language-elements)
-
-## Next steps
-
-- [DROP DATABASE](../../t-sql/statements/drop-database-transact-sql.md)
+- [DROP DATABASE (Transact-SQL)](drop-database-transact-sql.md)
 - [Best practices for Azure Synapse Analytics](/azure/sql-data-warehouse/sql-data-warehouse-best-practices#maintain-statistics)
 - [Designing tables in Azure Synapse Analytics](/azure/sql-data-warehouse/sql-data-warehouse-tables-overview#statistics)
 
@@ -4051,7 +4037,7 @@ The following T-SQL command pauses Delta Lake Log publishing in the current ware
 ALTER DATABASE CURRENT SET DATA_LAKE_LOG_PUBLISHING = PAUSED;
 ```
 
-To check the current status of Delta Lake Log publishing on all warehouses, of your workspace, use the following T-SQL code to query [sys.databases (Transact-SQL)](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md?view=fabric&preserve-view=true) in a new query window:
+To check the current status of Delta Lake Log publishing on all warehouses, of your workspace, use the following T-SQL code to query [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md?view=fabric&preserve-view=true) in a new query window:
 
 ```sql
 SELECT [name], [DATA_LAKE_LOG_PUBLISHING_DESC] FROM sys.databases;
@@ -4060,7 +4046,7 @@ SELECT [name], [DATA_LAKE_LOG_PUBLISHING_DESC] FROM sys.databases;
 ## Related content
 
 - [What is data warehousing in Microsoft Fabric?](/fabric/data-warehouse/data-warehousing)
-- [Query Delta Lake logs in Microsoft Fabric](/fabric/data-warehouse/query-delta-lake-logs)
+- [Delta Lake logs in Warehouse in Microsoft Fabric](/fabric/data-warehouse/query-delta-lake-logs)
 - [Understand V-Order for Microsoft Fabric Warehouse](/fabric/data-warehouse/v-order)
 
 ::: moniker-end

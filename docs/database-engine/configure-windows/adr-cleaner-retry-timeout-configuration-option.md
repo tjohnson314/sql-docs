@@ -4,7 +4,7 @@ description: "Explains the SQL Server instance configuration setting for ADR cle
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 07/18/2024
+ms.date: 12/04/2024
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -15,9 +15,9 @@ helpviewer_keywords:
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
-[!INCLUDE [sssql19-starting-md](../../includes/sssql19-starting-md.md)], this configuration setting is required for [accelerated database recovery](../../relational-databases/accelerated-database-recovery-concepts.md) (ADR). The cleaner is the asynchronous process that wakes up periodically and cleans page versions that aren't needed.
+[!INCLUDE [sssql19-starting-md](../../includes/sssql19-starting-md.md)], this configuration setting is used for [accelerated database recovery](../../relational-databases/accelerated-database-recovery-concepts.md) (ADR). The cleaner is an asynchronous process that wakes up periodically and cleans page versions that aren't needed.
 
-Occasionally the cleaner runs into issues while acquiring object level locks due to conflicts with user workload during its sweep. It tracks such pages in a separate list. `ADR cleaner retry timeout (min)` controls the amount of time the cleaner would spend exclusively retrying object lock acquisition and cleanup of page before abandoning the sweep. Completion of a sweep with 100 percent success is essential to keep the growth of aborted transactions in the aborted transactions map. If the separate list can't be cleaned up in the prescribed timeout, then the current sweep will be abandoned and the next sweep will start.
+Occasionally the cleaner might run into issues while acquiring object level locks due to conflicts with user workloads during its sweep. The cleaner tracks such pages in a separate list. `ADR cleaner retry timeout (min)` controls the amount of time the cleaner spends exclusively retrying object lock acquisition and cleanup of pages before it abandons the sweep. Completing the sweep with 100% success is essential to keep the growth of aborted transactions in the aborted transactions map. If the pages on the separate list can't be cleaned up in the prescribed timeout, then the current sweep is abandoned, and the cleanup is attempted during the next sweep.
 
 | Version | Default value |
 | --- | --- |
@@ -26,7 +26,9 @@ Occasionally the cleaner runs into issues while acquiring object level locks due
 
 ## Remarks
 
-The cleaner is single threaded in [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)], and so one [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance can work on one database at a time. If the instance has more than one user database with ADR enabled, then don't increase the timeout to a large value. Doing so could delay cleanup on one database while the retry is happening on another database.
+The cleaner is single threaded in [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)]. In [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], the cleaner is single-threaded by default, but can be made multi-threaded by configuring the `ADR Cleaner Thread Count` server configuration.
+
+If the cleaner is single-threaded, it can only work on one database at a time. If the instance has more than one database with ADR enabled, don't increase the timeout to a large value. Doing so could delay cleanup on one database while the retry is happening on another database.
 
 ::: moniker range="= sql-server-linux-ver15 || = sql-server-ver15"
 

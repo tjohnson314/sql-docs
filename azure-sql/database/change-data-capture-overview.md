@@ -1,10 +1,10 @@
 ---
-title: "Change data capture (CDC) with Azure SQL Database"
+title: "Change Data Capture (CDC) With Azure SQL Database"
 description: "Learn about change data capture (CDC) in Azure SQL Database, which records insert, update, and delete activity that applies to a table."
 author: croblesm
 ms.author: roblescarlos
 ms.reviewer: mathoma, randolphwest
-ms.date: 10/23/2024
+ms.date: 12/04/2024
 ms.service: azure-sql-database
 ms.subservice: replication
 ms.topic: conceptual
@@ -23,7 +23,7 @@ helpviewer_keywords:
 > - [Azure SQL Database](change-data-capture-overview.md)
 > - [SQL Server](/sql/relational-databases/track-changes/about-change-data-capture-sql-server)
 
-In this article, learn how change data capture (CDC) is implemented in Azure SQL Database to record activity on a database when tables and rows have been modified. For details about the CDC feature, including how it's implemented in SQL Server and Azure SQL Managed Instance, see [CDC with SQL Server](/sql/relational-databases/track-changes/about-change-data-capture-sql-server).
+In this article, learn how change data capture (CDC) is implemented in Azure SQL Database to record activity on a database when tables and rows have been modified. For details about the CDC feature, including how it's implemented in SQL Server and Azure SQL Managed Instance, see [What is change data capture (CDC)?](/sql/relational-databases/track-changes/about-change-data-capture-sql-server)
 
 ## Overview
 
@@ -143,9 +143,9 @@ GO
 
 If change data capture is enabled on a table with an existing primary key, and the *@index_name* parameter isn't used to identify an alternative unique index, the change data capture feature uses the primary key. Subsequent changes to the primary key aren't allowed without first disabling change data capture for the table. This is true regardless of whether support for net changes queries was requested when change data capture was configured.
 
-If there's no primary key on a table at the time it's enabled for change data capture, the subsequent addition of a primary key is ignored by change data capture. Because change data capture doesn't use a primary key that is created after the table was enabled, the key and key columns can be removed without restrictions.
+If there's no primary key on a table at the time you enable it for change data capture, the subsequent addition of a primary key is ignored by change data capture. Because change data capture doesn't use a primary key that is created after the table was enabled, the key and key columns can be removed without restrictions.
 
-For more information about the `sys.sp_cdc_enable_table` stored procedure arguments, see [sys.sp_cdc_enable_table (Transact-SQL)](/sql/relational-databases/system-stored-procedures/sys-sp-cdc-enable-table-transact-sql).
+For more information about the `sys.sp_cdc_enable_table` stored procedure arguments, see [sys.sp_cdc_enable_table](/sql/relational-databases/system-stored-procedures/sys-sp-cdc-enable-table-transact-sql).
 
 > [!TIP]  
 > To determine whether a source table has already been enabled for change data capture, examine the `is_tracked_by_cdc` column in the `sys.tables` catalog view.
@@ -227,7 +227,7 @@ Consider the following best practices when you use CDC with Azure SQL Database:
 
 - Test your workload thoroughly before enabling CDC on databases in production to help you determine the appropriate SLO fit for your workload. For more information about Azure SQL Database compute sizes, see [Service tiers](sql-database-paas-overview.md#service-tiers).
 
-- Consider scaling the number of vCores or transitioning to a higher database tier, such as Hyperscale, to maintain the previous performance level once CDC has been enabled on your Azure SQL Database. For more information, see [vCore purchasing model - Azure SQL Database](service-tiers-sql-database-vcore.md) and [Hyperscale service tier](service-tier-hyperscale.md).
+- Consider scaling the number of vCores, or transitioning to a higher database tier such as Hyperscale, to maintain the previous performance level once CDC has been enabled on your Azure SQL Database. For more information, see [vCore purchasing model - Azure SQL Database](service-tiers-sql-database-vcore.md) and [Hyperscale service tier](service-tier-hyperscale.md).
 
 - Monitor space utilization closely. For more information, see [Manage file space for databases in Azure SQL Database](file-space-manage.md).
 
@@ -248,7 +248,7 @@ Consider the following best practices when you use CDC with Azure SQL Database:
 
 ### Aggressive log truncation
 
-When you enable change data capture (CDC) on Azure SQL Database, the aggressive log truncation feature of Accelerated Database Recovery (ADR) is disabled. This is because the CDC scan accesses the database transaction log. Active transactions prevent transaction log truncation until the transaction commits and CDC scan catches up, or the transaction aborts. This might result in the transaction log filling up more than usual and should be monitored so that the transaction log doesn't fill.
+When you enable change data capture (CDC) in Azure SQL Database, the aggressive log truncation feature of Accelerated Database Recovery (ADR) is disabled. This is because the CDC scan accesses the database transaction log. Active transactions prevent transaction log truncation until the transaction commits and CDC scan catches up, or the transaction aborts.
 
 When enabling CDC, we recommend using the resumable index option when you create or rebuild an index. Resumable indexes don't keep a long-running transaction open, and allow log truncation during the operation for better log space management. For more information, see [Guidelines for online index operations - Resumable Index considerations](/sql/relational-databases/indexes/guidelines-for-online-index-operations#resumable-index-considerations).
 
@@ -258,9 +258,9 @@ While CDC is supported for [databases](resource-limits-vcore-single-databases.md
 
 ### Azure SQL Database log limits
 
-Accelerated Database Recovery and CDC aren't compatible in Azure SQL Database. This is because the CDC scan actively accesses and interacts with the database transaction log, which can conflict with the aggressive log truncation behavior of ADR.
+Accelerated Database Recovery and CDC are compatible. However, the aggressive log truncation behavior of ADR is disabled when CDC is enabled. This is because the CDC scan actively accesses and interacts with the database transaction log, which prevents the aggressive log truncation behavior of ADR.
 
-To prevent scalability and space management issues, closely monitoring your Azure SQL Database and consider scaling to a higher database tier, and allow your transaction log to grow according to your workload needs.
+When you enable CDC, you might observe higher transaction log utilization. You might need to scale up to a higher service tier or compute size to ensure that sufficient transaction log space is available for the needs of all your workloads.
 
 > [!TIP]  
 > If your workload demands higher overall performance due to higher transaction log throughput and faster transaction commit times, use the [Hyperscale service tier](service-tier-hyperscale.md).
@@ -275,7 +275,7 @@ Configuring the frequency of the capture and the cleanup processes for CDC in Az
 
 ### Failover in Azure SQL Database
 
-In the event of local or GeoDR failover scenarios, if your database has CDC enabled, the process of capturing and cleaning up data changes will occur automatically on the new primary database after the failover takes place.
+In local or GeoDR failover scenarios, if your database has CDC enabled, the process of capturing and cleaning up data changes occurs automatically on the new primary database after failover takes place.
 
 ### Microsoft Entra ID
 
@@ -297,7 +297,7 @@ EXEC sys.sp_cdc_enable_db;
 
 ### Point-in-time restore (PITR)
 
-If you enabled CDC on your Azure SQL Database as SQL user, point-in-time-restore (PITR) retains the CDC in the restored database, unless it's restored to a subcore SLO. If restored to subcore SLO, CDC artifacts aren't available.
+If you enabled CDC on Azure SQL Database as a SQL user, point-in-time-restore (PITR) retains CDC in the restored database, unless it's restored to a subcore SLO. If restored to a subcore SLO, CDC artifacts aren't available.
 
 If you enable CDC on your database as a Microsoft Entra user, it's not possible to Point-in-time restore (PITR) to a subcore SLO. Restore the database to the same or higher SLO as the source, and then disable CDC if necessary.
 
@@ -343,7 +343,7 @@ These are the different troubleshooting categories included in this section:
 
 #### Error 18807 - Can't find an object ID for the replication system table
 
-- **Cause**: This error happens when SQL Server can't find or access the replication system table '%s.' This could be because the table is missing or unreachable. CDC to function properly, you shouldn't manually modify any CDC metadata such as `CDC schema`, change tables, CDC system stored procedures, default `cdc user` permissions (`sys.database_principals`) or rename the `cdc user`.
+- **Cause**: This error happens when the SQL Server database engine can't find or access the replication system table '%s.' The table might be missing or unreachable. For CDC to function properly, don't manually modify any CDC metadata, such as the `CDC schema`, change tables, CDC system stored procedures, default `cdc user` permissions (`sys.database_principals`) or rename the `cdc user`.
 
 - **Recommendation**: Verify that the system table exists and is accessible by querying the table directly. Query the [sys.objects](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql) system catalog, set predicate clause with `is_ms_shipped=1` and `schema_name=cdc` to list all CDC-related objects. If the query doesn't return any objects, you should disable and then re-enable CDC for your database. Enabling change data capture for a database creates the `cdc schema`, `cdc user`, metadata tables, and other system objects for the database. You'll need to manually re-enable [CDC for individual tables](#enable-cdc-for-a-table) after CDC is enabled for the database.
 
@@ -409,13 +409,13 @@ These are the different troubleshooting categories included in this section:
   - Enable CDC
   - Re-enable the trigger
 
-For more information, see [DISABLE TRIGGER (Transact-SQL)](/sql/t-sql/statements/disable-trigger-transact-sql).
+For more information, see [DISABLE TRIGGER](/sql/t-sql/statements/disable-trigger-transact-sql).
 
 #### Error 913 - CDC capture job fails when processing changes for a table with system CLR data type
 
 - **Cause**: This error occurs when enabling CDC on a table with system CLR data type, making DML changes, and then making DDL changes on the same table while the CDC capture job is processing changes related to other tables.
 
-- **Recommendation**: The recommended steps are to quiesce DML to the table, run a capture job to process changes, run DDL for the table, run a capture job to process DDL changes, and then re-enable DML processing. For more information, see [CDC capture job fails when processing changes](/troubleshoot/sql/database-engine/replication/cdc-capture-job-fails-processing-changes-table).
+- **Recommendation**: The recommended steps are to quiesce DML to the table, run a capture job to process changes, run DDL for the table, run a capture job to process DDL changes, and then re-enable DML processing. For more information, see [CDC capture job fails](/troubleshoot/sql/database-engine/replication/cdc-capture-job-fails-processing-changes-table) when processing changes for a table with system CLR datatype (geometry, geography, or hierarchyid).
 
 ## Create user and assign role
 
@@ -456,6 +456,6 @@ EXEC sp_addrolemember 'db_owner' , 'cdc';
 ## Related content
 
 - [Work with Change Data](/sql/relational-databases/track-changes/work-with-change-data-sql-server)
-- [Track Data Changes](/sql/relational-databases/track-changes/track-data-changes-sql-server)
-- [Administer and Monitor change data capture](/sql/relational-databases/track-changes/administer-and-monitor-change-data-capture-sql-server)
-- [Temporal Tables](/sql/relational-databases/tables/temporal-tables)
+- [Track data changes (SQL Server)](/sql/relational-databases/track-changes/track-data-changes-sql-server)
+- [Administer and monitor change data capture](/sql/relational-databases/track-changes/administer-and-monitor-change-data-capture-sql-server)
+- [Temporal tables](/sql/relational-databases/tables/temporal-tables)

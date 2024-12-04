@@ -4531,6 +4531,8 @@ items:
         href: database-engine/configure-windows/ad-hoc-distributed-queries-server-configuration-option.md
       - name: ADR cleaner retry timeout
         href: database-engine/configure-windows/adr-cleaner-retry-timeout-configuration-option.md
+      - name: ADR Cleaner Thread Count
+        href: database-engine/configure-windows/adr-cleaner-thread-count-configuration-option.md
       - name: ADR Preallocation Factor
         href: database-engine/configure-windows/adr-preallocation-factor-server-configuration-option.md
       - name: affinity Input-Output mask
