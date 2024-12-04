@@ -27,6 +27,8 @@ Extension versions are cumulative. Higher extension versions include all of the 
 
 **Extension version**: `1.1.2859.223`
 
+Minor bug fixes. This release does not enable or introduce new features. 
+
 ## October 8, 2024
 
 **Extension version**: `1.1.2830.214`
