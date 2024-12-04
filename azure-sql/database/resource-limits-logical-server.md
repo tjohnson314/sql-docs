@@ -1,10 +1,10 @@
 ---
-title: Resource management in Azure SQL Database
+title: Resource Management
 description: This article provides an overview of resource management in Azure SQL Database with information about what happens when resource limits are reached.
 author: dimitri-furman
 ms.author: dfurman
 ms.reviewer: wiassaf, mathoma, randolphwest
-ms.date: 09/12/2024
+ms.date: 12/04/2024
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: reference
@@ -20,7 +20,7 @@ ms.topic: reference
 
 This article provides an overview of resource management in Azure SQL Database. It provides information on what happens when resource limits are reached, and describes resource governance mechanisms that are used to enforce these limits.
 
-For specific resource limits per pricing tier for single databases, refer to either
+For specific resource limits per pricing tier for single databases, refer to either:
 - [DTU-based single database resource limits](resource-limits-dtu-single-databases.md)
 - [vCore-based single database resource limits](resource-limits-vcore-single-databases.md) 
 
@@ -48,9 +48,9 @@ Consider the following:
 
 - These limits are applicable to new and existing subscriptions. 
 - Databases and elastic pools provisioned with the [DTU purchasing model](service-tiers-dtu.md) are counted against the vCore quota, and vice-versa. Each vCore consumed is considered equivalent to 100 DTUs consumed for the server-level quota.
-- Default limits includes both the vCores configured for provisioned compute databases / elastic pools, and the **max vCores** configured for [serverless](serverless-tier-overview.md#create-serverless-db) databases. 
+- Default limits include both the vCores configured for provisioned compute databases / elastic pools, and the **max vCores** configured for [serverless](serverless-tier-overview.md#create-serverless-db) databases. 
 - You can use the [Subscription Usages - Get](/rest/api/sql/subscription-usages/get) REST API call to determine your current vCore usage for your subscription. 
-- To request a higher vCore quota than the default, submit a new support request in the Azure portal. For more information, see [Request quota increases for Azure SQL Database](quota-increase-request.md).
+- To request a higher vCore quota than the default, submit a new support request in the Azure portal. For more information, see [Request quota increases for Azure SQL Database and SQL Managed Instance](quota-increase-request.md).
 
 ## Logical server limits
 
@@ -92,7 +92,7 @@ If you observe high compute utilization, mitigation options include:
 
 ### Storage
 
-When data space used reaches the maximum data size limit, either at the database level or at the elastic pool level, inserts and updates that increase data size fail and clients receive an [error message](troubleshoot-common-errors-issues.md). SELECT and DELETE statements remain unaffected.
+When data space used reaches the maximum data size limit, either at the database level or at the elastic pool level, inserts and updates that increase data size fail, and clients receive an [error message](troubleshoot-common-errors-issues.md). SELECT and DELETE statements remain unaffected.
 
 In Premium and Business Critical service tiers, clients also receive an error message if combined storage consumption by data, transaction log, and `tempdb` for a single database or an elastic pool exceeds maximum local storage size. For more information, see [Storage space governance](#storage-space-governance).
 
@@ -100,9 +100,9 @@ If you observe high storage space utilization, mitigation options include:
 
 - Increase maximum data size of the database or elastic pool, or scale up to a service objective with a higher maximum data size limit. See [Scale single database resources](single-database-scale.md) and [Scale elastic pool resources](elastic-pool-scale.md).
 - If the database is in an elastic pool, then alternatively the database can be moved outside of the pool, so that its storage space isn't shared with other databases.
-- Shrink a database to reclaim unused space. For more information, see [Manage file space in Azure SQL Database](file-space-manage.md).
+- Shrink a database to reclaim unused space. For more information, see [Manage file space for databases](file-space-manage.md).
     - In elastic pools, shrinking a database provides more storage for other databases in the pool.
-- Check if high space utilization is due to a spike in the size of Persistent Version Store (PVS). PVS is a part of each database, and is used to implement  [Accelerated Database Recovery](../accelerated-database-recovery.md). To determine current PVS size, see [PVS troubleshooting](/sql/relational-databases/accelerated-database-recovery-management#troubleshooting). A common reason for large PVS size is a transaction that is open for a long time (hours), preventing cleanup of row older versions in PVS.
+- Check if high space utilization is due to a spike in the size of Persistent Version Store (PVS). PVS is a part of each database, and is used to implement [Accelerated database recovery](/sql/relational-databases/accelerated-database-recovery-concepts). To determine current PVS size, see [Troubleshoot accelerated database recovery](/sql/relational-databases/accelerated-database-recovery-troubleshoot). A common reason for large PVS size is a transaction that is open for a long time (hours), preventing cleanup of row older versions in PVS.
 - For databases and elastic pools in Premium and Business Critical service tiers that consume large amounts of storage, you might receive an out-of-space error even though used space in the database or elastic pool is below its maximum data size limit. This can happen if `tempdb` or transaction log files consume a large amount of storage toward the maximum local storage limit. [Fail over](high-availability-sla-local-zone-redundancy.md#testing-application-fault-resiliency) the database or elastic pool to reset `tempdb` to its initial smaller size, or [shrink](file-space-manage.md#shrink-transaction-log-file) transaction log to reduce local storage consumption.
 
 ### Sessions, workers, and requests
@@ -113,7 +113,7 @@ Sessions, workers, and requests are defined as follows:
 - A request is the logical representation of a query or batch. A request is issued by a client connected to a session. Over time, multiple requests can be issued on the same session.
 - A worker thread, also known as a worker or thread, is a logical representation of an operating system thread. A request can have many workers when executed with a parallel query execution plan, or a single worker when executed with a serial (single threaded) execution plan. Workers are also required to support activities outside of requests: for example, a worker is required to process a login request as a session connects.
 
-For more information about these concepts, see the [Thread and Task Architecture Guide](/sql/relational-databases/thread-and-task-architecture-guide).
+For more information about these concepts, see the [Thread and task architecture guide](/sql/relational-databases/thread-and-task-architecture-guide).
 
 The maximum number of workers is determined by the service tier and compute size. New requests are rejected when session or worker limits are reached, and clients receive an error message. While the number of connections can be controlled by the application, the number of concurrent workers is often harder to estimate and control. This is especially true during peak load periods when database resource limits are reached and workers pile up due to longer running queries, large blocking chains, or excessive query parallelism.
 
@@ -128,7 +128,7 @@ You can mitigate approaching or hitting worker or session limits by:
 
 - Increasing the service tier or compute size of the database or elastic pool. See [Scale single database resources](single-database-scale.md) and [Scale elastic pool resources](elastic-pool-scale.md).
 - Optimizing queries to reduce resource utilization if the cause of increased workers is contention for compute resources. For more information, see [Query Tuning/Hinting](performance-guidance.md#query-tuning-and-hinting).
-- Optimizing the query workload to reduce the number of occurrences and duration of query blocking. For more information, see [Understand and resolve Azure SQL blocking problems](understand-resolve-blocking.md).
+- Optimizing the query workload to reduce the number of occurrences and duration of query blocking. For more information, see [Understand and resolve blocking problems](understand-resolve-blocking.md).
 - Reducing the [MAXDOP](configure-max-degree-of-parallelism.md) setting when appropriate.
 
 Find worker and session limits for Azure SQL Database by service tier and compute size:
@@ -136,7 +136,7 @@ Find worker and session limits for Azure SQL Database by service tier and comput
 - [Resource limits for single databases using the vCore purchasing model](resource-limits-vcore-single-databases.md)
 - [Resource limits for elastic pools using the vCore purchasing model](resource-limits-vcore-elastic-pools.md)
 - [Resource limits for single databases using the DTU purchasing model](resource-limits-dtu-single-databases.md)
-- [Resources limits for elastic pools using the DTU purchasing model](resource-limits-dtu-elastic-pools.md)
+- [Resource limits for elastic pools using the DTU purchasing model](resource-limits-dtu-elastic-pools.md)
 
 Learn more about troubleshooting specific errors for session or worker limits in [Resource governance errors](troubleshoot-common-errors-issues.md#resource-governance-errors).
 
@@ -146,7 +146,7 @@ The number of concurrent connections to external endpoints done via [sp_invoke_e
 
 ### Memory
 
-Unlike other resources (CPU, workers, storage), reaching the memory limit doesn't negatively impact query performance, and doesn't cause errors and failures. As described in detail in [Memory Management Architecture Guide](/sql/relational-databases/memory-management-architecture-guide), the database engine often uses all available memory, by design. Memory is used primarily for caching data, to avoid slower storage access. Thus, higher memory utilization usually improves query performance due to faster reads from memory, rather than slower reads from storage.
+Unlike other resources (CPU, workers, storage), reaching the memory limit doesn't negatively affect query performance, and doesn't cause errors and failures. As described in detail in [Memory management architecture guide](/sql/relational-databases/memory-management-architecture-guide), the database engine often uses all available memory, by design. Memory is used primarily for caching data, to avoid slower storage access. Thus, higher memory utilization usually improves query performance due to faster reads from memory, rather than slower reads from storage.
 
 After database engine startup, as the workload starts reading data from storage, the database engine aggressively caches data in memory. After this initial ramp-up period, it's common and expected to see the `avg_memory_usage_percent` and `avg_instance_memory_percent` columns in [sys.dm_db_resource_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-resource-stats-azure-sql-database), and the `sql_instance_memory_percent` Azure Monitor metric to be close to 100%, particularly for databases that aren't idle, and don't fully fit in memory.
 
@@ -165,7 +165,7 @@ If you get out-of-memory errors, mitigation options include:
 
 |Solution|Description|
 | :----- | :----- |
-|Reduce the size of memory grants|For more information about memory grants, see the [Understanding SQL Server memory grants](https://techcommunity.microsoft.com/t5/sql-server/understanding-sql-server-memory-grant/ba-p/383595) blog post. A common solution for avoiding excessively large memory grants is keeping [statistics](/sql/relational-databases/statistics/statistics) up to date. This results in more accurate estimates of memory consumption by the query engine, avoiding large memory grants.<br /><br />By default, in databases using compatibility level 140 and above, the database engine can automatically adjust memory grant size using [Batch mode memory grant feedback](/sql/relational-databases/performance/intelligent-query-processing#batch-mode-memory-grant-feedback). Similarly, in databases using compatibility level 150 and above, the database engine also uses [Row mode memory grant feedback](/sql/relational-databases/performance/intelligent-query-processing#row-mode-memory-grant-feedback), for more common row mode queries. This built-in functionality helps avoid out-of-memory errors due to large memory grants.|
+|Reduce the size of memory grants|For more information about memory grants, see the [Understanding SQL Server memory grants](https://techcommunity.microsoft.com/blog/sqlserver/understanding-sql-server-memory-grant/383595) blog post. A common solution to avoid excessively large memory grants is to keep [statistics](/sql/relational-databases/statistics/statistics) up to date. This results in more accurate estimates of memory consumption by the query engine, avoiding large memory grants.<br /><br />By default, in databases using compatibility level 140 and above, the database engine can automatically adjust memory grant size using [Batch mode memory grant feedback](/sql/relational-databases/performance/intelligent-query-processing#batch-mode-memory-grant-feedback). Similarly, in databases using compatibility level 150 and above, the database engine also uses [Row mode memory grant feedback](/sql/relational-databases/performance/intelligent-query-processing#row-mode-memory-grant-feedback), for more common row mode queries. This built-in functionality helps avoid out-of-memory errors due to large memory grants.|
 |Reduce the size of query plan cache|The database engine caches query plans in memory, to avoid compiling a query plan for every query execution. To avoid query plan cache bloat caused by caching plans that are only used once, make sure to use parameterized queries, and consider enabling OPTIMIZE_FOR_AD_HOC_WORKLOADS [database-scoped configuration](/sql/t-sql/statements/alter-database-scoped-configuration-transact-sql).|
 |Reduce the size of lock memory|The database engine uses memory for [locks](/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide#Lock_Engine). When possible, avoid large transactions that might acquire a large number of locks and cause high lock memory consumption.|
 
@@ -187,13 +187,13 @@ A more detailed breakdown of recent resource consumption by user workloads and i
 > [!TIP]
 > When monitoring or troubleshooting workload performance, it's important to consider both **user CPU consumption** (`avg_cpu_percent`, `cpu_percent`), and **total CPU consumption** by user workloads and internal processes (`avg_instance_cpu_percent`,`sql_instance_cpu_percent`). Performance might be noticeably affected if *either* of these metrics is in the 70-100% range.
 
-**User CPU consumption** is defined as a percentage toward the user workload CPU limit in each service objective. Likewise, **total CPU consumption** is defined as the percentage toward the CPU limit for all workloads. Because the two limits are different, the user and total CPU consumption are measured on different scales, and are not directly comparable with each other.
+**User CPU consumption** is defined as a percentage toward the user workload CPU limit in each service objective. Likewise, **total CPU consumption** is defined as the percentage toward the CPU limit for all workloads. Because the two limits are different, the user and total CPU consumption are measured on different scales, and aren't directly comparable with each other.
 
 If **user CPU consumption** reaches 100%, it means that the user workload is fully using the CPU capacity available to it in the selected service objective, even if **total CPU consumption** remains below 100%.
 
-When **total CPU consumption** reaches the 70-100% range, it's possible to see user workload throughput flattening and query latency increasing, even if **user CPU consumption** remains significantly below 100%. This is more likely to occur when using smaller service objectives with a moderate allocation of compute resources, but relatively intense user workloads, such as in [dense elastic pools](elastic-pool-resource-management.md). This can also occur with smaller service objectives when internal processes temporarily require additional resources, for example when creating a new replica of the database, or backing up the database.
+When **total CPU consumption** reaches the 70-100% range, it's possible to see user workload throughput flattening and query latency increasing, even if **user CPU consumption** remains significantly below 100%. This is more likely to occur when using smaller service objectives with a moderate allocation of compute resources, but relatively intense user workloads, such as in [dense elastic pools](elastic-pool-resource-management.md). This can also occur with smaller service objectives when internal processes temporarily require more resources, for example when creating a new replica of the database, or backing up the database.
 
-Likewise, when **user CPU consumption** reaches the 70-100% range, user workload throughput will flatten and query latency will increase, even if **total CPU consumption** is well below its limit.
+Likewise, when **user CPU consumption** reaches the 70-100% range, user workload throughput flattens and query latency increases, even if **total CPU consumption** is well below its limit.
 
 When either **user CPU consumption** or **total CPU consumption** is high, mitigation options are the same as noted in the [Compute CPU](#compute-cpu) section, and include service objective increase and/or user workload optimization.
 
@@ -247,7 +247,7 @@ Log rate governor traffic shaping is surfaced via the following wait types (expo
 
 When encountering a log rate limit that is hampering desired scalability, consider the following options:
 
-- Scale up to a higher service level in order to get the maximum log rate of a service tier, or switch to a different service tier. The [Hyperscale](service-tier-hyperscale.md) service tier provides 100 MB/s log rate per database and 125 MB/s per elastic pool, regardless of chosen service level. Log generation rate of 150 MB/s is available as an opt-in preview feature. For more information and to opt-in to 150 MB/s, see [Blog: November 2024 Hyperscale enhancements](https://aka.ms/AAslnql).
+- Scale up to a higher service level in order to get the maximum log rate of a service tier, or switch to a different service tier. The [Hyperscale](service-tier-hyperscale.md) service tier provides 100-MB/s log rate per database and 125 MB/s per elastic pool, regardless of chosen service level. Log generation rate of 150 MB/s is available as an opt-in preview feature. For more information and to opt in to 150 MB/s, see [Blog: November 2024 Hyperscale enhancements](https://aka.ms/AAslnql).
 - If data being loaded is transient, such as staging data in an ETL process, it can be loaded into `tempdb` (which is minimally logged).
 - For analytic scenarios, load into a clustered [columnstore](/sql/relational-databases/indexes/columnstore-indexes-overview) table, or a table with indexes that use [data compression](/sql/relational-databases/data-compression/data-compression). This reduces the required log rate. This technique does increase CPU utilization and is only applicable to data sets that benefit from clustered columnstore indexes or data compression.
 

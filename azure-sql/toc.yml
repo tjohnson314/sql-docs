@@ -90,7 +90,7 @@
         - name: Backup and recovery
           items:
           - name: Accelerated database recovery
-            href: accelerated-database-recovery.md
+            href: /sql/relational-databases/accelerated-database-recovery-concepts
           - name: Long-term backup retention
             href: database/long-term-retention-overview.md
 

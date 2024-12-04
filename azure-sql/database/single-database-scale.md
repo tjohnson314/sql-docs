@@ -1,10 +1,10 @@
 ---
-title: Scale single database resources
+title: Scale Single Database Resources
 description: This article describes how to scale the compute and storage resources available for a single database in Azure SQL Database.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: wiassaf, mathoma
-ms.date: 09/17/2024
+ms.reviewer: wiassaf, mathoma, randolphwest
+ms.date: 12/04/2024
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: conceptual
@@ -41,7 +41,7 @@ Changing the service tier or compute size of mainly involves the service perform
 
 1. Switch routing of connections to a new compute instance.
 
-    Existing connections to the database in the original compute instance are dropped. Any new connections are established to the database in the new compute instance. For some combinations of service tier and compute size changes, database files are detached and reattached during the switch.  Regardless, the switch can result in a brief service interruption when the database is unavailable generally for less than 30 seconds and often for only a few seconds. If there are long-running transactions running when connections are dropped, the duration of this step can take longer in order to recover aborted transactions. [Accelerated Database Recovery in Azure SQL](../accelerated-database-recovery.md) can reduce the impact from aborting long running transactions.
+    Existing connections to the database in the original compute instance are dropped. Any new connections are established to the database in the new compute instance. For some combinations of service tier and compute size changes, database files are detached and reattached during the switch. Regardless, the switch can result in a brief service interruption when the database is unavailable generally for less than 30 seconds and often for only a few seconds. If there are long-running transactions running when connections are dropped, the duration of this step can take longer in order to recover aborted transactions. [Accelerated database recovery](/sql/relational-databases/accelerated-database-recovery-concepts) can reduce the impact from aborting long running transactions.
 
 > [!IMPORTANT]
 > No data is lost during any step in the workflow. Make sure that you have implemented some [retry logic](troubleshoot-common-connectivity-issues.md) in the applications and components that are using Azure SQL Database while the service tier is changed.
@@ -50,12 +50,12 @@ Changing the service tier or compute size of mainly involves the service perform
 
 The estimated latency to change the service tier, scale the compute size of a single database or elastic pool, move a database in/out of an elastic pool, or move a database between elastic pools is parameterized as follows:
 
-| Database scaling latency | To Basic single database,</br>Standard single database (S0-S1) | To Standard single database (S2-S12),</br>General Purpose single database,</br>Basic elastic pooled database,</br>Standard elastic pooled database,</br>General Purpose pooled database | To Premium single database or pooled database,</br>Business Critical single database or pooled database | To Hyperscale single database or pooled database |
+| Database scaling latency | To Basic single database,<br />Standard single database (S0-S1) | To Standard single database (S2-S12),<br />General Purpose single database,<br />Basic elastic pooled database,<br />Standard elastic pooled database,<br />General Purpose pooled database | To Premium single database or pooled database,<br />Business Critical single database or pooled database | To Hyperscale single database or pooled database |
 |:-|:-|:-|:-|:-|
-| **From Basic single database,</br>Standard single database (S0-S1)** | &bull; &nbsp;Constant time latency independent of space used.</br>&bull; &nbsp;Typically, less than 5 minutes. | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. |
-| **From Basic pooled database,</br>Standard single database (S2-S12),</br>Standard pooled database,</br>General Purpose single database or pooled database** | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. | &bull; &nbsp;For single databases, constant time latency independent of space used.</br>&bull; &nbsp;Typically, less than 5 minutes for single databases.</br>&bull; &nbsp;For elastic pools, proportional to the number of databases. | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. |
-| **From Premium single database or pooled database,</br>Business Critical single database or pooled database** | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. | &bull; &nbsp;Latency proportional to database space used due to data copying.</br>&bull; &nbsp;Typically, less than 1 minute per GB of space used. |
-| **From Hyperscale single database or pooled database** | N/A | See [Reverse migrate from Hyperscale](manage-hyperscale-database.md#reverse-migrate-from-hyperscale) for supported scenarios and limitations. | N/A | &bull; &nbsp;Constant time latency independent of space used.</br>&bull; &nbsp;Typically, less than 2 minutes. |
+| **From Basic single database,<br />Standard single database (S0-S1)** | - Constant time latency independent of space used.<br /><br />- Typically, less than 5 minutes. | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. |
+| **From Basic pooled database,<br />Standard single database (S2-S12),<br />Standard pooled database,<br />General Purpose single database or pooled database** | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. | - For single databases, constant time latency independent of space used.<br /><br />- Typically, less than 5 minutes for single databases.<br /><br />- For elastic pools, proportional to the number of databases. | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. |
+| **From Premium single database or pooled database,<br />Business Critical single database or pooled database** | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. | - Latency proportional to database space used due to data copying.<br /><br />- Typically, less than 1 minute per GB of space used. |
+| **From Hyperscale single database or pooled database** | N/A | See [Reverse migrate from Hyperscale](manage-hyperscale-database.md#reverse-migrate-from-hyperscale) for supported scenarios and limitations. | N/A | - Constant time latency independent of space used.<br /><br />- Typically, less than 2 minutes. |
 
 > [!NOTE]
 > - Additionally, for Standard (S2-S12) and General Purpose databases, latency for moving a database in/out of an elastic pool or between elastic pools will be proportional to database size if the database is using Premium File Share ([PFS](/azure/storage/files/storage-files-introduction)) storage.
@@ -90,11 +90,11 @@ In the SQL database **Overview** page, look for the banner indicating a scaling 
 
 On the resulting **Ongoing operations** page, select **Cancel this operation**.
 
-:::image type="content" source="media/single-database-scale/ongoing-operations-cancel-this-operation.png" alt-text="Screenshot from the Azure portal showing the Ongoing operations page and the cancel this operation button." lightbox="media/single-database-scale/ongoing-operations-cancel-this-operation.png":::
+:::image type="content" source="media/single-database-scale/ongoing-operations-cancel-this-operation.png" alt-text="Screenshot from the Azure portal showing the Ongoing operations page and the cancel this operation button.":::
 
 ### [PowerShell](#tab/azure-powershell)
 
-In order to invoke the PowerShell commands on a computer, [Az package version 9.7.0](https://www.powershellgallery.com/packages/Az/9.7.0) or a newer version must be installed locally. Or, consider using the [Azure Cloud Shell](/azure/cloud-shell/overview) to run Azure PowerShell at [shell.azure.com](https://portal.azure.com/#cloudshell).
+In order to invoke the PowerShell commands on a computer, you must install [Az PowerShell module 9.7.0](https://www.powershellgallery.com/packages/Az/9.7.0) or a newer version locally. Or, consider using the [Azure Cloud Shell](/azure/cloud-shell/overview) to run Azure PowerShell at [shell.azure.com](https://portal.azure.com/#cloudshell).
 
 First, log in to Azure and set the proper context for your subscription:
 
@@ -160,7 +160,7 @@ else {
 - When downgrading a database with [geo-replication](active-geo-replication-configure-portal.md) enabled, downgrade its primary databases to the desired service tier and compute size before downgrading the secondary database (general guidance for best performance). When downgrading to a different edition, it's a requirement that the primary database is downgraded first.
 - The restore service offerings are different for the various service tiers. If you're downgrading to the **Basic** tier, there's a lower backup retention period. See [Automated backups in Azure SQL Database](automated-backups-overview.md).
 - The new properties for the database aren't applied until the changes are complete.
-- When data copying is required to scale a database (see [Latency](#latency)) when changing the service tier, high resource utilization concurrent to the scaling operation can cause longer scaling times. With [Accelerated Database Recovery (ADR)](/sql/relational-databases/accelerated-database-recovery-concepts), rollback of long running transactions is not a significant source of delay, but high concurrent resource usage might leave less compute, storage, and network bandwidth resources for scaling, particularly for smaller compute sizes.
+- When data copying is required to scale a database (see [Latency](#latency)) when changing the service tier, high resource utilization concurrent to the scaling operation can cause longer scaling times. With [Accelerated database recovery](/sql/relational-databases/accelerated-database-recovery-concepts), rollback of long running transactions isn't a significant source of delay, but high concurrent resource usage might leave less compute, storage, and network bandwidth resources for scaling, particularly for smaller compute sizes.
 
 ## Billing
 
@@ -171,7 +171,7 @@ You're billed for each hour a database exists using the highest service tier + c
 ### vCore-based purchasing model
 
 - Storage can be provisioned up to the data storage max size limit using 1-GB increments. The minimum configurable data storage is 1 GB. For data storage max size limits in each service objective, see resource limit documentation pages for [Resource limits for single databases using the vCore purchasing model](resource-limits-vcore-single-databases.md) and [Resource limits for single databases using the DTU purchasing model](resource-limits-dtu-single-databases.md).
-- Data storage for a single database can be provisioned by increasing or decreasing its max size using the [Azure portal](https://portal.azure.com), [Transact-SQL](/sql/t-sql/statements/alter-database-transact-sql#examples-1), [PowerShell](/powershell/module/az.sql/set-azsqldatabase), [Azure CLI](/cli/azure/sql/db#az-sql-db-update), or [REST API](/rest/api/sql/databases/update). If the max size value is specified in bytes, it must be a multiple of 1 GB (1073741824 bytes).
+- Data storage for a single database can be provisioned by increasing or decreasing its max size using the [Azure portal](https://portal.azure.com), [Transact-SQL](/sql/t-sql/statements/alter-database-transact-sql#examples-1), [PowerShell](/powershell/module/az.sql/set-azsqldatabase), [Azure CLI](/cli/azure/sql/db#az-sql-db-update), or [REST API](/rest/api/sql/databases/update). If the max size value is specified in bytes, it must be a multiple of 1 GB (1,073,741,824 bytes).
 - The amount of data that can be stored in the data files of a database is limited by the configured data storage max size. In addition to that storage, Azure SQL Database automatically adds 30% more storage to be used for the transaction log. The price of storage for a single database or an elastic pool is the sum of data storage and transaction log storage amounts multiplied by the storage unit price of the service tier. For example, if data storage is set to _10 GB_, the additional transaction log storage is _10 GB * 30% = 3 GB_, and the total amount of billable storage is _10 GB + 3 GB = 13 GB_.
 
   > [!NOTE]
@@ -200,7 +200,7 @@ To change the database size of a replicated secondary database, change the size 
 
 More than 1 TB of storage in the Premium tier is currently available in all regions except: China East, China North, Germany Central, and Germany Northeast. In these regions, the storage max in the Premium tier is limited to 1 TB. The following considerations and limitations apply to P11 and P15 databases with a maximum size greater than 1 TB:
 
-- If the max size for a P11 or P15 database was ever set to a value greater than 1 TB, then can it only be restored or copied to a P11 or P15 database.  Subsequently, the database can be rescaled to a different compute size provided the amount of space allocated at the time of the rescaling operation doesn't exceed max size limits of the new compute size.
+- If the max size for a P11 or P15 database was ever set to a value greater than 1 TB, then can it only be restored or copied to a P11 or P15 database. Later, the database can be rescaled to a different compute size provided the amount of space allocated at the time of the rescaling operation doesn't exceed max size limits of the new compute size.
 - For active geo-replication scenarios:
   - Setting up a geo-replication relationship: If the primary database is P11 or P15, the secondary(ies) must also be P11 or P15. Lower compute sizes are rejected as secondaries since they aren't capable of supporting more than 1 TB.
   - Upgrading the primary database in a geo-replication relationship: Changing the maximum size to more than 1 TB on a primary database triggers the same change on the secondary database. Both upgrades must be successful for the change on the primary to take effect. Region limitations for the more than 1-TB option apply. If the secondary is in a region that doesn't support more than 1 TB, the primary isn't upgraded.
@@ -209,4 +209,4 @@ More than 1 TB of storage in the Premium tier is currently available in all regi
 ## Related content
 
 - [Resource limits for single databases using the vCore purchasing model](resource-limits-vcore-single-databases.md)
-- [Resource limits for single databases using the DTU purchasing model](resource-limits-dtu-single-databases.md)
+- [Resource limits for single databases using the DTU purchasing model - Azure SQL Database](resource-limits-dtu-single-databases.md)
