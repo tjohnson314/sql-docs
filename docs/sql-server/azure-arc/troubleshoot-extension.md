@@ -11,7 +11,7 @@ ms.topic: troubleshooting-general
 
 [!INCLUDE [sqlserver](../../includes/applies-to-version/sqlserver.md)]
 
-Query Azure Resource Graph to identify the state the Azure extension for SQL Server on your Azure Arc-enabled servers. This article demonstrates queries that identify unhealthy extensions. 
+Use Azure Resource Graph to identify the state the Azure extension for SQL Server on your Azure Arc-enabled servers. This article demonstrates queries that identify unhealthy extensions. 
 
 > [!TIP] 
 > If you're not already familiar, learn about Azure Resource Graph:
@@ -81,11 +81,11 @@ resources
     LastExtensionStatusMessage = properties.instanceView.status.message
 ```
 
-To identify possible problems, review the value in the **RecommendedAction** or the **FailureReasons** column from the results. The ReccommendedAction column will provide possible first steps to solve the issue or clues as to what should be investigated first. For futher information FailureReasons contains a list of all the reasons the resources was deemed unhealthy. Finally for even more information on your resource view the **LastExtensionStatusMessage** to see the last reported message by the agent.
+To identify possible problems, review the value in the **RecommendedAction** or the **FailureReasons** column. The ReccommendedAction column provides possible first steps to solve the issue or clues for what to check first. The FailureReasons column lists the reasons the resource was deemed unhealthy. Finally, check **LastExtensionStatusMessage** to see the last reported message by the agent.
 
 ## Identify unhealthy extension (PowerShell)
 
-This example runs in PowerShell. The example returns the same result as the above querry but through a powershell script.
+This example runs in PowerShell. The example returns the same result as the previous query but through a PowerShell script.
 
 ```powershell
 # PowerShell script to execute an Azure Resource Graph query using Azure CLI
@@ -162,11 +162,11 @@ $result = Search-AzGraph -Query $query
 $result | Format-Table -Property ExtensionHealth, LastUploadTimestamp, LastUploadStatus, Message
 ```
 
-To identify possible problems, review the value in the **RecommendedAction** or the **FailureReasons** column from the results. The ReccommendedAction column will provide possible first steps to solve the issue or clues as to what should be investigated first. For futher information FailureReasons contains a list of all the reasons the resources was deemed unhealthy. Finally for even more information on your resource view the **LastExtensionStatusMessage** to see the last reported message by the agent.
+To identify possible problems, review the value in the **RecommendedAction** or the **FailureReasons** column. The ReccommendedAction column provides possible first steps to solve the issue or clues for what to check first. The FailureReasons column lists the reasons the resource was deemed unhealthy. Finally, check **LastExtensionStatusMessage** to see the last reported message by the agent.
 
 ## Identify extensions missing updates
 
-Identify extensions that have not updated status recently. This query returns a list of Azure extensions for SQL Server ordered by the number of days since the extension last updated its status. A value of '-1' indicates that the extension has crashed and there is a callstack in the extension status.
+Identify extensions that haven't updated status recently. This query returns a list of Azure extensions for SQL Server ordered by the number of days since the extension last updated its status. A value of '-1' indicates that the extension crashed and there is a callstack in the extension status.
 
 ```kusto
 // Show the timestamp extracted
