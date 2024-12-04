@@ -122,7 +122,7 @@ To test the connection, first update the user-configurable values. Then, use the
 # User-configurable values 
 # 
 
-$SubscriptionId = "a1a1a1a1-8372-1d28-a111-1a2a31a1a1a1" 
+$SubscriptionId = "aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e" 
 $RgName = "my-resource-group" 
 $MIName = "my-instance-name" 
 
