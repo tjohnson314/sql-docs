@@ -28,7 +28,7 @@ Instance pools in Azure SQL Managed Instance allow you to deploy multiple instan
 Instance pools provide the following core benefits:
 
 - Ability to host 2-vCore instances, which are only available within instance pools
-- Predictable and fast instance deployment time (up to 5 minutes).
+- Predictable and fast instance deployment time (up to 10 minutes).
 - Cost-saving infrastructure when migrating multiple SQL Server instances.
 
 The following diagram illustrates an instance pool with multiple managed instances deployed to a virtual cluster in a virtual network subnet: 
