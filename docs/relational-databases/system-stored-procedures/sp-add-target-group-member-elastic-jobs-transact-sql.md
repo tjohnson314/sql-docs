@@ -131,9 +131,7 @@ The following example adds all the databases in the `London` and `NewYork` serve
 When using Microsoft Entra authentication (formerly Azure Active Directory), omit the *@refresh_credential_name* parameter, which should only be provided when using database-scoped credentials. In the following examples, the `@refresh_credential_name` parameter is commented out.
 
 ```sql
---Connect to the jobs database specified when creating the job agent
-USE ElasticJobs;
-GO
+--Connect to the jobs database specified when creating the job agent.
 
 -- Create a target group containing server(s)
 EXEC jobs.sp_add_target_group @target_group_name =  N'Servers Maintaining Customer Information';
